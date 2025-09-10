@@ -49,7 +49,16 @@ The source code of this documentation is also `available online
    getting_started
    libfranka
    franka_ros
-   franka_ros2
+   franka_ros2 <doc/franka_ros2/doc/index.rst>
+   franka_bringup <doc/franka_ros2/franka_bringup/doc/index.rst>
+   franka_hardware <doc/franka_ros2/franka_hardware/doc/index.rst>
+   franka_msgs <doc/franka_ros2/franka_msgs/doc/index.rst>
+   franka_gripper <doc/franka_ros2/franka_gripper/doc/index.rst>
+   franka_example_controllers <doc/franka_ros2/franka_example_controllers/doc/index.rst>
+   franka_robot_state_broadcaster <doc/franka_ros2/franka_robot_state_broadcaster/doc/index.rst>
+   franka_semantic_components <doc/franka_ros2/franka_semantic_components/doc/index.rst>
+   franka_fr3_moveit_config <doc/franka_ros2/franka_fr3_moveit_config/doc/index.rst>
+   franka_gazebo <doc/franka_ros2/franka_gazebo/doc/index.rst>
    franka_matlab/index
    franka_matlab/franka_matlab_changelog
    control_parameters
