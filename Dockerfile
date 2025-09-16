@@ -31,7 +31,8 @@ RUN pip3 install --ignore-installed --no-cache-dir \
     sphinx-rtd-theme==1.0.0 \
     sphinx-reredirects==0.1.1 \
     myst-parser==0.18.0 \
-    "docutils<0.18"
+    "docutils<0.18" \
+    vcstool
 
 WORKDIR /workspace
 
