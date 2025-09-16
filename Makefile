@@ -33,9 +33,14 @@ import-repos:
 clean:
 	rm -rf $(BUILDDIR)/*
 	rm -rf $(SOURCEDIR)/doc
+	rm -rf $(SOURCEDIR)/franka_ros2
 
-# Custom html target that first imports repos, generates JS, then builds
-html: import-repos generate-js
+# Custom html target that first imports repos, generates JS, clones franka_ros2, then builds
+html: generate-js
+	@echo "Importing franka_ros2 documentation..."
+	@if [ ! -d "$(SOURCEDIR)/franka_ros2" ]; then \
+		cd $(SOURCEDIR) && vcs import --input ../franka_ros2.repos .; \
+	fi
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # Catch-all target: route all unknown targets to Sphinx using the new
