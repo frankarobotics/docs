@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="FR3 certification remarks" href="fr3-certification-remarks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.6
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/franka_matlab_changelog.html">Franka Toolbox for MATLAB changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cannot-boot-realtime-kernel-because-of-invalid-signature">Cannot boot realtime kernel because of “Invalid Signature”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-libfranka-executable-fails-with-connection-timeout">Running a libfranka executable fails with “Connection timeout”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motion-stopped-due-to-discontinuities-or-communication-constraints-violation">Motion stopped due to discontinuities or <code class="docutils literal notranslate"><span class="pre">communication_constraints_violation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#disabling-cpu-frequency-scaling">Disabling CPU frequency scaling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#robot-is-not-reachable">Robot is not reachable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-libfranka-executable-fails-with-udp-receive-timeout">Running a libfranka executable fails with “UDP receive: Timeout”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-bandwidth-delay-and-jitter-test">Network bandwidth, delay and jitter test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simple-ping-tests">Simple ping tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-network-performance-analysis">Advanced network performance analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-libfranka-executable-fails-with-incompatible-library-version">Running a libfranka executable fails with “Incompatible Library Version”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-libfranka-executable-fails-with-command-rejected-due-to-activated-safety-function-or-command-preempted-due-to-activated-safety-function">Running a libfranka executable fails with “command rejected due to activated safety function!” or “command preempted due to activated safety function!”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#realtime-control-loop-best-practices">Realtime Control Loop Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-not-to-do-in-1khz-control-loops">What NOT to Do in 1kHz Control Loops</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/troubleshooting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h1>
+<p>This section lists solutions to a set of possible errors which can happen when using the FCI.</p>
+<blockquote>
+<div><div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Further help is provided in the troubleshooting page of the manual shipped with your robot.</p>
+</div>
+</div></blockquote>
+<section id="cannot-boot-realtime-kernel-because-of-invalid-signature">
+<span id="troubleshooting-realtime-kernel"></span><h2>Cannot boot realtime kernel because of “Invalid Signature”<a class="headerlink" href="#cannot-boot-realtime-kernel-because-of-invalid-signature" title="Permalink to this heading"></a></h2>
+<p>When you have successfully installed the real-time kernel and try to boot it you might encounter
+that Linux is not booting at all. This can happen when you have installed Ubuntu alongside with
+Windows (e.g. Dual Boot). Usually then the UEFI boot loader will have <em>Secure Boot</em> activated,
+which will not allow the unsigned real-time kernel to load.</p>
+<p>The easiest solution is to <strong>disable “Secure Boot”</strong> in your boot loader. This highly depends on your
+system, but usually you can enter the boot loader by pressing F2, F3, F12 or DEL key during boot.</p>
+</section>
+<section id="running-a-libfranka-executable-fails-with-connection-timeout">
+<span id="troubleshooting-connection-timeout"></span><h2>Running a libfranka executable fails with “Connection timeout”<a class="headerlink" href="#running-a-libfranka-executable-fails-with-connection-timeout" title="Permalink to this heading"></a></h2>
+<p>This error occurs if <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> cannot connect to the robot at all. Please check that:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Using a robot with system version 4.2.0 or higher requires to enable the FCI mode. To do that
+open Desk -&gt; expand the menu in the sidebar -&gt; press <cite>‘Activate FCI’</cite>. Further information
+about Single Point of Control (SPoC) can be found in the manual shipped with the robot.</p></li>
+<li><p>Your workstation is directly connected to Control, not the LAN port of the Arm (see
+<a class="reference internal" href="requirements.html#requirement-network"><span class="std std-ref">Network</span></a>).</p></li>
+<li><p>The robot can be reached from your workstation (see <a class="reference internal" href="#troubleshooting-robot-not-reachable"><span class="std std-ref">Robot is not reachable</span></a>).</p></li>
+<li><p>The FCI feature file is installed on the robot (see “Settings -&gt; System -&gt; Installed Features”).
+If you do not have this feature, please install it. Please reach out to <cite>support&#64;franka.de</cite> with
+your serial number if you need to obtain the feature.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="motion-stopped-due-to-discontinuities-or-communication-constraints-violation">
+<span id="motion-stopped-due-to-discontinuities"></span><h2>Motion stopped due to discontinuities or <code class="docutils literal notranslate"><span class="pre">communication_constraints_violation</span></code><a class="headerlink" href="#motion-stopped-due-to-discontinuities-or-communication-constraints-violation" title="Permalink to this heading"></a></h2>
+<p>If the difference between commanded values in subsequent time steps is too large, then the motion is
+stopped with a discontinuity error such as <code class="docutils literal notranslate"><span class="pre">joint_motion_generator_velocity_discontinuity</span></code>. See if
+the commanded values do not exceed the <a class="reference internal" href="control_parameters.html#limit-table"><span class="std std-ref">limits</span></a>.</p>
+<p>Discontinuities can occur if your code commands actual jumps to the robot, but also because of
+network packet losses. This is also the reason for <code class="docutils literal notranslate"><span class="pre">communication_constraints_violation</span></code> errors.
+If the issue occurs even when using the provided examples, the problem is most likely related to
+overall communication quality. To ensure best performance, please check the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>All source code is compiled with optimizations (<code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=Release</span></code>). If you installed
+<code class="docutils literal notranslate"><span class="pre">libfranka</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> from the ROS repositories, this is already the case for these
+projects. However, your own source code needs to be compiled with optimizations as well.</p></li>
+<li><p>Connect your PC directly to Control, without using any intermediate switches. The
+<a class="reference internal" href="getting_started.html#setting-up-the-network"><span class="std std-ref">network setup instructions</span></a> describe how to do this.</p></li>
+<li><p>Verify your network connection by executing the <a class="reference internal" href="#network-bandwidth-delay-and-jitter-test">network bandwidth, delay and jitter test</a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka::Robot</span></code> is instantiated with <code class="docutils literal notranslate"><span class="pre">RealtimeConfig::kEnforce</span></code>. This is the default if no
+<code class="docutils literal notranslate"><span class="pre">RealtimeConfig</span></code> is explicitly specified in the constructor.</p></li>
+<li><p>Power saving features are disabled (cpu frequency scaling, power saving mode,
+laptop on battery, BIOS power saving features, etc.). See <a class="reference internal" href="#disabling-cpu-frequency-scaling">Disabling CPU frequency scaling</a>.</p></li>
+</ul>
+</div></blockquote>
+<section id="disabling-cpu-frequency-scaling">
+<span id="disable-cpu-frequency-scaling"></span><h3>Disabling CPU frequency scaling<a class="headerlink" href="#disabling-cpu-frequency-scaling" title="Permalink to this heading"></a></h3>
+<p>CPUs are often configured to use a lower operating frequency when under a light load in order to
+conserve power. We recommend to disable this feature as it leads to higher latencies when using
+<code class="docutils literal notranslate"><span class="pre">libfranka</span></code>. To check and modify the power saving mode, install the <code class="docutils literal notranslate"><span class="pre">cpufrequtils</span></code> package:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cpufrequtils
+</pre></div>
+</div>
+<p>Run <code class="docutils literal notranslate"><span class="pre">cpufreq-info</span></code> to see available “governors” and the current CPU frequency. Here is an example
+output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cpufreq-info
+...
+analyzing<span class="w"> </span>CPU<span class="w"> </span><span class="m">0</span>:
+<span class="w">  </span>driver:<span class="w"> </span>intel_pstate
+<span class="w">  </span>CPUs<span class="w"> </span>which<span class="w"> </span>run<span class="w"> </span>at<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>hardware<span class="w"> </span>frequency:<span class="w"> </span><span class="m">0</span>
+<span class="w">  </span>CPUs<span class="w"> </span>which<span class="w"> </span>need<span class="w"> </span>to<span class="w"> </span>have<span class="w"> </span>their<span class="w"> </span>frequency<span class="w"> </span>coordinated<span class="w"> </span>by<span class="w"> </span>software:<span class="w"> </span><span class="m">0</span>
+<span class="w">  </span>maximum<span class="w"> </span>transition<span class="w"> </span>latency:<span class="w"> </span><span class="m">0</span>.97<span class="w"> </span>ms.
+<span class="w">  </span>hardware<span class="w"> </span>limits:<span class="w"> </span><span class="m">400</span><span class="w"> </span>MHz<span class="w"> </span>-<span class="w"> </span><span class="m">3</span>.00<span class="w"> </span>GHz
+<span class="w">  </span>available<span class="w"> </span>cpufreq<span class="w"> </span>governors:<span class="w"> </span>performance,<span class="w"> </span>powersave
+<span class="w">  </span>current<span class="w"> </span>policy:<span class="w"> </span>frequency<span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span>within<span class="w"> </span><span class="m">400</span><span class="w"> </span>MHz<span class="w"> </span>and<span class="w"> </span><span class="m">3</span>.00<span class="w"> </span>GHz.
+<span class="w">                  </span>The<span class="w"> </span>governor<span class="w"> </span><span class="s2">&quot;powersave&quot;</span><span class="w"> </span>may<span class="w"> </span>decide<span class="w"> </span>which<span class="w"> </span>speed<span class="w"> </span>to<span class="w"> </span>use
+<span class="w">                  </span>within<span class="w"> </span>this<span class="w"> </span>range.
+<span class="w">  </span>current<span class="w"> </span>CPU<span class="w"> </span>frequency<span class="w"> </span>is<span class="w"> </span><span class="m">500</span><span class="w"> </span>MHz.
+...
+</pre></div>
+</div>
+<p>In this example, the maximum frequency is 3 GHz, but the current one is 500 Mhz due to the
+<code class="docutils literal notranslate"><span class="pre">powersave</span></code> policy. In this case we can benefit by setting the governor to <code class="docutils literal notranslate"><span class="pre">performance</span></code>.</p>
+<p>To change this setting using the Ubuntu GUI, install the <code class="docutils literal notranslate"><span class="pre">indicator-cpufreq</span></code> package. A widget in
+the top bar of the Unity user interface should allow you to set the current policy.</p>
+<p>To change this setting using the terminal, execute the following commands:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>ondemand
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>cpufrequtils
+sudo<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &quot;GOVERNOR=performance&quot; &gt; /etc/default/cpufrequtils&#39;</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>cpufrequtils
+</pre></div>
+</div>
+<p>They will disable the <code class="docutils literal notranslate"><span class="pre">ondemand</span></code> CPU scaling daemon, create a <code class="docutils literal notranslate"><span class="pre">/etc/default/cpufrequtils</span></code>
+configuration file, and then restart the <code class="docutils literal notranslate"><span class="pre">cpufrequtils</span></code> service.</p>
+<p>After enabling the <code class="docutils literal notranslate"><span class="pre">performance</span></code> governor, the <code class="docutils literal notranslate"><span class="pre">cpufreq-info</span></code> results are:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cpufreq-info
+...
+analyzing<span class="w"> </span>CPU<span class="w"> </span><span class="m">0</span>:
+<span class="w">  </span>driver:<span class="w"> </span>intel_pstate
+<span class="w">  </span>CPUs<span class="w"> </span>which<span class="w"> </span>run<span class="w"> </span>at<span class="w"> </span>the<span class="w"> </span>same<span class="w"> </span>hardware<span class="w"> </span>frequency:<span class="w"> </span><span class="m">0</span>
+<span class="w">  </span>CPUs<span class="w"> </span>which<span class="w"> </span>need<span class="w"> </span>to<span class="w"> </span>have<span class="w"> </span>their<span class="w"> </span>frequency<span class="w"> </span>coordinated<span class="w"> </span>by<span class="w"> </span>software:<span class="w"> </span><span class="m">0</span>
+<span class="w">  </span>maximum<span class="w"> </span>transition<span class="w"> </span>latency:<span class="w"> </span><span class="m">0</span>.97<span class="w"> </span>ms.
+<span class="w">  </span>hardware<span class="w"> </span>limits:<span class="w"> </span><span class="m">400</span><span class="w"> </span>MHz<span class="w"> </span>-<span class="w"> </span><span class="m">3</span>.00<span class="w"> </span>GHz
+<span class="w">  </span>available<span class="w"> </span>cpufreq<span class="w"> </span>governors:<span class="w"> </span>performance,<span class="w"> </span>powersave
+<span class="w">  </span>current<span class="w"> </span>policy:<span class="w"> </span>frequency<span class="w"> </span>should<span class="w"> </span>be<span class="w"> </span>within<span class="w"> </span><span class="m">400</span><span class="w"> </span>MHz<span class="w"> </span>and<span class="w"> </span><span class="m">3</span>.00<span class="w"> </span>GHz.
+<span class="w">                  </span>The<span class="w"> </span>governor<span class="w"> </span><span class="s2">&quot;performance&quot;</span><span class="w"> </span>may<span class="w"> </span>decide<span class="w"> </span>which<span class="w"> </span>speed<span class="w"> </span>to<span class="w"> </span>use
+<span class="w">                  </span>within<span class="w"> </span>this<span class="w"> </span>range.
+<span class="w">  </span>current<span class="w"> </span>CPU<span class="w"> </span>frequency<span class="w"> </span>is<span class="w"> </span><span class="m">2</span>.83<span class="w"> </span>GHz.
+...
+</pre></div>
+</div>
+<p>Now the example output shows a CPU frequency close to the maximum one. You can
+also directly verify the current governor using the <code class="docutils literal notranslate"><span class="pre">cpufreq-info</span> <span class="pre">-p</span></code> command.</p>
+</section>
+</section>
+<section id="robot-is-not-reachable">
+<span id="troubleshooting-robot-not-reachable"></span><h2>Robot is not reachable<a class="headerlink" href="#robot-is-not-reachable" title="Permalink to this heading"></a></h2>
+<p>Try to ping the robot using the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+<p>If this command fails, the robot is not properly connected to the network, or the IP address
+is not correctly assigned during the setup phase. Please set up the network according to the
+documents sent with your robot.</p>
+</section>
+<section id="running-a-libfranka-executable-fails-with-udp-receive-timeout">
+<span id="troubleshooting-udp-timeout"></span><h2>Running a libfranka executable fails with “UDP receive: Timeout”<a class="headerlink" href="#running-a-libfranka-executable-fails-with-udp-receive-timeout" title="Permalink to this heading"></a></h2>
+<p>This error occurs if the robot state can not be received by <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>. Please check that
+your workstation’s firewall does not block incoming UDP packets (see <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">iptables</span> <span class="pre">-L</span></code>).</p>
+</section>
+<section id="network-bandwidth-delay-and-jitter-test">
+<span id="network-bandwidth-delay-test"></span><h2>Network bandwidth, delay and jitter test<a class="headerlink" href="#network-bandwidth-delay-and-jitter-test" title="Permalink to this heading"></a></h2>
+<p>In order to evaluate the network performance of your (possible) control PC we’ve developed two
+tests. The first, a ping test, can be executed without the need of libfranka or franka_ros
+installed on your system. If your system passes the first ping test, you can run the
+advanced UDP network performance analysis.</p>
+<section id="simple-ping-tests">
+<span id="network-ping-test"></span><h3>Simple ping tests<a class="headerlink" href="#simple-ping-tests" title="Permalink to this heading"></a></h3>
+<p>The following command will simulate a network load which is equivalent to a scenario where the
+robot is controlled by the FCI:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ping<span class="w"> </span>&lt;fci-ip&gt;<span class="w"> </span>-i<span class="w"> </span><span class="m">0</span>.001<span class="w"> </span>-D<span class="w"> </span>-c<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1200</span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>PING<span class="w"> </span>&lt;fci-ip&gt;<span class="w"> </span><span class="m">1200</span><span class="o">(</span><span class="m">1228</span><span class="o">)</span><span class="w"> </span>bytes<span class="w"> </span>of<span class="w"> </span>data.
+<span class="o">[</span><span class="m">1500982522</span>.977579<span class="o">]</span><span class="w"> </span><span class="m">1208</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span>&lt;fci-ip&gt;:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">1</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">0</span>.279<span class="w"> </span>ms
+<span class="o">[</span><span class="m">1500982522</span>.978423<span class="o">]</span><span class="w"> </span><span class="m">1208</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span>&lt;fci-ip&gt;:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">2</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">0</span>.224<span class="w"> </span>ms
+<span class="o">[</span><span class="m">1500982522</span>.979434<span class="o">]</span><span class="w"> </span><span class="m">1208</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span>&lt;fci-ip&gt;:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">3</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">0</span>.196<span class="w"> </span>ms
+<span class="o">[</span><span class="m">1500982522</span>.980482<span class="o">]</span><span class="w"> </span><span class="m">1208</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span>&lt;fci-ip&gt;:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">4</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">0</span>.243<span class="w"> </span>ms
+....
+<span class="o">[</span><span class="m">1500982533</span>.034267<span class="o">]</span><span class="w"> </span><span class="m">1208</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span>&lt;fci-ip&gt;:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">9999</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">0</span>.236<span class="w"> </span>ms
+<span class="o">[</span><span class="m">1500982533</span>.035211<span class="o">]</span><span class="w"> </span><span class="m">1208</span><span class="w"> </span>bytes<span class="w"> </span>from<span class="w"> </span>&lt;fci-ip&gt;:<span class="w"> </span><span class="nv">icmp_seq</span><span class="o">=</span><span class="m">10000</span><span class="w"> </span><span class="nv">ttl</span><span class="o">=</span><span class="m">64</span><span class="w"> </span><span class="nv">time</span><span class="o">=</span><span class="m">0</span>.203<span class="w"> </span>ms
+
+---<span class="w"> </span>&lt;fci-ip&gt;<span class="w"> </span>ping<span class="w"> </span>statistics<span class="w"> </span>---
+<span class="m">10000</span><span class="w"> </span>packets<span class="w"> </span>transmitted,<span class="w"> </span><span class="m">10000</span><span class="w"> </span>received,<span class="w"> </span><span class="m">0</span>%<span class="w"> </span>packet<span class="w"> </span>loss,<span class="w"> </span><span class="nb">time</span><span class="w"> </span>10057ms
+rtt<span class="w"> </span>min/avg/max/mdev<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.147/0.240/0.502/0.038<span class="w"> </span>ms
+</pre></div>
+</div>
+<p>The example result shows an average round-trip time of 0.24 ms and a maximum round-trip time of 0.5
+ms. The standard deviation <cite>mdev</cite> is around 0.04 ms. As explained in the
+<a class="reference internal" href="requirements.html#requirement-network"><span class="std std-ref">network requirements section</span></a> it must be guaranteed that the sum of the
+round-trip time and the execution time of the motion generator or control loop is
+<strong>less than 1 ms</strong>. If this constraint is violated for a cycle, the received packet is dropped by
+the FCI.</p>
+<p>If the round-trip time is long even with a direct connection, consider
+purchasing a separate, high performance PCI-Express network card for your
+workstation PC. See if there are dedicated drivers for your network card,
+these usually offer better performance. Lastly, the CPU can also be a limiting
+factor for network performance.</p>
+</section>
+<section id="advanced-network-performance-analysis">
+<h3>Advanced network performance analysis<a class="headerlink" href="#advanced-network-performance-analysis" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">communication_test</span></code> executable, which is part of the <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> examples since
+version 0.5, executes a control loop and provides feedback about the lost robot
+states as well as the maximum, minimum and average control command success rate.</p>
+<p>If you installed the <code class="docutils literal notranslate"><span class="pre">ros-noetic-libfranka</span></code> package or installed <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> from source, you can execute the test with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/noetic/setup.sh<span class="w"> </span><span class="c1"># only needed when installed with ROS</span>
+communication_test<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+<p>If you do not want to install <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> system-wide you can  execute the following command inside your build folder after compiling <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>
+from source:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./examples/communication_test<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-a-libfranka-executable-fails-with-incompatible-library-version">
+<h2>Running a libfranka executable fails with “Incompatible Library Version”<a class="headerlink" href="#running-a-libfranka-executable-fails-with-incompatible-library-version" title="Permalink to this heading"></a></h2>
+<p>This happens when your version of libfranka is incompatible with the system version of your robot.
+The error contains the server version of the robot. You can use that number to
+<a class="reference internal" href="compatibility.html#compatibility-libfranka"><span class="std std-ref">choose the correct libfranka version for your robot</span></a>.</p>
+</section>
+<section id="running-a-libfranka-executable-fails-with-command-rejected-due-to-activated-safety-function-or-command-preempted-due-to-activated-safety-function">
+<h2>Running a libfranka executable fails with “command rejected due to activated safety function!” or “command preempted due to activated safety function!”<a class="headerlink" href="#running-a-libfranka-executable-fails-with-command-rejected-due-to-activated-safety-function-or-command-preempted-due-to-activated-safety-function" title="Permalink to this heading"></a></h2>
+<p>This error occurs when a safety function defined in Watchman (the safety configurator area of the Desk webpage) is active.
+For example, there could be an active safety function limiting the robot’s speed to 0.2 m/s. As this cannot be guaranteed when using FCI, the
+robot will not move. However, you can still read the robot state. In order to command movements to the robot again,
+you either need to disable the safety function or delete the corresponding safety rule in Watchman.</p>
+</section>
+<section id="realtime-control-loop-best-practices">
+<span id="troubleshooting-realtime-control-loops"></span><h2>Realtime Control Loop Best Practices<a class="headerlink" href="#realtime-control-loop-best-practices" title="Permalink to this heading"></a></h2>
+<p>When implementing 1kHz control loops with libfranka, it’s crucial to ensure your code completes within the 500us deadline.
+This means between read and write command must be completed in 500us.</p>
+<p>The deadline might be tighter based on the following factors:
+* If you are using a switch to connect to the control PC.
+* If your ethernet card is not a high-performance one.
+* If you don’t use the real-time kernel.</p>
+<p>Here are common pitfalls and how to avoid them:</p>
+<section id="what-not-to-do-in-1khz-control-loops">
+<span id="realtime-what-not-to-do"></span><h3>What NOT to Do in 1kHz Control Loops<a class="headerlink" href="#what-not-to-do-in-1khz-control-loops" title="Permalink to this heading"></a></h3>
+<p><strong>❌ DON’T: Load Model Inside Loop</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// BAD - Based on communication_test.cpp</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">robot_state</span><span class="p">,</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">readOnce</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// NEVER DO THIS - loads model every cycle!</span>
+<span class="w">  </span><span class="n">franka</span><span class="o">::</span><span class="n">Model</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">robot</span><span class="p">.</span><span class="n">loadModel</span><span class="p">();</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">gravity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="n">gravity</span><span class="p">(</span><span class="n">robot_state</span><span class="p">);</span>
+
+<span class="w">  </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">torques</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// GOOD - Load once before loop</span>
+<span class="n">franka</span><span class="o">::</span><span class="n">Model</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">robot</span><span class="p">.</span><span class="n">loadModel</span><span class="p">();</span><span class="w">  </span><span class="c1">// Before loop!</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Use pre-loaded model</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>❌ DON’T: Sleep or Block</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// BAD - From the example itself!</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">robot_state</span><span class="p">,</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">readOnce</span><span class="p">();</span>
+
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">microseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span><span class="w">  </span><span class="c1">// BLOCKS RT!</span>
+
+<span class="w">  </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">torques</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// GOOD - No sleeping in control loop</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">robot_state</span><span class="p">,</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">readOnce</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// Compute and write immediately</span>
+<span class="w">  </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">torques</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>❌ DON’T: Print Every Cycle</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// BAD - Printing in tight loop</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">robot_state</span><span class="p">,</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">readOnce</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// NEVER DO THIS - blocks on I/O</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Position: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">robot_state</span><span class="p">.</span><span class="n">q</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Success rate: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">robot_state</span><span class="p">.</span><span class="n">control_command_success_rate</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">  </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">torques</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// GOOD - Print periodically or in separate thread</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">counter</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w">  </span><span class="c1">// Every second at 1kHz</span>
+<span class="w">  </span><span class="c1">// Store data for printing thread</span>
+<span class="w">  </span><span class="n">print_data</span><span class="p">.</span><span class="n">mutex</span><span class="p">.</span><span class="n">try_lock</span><span class="p">();</span>
+<span class="w">  </span><span class="n">print_data</span><span class="p">.</span><span class="n">robot_state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">robot_state</span><span class="p">;</span>
+<span class="w">  </span><span class="n">print_data</span><span class="p">.</span><span class="n">mutex</span><span class="p">.</span><span class="n">unlock</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>❌ DON’T: Dynamic Allocations</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// BAD - Allocating vectors every cycle</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">robot_state</span><span class="p">,</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">readOnce</span><span class="p">();</span>
+
+<span class="w">  </span><span class="c1">// NEVER DO THIS</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">error</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+<span class="w">  </span><span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="w"> </span><span class="nf">tau_d</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">error</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">desired_q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">robot_state</span><span class="p">.</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="n">tau_d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k_p</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">error</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">franka</span><span class="o">::</span><span class="n">Torques</span><span class="p">(</span><span class="n">tau_d</span><span class="p">.</span><span class="n">data</span><span class="p">()));</span>
+<span class="p">}</span>
+
+<span class="c1">//Alternative solutions</span>
+
+<span class="c1">// GOOD - pre-allocate memory</span>
+<span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">error</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+<span class="n">Eigen</span><span class="o">::</span><span class="n">VectorXd</span><span class="w"> </span><span class="nf">tau_d</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">robot_state</span><span class="p">,</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">readOnce</span><span class="p">();</span>
+<span class="w">  </span><span class="c1">// Use pre-allocated memory</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">error</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">desired_q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">robot_state</span><span class="p">.</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">    </span><span class="n">tau_d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k_p</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">error</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">franka</span><span class="o">::</span><span class="n">Torques</span><span class="p">(</span><span class="n">tau_d</span><span class="p">.</span><span class="n">data</span><span class="p">()));</span>
+<span class="p">}</span>
+
+<span class="c1">// GOOD - Use fixed arrays</span>
+<span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tau_d</span><span class="p">{};</span><span class="w">  </span><span class="c1">// Pre-allocated</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">size_t</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">7</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">tau_d</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">k_p</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="n">desired_q</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">robot_state</span><span class="p">.</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">tau_d</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Why Memory Allocation Matters:</strong></p>
+<ul class="simple">
+<li><p><strong>Heap allocations</strong> (like <code class="docutils literal notranslate"><span class="pre">std::vector</span></code>, <code class="docutils literal notranslate"><span class="pre">Eigen::VectorXd</span></code>) are VERY slow</p></li>
+<li><p>At 1kHz, even small allocations add up and cause jitter</p></li>
+<li><p>Preallocating ensures deterministic, real-time performance</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fr3-certification-remarks.html" class="btn btn-neutral float-left" title="FR3 certification remarks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faq.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
