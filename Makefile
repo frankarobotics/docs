@@ -12,19 +12,35 @@ BUILDDIR      = build
 help:
 	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-.PHONY: help Makefile clean html
+.PHONY: help Makefile clean html import-repos generate-js
 
 # Generate compatibility data JavaScript file
 generate-js:
 	@chmod +x $(SOURCEDIR)/_static/generate_compatibility_js.py
 	@$(SOURCEDIR)/_static/generate_compatibility_js.py
 
-# Clean build directory
+# Import VCS repositories for documentation
+import-repos:
+	@echo "Importing VCS repositories..."
+	@rm -rf $(SOURCEDIR)/doc
+	@mkdir -p $(SOURCEDIR)/doc
+	@vcs import --input rolling.repos $(SOURCEDIR)/doc
+	@echo "Copying prepared franka_ros2 documentation..."
+	@rm -rf $(SOURCEDIR)/doc/franka_ros2
+	@cp -r franka_ros2 $(SOURCEDIR)/doc/
+
+# Clean build directory and doc imports
 clean:
 	rm -rf $(BUILDDIR)/*
+	rm -rf $(SOURCEDIR)/doc
+	rm -rf $(SOURCEDIR)/franka_ros2
 
-# Custom html target that first generates JS
+# Custom html target that first imports repos, generates JS, clones franka_ros2, then builds
 html: generate-js
+	@echo "Importing franka_ros2 documentation..."
+	@if [ ! -d "$(SOURCEDIR)/franka_ros2" ]; then \
+		cd $(SOURCEDIR) && vcs import --input ../franka_ros2.repos .; \
+	fi
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # Catch-all target: route all unknown targets to Sphinx using the new

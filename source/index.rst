@@ -49,7 +49,7 @@ The source code of this documentation is also `available online
    getting_started
    libfranka
    franka_ros
-   franka_ros2
+   franka_ros2/docs/index
    franka_matlab/index
    franka_matlab/franka_matlab_changelog
    control_parameters
