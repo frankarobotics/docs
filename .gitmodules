@@ -1,6 +1,3 @@
-[submodule "libfranka"]
-	path = libfranka
-	url = https://github.com/frankarobotics/libfranka
 [submodule "franka_ros"]
 	path = franka_ros
 	url = https://github.com/frankarobotics/franka_ros
