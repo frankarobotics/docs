@@ -3,3 +3,7 @@ repositories:
     type: git
     url: https://github.com/frankarobotics/franka_ros2.git
     version: jazzy
+  libfranka:
+    type: git
+    url: https://github.com/frankarobotics/libfranka.git
+    version: main

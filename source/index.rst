@@ -45,9 +45,9 @@ The source code of this documentation is also `available online
    overview
    requirements
    compatibility
-   installation_linux
-   getting_started
-   libfranka
+   libfranka/docs/installation_linux
+   libfranka/docs/getting_started
+   libfranka/docs/index
    franka_ros
    franka_ros2/docs/index
    franka_matlab/index

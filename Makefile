@@ -34,12 +34,13 @@ clean:
 	rm -rf $(BUILDDIR)/*
 	rm -rf $(SOURCEDIR)/doc
 	rm -rf $(SOURCEDIR)/franka_ros2
+	rm -rf $(SOURCEDIR)/libfranka
 
-# Custom html target that first imports repos, generates JS, clones franka_ros2, then builds
+# Custom html target that first imports repos, generates JS, clones franka_ros2 and libfranka, then builds
 html: generate-js
-	@echo "Importing franka_ros2 documentation..."
-	@if [ ! -d "$(SOURCEDIR)/franka_ros2" ]; then \
-		cd $(SOURCEDIR) && vcs import --input ../franka_ros2.repos .; \
+	@echo "Importing documentation repositories..."
+	@if [ ! -d "$(SOURCEDIR)/franka_ros2" ] || [ ! -d "$(SOURCEDIR)/libfranka" ]; then \
+		cd $(SOURCEDIR) && vcs import --input ../upstream.repos .; \
 	fi
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
