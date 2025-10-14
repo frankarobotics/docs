@@ -150,79 +150,48 @@ This parameter is used to determine the flip direction of the elbow.
 
 .. important::
 
-    Note that the maximum joint velocity depends on the joint position. The maximum and minimum joint velocities at a certain joint position are calculated as:
+    Note that the maximum joint velocity depends on both the joint position and the direction of motion. The maximum
+    and minimum joint velocities for a given joint position can be obtained from the following functions:
 
-    .. list-table::
-       :class: borderless
+    .. code-block:: c++
 
-       * - .. figure:: _static/pbv_equations_max.svg
-                :align: center
-                :figclass: align-center
+          Robot::getUpperJointVelocityLimits(const std::array<double, 7UL> &joint_positions);
+          Robot::getLowerJointVelocityLimits(const std::array<double, 7UL> &joint_positions);
 
-                Maximum velocities
+    The position based joint velocity limits are computed by:
 
-       * - .. figure:: _static/pbv_equations_min.svg
-                :align: center
-                :figclass: align-center
+    .. math::
 
-                Minimum velocities
+      \dot{q_i} (q_i)_{max} = \min(\dot{q}_{max,i}, \max(0, \; -\dot{q}_{offset,i} + \sqrt{\max(0, \; 2 \cdot \ddot{q}_{dec,i} \cdot (q_{max,i} - q_i))}))
+
+      \dot{q_i} (q_i)_{min} = \max(\dot{q}_{min,i}, \min(0, \; \dot{q}_{offset,i} - \sqrt{\max(0, \; 2 \cdot \ddot{q}_{dec,i} \cdot (-q_{min,i} + q_i))}))
+
+    where:
+      - :math:`\dot{q_i} (q_i)_{max}` is the maximum joint velocity for joint :math:`i` at position :math:`q_i`.
+      - :math:`\dot{q_i} (q_i)_{min}` is the minimum joint velocity for joint :math:`i` at position :math:`q_i`.
+      - :math:`\dot{q}_{max,i}` is the maximum joint velocity for joint :math:`i` from the table above.
+      - :math:`\dot{q}_{min,i}` is the minimum joint velocity for joint :math:`i` from the table above.
+      - :math:`\dot{q}_{offset,i}` is the velocity offset for joint :math:`i` from the table above.
+      - :math:`\ddot{q}_{dec,i}` is the maximum deceleration limits for joint :math:`i` from the table above.
+      - :math:`q_{max,i}` is the maximum joint position for joint :math:`i` from the table above.
+      - :math:`q_{min,i}` is the minimum joint position for joint :math:`i` from the table above.
+      - :math:`q_i` is the current joint position of joint :math:`i`.
 
     In order to avoid violating the safety joint velocity limits, the Max/Min Joint velocity limits for FCI are more restrictive than those provided in the Datasheet.
 
-As most motion planners cannot deal with those functions for describing the velocity limits of each joint but they only deal with
-fixed velocity limits (rectangular limits), we are providing here a suggestion on which values to use for them.
+Since most motion planners cannot represent variable velocity limits and instead rely on constant limits, users are free to choose the joint range and velocity
+limits within which they wish to operate.
 
-In the figures below the system velocity limits are visualized by the red and blue thresholds while the suggested
-"position-velocity rectangular limits" are visualized in black.
+In the figure below, the system velocity limits are shown in red and blue, and the position–velocity rectangular limits are depicted in black.
 
-.. list-table:: Visualization of the joint limits of FR3
-   :class: borderless
+.. figure:: _static/pbv_limits_generic.svg
+   :align: center
+   :figclass: align-center
 
-   * - .. figure:: _static/pbv_limits_j1.svg
-            :align: center
-            :figclass: align-center
-
-            Velocity limits of Joint 1
-
-     - .. figure:: _static/pbv_limits_j2.svg
-            :align: center
-            :figclass: align-center
-
-            Velocity limits of Joint 2
-
-   * - .. figure:: _static/pbv_limits_j3.svg
-            :align: center
-            :figclass: align-center
-
-            Velocity limits of Joint 3
-
-     - .. figure:: _static/pbv_limits_j4.svg
-            :align: center
-            :figclass: align-center
-
-            Velocity limits of Joint 4
-
-   * - .. figure:: _static/pbv_limits_j5.svg
-            :align: center
-            :figclass: align-center
-
-            Velocity limits of Joint 5
-
-     - .. figure:: _static/pbv_limits_j6.svg
-            :align: center
-            :figclass: align-center
-
-            Velocity limits of Joint 6
-
-   * - .. figure:: _static/pbv_limits_j7.svg
-            :align: center
-            :figclass: align-center
-
-            Velocity limits of Joint 7
-     -
+   Position based velocity limits
 
 
-Here are the parameters describing the suggested position-velocity rectangular limits:
+Below are suggested position-velocity rectangular limits:
 
 .. csv-table::
    :header-rows: 1
@@ -230,10 +199,7 @@ Here are the parameters describing the suggested position-velocity rectangular l
 
 .. important::
 
-   These limits are the values that are used by default in the rate limiter and in the URDF inside :doc:`franka_ros`.
-   However, these are only a suggestion, you are free to define your own rectangles within the specification accordingly to your needs.
-
-   Since FR3 does not inherently implement any restriction to the system limits (red and blue line in the plots above), you are also free
+   These limits are only a suggestion. Since FR3 does not inherently implement any restriction to the system limits (red and blue line in the plots above), you are free
    to implement your own motion generator to exploit the HW capabilities of FR3 beyond the rectangular limits imposed by existing motion generators.
 
 
