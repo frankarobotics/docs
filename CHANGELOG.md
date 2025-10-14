@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.0
+
+- Use the docs from franka_toolbox_for_matlab repository to create documentation structure
+- Update documentation regarding fci joint limits
+
 ## 0.6.0
 
 - Use vcstool to import franka_ros2

@@ -50,8 +50,7 @@ The source code of this documentation is also `available online
    libfranka/docs/index
    franka_ros
    franka_ros2/docs/index
-   franka_matlab/index
-   franka_matlab/franka_matlab_changelog
+   franka_toolbox_for_matlab/docs/franka_matlab/index
    control_parameters
    fr3-certification-remarks
    troubleshooting

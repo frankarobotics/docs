@@ -7,3 +7,7 @@ repositories:
     type: git
     url: https://github.com/frankarobotics/libfranka.git
     version: main
+  franka_toolbox_for_matlab:
+    type: git
+    url: https://github.com/frankarobotics/franka_toolbox_for_matlab.git
+    version: main
