@@ -2,7 +2,7 @@
 
 ## 0.6.0
 
-- Use vcstool to import franka_ros2 
+- Use vcstool to import franka_ros2
 - Use the docs under each franka_ros2 package to create documentation structure
 - Updated build process for franka_ros2 integration
 

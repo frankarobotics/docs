@@ -275,11 +275,11 @@ What NOT to Do in 1kHz Control Loops
     // BAD - Based on communication_test.cpp
     while (!torques.motion_finished) {
       std::tie(robot_state, period) = rw_interface->readOnce();
-      
+
       // NEVER DO THIS - loads model every cycle!
       franka::Model model = robot.loadModel();
       auto gravity = model.gravity(robot_state);
-      
+
       rw_interface->writeOnce(torques);
     }
 
@@ -296,9 +296,9 @@ What NOT to Do in 1kHz Control Loops
     // BAD - From the example itself!
     while (!torques.motion_finished) {
       std::tie(robot_state, period) = rw_interface->readOnce();
-      
+
       std::this_thread::sleep_for(std::chrono::microseconds(100));  // BLOCKS RT!
-      
+
       rw_interface->writeOnce(torques);
     }
 
@@ -316,11 +316,11 @@ What NOT to Do in 1kHz Control Loops
     // BAD - Printing in tight loop
     while (!torques.motion_finished) {
       std::tie(robot_state, period) = rw_interface->readOnce();
-      
+
       // NEVER DO THIS - blocks on I/O
       std::cout << "Position: " << robot_state.q << std::endl;
       std::cout << "Success rate: " << robot_state.control_command_success_rate << std::endl;
-      
+
       rw_interface->writeOnce(torques);
     }
 
@@ -339,16 +339,16 @@ What NOT to Do in 1kHz Control Loops
     // BAD - Allocating vectors every cycle
     while (!torques.motion_finished) {
       std::tie(robot_state, period) = rw_interface->readOnce();
-      
+
       // NEVER DO THIS
       std::vector<double> error(7);
       Eigen::VectorXd tau_d(7);
-      
+
       for (size_t i = 0; i < 7; i++) {
         error[i] = desired_q[i] - robot_state.q[i];
         tau_d[i] = k_p * error[i];
       }
-      
+
       rw_interface->writeOnce(franka::Torques(tau_d.data()));
     }
 
@@ -381,4 +381,3 @@ What NOT to Do in 1kHz Control Loops
 * **Heap allocations** (like ``std::vector``, ``Eigen::VectorXd``) are VERY slow
 * At 1kHz, even small allocations add up and cause jitter
 * Preallocating ensures deterministic, real-time performance
-

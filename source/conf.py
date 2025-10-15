@@ -14,7 +14,6 @@
 # serve to show the default.
 
 import json
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -154,6 +153,14 @@ latex_documents = [
     (master_doc, "fci.tex", "Franka Control Interface Documentation", author, "manual"),
 ]
 
+# Mathwork blocks automatic checks
+linkcheck_ignore = [
+    r'https://shorturl.at/.*',
+    r'blogs.oracle.com/.*',
+    r'https://www.mathworks.com/.*',
+    r'https://blogs.oracle.com/.*',
+    r'https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.*',
+]
 
 # -- Options for manual page output ---------------------------------------
 

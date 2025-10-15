@@ -42,7 +42,7 @@ RUN groupadd --gid $USER_GID $USERNAME \
     && echo "$USERNAME ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers \
     && chown $USERNAME:$USERNAME /workspace
 
-USER $USERNAME 
+USER $USERNAME
 
 COPY entrypoint.sh /
 CMD [ "/bin/bash" ]

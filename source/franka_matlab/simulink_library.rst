@@ -43,7 +43,7 @@ Robot State
 
 For reading the desired set of signals stemming from the current robot state,
 you can free-type the names of the signals in the `Parameters` pane of the block parameters.
-For the set of available signals and their namings --> `Robot State Attributes <https://frankarobotics.github.io/libfranka/structfranka_1_1RobotState.html>`_
+For the set of available signals and their namings --> `Robot State Attributes <https://frankarobotics.github.io/libfranka/0.15.0/structfranka_1_1RobotState.html>`_
 
 .. figure:: _static/get_robot_state_settings.png
     :align: center
@@ -87,7 +87,7 @@ Vacuum Gripper State
 
     Get current vacuum gripper state Simulink Block.
 
-The vacuum gripper state block will inform the application about the current vacuum gripper state. 
+The vacuum gripper state block will inform the application about the current vacuum gripper state.
 
 Mass Matrix
 -----------

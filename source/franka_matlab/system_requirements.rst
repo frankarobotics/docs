@@ -7,7 +7,7 @@ Host PC Requirements
 MATLAB Toolbox Dependencies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The following Mathworks products are required for the Host PC: 
+The following Mathworks products are required for the Host PC:
 
 * `MATLAB <https://www.mathworks.com/products/matlab.html>`_
 * `Simulink <https://www.mathworks.com/products/simulink.html>`_
@@ -25,7 +25,7 @@ MATLAB Coder Support Package for NVIDIA Jetson
 
 MATLAB Support Package for Linux
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-In case of Ubuntu Target PC, it is highly recommended to install the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_ 
+In case of Ubuntu Target PC, it is highly recommended to install the `matlab-support package <https://packages.ubuntu.com/search?keywords=matlab-support>`_
 in order for Matlab to reference the system dynamic libraries instead of the precompiled ones that it ships with:
 
 .. code-block:: shell

@@ -10,7 +10,7 @@ Compatibility with Matlab & libfranka
 | Franka MATLAB version  | libfranka version | MATLAB Version             |
 +========================+===================+============================+
 | 3.0.0                  | 0.15.0            | :math:`\geq` R2023a        |
-+------------------------+-------------------+----------------------------+ 
++------------------------+-------------------+----------------------------+
 | 2.0.0                  | 0.9.x & 0.14.x    | :math:`\geq` R2022a        |
 +------------------------+-------------------+----------------------------+
 | 1.0.0                  | 0.9.x & 0.13.x    | :math:`\geq` R2021a        |
@@ -30,4 +30,4 @@ Compatibility with Matlab & libfranka
 
 .. important::
     Check the `Matlab System Requirements <https://www.mathworks.com/support/requirements/previous-releases.html>`_ for your Host PC OS compatibility
-    as well as the `libfranka and robot system compatibility <https://frankaemika.github.io/docs/compatibility.html>`_.
+    as well as the `libfranka and robot system compatibility <https://frankarobotics.github.io/docs/compatibility.html>`_.

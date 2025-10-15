@@ -20,8 +20,8 @@ When using an external Target PC to control the robot, you must provide connecti
 
 .. warning::
 
-    Before attempting to connect to the robot via an external AI companion or NVIDIA Jetson, 
-    ensure that you have copied your SSH key to the target PC, e.g with ``ssh-copy-id`` for Linux. 
+    Before attempting to connect to the robot via an external AI companion or NVIDIA Jetson,
+    ensure that you have copied your SSH key to the target PC, e.g with ``ssh-copy-id`` for Linux.
     This step is crucial for establishing an SSH connection without requiring a password each time.
 
 .. code-block:: matlab
