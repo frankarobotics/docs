@@ -1,7 +1,7 @@
 # Changelog:
 
 ## 3.0.0 (16-05-2025)
-   
+
    - **BREAKING** New FrankaRobot() implementation for supporting robot control through AI Companion/Jetson and a non-real time Host PC Windows/Linux
    - MATLAB & Simulink implementation for the Franka Vacuum Gripper added.
    - Default project pre-binaries for libfranka 0.15.0 bundled with all 3d party runntime dependencies.The project should be able to execute out-of-the-box without additional installations.
@@ -12,12 +12,12 @@
    - **BREAKING** New Simulink Model Blocks replacing the old single Model Block.
    - **BREAKING** Installation workflow and Simulink build system modification for supporting deployment to the Franka AI Companion.
    - **BREAKING** Toolbox renaming: Franka Toolbox for MATLAB. Scripts also now follow the shorter convention: franka_toolbox_<>.m
-   - Cartesian impedance control example now includes UI elements as improved demo and better testing of the External Mode.  
+   - Cartesian impedance control example now includes UI elements as improved demo and better testing of the External Mode.
    - Dropping experimental support for native deployment in Windows host machines
    - Switch port matlab function for targeting custom docker images in AI Companion.
 
 ## 1.0.0 (11-03-2024)
-    
+
    - **BREAKING** Robot Settings standardization with Matlab OOP.
    - **BREAKING** Adding the option to set the rate limiter and the cutoff frequency in the apply control simulink block.
    - **BREAKING** Removing the get initial robot state block from the simulink library.
@@ -41,7 +41,7 @@
    - Windows 10 support (Experimental mainly due to the non-Real-Time nature of the default Windows system).
    - Project now relies on the leaner "Generic Real-Time" .tlc (grt.tlc) target framework.
    - Support for XCP communication protocol (vehicle network communication). Data inspector is now enabled!
-   - Support for "Run on custom Hardware" Simulink App for controlling the "Build-deploy-execute-connect" workflow. 
+   - Support for "Run on custom Hardware" Simulink App for controlling the "Build-deploy-execute-connect" workflow.
    - Project back-end overal simplification with modified rt_main.cpp for handling the external mode as a seperate thread.
    - **BREAKING** all the Franka MATLAB functions are starting with the "`franka_`" prefix.
    - Expansion of Matlab library with the functions `franka_communication_test()`, `franka_joint_poses()`, `franka_robot_state()` and `franka_joint_point_to_point_motion()`.
@@ -63,7 +63,7 @@
    - Simulink Franka Library sFunctions C++ and tlc implementations decoupled from src code necessary for automatic code gen. SRC Folder can be treated seperately as a C++ project.
 
 ## 0.1.0 (21-01-2020)
-  
+
   - Features:
     - **Simulink Library** for **Franka Robot**, includes the following blocks:
         - **Franka Simulink Iterface** for applying the desired control, plus additional parameters.

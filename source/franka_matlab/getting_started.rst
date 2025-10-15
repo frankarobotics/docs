@@ -24,7 +24,7 @@ To browse the available examples, use the following command:
 
     The Cartesian Impedance Control Example equiped with sliders as UI elements for controlling the End-Effector position.
 
-After opening, by double clicking, any of the Simulink models the robot settings will be loaded automatically in the 
+After opening, by double clicking, any of the Simulink models the robot settings will be loaded automatically in the
 workspace, in the form of the `frs` object.
 
 .. figure:: _static/workspace_parameters.png
@@ -33,7 +33,7 @@ workspace, in the form of the `frs` object.
 
     The Franka Robot Settings object.
 
-The robot_ip is set to 172.16.0.2. Make sure that the robot_ip, as well as all the other parameters matches your 
+The robot_ip is set to 172.16.0.2. Make sure that the robot_ip, as well as all the other parameters matches your
 setup for your intended purposes.
 
 .. code-block:: matlab
@@ -55,10 +55,10 @@ The requirements for the solver settings for the Simulink model should be:
 * discrete (no continuous states)
 * With Fixed-step sixe (fundamental sample time) of `0.001`.
 
-Simulink Build & Deploy - Target PC: Franka AI Companion  
+Simulink Build & Deploy - Target PC: Franka AI Companion
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For building & deploying to the Franka AI Companion you can 
+For building & deploying to the Franka AI Companion you can
 use the following recommended workflow:
 
 Start by clicking "Run on Hardware Board" in the Simulink APPS pane and select
@@ -72,8 +72,8 @@ the "NVIDIA Jetson" option.
 
 .. important::
 
-    In case this option is not visible make sure that the 
-    `MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms <https://www.mathworks.com/matlabcentral/fileexchange/68644-matlab-coder-support-package-for-nvidia-jetson-and-nvidia-drive-platforms>`_ 
+    In case this option is not visible make sure that the
+    `MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms <https://www.mathworks.com/matlabcentral/fileexchange/68644-matlab-coder-support-package-for-nvidia-jetson-and-nvidia-drive-platforms>`_
     is installed.
 
 We need to proceed with a couple of "Hardware Settings" before building & running the model.
@@ -138,11 +138,11 @@ Simulink Build & Deploy - Target PC: Linux Host
 
 .. important::
 
-    If you are planning to build, run & deploy the application to your linux host pc 
-    make sure that you've installed libfranka and a Real-Time kernel as described in the 
+    If you are planning to build, run & deploy the application to your linux host pc
+    make sure that you've installed libfranka and a Real-Time kernel as described in the
     previous installation page.
 
-Let's start by selecting the `Run on Custom Hardware` App from the Apps pane in Simulink. 
+Let's start by selecting the `Run on Custom Hardware` App from the Apps pane in Simulink.
 Allow the grt.tlc target to be auto-selected, as prompted.
 
 .. figure:: _static/cartesian_impedance_control_apps.png
@@ -180,7 +180,7 @@ Please proceed with the following necessary model checks before proceeding:
     Before executing make sure that the brakes of the robot are disengaged, the FCI mode is activated
     in Desk and that the robot is in execution mode (user-button is released)!
 
-You can then select from the Hardware tab either `Monitor & Tune` in case monitoring through the external mode is 
+You can then select from the Hardware tab either `Monitor & Tune` in case monitoring through the external mode is
 desired or `Build, Deploy & Start` for just executing the application without monitoring.
 
 .. figure:: _static/cartesian_impedance_control_hardware.png
@@ -198,7 +198,7 @@ desired or `Build, Deploy & Start` for just executing the application without mo
 Simulink External Mode ("Monitor & Tune") - Necessary Settings
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In case you are planning to execute with External Mode for "Monitor & Tuning", 
+In case you are planning to execute with External Mode for "Monitor & Tuning",
 it is also necessary to apply the following settings:
 
  * "Run external mode in a background thread".
@@ -229,10 +229,10 @@ it is also necessary to apply the following settings:
 MATLAB
 ------
 
-Demo Pick & Place with RRT 
+Demo Pick & Place with RRT
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For familiarization with the Matlab API for the Franka Robot the `pick_and_place_with_RRT.mlx` demo is a good starting point. 
+For familiarization with the Matlab API for the Franka Robot the `pick_and_place_with_RRT.mlx` demo is a good starting point.
 
 .. figure:: _static/matlab_pick_and_place_with_RRT_demo.png
     :align: center
@@ -242,7 +242,7 @@ For familiarization with the Matlab API for the Franka Robot the `pick_and_place
 
 Automatic error recovery
 ~~~~~~~~~~~~~~~~~~~~~~~~
-If the robot encounters an error state and transitions to reflex mode, 
+If the robot encounters an error state and transitions to reflex mode,
 you may attempt a recovery by executing the automatic error recovery command in Matlab.
 
 .. code-block:: shell
@@ -250,11 +250,10 @@ you may attempt a recovery by executing the automatic error recovery command in 
     fr = FrankaRobot('RobotIP', <robot ip as string>);
     fr.automatic_error_recovery();
 
-In case the command fails and the robot remains in the erroneous state try using the guiding mode to manually bring 
-back the robot to a valid configuration. 
+In case the command fails and the robot remains in the erroneous state try using the guiding mode to manually bring
+back the robot to a valid configuration.
 
 .. hint::
 
-    Checkout the :ref:`Franka library for MATLAB <matlab-library>` for a set of helper 
+    Checkout the :ref:`Franka library for MATLAB <matlab-library>` for a set of helper
     functions that can help to optimize your workflow.
-
