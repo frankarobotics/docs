@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="libfranka" href="libfranka.html" />
+    <link rel="prev" title="Installation on Linux" href="installation_linux.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.6
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#operating-the-robot">Operating the robot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-fci-feature">Installing the FCI Feature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-network">Setting up the network</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#control-network-configuration">Control network configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linux-workstation-network-configuration">Linux workstation network configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#preparing-the-robot-for-fci-usage-in-desk">Preparing the robot for FCI usage in Desk</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#activating-the-fci-mode">Activating the FCI mode</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fci-mode-in-panda">FCI mode in Panda</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fci-mode-in-franka-research-3">FCI mode in Franka Research 3</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#verifying-the-connection">Verifying the connection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_matlab/franka_matlab_changelog.html">Franka Toolbox for MATLAB changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/getting_started.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<p>After setting up the required software for <a class="reference internal" href="installation_linux.html"><span class="doc">Linux</span></a>.
+It is time to connect to the robot and test the whole setup
+by using FCI to read the current robot state.</p>
+<section id="operating-the-robot">
+<h2>Operating the robot<a class="headerlink" href="#operating-the-robot" title="Permalink to this heading"></a></h2>
+<p>Before going further though, here are a few safety considerations.
+Always check the following things before powering on the robot:</p>
+<ol class="arabic simple">
+<li><p>Make sure that the Arm has been mounted on a stable base and cannot topple over, even
+when performing fast motions or abrupt stops.</p></li>
+</ol>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Only tabletop mounting is supported, i.e. the Arm must be mounted perpendicular to the
+ground! Other mountings will <strong>void your warranty</strong> and <strong>might cause damage
+to the robot</strong>!</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Ensure that the cable connecting Arm and Control is firmly attached on both sides.</p></li>
+<li><p>Connect the external activation device to Arm’s base and keep it next to you in order to be
+able to stop the robot at any time.</p></li>
+</ol>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Activating the external activation device will disconnect the Arm from Control.
+The joint motor controllers will then hold their current position.
+<strong>The external activation device is not an emergency stop!</strong></p>
+</div>
+<p>This list is non-exhaustive! The manual delivered with your robot contains a chapter dedicated
+to safety. Please read it carefully and follow the instructions. The manual can also be found in
+our <a class="reference external" href="https://world.franka.de/resources">Franka World Hub</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The workstation PC which commands your robot using the FCI must always be connected to the LAN
+port of Control (shop floor network) and <strong>not</strong> to the LAN port of the Arm (robot network).</p>
+</div>
+</section>
+<section id="installing-the-fci-feature">
+<h2>Installing the FCI Feature<a class="headerlink" href="#installing-the-fci-feature" title="Permalink to this heading"></a></h2>
+<p>In order to be able to operate the robot through the Franka Control Interface, the corresponding
+Feature needs to be installed on your device. If it is already installed to the controller, it
+will be listed under Desk –&gt; Settings –&gt; System –&gt; Installed Features.
+If FCI is not installed yet, you can synchronize it from your Franka World account to your
+controller. Therefore, you must have an available FCI license in your company/university account and have
+your controller registered in this account. The software (offline or online) synchronization
+process is described in more detail in the
+<a class="reference external" href="https://download.franka.de/franka-world-manual/">Franka World user manual</a>.</p>
+</section>
+<section id="setting-up-the-network">
+<span id="id1"></span><h2>Setting up the network<a class="headerlink" href="#setting-up-the-network" title="Permalink to this heading"></a></h2>
+<p>Good network performance is crucial when controlling the robot using FCI.
+Therefore it is strongly recommended to use a direct connection between the
+workstation PC and Panda’s Control. This section describes how to configure your
+network for this use case.</p>
+<figure class="align-center" id="id3">
+<img alt="_images/control.png" src="_images/control.png" />
+<figcaption>
+<p><span class="caption-text">Use Control’s LAN port when controlling the robot through FCI.
+Do not connect to the port in Arm’s base.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Control and your workstation must be configured to appear on the same
+network. Simplest way to achieve that is to use static IP addresses. Any two
+addresses on the same network would work, but the following values will be used
+for the purpose of this tutorial:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 43%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Workstation PC</p></th>
+<th class="head"><p>Control</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Address</p></td>
+<td><p>172.16.0.1</p></td>
+<td><p>172.16.0.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Netmask</p></td>
+<td><p>24</p></td>
+<td><p>24</p></td>
+</tr>
+</tbody>
+</table>
+<p>The Control’s address (172.16.0.2) is called <code class="docutils literal notranslate"><span class="pre">&lt;fci-ip&gt;</span></code> in the following chapters.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>With this network configuration, Desk can be accessed via <code class="docutils literal notranslate"><span class="pre">https://&lt;fci-ip&gt;</span></code>, although
+you will see a certificate warning in your browser.</p>
+</div>
+<p>The configuration process consists of two steps:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Configuring Control’s network settings.</p></li>
+<li><p>Configuring your workstation’s network settings.</p></li>
+</ul>
+</div></blockquote>
+<section id="control-network-configuration">
+<h3>Control network configuration<a class="headerlink" href="#control-network-configuration" title="Permalink to this heading"></a></h3>
+<p>For this step, the robot needs to be installed and tested. <strong>Please read through
+the documents shipped with your robot and follow the setup instructions before
+continuing any further!</strong></p>
+<p>With system version &gt;= 5.5.0, the Control’s network can be configured in the settings interface. For
+the duration of this step you can connect to the robot through the port in the
+robot’s base. For details, consult the <cite>Connecting a user interface device</cite>
+section in the manual delivered with your robot.</p>
+<figure class="align-center" id="id4">
+<img alt="_images/FrankaUI_Settings_Bar.png" src="_images/FrankaUI_Settings_Bar.png" />
+<figcaption>
+<p><span class="caption-text">Accessing the Franka’s settings interface through Desk.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To set up a static address, enter the following values in the <cite>Network</cite> section:</p>
+<figure class="align-center" id="id5">
+<img alt="_images/FrankaUI_Settings_Network.png" src="_images/FrankaUI_Settings_Network.png" />
+<figcaption>
+<p><span class="caption-text">Setting a static IP for the Control’s LAN port (Shop Floor network).
+DHCP Client option is deselected.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Press <cite>Apply</cite>. After the settings are successfully applied, connect your
+workstation’s LAN port to the robot’s control unit.</p>
+</section>
+<section id="linux-workstation-network-configuration">
+<h3>Linux workstation network configuration<a class="headerlink" href="#linux-workstation-network-configuration" title="Permalink to this heading"></a></h3>
+<p>This section describes how to set up a static IP address on Ubuntu 16.04
+using the GUI. Follow the official Ubuntu <a class="reference external" href="https://help.ubuntu.com/lts/serverguide/network-configuration.html">guide</a> if you prefer to use the
+command line.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The following steps will modify your network settings. If in doubt,
+contact your network’s administrator.</p>
+</div>
+<p>First, go to Network Connection widget. Select the wired connection you
+will be using and click edit.</p>
+<figure class="align-center" id="id6">
+<img alt="_images/edit-connections.png" src="_images/edit-connections.png" />
+<figcaption>
+<p><span class="caption-text">Edit the connection in the Ethernet section.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Next, click on the IPv4 settings tab, set the method to Manual, and enter the
+following values:</p>
+<figure class="align-center" id="id7">
+<img alt="_images/static-ip-ubuntu.png" src="_images/static-ip-ubuntu.png" />
+<figcaption>
+<p><span class="caption-text">Setting a static IP for the Workstation PC. Method is set to Manual.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This step will disable DHCP, which means you will no longer obtain an address
+when connecting to a DHCP server, like the one in Arm’s base. When you no
+longer use FCI, you can change the Method back to <cite>Automatic (DHCP)</cite>.</p>
+</div>
+<p>Save the changes, and close the Network Connection window. Click on the
+connection name from the drop down menu. It should now be possible to connect to
+the robot from your workstation. To verify this, perform the
+<a class="reference internal" href="troubleshooting.html#network-bandwidth-delay-test"><span class="std std-ref">Network bandwidth, delay and jitter test</span></a>. From now on, you can also access Desk
+through this address in your browser.</p>
+</section>
+</section>
+<section id="preparing-the-robot-for-fci-usage-in-desk">
+<span id="preparing-robot-in-desk"></span><h2>Preparing the robot for FCI usage in Desk<a class="headerlink" href="#preparing-the-robot-for-fci-usage-in-desk" title="Permalink to this heading"></a></h2>
+<p>In order to verify the connection, the robot’s brakes need to be unlocked in Desk and the activation
+device needs to be relased so that the robot is ready for execution indicated by blue LED mode.</p>
+<section id="activating-the-fci-mode">
+<h3>Activating the FCI mode<a class="headerlink" href="#activating-the-fci-mode" title="Permalink to this heading"></a></h3>
+<p>To activate FCI mode, open Desk, then release the robot brakes, and expand the menu in the top bar. Finally, click on ‘Activate FCI’.</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="_images/FrankaUI_System_ActivateFCI.png"><img alt="_images/FrankaUI_System_ActivateFCI.png" src="_images/FrankaUI_System_ActivateFCI.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-text">Activating the FCI mode in the Desk topbar menu (system version &gt;= 5.5.0)</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="fci-mode-in-panda">
+<h4>FCI mode in Panda<a class="headerlink" href="#fci-mode-in-panda" title="Permalink to this heading"></a></h4>
+<p>After Activating the FCI mode, a pop-up as shown below is appearing. This pop-up indicates that the FCI mode
+is currently active and that Desk interactions are not allowed while it is active. This pop-up needs to
+remain open while working with FCI. Further information about Single Point of Control (SPoC) can be found
+in the manual shipped with the robot which can also be found in our
+<a class="reference external" href="https://world.franka.de/resources">Franka World Hub</a>.</p>
+<figure class="align-center" id="id9">
+<img alt="_images/pop_up_fci.png" src="_images/pop_up_fci.png" />
+<figcaption>
+<p><span class="caption-text">Pop-up when the FCI mode is activated</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="fci-mode-in-franka-research-3">
+<h4>FCI mode in Franka Research 3<a class="headerlink" href="#fci-mode-in-franka-research-3" title="Permalink to this heading"></a></h4>
+<p>After Activating the FCI mode, a pop-up appears, then the user needs to confirm.</p>
+<table style="margin-bottom: 25px;">
+         <tr>
+             <td><img src="_static/FrankaUI_System_ActivateFCI_Confirm.png" alt="FrankaUI_System_ActivateFCI_Confirm" style="width: 300px;"/></td>
+             <td><img src="_static/FrankaUI_System_ActivateFCI_Done.png" alt="FrankaUI_System_ActivateFCI_Done" style="width: 300px;"/></td>
+         </tr>
+     <caption style="caption-side: bottom; text-align: center;">Sidebar is green when the FCI mode is activated</caption>
+ </table></section>
+</section>
+</section>
+<section id="verifying-the-connection">
+<h2>Verifying the connection<a class="headerlink" href="#verifying-the-connection" title="Permalink to this heading"></a></h2>
+<p>The previous sections described how to specify the IP address of the Control’s
+LAN port. In the following sections that address is referred to as <code class="docutils literal notranslate"><span class="pre">&lt;fci-ip&gt;</span></code>.</p>
+<p>In order to verify that everything is correctly set up, be sure <a class="reference internal" href="#preparing-robot-in-desk"><span class="std std-ref">the robot is prepared for FCI
+usage in Desk</span></a> and run the <code class="docutils literal notranslate"><span class="pre">echo_robot_state</span></code>
+example from <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>. If you decided to install <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> and <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> from the ROS
+repository, you can instead read the instructions for
+<a class="reference internal" href="franka_ros.html#ros-visualization"><span class="std std-ref">visualizing the robot in ros</span></a> .</p>
+<p>Change to the build directory of <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> and execute the example:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./examples/echo_robot_state<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+<p>The program will print the current state of the robot to the console and terminate after a few
+iterations. The fields are explained in the <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.15.0/structfranka_1_1RobotState.html">RobotState</a>.</p>
+<p>Example output:</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;O_T_EE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.998578</span><span class="p">,</span><span class="mf">0.0328747</span><span class="p">,</span><span class="mf">-0.0417381</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.0335224</span><span class="p">,</span><span class="mf">-0.999317</span><span class="p">,</span><span class="mf">0.0149157</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">-0.04122</span><span class="p">,</span><span class="mf">-0.016294</span><span class="p">,</span>
+<span class="w">             </span><span class="mf">-0.999017</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.305468</span><span class="p">,</span><span class="mf">-0.00814133</span><span class="p">,</span><span class="mf">0.483198</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;O_T_EE_d&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.998582</span><span class="p">,</span><span class="mf">0.0329548</span><span class="p">,</span><span class="mf">-0.041575</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.0336027</span><span class="p">,</span><span class="mf">-0.999313</span><span class="p">,</span><span class="mf">0.0149824</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">-0.0410535</span><span class="p">,</span>
+<span class="w">               </span><span class="mf">-0.0163585</span><span class="p">,</span><span class="mf">-0.999023</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.305444</span><span class="p">,</span><span class="mf">-0.00810967</span><span class="p">,</span><span class="mf">0.483251</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;F_T_EE&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.7071</span><span class="p">,</span><span class="mf">-0.7071</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.7071</span><span class="p">,</span><span class="mf">0.7071</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.1034</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;EE_T_K&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;m_ee&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.73</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;F_x_Cee&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.01</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.03</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;I_ee&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.001</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.0025</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.0017</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;m_load&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;F_x_Cload&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;I_load&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;m_total&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.73</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;F_x_Ctotal&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.01</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.03</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;I_total&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.001</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.0025</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mf">0.0017</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;elbow&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.0207622</span><span class="p">,</span><span class="mi">-1</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;elbow_d&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.0206678</span><span class="p">,</span><span class="mi">-1</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;tau_J&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-0.00359774</span><span class="p">,</span><span class="mf">-5.08582</span><span class="p">,</span><span class="mf">0.105732</span><span class="p">,</span><span class="mf">21.8135</span><span class="p">,</span><span class="mf">0.63253</span><span class="p">,</span><span class="mf">2.18121</span><span class="p">,</span><span class="mf">-0.0481953</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;tau_J_d&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;dtau_J&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-54.0161</span><span class="p">,</span><span class="mf">-18.9808</span><span class="p">,</span><span class="mf">-64.6899</span><span class="p">,</span><span class="mf">-64.2609</span><span class="p">,</span><span class="mf">14.1561</span><span class="p">,</span><span class="mf">28.5654</span><span class="p">,</span><span class="mf">-11.1858</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;q&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0167305</span><span class="p">,</span><span class="mf">-0.762614</span><span class="p">,</span><span class="mf">-0.0207622</span><span class="p">,</span><span class="mf">-2.34352</span><span class="p">,</span><span class="mf">-0.0305686</span><span class="p">,</span><span class="mf">1.53975</span><span class="p">,</span><span class="mf">0.753872</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;dq&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.00785939</span><span class="p">,</span><span class="mf">0.00189343</span><span class="p">,</span><span class="mf">0.00932415</span><span class="p">,</span><span class="mf">0.0135431</span><span class="p">,</span><span class="mf">-0.00220327</span><span class="p">,</span><span class="mf">-0.00492024</span><span class="p">,</span><span class="mf">0.00213604</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;q_d&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.0167347</span><span class="p">,</span><span class="mf">-0.762775</span><span class="p">,</span><span class="mf">-0.0206678</span><span class="p">,</span><span class="mf">-2.34352</span><span class="p">,</span><span class="mf">-0.0305677</span><span class="p">,</span><span class="mf">1.53975</span><span class="p">,</span><span class="mf">0.753862</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;dq_d&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;joint_contact&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;cartesian_contact&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;joint_collision&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="w"> </span><span class="nt">&quot;cartesian_collision&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;tau_ext_hat_filtered&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.00187271</span><span class="p">,</span><span class="mf">-0.700316</span><span class="p">,</span><span class="mf">0.386035</span><span class="p">,</span><span class="mf">0.0914781</span><span class="p">,</span><span class="mf">-0.117258</span><span class="p">,</span><span class="mf">-0.00667777</span><span class="p">,</span>
+<span class="w">                           </span><span class="mf">-0.0252562</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;O_F_ext_hat_K&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-2.06065</span><span class="p">,</span><span class="mf">0.45889</span><span class="p">,</span><span class="mf">-0.150951</span><span class="p">,</span><span class="mf">-0.482791</span><span class="p">,</span><span class="mf">-1.39347</span><span class="p">,</span><span class="mf">0.109695</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;K_F_ext_hat_K&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">-2.03638</span><span class="p">,</span><span class="mf">-0.529916</span><span class="p">,</span><span class="mf">0.228266</span><span class="p">,</span><span class="mf">-0.275938</span><span class="p">,</span><span class="mf">0.434583</span><span class="p">,</span><span class="mf">0.0317351</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;theta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mf">0.01673</span><span class="p">,</span><span class="mf">-0.763341</span><span class="p">,</span><span class="mf">-0.0207471</span><span class="p">,</span><span class="mf">-2.34041</span><span class="p">,</span><span class="mf">-0.0304783</span><span class="p">,</span><span class="mf">1.54006</span><span class="p">,</span><span class="mf">0.753865</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;dtheta&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;current_errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"> </span><span class="nt">&quot;last_motion_errors&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="nt">&quot;control_command_success_rate&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;robot_mode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Idle&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;time&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3781435</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If an error occurs at this point, perform the
+<a class="reference internal" href="troubleshooting.html#troubleshooting-robot-not-reachable"><span class="std std-ref">ping test</span></a> and ensure that the robot’s fail-safe
+safety locking system is opened. Further information are provided in the manual shipped with
+the robot.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation_linux.html" class="btn btn-neutral float-left" title="Installation on Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="libfranka.html" class="btn btn-neutral float-right" title="libfranka" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
