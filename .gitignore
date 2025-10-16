@@ -6,3 +6,5 @@ package-lock.json
 __pycache__
 source/_static/compatibility_data.js
 source/franka_ros2
+source/franka_toolbox_for_matlab
+source/libfranka

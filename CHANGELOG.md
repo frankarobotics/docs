@@ -4,6 +4,7 @@
 
 - Use the docs from franka_toolbox_for_matlab repository to create documentation structure
 - Update documentation regarding fci joint limits
+- feat: Added nightly schedule for documentation build
 
 ## 0.6.0
 
