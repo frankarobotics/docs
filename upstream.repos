@@ -1,4 +1,8 @@
 repositories:
+  franka_ros:
+    type: git
+    url: https://github.com/frankarobotics/franka_ros.git
+    version: develop
   franka_ros2:
     type: git
     url: https://github.com/frankarobotics/franka_ros2.git
