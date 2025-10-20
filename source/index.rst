@@ -48,7 +48,7 @@ The source code of this documentation is also `available online
    libfranka/docs/installation_linux
    libfranka/docs/getting_started
    libfranka/docs/index
-   franka_ros
+   franka_ros/docs/index
    franka_ros2/docs/index
    franka_toolbox_for_matlab/docs/franka_matlab/index
    control_parameters

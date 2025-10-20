@@ -5,6 +5,7 @@ package-lock.json
 .env
 __pycache__
 source/_static/compatibility_data.js
+source/franka_ros
 source/franka_ros2
 source/franka_toolbox_for_matlab
 source/libfranka

@@ -33,14 +33,15 @@ import-repos:
 clean:
 	rm -rf $(BUILDDIR)/*
 	rm -rf $(SOURCEDIR)/doc
+	rm -rf $(SOURCEDIR)/franka_ros
 	rm -rf $(SOURCEDIR)/franka_ros2
 	rm -rf $(SOURCEDIR)/libfranka
 	rm -rf $(SOURCEDIR)/franka_toolbox_for_matlab
 
-# Custom html target that first imports repos, generates JS, clones franka_ros2, libfranka and franka_toolbox_for_matlab, then builds
+# Custom html target that first imports repos, generates JS, clones franka_ros, franka_ros2, libfranka and franka_toolbox_for_matlab, then builds
 html: generate-js
 	@echo "Importing documentation repositories..."
-	@if [ ! -d "$(SOURCEDIR)/franka_ros2" ] || [ ! -d "$(SOURCEDIR)/libfranka" ] || [ ! -d "$(SOURCEDIR)/franka_toolbox_for_matlab" ]; then \
+	@if [ ! -d "$(SOURCEDIR)/franka_ros" ] || [ ! -d "$(SOURCEDIR)/franka_ros2" ] || [ ! -d "$(SOURCEDIR)/libfranka" ] || [ ! -d "$(SOURCEDIR)/franka_toolbox_for_matlab" ]; then \
 		cd $(SOURCEDIR) && vcs import --input ../upstream.repos .; \
 	fi
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
