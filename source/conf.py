@@ -14,6 +14,7 @@
 # serve to show the default.
 
 import json
+
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
@@ -70,7 +71,7 @@ copyright = "2023, Franka Robotics GmbH"
 author = "Franka Robotics GmbH"
 
 # The version of libfranka that the documentation refers to
-libfranka_version = "0.15.0"
+libfranka_version = "0.18.0"
 
 # The version info for the project you're documenting, acts as replacement for
 # |version| and |release|, also used in various other places throughout the
@@ -155,11 +156,11 @@ latex_documents = [
 
 # Mathwork blocks automatic checks
 linkcheck_ignore = [
-    r'https://shorturl.at/.*',
-    r'blogs.oracle.com/.*',
-    r'https://www.mathworks.com/.*',
-    r'https://blogs.oracle.com/.*',
-    r'https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.*',
+    r"https://shorturl.at/.*",
+    r"blogs.oracle.com/.*",
+    r"https://www.mathworks.com/.*",
+    r"https://blogs.oracle.com/.*",
+    r"https://github.com/ros-controls/roadmap/blob/master/design_drafts/controller_chaining.*",
 ]
 
 # -- Options for manual page output ---------------------------------------

@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0
+
+- Prepare for the release 5.9.0, update compatibility matrix
+
 ## 0.7.1
 
 - docs: use the docs under franka_ros repository
