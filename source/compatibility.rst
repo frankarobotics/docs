@@ -148,9 +148,9 @@ Therefore, they are compatible with libfranka versions 0.4.0 and 0.5.0.
     </script>
 
 `Robot version line 19
-<https://github.com/frankarobotics/libfranka-common/blob/fr3-develop/include/research_interface/robot/service_types.h>`_
+<https://github.com/frankarobotics/libfranka-common/blob/master/include/research_interface/robot/service_types.h#L21>`_
 and `Gripper version line 17
-<https://github.com/frankarobotics/libfranka-common/blob/fr3-develop/include/research_interface/gripper/types.h>`_
+<https://github.com/frankarobotics/libfranka-common/blob/master/include/research_interface/gripper/types.h#L17>`_
 are part of libfranka-common repository, a submodule of libfranka repository.
 
 Franka MATLAB® compatible versions are located :ref:`here<compatibility-franka-matlab>`.
