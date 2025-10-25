@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_ros2 &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.6
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation_linux.html">Installation on Linux</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>franka_ros2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_ros2/franka_ros2/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-ros2">
+<h1>franka_ros2<a class="headerlink" href="#franka-ros2" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><code class="docutils literal notranslate"><span class="pre">franka_ros2</span></code> is not supported on Windows.</p>
+</div>
+<p>You can access the changelog of franka_ros2 at <a class="reference external" href="https://github.com/frankarobotics/franka_ros2/blob/jazzy/CHANGELOG.rst">this link</a></p>
+<p>The <a class="reference external" href="https://github.com/frankarobotics/franka_ros2">franka_ros2 repo</a> contains a ROS 2 integration of
+libfranka.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>franka_ros2 is in rapid development. Anticipate breaking changes. Report bugs on
+<a class="reference external" href="https://github.com/frankarobotics/franka_ros2/issues">GitHub</a>.</p>
+</div>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>Please refer to the <a class="reference external" href="https://github.com/frankarobotics/franka_ros2/blob/humble/README.md">README.md</a></p>
+</section>
+<section id="moveit">
+<h2>MoveIt<a class="headerlink" href="#moveit" title="Permalink to this heading"></a></h2>
+<p>To see if everything works, you can try to run the MoveIt example on the robot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_fr3_moveit_config</span> <span class="n">moveit</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">robot_ip</span><span class="o">:=&lt;</span><span class="n">fci</span><span class="o">-</span><span class="n">ip</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Then activate the <code class="docutils literal notranslate"><span class="pre">MotionPlanning</span></code> display in RViz.</p>
+<p>If you do not have a robot you can still test your setup by running on a dummy hardware:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_fr3_moveit_config</span> <span class="n">moveit</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">robot_ip</span><span class="o">:=</span><span class="n">dont</span><span class="o">-</span><span class="n">care</span> <span class="n">use_fake_hardware</span><span class="o">:=</span><span class="n">true</span>
+</pre></div>
+</div>
+<p>Wait until you can see the green <code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">can</span> <span class="pre">start</span> <span class="pre">planning</span> <span class="pre">now!</span></code> message from MoveIt inside the
+terminal. Then turn off the <code class="docutils literal notranslate"><span class="pre">PlanningScene</span></code> and turn it on again. After that turn on the <code class="docutils literal notranslate"><span class="pre">MotionPlanning</span></code>.</p>
+</section>
+<section id="namespace-enabled-launch-files">
+<h2>Namespace enabled launch files<a class="headerlink" href="#namespace-enabled-launch-files" title="Permalink to this heading"></a></h2>
+<p>To demonstrate how to launch the robot within a specified namespace, we provide an example launch file located at
+<code class="docutils literal notranslate"><span class="pre">franka_bringup/launch/example.launch.py</span></code>.</p>
+<p>By default <code class="docutils literal notranslate"><span class="pre">example.launch.py</span></code> file is configured to read essential robot configuration details from a YAML file, <code class="docutils literal notranslate"><span class="pre">franka.ns-config.yaml</span></code>,
+located in the franka_bringup/launch/ directory. You may provide a different YAML file by specifying the path to it in the command line.</p>
+<p>For more details, see the franka_bringup documentation below.</p>
+</section>
+<section id="example-controllers">
+<h2>Example Controllers<a class="headerlink" href="#example-controllers" title="Permalink to this heading"></a></h2>
+<p>This repo comes with a few example controllers located in the <code class="docutils literal notranslate"><span class="pre">franka_example_controllers</span></code> package.</p>
+<p>For a comprehensive list of available controllers and their usage, see the franka_example_controllers documentation below.</p>
+</section>
+<section id="package-descriptions">
+<h2>Package Descriptions<a class="headerlink" href="#package-descriptions" title="Permalink to this heading"></a></h2>
+<p>This section contains more detailed descriptions of what each package does. In general the package structure tries to
+adhere to the structure that is proposed
+<a class="reference external" href="https://rtw.stoglrobotics.de/master/guidelines/robot_package_structure.html">here</a>.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_gazebo/doc/index.html">franka_gazebo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

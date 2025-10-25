@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Installation on Linux &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Getting started" href="getting_started.html" />
+    <link rel="prev" title="Compatible versions" href="compatibility.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                0.6
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation on Linux</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-from-the-ros-repositories">Installing from the ROS repositories</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#building-from-source">Building from source</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-ros-packages">Building the ROS packages</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#setting-up-the-real-time-kernel">Setting up the real-time kernel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-file-integrity">Verifying file integrity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiling-the-kernel">Compiling the kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-the-new-kernel">Verifying the new kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#allow-a-user-to-set-real-time-permissions-for-its-processes">Allow a user to set real-time permissions for its processes</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka.html">libfranka</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="control_parameters.html">Robot and interface specifications</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Installation on Linux</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/installation_linux.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="installation-on-linux">
+<h1>Installation on Linux<a class="headerlink" href="#installation-on-linux" title="Permalink to this heading"></a></h1>
+<p>This chapter describes how to install <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code>, either
+as binary packages or by building from source, and how to install a real-time
+Linux kernel. <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> is only required if you want to control your robot
+using <a class="reference external" href="https://www.ros.org/">ROS</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>While <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> and the <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> packages should work on different Linux distributions,
+official support is currently only provided for:</p>
+<ul class="simple">
+<li><p>Ubuntu 18.04 LTS <cite>Bionic Beaver</cite> and ROS <cite>Melodic Morenia</cite> (requires at least <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> 0.6.0)</p></li>
+<li><p>Ubuntu 20.04 LTS <cite>Focal Fossa</cite> and ROS <cite>Noetic Ninjemys</cite> (requires at least <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> 0.8.0)</p></li>
+</ul>
+<p>The following instructions are exemplary for Ubuntu 20.04 LTS system and ROS <cite>Noetic Ninjemys</cite>.
+They only work in the supported environments.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>We do not offer support for Ubuntu 16.04 LTS <cite>Xenial Xerus</cite> and ROS <cite>Kinetic Kame</cite> anymore, as they have reached their
+end-of-life.</p>
+</div>
+<section id="installing-from-the-ros-repositories">
+<h2>Installing from the ROS repositories<a class="headerlink" href="#installing-from-the-ros-repositories" title="Permalink to this heading"></a></h2>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>These packages might not always be up-to-date, as they are only synced at certain intervals.
+Read the changelog at <a class="reference external" href="https://frankarobotics.github.io">https://frankarobotics.github.io</a> to find out which <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> version is required for
+a particular robot software version. If this doesn’t match the <code class="docutils literal notranslate"><span class="pre">ros-noetic-libfranka</span></code> version from the
+repositories, you need to <a class="reference internal" href="#installation-build-from-source"><span class="std std-ref">build from source</span></a>.</p>
+</div>
+<p>Binary packages for <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> are available from the ROS repositories.
+After <a class="reference external" href="http://wiki.ros.org/noetic/Installation/Ubuntu">setting up ROS Noetic</a>, execute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">ros</span><span class="o">-</span><span class="n">noetic</span><span class="o">-</span><span class="n">libfranka</span> <span class="n">ros</span><span class="o">-</span><span class="n">noetic</span><span class="o">-</span><span class="n">franka</span><span class="o">-</span><span class="n">ros</span>
+</pre></div>
+</div>
+</section>
+<section id="building-from-source">
+<span id="installation-build-from-source"></span><h2>Building from source<a class="headerlink" href="#building-from-source" title="Permalink to this heading"></a></h2>
+<p>Refer to the <a class="reference external" href="https://github.com/frankarobotics/libfranka/blob/main/README.md">README.md</a></p>
+<section id="building-the-ros-packages">
+<h3>Building the ROS packages<a class="headerlink" href="#building-the-ros-packages" title="Permalink to this heading"></a></h3>
+<p>After <a class="reference external" href="https://wiki.ros.org/noetic/Installation/Ubuntu">setting up ROS Noetic</a>, create a Catkin
+workspace in a directory of your choice:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/path/to/desired/folder
+mkdir<span class="w"> </span>-p<span class="w"> </span>catkin_ws/src
+<span class="nb">cd</span><span class="w"> </span>catkin_ws
+<span class="nb">source</span><span class="w"> </span>/opt/ros/noetic/setup.sh
+catkin_init_workspace<span class="w"> </span>src
+</pre></div>
+</div>
+<p>Then clone the <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> repository from <a class="reference external" href="https://github.com/frankarobotics/franka_ros">GitHub</a>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="o">--</span><span class="n">recursive</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">frankarobotics</span><span class="o">/</span><span class="n">franka_ros</span> <span class="n">src</span><span class="o">/</span><span class="n">franka_ros</span>
+</pre></div>
+</div>
+<p>By default, this will check out the newest release of <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code>. If you want to build a particular version of
+<code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> instead, check out the corresponding Git tag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">&lt;</span><span class="n">version</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Install any missing dependencies and build the packages:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>--rosdistro<span class="w"> </span>noetic<span class="w"> </span>-y<span class="w"> </span>--skip-keys<span class="w"> </span>libfranka
+catkin_make<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-DFranka_DIR:PATH<span class="o">=</span>/path/to/libfranka/build
+<span class="nb">source</span><span class="w"> </span>devel/setup.sh
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>If you also installed <code class="docutils literal notranslate"><span class="pre">ros-noetic-libfranka</span></code>, <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> might be picked up from <code class="docutils literal notranslate"><span class="pre">/opt/ros/noetic</span></code>
+instead of from your custom <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> build!</p>
+</div>
+</section>
+</section>
+<section id="setting-up-the-real-time-kernel">
+<span id="preempt"></span><h2>Setting up the real-time kernel<a class="headerlink" href="#setting-up-the-real-time-kernel" title="Permalink to this heading"></a></h2>
+<p>In order to control your robot using <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>, the controller program on
+the workstation PC must run with <cite>real-time priority</cite> under a <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code>
+kernel. This section describes the procedure of patching a kernel to support
+<code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> and creating an installation package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>NVIDIA drivers are not officially supported on <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> kernels, but the installation might work anyway by passing the environment variable <code class="docutils literal notranslate"><span class="pre">IGNORE_PREEMPT_RT_PRESENCE=1</span></code> to the installation command.</p>
+</div>
+<p>First, install the necessary dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">bc</span> <span class="n">curl</span> <span class="n">debhelper</span> <span class="n">dpkg</span><span class="o">-</span><span class="n">dev</span> <span class="n">devscripts</span> <span class="n">fakeroot</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libelf</span><span class="o">-</span><span class="n">dev</span> <span class="n">bison</span> <span class="n">flex</span> <span class="n">cpio</span> <span class="n">kmod</span> <span class="n">rsync</span> <span class="n">libncurses</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<p>Then, you have to decide which kernel version to use. To find the one you are
+using currently, use <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-r</span></code>. Real-time patches are only available for
+select kernel versions, see
+<a class="reference external" href="https://www.kernel.org/pub/linux/kernel/projects/rt/">https://www.kernel.org/pub/linux/kernel/projects/rt/</a>. We recommend choosing the
+version closest to the one you currently use. If you choose a
+different version, simply substitute the numbers. Having decided on a version,
+use <code class="docutils literal notranslate"><span class="pre">curl</span></code> to download the source files:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For Ubuntu 16.04 tested with the kernel version 4.14.12:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v4</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">4.14.12</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v4</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">4.14.12</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">4.14</span><span class="o">/</span><span class="n">older</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">4.14.12</span><span class="o">-</span><span class="n">rt10</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">4.14</span><span class="o">/</span><span class="n">older</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">4.14.12</span><span class="o">-</span><span class="n">rt10</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For Ubuntu 18.04 tested with the kernel version 5.4.19:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v5</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">5.4.19</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v5</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">5.4.19</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">5.4</span><span class="o">/</span><span class="n">older</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">5.4.19</span><span class="o">-</span><span class="n">rt10</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">5.4</span><span class="o">/</span><span class="n">older</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">5.4.19</span><span class="o">-</span><span class="n">rt10</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For Ubuntu 20.04 tested with the kernel version 5.9.1:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v5</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">5.9.1</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v5</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">5.9.1</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">5.9</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">5.9.1</span><span class="o">-</span><span class="n">rt20</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">5.9</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">5.9.1</span><span class="o">-</span><span class="n">rt20</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For Ubuntu 22.04, we recommend using the <a class="reference external" href="https://ubuntu.com/real-time">Ubuntu Pro real-time kernel</a>. After enabling it, you can skip directly to <a class="reference internal" href="#installation-real-time"><span class="std std-ref">Allow a user to set real-time permissions for its processes</span></a>.
+In case you do not want to use Ubuntu Pro, you can proceed as for the other versions (tested with the kernel version 6.8.0):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v6</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">6.8</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">v6</span><span class="o">.</span><span class="n">x</span><span class="o">/</span><span class="n">linux</span><span class="o">-</span><span class="mf">6.8</span><span class="o">.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">6.8</span><span class="o">/</span><span class="n">older</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">6.8</span><span class="o">-</span><span class="n">rt8</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">xz</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">pub</span><span class="o">/</span><span class="n">linux</span><span class="o">/</span><span class="n">kernel</span><span class="o">/</span><span class="n">projects</span><span class="o">/</span><span class="n">rt</span><span class="o">/</span><span class="mf">6.8</span><span class="o">/</span><span class="n">older</span><span class="o">/</span><span class="n">patch</span><span class="o">-</span><span class="mf">6.8</span><span class="o">-</span><span class="n">rt8</span><span class="o">.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+</div>
+<p>And decompress them with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xz</span> <span class="o">-</span><span class="n">d</span> <span class="o">*.</span><span class="n">xz</span>
+</pre></div>
+</div>
+<section id="verifying-file-integrity">
+<h3>Verifying file integrity<a class="headerlink" href="#verifying-file-integrity" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This step is optional but recommended!</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.sign</span></code> files can be used to verify that the downloaded files were not
+corrupted or tampered with. The steps shown here are adapted from the
+<a class="reference external" href="https://www.kernel.org/signature.html">Linux Kernel Archive</a> , see the
+linked page for more details about the process.</p>
+<p>You can use <code class="docutils literal notranslate"><span class="pre">gpg2</span></code> to verify the <code class="docutils literal notranslate"><span class="pre">.tar</span></code> archives:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpg2</span> <span class="o">--</span><span class="n">verify</span> <span class="n">linux</span><span class="o">-*.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
+<span class="n">gpg2</span> <span class="o">--</span><span class="n">verify</span> <span class="n">patch</span><span class="o">-*.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+<p>If your output is similar to the following:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gpg2 --verify linux-*.tar.sign
+gpg: assuming signed data in &#39;linux-4.14.12.tar&#39;
+gpg: Signature made Fr 05 Jan 2018 06:49:11 PST using RSA key ID 6092693E
+gpg: Can&#39;t check signature: No public key
+</pre></div>
+</div>
+<p>You have to first download the public key of the person who signed the above
+file. As you can  see from the above output, it has the ID <code class="docutils literal notranslate"><span class="pre">6092693E</span></code>. You can
+obtain it from the key server:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpg2</span>  <span class="o">--</span><span class="n">keyserver</span> <span class="n">hkp</span><span class="p">:</span><span class="o">//</span><span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">80</span> <span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span> <span class="mi">6092693</span><span class="n">E</span>
+</pre></div>
+</div>
+<p>Similarly for the patch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpg2</span> <span class="o">--</span><span class="n">keyserver</span> <span class="n">hkp</span><span class="p">:</span><span class="o">//</span><span class="n">keyserver</span><span class="o">.</span><span class="n">ubuntu</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="mi">80</span> <span class="o">--</span><span class="n">recv</span><span class="o">-</span><span class="n">keys</span> <span class="mf">2872E4</span><span class="n">CC</span>
+</pre></div>
+</div>
+<p>Note that keys for other kernel version might have different IDs, you will have to
+adapt accordingly.</p>
+<p>Having downloaded the keys, you can now verify the sources. Here is an example of
+a correct output:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ gpg2 --verify linux-*.tar.sign
+gpg: assuming signed data in &#39;linux-4.14.12.tar&#39;
+gpg: Signature made Fr 05 Jan 2018 06:49:11 PST using RSA key ID 6092693E
+gpg: Good signature from &quot;Greg Kroah-Hartman &lt;gregkh@linuxfoundation.org&gt;&quot; [unknown]
+gpg:                 aka &quot;Greg Kroah-Hartman &lt;gregkh@kernel.org&gt;&quot; [unknown]
+gpg:                 aka &quot;Greg Kroah-Hartman (Linux kernel stable release signing key) &lt;greg@kroah.com&gt;&quot; [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: 647F 2865 4894 E3BD 4571  99BE 38DB BDC8 6092 693E
+</pre></div>
+</div>
+<p>See <a class="reference external" href="https://www.kernel.org/signature.html">Linux Kernel Archive</a>
+for more information about the warning.</p>
+</section>
+<section id="compiling-the-kernel">
+<h3>Compiling the kernel<a class="headerlink" href="#compiling-the-kernel" title="Permalink to this heading"></a></h3>
+<p>Once you are sure the files were downloaded properly, you can extract the source
+code and apply the patch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">xf</span> <span class="n">linux</span><span class="o">-*.</span><span class="n">tar</span>
+<span class="n">cd</span> <span class="n">linux</span><span class="o">-*/</span>
+<span class="n">patch</span> <span class="o">-</span><span class="n">p1</span> <span class="o">&lt;</span> <span class="o">../</span><span class="n">patch</span><span class="o">-*.</span><span class="n">patch</span>
+</pre></div>
+</div>
+<p>Next copy your currently booted kernel configuration as the default config for the new real time kernel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cp -v /boot/config-$(uname -r) .config
+</pre></div>
+</div>
+<p>Exclude the debug information from the kernel files to save space:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">DEBUG_INFO</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">DEBUG_KERNEL</span>
+</pre></div>
+</div>
+<p>Disable the system-wide ring of trusted keys:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">SYSTEM_TRUSTED_KEYS</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">SYSTEM_REVOCATION_LIST</span>
+</pre></div>
+</div>
+<p>Activate the Fully Preemptible Kernel (Real-Time):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">PREEMPT_NONE</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">PREEMPT_VOLUNTARY</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">PREEMPT</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">enable</span> <span class="n">PREEMPT_RT</span>
+</pre></div>
+</div>
+<p>Now you can use this config as the default to configure the build:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">olddefconfig</span>
+</pre></div>
+</div>
+<p>Afterwards, you are ready to compile the kernel. As this is a lengthy process, set the
+multithreading option <code class="docutils literal notranslate"><span class="pre">-j</span></code> to the number of your CPU cores:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make -j$(nproc) deb-pkg
+</pre></div>
+</div>
+<p>Finally, you are ready to install the newly created package. The exact names
+depend on your environment, but you are looking for <code class="docutils literal notranslate"><span class="pre">headers</span></code> and <code class="docutils literal notranslate"><span class="pre">images</span></code>
+packages without the <code class="docutils literal notranslate"><span class="pre">dbg</span></code> suffix. To install:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">IGNORE_PREEMPT_RT_PRESENCE</span><span class="o">=</span><span class="mi">1</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="o">../</span><span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-*.</span><span class="n">deb</span> <span class="o">../</span><span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-*.</span><span class="n">deb</span>
+</pre></div>
+</div>
+</section>
+<section id="verifying-the-new-kernel">
+<h3>Verifying the new kernel<a class="headerlink" href="#verifying-the-new-kernel" title="Permalink to this heading"></a></h3>
+<p>Restart your system. The Grub boot menu should now allow you to choose your
+newly installed kernel. To see which one is currently being used, see the output
+of the <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-a</span></code> command. It should contain the string <code class="docutils literal notranslate"><span class="pre">PREEMPT</span> <span class="pre">RT</span></code> and the
+version number you chose. Additionally, <code class="docutils literal notranslate"><span class="pre">/sys/kernel/realtime</span></code> should exist and
+contain the the number <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you encounter errors that you fail to boot the new kernel see <a class="reference internal" href="troubleshooting.html#troubleshooting-realtime-kernel"><span class="std std-ref">Cannot boot realtime kernel because of “Invalid Signature”</span></a></p>
+</div>
+</section>
+<section id="allow-a-user-to-set-real-time-permissions-for-its-processes">
+<span id="installation-real-time"></span><h3>Allow a user to set real-time permissions for its processes<a class="headerlink" href="#allow-a-user-to-set-real-time-permissions-for-its-processes" title="Permalink to this heading"></a></h3>
+<p>After the <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> kernel is installed and running, add a group named
+<cite>realtime</cite> and add the user controlling your robot to this group:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo addgroup realtime
+sudo usermod -a -G realtime $(whoami)
+</pre></div>
+</div>
+<p>Afterwards, add the following limits to the <cite>realtime</cite> group in
+<code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">rtprio</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">priority</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">memlock</span> <span class="mi">102400</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">rtprio</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">priority</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">memlock</span> <span class="mi">102400</span>
+</pre></div>
+</div>
+<p>The limits will be applied after you log out and in again.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compatibility.html" class="btn btn-neutral float-left" title="Compatible versions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Getting started" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
