@@ -46,6 +46,7 @@ The source code of this documentation is also `available online
    requirements
    compatibility
    libfranka/docs/installation_linux
+   libfranka/docs/api_references
    libfranka/docs/getting_started
    libfranka/docs/index
    franka_ros/docs/index
