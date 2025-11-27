@@ -31,7 +31,7 @@ The source code of this documentation is also `available online
 
 .. important::
     Before you start using the FCI, please read through the documents shipped with the robot and
-    the :doc:`requirements` chapter.
+    the :doc:`libfranka/docs/system_requirements` chapter.
 
 .. note::
     Using a robot with system version 4.2.0 or higher requires to enable the FCI mode. To do that
@@ -43,15 +43,11 @@ The source code of this documentation is also `available online
    :caption: Contents:
 
    overview
-   requirements
-   compatibility
-   libfranka/docs/installation_linux
-   libfranka/docs/api_references
-   libfranka/docs/getting_started
    libfranka/docs/index
    franka_ros/docs/index
    franka_ros2/docs/index
    franka_toolbox_for_matlab/docs/franka_matlab/index
+   compatibility
    control_parameters
    fr3-certification-remarks
    troubleshooting
