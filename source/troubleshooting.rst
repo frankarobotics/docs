@@ -181,7 +181,7 @@ Running a libfranka executable fails with "Incompatible Library Version"
 ------------------------------------------------------------------------
 
 Your ``libfranka`` version does not match the robot’s system version.  
-Use the reported server version to select the correct version (see :ref:`compatibility-libfranka`).
+Use the reported server version to select the correct version (see :ref:`libfranka_compatibility`).
 
 
 .. _troubleshooting_safety_function_active:
