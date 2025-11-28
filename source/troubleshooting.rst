@@ -43,7 +43,8 @@ Motion stopped due to discontinuities or ``communication_constraints_violation``
 --------------------------------------------------------------------------------
 
 If the difference between commanded values between cycles is too large, motion stops with errors such as 
-``joint_motion_generator_velocity_discontinuity``. Ensure the command changes do not exceed the :ref:`Limits for during specific control modes <control_modes>`.
+``joint_motion_generator_velocity_discontinuity``. Ensure the command changes do not exceed the 
+:ref:`limits <limit_table>`.
 
 Discontinuities can result from:
 
@@ -56,7 +57,7 @@ If it happens even when running official examples, the issue is likely network-r
 Check:
 
 * Source code is compiled with optimizations (``-DCMAKE_BUILD_TYPE=Release``)
-* Direct PC → Control connection without switches (see :ref:`Network <requirement-network>`)
+* Direct PC → Control connection without switches (see :ref:`setting-up-the-network`)
 * Network performance using the `network bandwidth, delay and jitter test`_
 * ``franka::Robot`` instantiated using ``RealtimeConfig::kEnforce`` (default)
 * CPU power-saving features are disabled (see :ref:`disable_cpu_frequency_scaling`)
@@ -180,7 +181,7 @@ Running a libfranka executable fails with "Incompatible Library Version"
 ------------------------------------------------------------------------
 
 Your ``libfranka`` version does not match the robot’s system version.  
-Use the reported server version to select the correct version (see :ref:`Robot System Version Compatibility <libfranka_compatibility>`).
+Use the reported server version to select the correct version (see :ref:`libfranka_compatibility`).
 
 
 .. _troubleshooting_safety_function_active:
