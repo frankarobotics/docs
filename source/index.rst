@@ -44,11 +44,11 @@ The source code of this documentation is also `available online
 
    overview
    libfranka/docs/index
-   franka_ros/docs/index
    franka_ros2/docs/index
+   franka_ros/docs/index
    franka_toolbox_for_matlab/docs/franka_matlab/index
    compatibility
-   control_parameters
+   robot_specifications
    fr3-certification-remarks
    troubleshooting
    faq
