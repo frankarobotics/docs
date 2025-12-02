@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0
+
+- Refactor libfranka docu
+
 ## 0.9.0
 
 - Add API section
