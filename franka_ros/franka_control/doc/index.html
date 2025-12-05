@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_control &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="franka_description" href="../../franka_description/doc/index.html" />
+    <link rel="prev" title="franka_ros" href="../../franka_ros/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros/doc/index.html">franka_ros</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">franka_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_description/doc/index.html">franka_description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo/doc/index.html">franka_gazebo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hw/doc/index.html">franka_hw</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html#panda-moveit-config">panda_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_visualization/doc/index.html">franka_visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/index.html#writing-your-own-controller">Writing  your own controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros</a> &raquo;</li>
+      <li>franka_control</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_ros/franka_control/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-control">
+<span id="id1"></span><h1>franka_control<a class="headerlink" href="#franka-control" title="Permalink to this heading"></a></h1>
+<p>The ROS nodes <code class="docutils literal notranslate"><span class="pre">franka_control_node</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_combined_control_node</span></code> are hardware nodes
+for ROS control that use according hardware classes from <code class="docutils literal notranslate"><span class="pre">franka_hw</span></code>. They provide a variety
+of ROS services to expose the full <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> API in the ROS ecosystem. The following services
+are provided:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::SetJointImpedance</span></code> specifies joint stiffness for the internal controller
+(damping is automatically derived from the stiffness).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::SetCartesianImpedance</span></code> specifies Cartesian stiffness for the internal
+controller (damping is automatically derived from the stiffness).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::SetEEFrame</span></code> specifies the transformation from &lt;arm_id&gt;_EE (end effector) to
+&lt;arm_id&gt;_NE (nominal end effector) frame. The transformation from flange to end effector frame
+is split into two transformations: &lt;arm_id&gt;_EE to &lt;arm_id&gt;_NE frame and &lt;arm_id&gt;_NE to
+&lt;arm_id&gt;_link8 frame. The transformation from &lt;arm_id&gt;_NE to &lt;arm_id&gt;_link8 frame can only be
+set through the administrator’s interface.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::SetKFrame</span></code> specifies the transformation from &lt;arm_id&gt;_K to &lt;arm_id&gt;_EE frame.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::SetForceTorqueCollisionBehavior</span></code> sets thresholds for external Cartesian
+wrenches to configure the collision reflex.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::SetFullCollisionBehavior</span></code> sets thresholds for external forces on Cartesian
+and joint level to configure the collision reflex.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_msgs::SetLoad</span></code> sets an external load to compensate (e.g. of a grasped object).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">std_srvs::Trigger</span></code> services allow to connect and disconnect your hardware node
+(available from 0.8.0). When no active (commanding) controller is running, you can disconnect
+the hardware node, freeing the respective robots for non-fci applications like e.g. Desk-based
+operations. Once you want to resume fci operations you can call connect and start your
+ros_control based controllers again.</p></li>
+</ul>
+</div></blockquote>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The &lt;arm_id&gt;_EE frame denotes the part of the
+configurable end effector frame which can be adjusted during run time through <cite>franka_ros</cite>. The
+&lt;arm_id&gt;_K frame marks the center of the internal
+Cartesian impedance. It also serves as a reference frame for external wrenches. <em>Neither the
+&lt;arm_id&gt;_EE nor the &lt;arm_id&gt;_K are contained in the URDF as they can be changed at run time</em>.
+By default, &lt;arm_id&gt; is set to “panda”.</p>
+<figure class="align-center" id="id2">
+<img alt="../../../_images/frames.svg" src="../../../_images/frames.svg" /><figcaption>
+<p><span class="caption-text">Overview of the end-effector frames.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</div>
+<p>To recover from errors and reflexes when the robot is in reflex mode, you can utilize the
+<code class="docutils literal notranslate"><span class="pre">franka_msgs::ErrorRecoveryAction</span></code>. This can be achieved through either an action client or by publishing on the
+action goal topic.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rostopic<span class="w"> </span>pub<span class="w"> </span>-1<span class="w"> </span>/franka_control/error_recovery/goal<span class="w"> </span>franka_msgs/ErrorRecoveryActionGoal<span class="w"> </span><span class="s2">&quot;{}&quot;</span>
+</pre></div>
+</div>
+<p>After recovery, the <code class="docutils literal notranslate"><span class="pre">franka_control_node</span></code> restarts the controllers that were running. That is
+possible as the node does not die when robot reflexes are triggered or when errors have occurred.
+All of these functionalities are provided by the <code class="docutils literal notranslate"><span class="pre">franka_control_node</span></code> which can be launched
+with the following command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>franka_control<span class="w"> </span>franka_control.launch<span class="w"> </span><span class="se">\</span>
+robot_ip:<span class="o">=</span>&lt;fci-ip&gt;<span class="w"> </span><span class="c1"># mandatory \</span>
+load_gripper:<span class="o">=</span>&lt;true<span class="p">|</span>false&gt;<span class="w"> </span><span class="c1"># default: true \</span>
+robot:<span class="o">=</span>&lt;panda<span class="p">|</span>fr3&gt;<span class="w"> </span><span class="c1"># default: panda</span>
+</pre></div>
+</div>
+<p>Besides loading the <code class="docutils literal notranslate"><span class="pre">franka_control_node</span></code>, the launch file also starts a
+<code class="docutils literal notranslate"><span class="pre">franka_control::FrankaStateController</span></code> for reading and publishing the robot states, including
+external wrenches, configurable transforms and the joint states required for visualization with
+rviz. For visualization purposes, a <code class="docutils literal notranslate"><span class="pre">robot_state_publisher</span></code> is started.</p>
+<p>This package also implements the <code class="docutils literal notranslate"><span class="pre">franka_combined_control_node</span></code>, a hardware node for <code class="docutils literal notranslate"><span class="pre">ros_control</span></code> based
+on the <code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaCombinedHW</span></code> class. The set of robots loaded are configured via the ROS parameter
+server. These parameters have to be in the hardware node’s namespace (see <a class="reference external" href="https://github.com/frankarobotics/franka_ros/tree/develop/franka_control/config/franka_combined_control_node.yaml">franka_combined_control_node.yaml</a>
+as a reference) and look like this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">robot_hardware</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2</span>
+<span class="w">  </span><span class="c1"># (...)</span>
+
+<span class="nt">panda_1</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">franka_hw/FrankaCombinableHW</span>
+<span class="w">  </span><span class="nt">arm_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1</span>
+<span class="w">  </span><span class="nt">joint_names</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint2</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint3</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint5</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint6</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint7</span>
+<span class="w">  </span><span class="c1"># Configure the threshold angle for printing joint limit warnings.</span>
+<span class="w">  </span><span class="nt">joint_limit_warning_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w"> </span><span class="c1"># [rad]</span>
+<span class="w">  </span><span class="c1"># Activate rate limiter? [true|false]</span>
+<span class="w">  </span><span class="nt">rate_limiting</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># Cutoff frequency of the low-pass filter. Set to &gt;= 1000 to deactivate.</span>
+<span class="w">  </span><span class="nt">cutoff_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">  </span><span class="c1"># Internal controller for motion generators [joint_impedance|cartesian_impedance]</span>
+<span class="w">  </span><span class="nt">internal_controller</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_impedance</span>
+<span class="w">  </span><span class="c1"># Configure the initial defaults for the collision behavior reflexes.</span>
+<span class="w">  </span><span class="nt">collision_config</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lower_torque_thresholds_acceleration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [Nm]</span>
+<span class="w">    </span><span class="nt">upper_torque_thresholds_acceleration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [Nm]</span>
+<span class="w">    </span><span class="nt">lower_torque_thresholds_nominal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [Nm]</span>
+<span class="w">    </span><span class="nt">upper_torque_thresholds_nominal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [Nm]</span>
+<span class="w">    </span><span class="nt">lower_force_thresholds_acceleration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [N, N, N, Nm, Nm, Nm]</span>
+<span class="w">    </span><span class="nt">upper_force_thresholds_acceleration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [N, N, N, Nm, Nm, Nm]</span>
+<span class="w">    </span><span class="nt">lower_force_thresholds_nominal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [N, N, N, Nm, Nm, Nm]</span>
+<span class="w">    </span><span class="nt">upper_force_thresholds_nominal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [N, N, N, Nm, Nm, Nm]</span>
+
+<span class="nt">panda_2</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">franka_hw/FrankaCombinableHW</span>
+<span class="w">  </span><span class="nt">arm_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2</span>
+<span class="w">  </span><span class="nt">joint_names</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint2</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint3</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint5</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint6</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint7</span>
+<span class="w">  </span><span class="c1"># Configure the threshold angle for printing joint limit warnings.</span>
+<span class="w">  </span><span class="nt">joint_limit_warning_threshold</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">0.1</span><span class="w"> </span><span class="c1"># [rad]</span>
+<span class="w">  </span><span class="c1"># Activate rate limiter? [true|false]</span>
+<span class="w">  </span><span class="nt">rate_limiting</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<span class="w">  </span><span class="c1"># Cutoff frequency of the low-pass filter. Set to &gt;= 1000 to deactivate.</span>
+<span class="w">  </span><span class="nt">cutoff_frequency</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
+<span class="w">  </span><span class="c1"># Internal controller for motion generators [joint_impedance|cartesian_impedance]</span>
+<span class="w">  </span><span class="nt">internal_controller</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">joint_impedance</span>
+<span class="w">  </span><span class="c1"># Configure the initial defaults for the collision behavior reflexes.</span>
+<span class="w">  </span><span class="nt">collision_config</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">lower_torque_thresholds_acceleration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [Nm]</span>
+<span class="w">    </span><span class="nt">upper_torque_thresholds_acceleration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [Nm]</span>
+<span class="w">    </span><span class="nt">lower_torque_thresholds_nominal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [Nm]</span>
+<span class="w">    </span><span class="nt">upper_torque_thresholds_nominal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">18.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">16.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">14.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">12.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [Nm]</span>
+<span class="w">    </span><span class="nt">lower_force_thresholds_acceleration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [N, N, N, Nm, Nm, Nm]</span>
+<span class="w">    </span><span class="nt">upper_force_thresholds_acceleration</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [N, N, N, Nm, Nm, Nm]</span>
+<span class="w">    </span><span class="nt">lower_force_thresholds_nominal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [N, N, N, Nm, Nm, Nm]</span>
+<span class="w">    </span><span class="nt">upper_force_thresholds_nominal</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">20.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">25.0</span><span class="p p-Indicator">]</span><span class="w">  </span><span class="c1"># [N, N, N, Nm, Nm, Nm]</span>
+
+<span class="c1"># (+ more robots ...)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Be sure to choose unique and consistent <code class="docutils literal notranslate"><span class="pre">arm_id</span></code> parameters. The IDs must match the prefixes
+in the joint names and should be according to the robot description loaded to the control
+node’s namespace.</p>
+</div>
+<p>For more information on the parameter based loading of hardware classes, please refer to the
+official documentation of <code class="docutils literal notranslate"><span class="pre">combined_robot_hw::CombinedRobotHW</span></code> from
+<a class="reference external" href="https://github.com/ros-controls/ros_control">https://github.com/ros-controls/ros_control</a>.</p>
+<p>A second important parameter file
+(see franka_ros/franka_control/config/default_combined_controllers.yaml as a reference) configures
+a set of default controllers that can be started with the hardware node. The controllers have to match
+the launched hardware. The provided default parameterization (here for 2 robots) looks like:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">panda_1_state_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">franka_control/FrankaStateController</span>
+<span class="w">  </span><span class="nt">arm_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1</span>
+<span class="w">  </span><span class="nt">joint_names</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint2</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint3</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint5</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint6</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_1_joint7</span>
+<span class="w">  </span><span class="nt">publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w">  </span><span class="c1"># [Hz]</span>
+
+<span class="nt">panda_2_state_controller</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">franka_control/FrankaStateController</span>
+<span class="w">  </span><span class="nt">arm_id</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2</span>
+<span class="w">  </span><span class="nt">joint_names</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint1</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint2</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint3</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint4</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint5</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint6</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">panda_2_joint7</span>
+<span class="w">  </span><span class="nt">publish_rate</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">30</span><span class="w">  </span><span class="c1"># [Hz]</span>
+
+<span class="c1"># (+ more controllers ...)</span>
+</pre></div>
+</div>
+<p>We provide a launch file to run the <code class="docutils literal notranslate"><span class="pre">franka_combined_control_node</span></code> with user specified configuration
+files for hardware and controllers which default to a configuration with 2 robots. Launch it with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>franka_control<span class="w"> </span>franka_combined_control.launch<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>robot_ips:<span class="o">=</span>&lt;your_robot_ips_as_a_map&gt;<span class="w">                 </span><span class="c1"># mandatory</span>
+<span class="w">    </span>robot:<span class="o">=</span>&lt;path_to_your_robot_description&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>args:<span class="o">=</span>&lt;xacro_args_passed_to_the_robot_description&gt;<span class="w"> </span><span class="se">\ </span><span class="c1"># if needed</span>
+<span class="w">    </span>robot_id:<span class="o">=</span>&lt;name_of_your_multi_robot_setup&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>hw_config_file:<span class="o">=</span>&lt;path_to_your_hw_config_file&gt;<span class="se">\ </span><span class="w">      </span><span class="c1"># includes the robot ips!</span>
+<span class="w">    </span>controllers_file:<span class="o">=</span>&lt;path_to_your_default_controller_parameterization&gt;<span class="se">\</span>
+<span class="w">    </span>controllers_to_start:<span class="o">=</span>&lt;list_of_default_controllers_to_start&gt;<span class="se">\</span>
+<span class="w">    </span>joint_states_source_list:<span class="o">=</span>&lt;list_of_sources_to_fuse_a_complete_joint_states_topic&gt;
+</pre></div>
+</div>
+<p>This launch file can be parameterized to run an arbitrary number of robots.
+To do so just write your own configuration files in the style of
+franka_control/config/franka_combined_control_node.yaml and
+franka_ros/franka_control/config/default_combined_controllers.yaml.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Be sure to pass the correct IPs of your robots to <cite>franka_combined_control.launch</cite> as a map.
+This looks like: <cite>{&lt;arm_id_1&gt;/robot_ip: &lt;my_ip_1&gt;, &lt;arm_id_2&gt;/robot_ip: &lt;my_ip_2&gt;, …}</cite></p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../franka_ros/doc/index.html" class="btn btn-neutral float-left" title="franka_ros" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../franka_description/doc/index.html" class="btn btn-neutral float-right" title="franka_description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

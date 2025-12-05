@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_gripper &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="franka_robot_state_broadcaster" href="../../franka_robot_state_broadcaster/doc/index.html" />
+    <link rel="prev" title="franka_semantic_components" href="../../franka_semantic_components/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">franka_gripper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#actions-and-services">Actions and Services</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#changes-from-franka-ros">Changes from franka_ros</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo/doc/index.html">franka_gazebo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2</a> &raquo;</li>
+      <li>franka_gripper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_ros2/franka_gripper/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-gripper">
+<h1>franka_gripper<a class="headerlink" href="#franka-gripper" title="Permalink to this heading"></a></h1>
+<p>This package contains the <code class="docutils literal notranslate"><span class="pre">franka_gripper_node</span></code> for interfacing with the <code class="docutils literal notranslate"><span class="pre">Franka</span> <span class="pre">Hand</span></code>.</p>
+<section id="actions-and-services">
+<h2>Actions and Services<a class="headerlink" href="#actions-and-services" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">franka_gripper_node</span></code> provides the following actions:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">homing</span></code> - homes the gripper and updates the maximum width given the mounted fingers.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">move</span></code> - moves to a target width with the defined speed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grasp</span></code> - tries to grasp at the desired width with the desired force while closing with the given speed. The operation is successful if the
+distance <code class="docutils literal notranslate"><span class="pre">d</span></code> between the gripper fingers is <code class="docutils literal notranslate"><span class="pre">width</span> <span class="pre">-</span> <span class="pre">epsilon.inner</span> <span class="pre">&lt;</span> <span class="pre">d</span> <span class="pre">&lt;</span> <span class="pre">width</span> <span class="pre">+</span> <span class="pre">epsilon.outer</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gripper_action</span></code> - a special grasping action for MoveIt.</p></li>
+</ul>
+<p>Also, there is a <code class="docutils literal notranslate"><span class="pre">stop</span></code> service that aborts gripper actions and stops grasping.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>Use the following launch file to start the gripper:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_gripper</span> <span class="n">gripper</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="n">robot_ip</span><span class="o">:=&lt;</span><span class="n">fci</span><span class="o">-</span><span class="n">ip</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>In a different tab you can now perform the homing and send a grasp command.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">action</span> <span class="n">send_goal</span> <span class="o">/</span><span class="n">fr3_gripper</span><span class="o">/</span><span class="n">homing</span> <span class="n">franka_msgs</span><span class="o">/</span><span class="n">action</span><span class="o">/</span><span class="n">Homing</span> <span class="p">{}</span>
+<span class="n">ros2</span> <span class="n">action</span> <span class="n">send_goal</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">fr3_gripper</span><span class="o">/</span><span class="n">grasp</span> <span class="n">franka_msgs</span><span class="o">/</span><span class="n">action</span><span class="o">/</span><span class="n">Grasp</span> <span class="s2">&quot;{width: 0.00, speed: 0.03, force: 50}&quot;</span>
+</pre></div>
+</div>
+<p>The inner and outer epsilon are 0.005 meter per default. You can also explicitly set the epsilon:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">action</span> <span class="n">send_goal</span> <span class="o">-</span><span class="n">f</span> <span class="o">/</span><span class="n">fr3_gripper</span><span class="o">/</span><span class="n">grasp</span> <span class="n">franka_msgs</span><span class="o">/</span><span class="n">action</span><span class="o">/</span><span class="n">Grasp</span> <span class="s2">&quot;{width: 0.00, speed: 0.03, force: 50, epsilon: {inner: 0.01, outer: 0.01}}&quot;</span>
+</pre></div>
+</div>
+<p>To stop the grasping, you can use <code class="docutils literal notranslate"><span class="pre">stop</span></code> service.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">service</span> <span class="n">call</span> <span class="o">/</span><span class="n">fr3_gripper</span><span class="o">/</span><span class="n">stop</span> <span class="n">std_srvs</span><span class="o">/</span><span class="n">srv</span><span class="o">/</span><span class="n">Trigger</span> <span class="p">{}</span>
+</pre></div>
+</div>
+</section>
+<section id="changes-from-franka-ros">
+<h2>Changes from franka_ros<a class="headerlink" href="#changes-from-franka-ros" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>All topics and actions were previously prefixed with <code class="docutils literal notranslate"><span class="pre">franka_gripper</span></code>. This prefix was renamed to <code class="docutils literal notranslate"><span class="pre">panda_gripper</span></code>
+to enable, in the future, a workflow where all prefixes are based on the <code class="docutils literal notranslate"><span class="pre">arm_id</span></code>
+to effortlessly enable multi arm setups.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">stop</span></code> action is now a service action as it is not preemptable.</p></li>
+<li><p>All actions (apart from the <code class="docutils literal notranslate"><span class="pre">gripper_action</span></code>) have the current gripper width as feedback.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../franka_semantic_components/doc/index.html" class="btn btn-neutral float-left" title="franka_semantic_components" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../franka_robot_state_broadcaster/doc/index.html" class="btn btn-neutral float-right" title="franka_robot_state_broadcaster" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

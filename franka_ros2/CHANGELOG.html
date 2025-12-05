@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog for package franka_ros2 &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Changelog for package franka_ros2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/franka_ros2/CHANGELOG.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="changelog-for-package-franka-ros2">
+<h1>Changelog for package franka_ros2<a class="headerlink" href="#changelog-for-package-franka-ros2" title="Permalink to this heading"></a></h1>
+<section id="v3-1-1-2025-11-10">
+<h2>v3.1.1 (2025-11-10)<a class="headerlink" href="#v3-1-1-2025-11-10" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.18.0 and franka_description &gt;= 2.0.0 requires ROS 2 Jazzy</p>
+<ul class="simple">
+<li><p>Fix: controller manager overrun feature disabled</p></li>
+</ul>
+</section>
+<section id="v3-1-0-2025-10-24">
+<h2>v3.1.0 (2025-10-24)<a class="headerlink" href="#v3-1-0-2025-10-24" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.18.0 and franka_description &gt;= 2.0.0 requires ROS 2 Jazzy</p>
+<ul class="simple">
+<li><p>Updated dependencies: libfranka to 0.18.0</p></li>
+<li><p>BREAKING CHANGE: only one move group called <cite>(arm_id)_arm</cite> is available. If Franka Hand is set, the TCP is placed as in the former <cite>(arm_id)_manipulator</cite>. Otherwise, its location corresponds to the one from the former <cite>(arm_id)_arm</cite>.</p></li>
+<li><p>Refactor: ee_id and load_gripper arguments added in moveit launch file</p></li>
+</ul>
+</section>
+<section id="v3-0-0-2025-09-18">
+<h2>v3.0.0 (2025-09-18)<a class="headerlink" href="#v3-0-0-2025-09-18" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.15.0 and franka_description &gt;= 2.0.0 requires ROS 2 Jazzy</p>
+<ul class="simple">
+<li><p>Add support for ROS 2 Jazzy</p></li>
+<li><p>Add docs under each package</p></li>
+<li><p>Refactor: Optimized the franka_robot_state_broadcaster to not block the RT loop of ros2_control</p></li>
+<li><p>Added fixed forked of the controller manager to avoid the [issue #2529](<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2529">https://github.com/ros-controls/ros2_control/issues/2529</a>) in ros2_control</p></li>
+</ul>
+</section>
+<section id="v2-0-2-2025-07-09">
+<h2>v2.0.2 (2025-07-09)<a class="headerlink" href="#v2-0-2-2025-07-09" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.15.0 and franka_description &gt;= 1.0.0 requires ROS 2 Humble and Jazzy</p>
+<ul class="simple">
+<li><p>refactor: srdf files come from franka description</p></li>
+<li><p>Fix: FrankaHardwareInterface: Fix eager claiming bug when multiple hardware components are present</p></li>
+<li><p>Fix: joint_state_publisher uses correct topics to avoid rviz glitches</p></li>
+</ul>
+</section>
+<section id="v2-0-1-2025-06-26">
+<h2>v2.0.1 (2025-06-26)<a class="headerlink" href="#v2-0-1-2025-06-26" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.15.0 and franka_description &gt;= 1.0.0 requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>Fix: joint_impedance_with_ik_example_controller uses correct time from robot</p></li>
+</ul>
+</section>
+<section id="v2-0-0-2025-06-10">
+<h2>v2.0.0 (2025-06-10)<a class="headerlink" href="#v2-0-0-2025-06-10" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.15.0 and franka_description &gt;= 0.5.0 requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>BREAKING CHANGE: <cite>franka.launch.py</cite> is adapted to use namespaces</p></li>
+<li><p>BREAKING CHANGE: the controller examples were removed to use a single launch script named <cite>example.launch.py</cite>, which can launch multiple robots and takes the arguments from a config file named <cite>franka.config.yaml</cite></p></li>
+<li><p>Fix: franka gripper works with namespaces</p></li>
+<li><p>Add: <cite>example.launch.py</cite> - a single launch script to launch any number of namespaces</p></li>
+<li><p>Feat: <cite>franka.launch.py</cite> can launch different robots in specific namespaces</p></li>
+<li><p>Add: <cite>franka.config.yaml</cite> to configure the input arguments for multiple robots</p></li>
+<li><p>Add: <cite>controllers.yaml</cite> controller file for namespace-agnostic launch of existing controllers</p></li>
+</ul>
+</section>
+<section id="v1-0-2-2025-05-30">
+<h2>v1.0.2 (2025-05-30)<a class="headerlink" href="#v1-0-2-2025-05-30" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.15.0 and franka_description &gt;= 0.5.0 requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>Fix: gripper example controller does not start any hardware interface</p></li>
+</ul>
+</section>
+<section id="v1-0-1-2025-05-26">
+<h2>v1.0.1 (2025-05-26)<a class="headerlink" href="#v1-0-1-2025-05-26" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.15.0 and franka_description &gt;= 0.5.0 requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>Fix: FrankaRobotStateBroadcaster Lock issue - add configurable timeout (see controllers.yaml)</p></li>
+<li><p>Add: vcstool import for compatible libfranka and franka_description</p></li>
+<li><p>Fix: Franka robot state broadcaster GitHub Issue #94 and #105</p></li>
+<li><p>Test: Re-enable a test and provide Mock functions</p></li>
+<li><p>Style: Adjust clang-tidy config due to changes in generate_parameter_library()</p></li>
+<li><p>Chore: Eliminate annoying CMake configure time messages</p></li>
+<li><p>Feat: Added prefix to single robot control</p></li>
+<li><p>Doc: Added a link to the Gazebo README.md for better visibility</p></li>
+<li><p>Breaking feat: Automatically spawn command interfaces depending on the configured ones coming from the URDF</p></li>
+</ul>
+</section>
+<section id="v1-0-0-2025-01-22">
+<h2>v1.0.0 (2025-01-22)<a class="headerlink" href="#v1-0-0-2025-01-22" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.15.0 and franka_description &gt;= 0.3.0 requires ROS 2 Humble</p>
+<ul>
+<li><p>feat: franka_example_controllers - Add a Franka Hand controller example (gripper_example_controller)</p></li>
+<li><p>fix: reduced acceleration discontinuities by adding new robot_time state to franka_hardware that allows to update controllers with same time that robot uses</p></li>
+<li><p>refactor: Improved Docker image for development with VSCode</p></li>
+<li><p>BREAKING_CHANGE: initial_joint_position state removed from franka_hardware. rename/replace functions in franka_semantic_components as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-</span>  <span class="n">initial_cartesian_pose</span><span class="p">,</span> <span class="n">initial_elbow_state</span>
+<span class="o">+</span>  <span class="n">cartesian_pose_state</span><span class="p">,</span>   <span class="n">elbow_state</span><span class="o">.</span>
+<span class="o">-</span> <span class="n">getInitialElbowConfiguration</span><span class="p">,</span> <span class="n">getInitialOrientationAndTranslation</span><span class="p">,</span> <span class="n">getInitialPoseMatrix</span>
+<span class="o">+</span> <span class="n">getCurrentElbowConfiguration</span><span class="p">,</span> <span class="n">getCurrentOrientationAndTranslation</span><span class="p">,</span> <span class="n">getCurrentPoseMatrix</span>
+</pre></div>
+</div>
+</li>
+</ul>
+</section>
+<section id="id1">
+<h2>0.1.15 (2024-06-21)<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.2 and franka_description &gt;= 0.3.0 requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat:  franka_gazebo_bringup: Released and supports joint position, velocity and effort commands</p></li>
+<li><p>feat:  franka_ign_ros2_control: ROS 2 hardware interface for gazebo controller. Modified to add gravity torques for Franka robots.</p></li>
+<li><p>fix: the joint-impedance-with-IK example to work without a gripper</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2>0.1.14 (2024-05-13)<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.2, and franka_description &gt;= 0.2.0 requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>BREAKING CHANGE: franka_description package</p></li>
+<li><p>BREAKING CHANGE: using the franka_description standalone package <a class="reference external" href="https://github.com/frankarobotics/franka_description">https://github.com/frankarobotics/franka_description</a></p></li>
+<li><p>build:  install pinocchio dependency from ros-humble-pinocchio apt package</p></li>
+<li><p>feat: Added error recovery action to ROS 2 node</p></li>
+<li><p>fix: hard-coded panda robot references</p></li>
+<li><p>fix: franka_hardware prefixes the robot_state and robot model state interfaces with the read robot name from the urdf.</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>0.1.13 (2024-01-18)<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.2, requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>BREAKING CHANGE: update libfranka dependency in devcontainer to 0.13.3(requires system image 5.5.0)</p></li>
+<li><p>fix: devcontainer typo</p></li>
+</ul>
+</section>
+<section id="id4">
+<h2>0.1.12 (2024-01-12)<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.2, requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_semantic_component: Read robot state from urdf robot description.</p></li>
+<li><p>feat: franka_state_broadcaster: Publish visualizable topics seperately.</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>0.1.11 (2023-12-20)<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.2, requires ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_example_controllers: Add a joint impedance example using OrocosKDL(LMA-ik) through MoveIt service.</p></li>
+<li><p>feat: franka_hardware: Register initial joint positions and cartesian pose state interface without having running command interfaces.</p></li>
+</ul>
+</section>
+<section id="id6">
+<h2>0.1.10 (2023-12-04)<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: Adapted the franka robot state broadcaster to use ROS 2 message types</p></li>
+<li><p>feat: Adapted the Cartesian velocity command interface to use Eigen types</p></li>
+</ul>
+</section>
+<section id="id7">
+<h2>0.1.9 (2023-12-04)<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_hardware: add state interfaces for initial position, cartesian pose and elbow.</p></li>
+<li><p>feat: franka_hardware: support cartesian pose interface.</p></li>
+<li><p>feat: franka_semantic_component: support cartesian pose interface.</p></li>
+<li><p>feat: franka_example_controllers: add cartesian pose example controller</p></li>
+<li><p>feat: franka_example_controllers: add cartesian elbow controller</p></li>
+<li><p>feat: franka_example_controllers: add cartesian orientation controller</p></li>
+</ul>
+</section>
+<section id="id8">
+<h2>0.1.8 (2023-11-16)<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.13.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>test: franka_hardware: add unit tests for robot class.</p></li>
+<li><p>fix:  joint_trajectory_controller: hotfix add joint patched old JTC back.</p></li>
+</ul>
+</section>
+<section id="id9">
+<h2>0.1.7 (2023-11-10)<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.12.1, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_hardware: joint position command interface supported</p></li>
+<li><p>feat: franka_hardware: controller initializer automatically acknowledges error, if arm is in reflex mode</p></li>
+<li><p>feat: franka_example_controllers: joint position example controller provided</p></li>
+<li><p>fix:  franka_example_controllers: fix second start bug with the example controllers</p></li>
+</ul>
+</section>
+<section id="id10">
+<h2>0.1.6 (2023-11-03)<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.12.1, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_hardware: support for cartesian velocity command interface</p></li>
+<li><p>feat: franka_semantic_component: implemented cartesian velocity interface</p></li>
+<li><p>feat: franka_example_controllers: implement cartesian velocity example controller</p></li>
+<li><p>feat: franka_example_controllers: implement elbow example controller</p></li>
+</ul>
+</section>
+<section id="id11">
+<h2>0.1.5 (2023-10-13)<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.12.1, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_hardware: support joint velocity command interface</p></li>
+<li><p>feat: franka_example_controllers: implement joint velocity example controller</p></li>
+<li><p>feat: franka_description: add velocity command interface to the control tag</p></li>
+</ul>
+</section>
+<section id="id12">
+<h2>0.1.4 (2023-09-26)<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.12.1, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_hardware: adapt to libfranka active control 0.12.1</p></li>
+</ul>
+</section>
+<section id="id13">
+<h2>0.1.3 (2023-08-24)<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.11.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>fix: franka_hardware: hotfix start controller when user claims the command interface</p></li>
+</ul>
+</section>
+<section id="id14">
+<h2>0.1.2 (2023-08-21)<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.11.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_hardware: implement non-realtime parameter services</p></li>
+</ul>
+</section>
+<section id="id15">
+<h2>0.1.1 (2023-08-21)<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.11.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_hardware: uses updated libfranka version providing the possibility to have the control loop on the ROS side</p></li>
+</ul>
+</section>
+<section id="id16">
+<h2>0.1.0 (2023-07-28)<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h2>
+<p>Requires libfranka &gt;= 0.10.0, required ROS 2 Humble</p>
+<ul class="simple">
+<li><p>feat: franka_bringup: franka_robot_state broadcaster added to franka.launch.py.</p></li>
+<li><p>feat: franka_example_controllers: model printing read only controller implemented</p></li>
+<li><p>feat: franka_robot_model: semantic component to access robot model parameters.</p></li>
+<li><p>feat: franka_msgs: franka robot state msg added</p></li>
+<li><p>feat: franka_robot_state: broadcaster publishes robot state.</p></li>
+<li><dl class="simple">
+<dt>feat: joint_effort_trajectory_controller package that contains a version of the</dt><dd><p>joint_trajectory_controller that can use the torque interface. [See this PR](<a class="reference external" href="https://github.com/ros-controls/ros2_controllers/pull/225">https://github.com/ros-controls/ros2_controllers/pull/225</a>)</p>
+</dd>
+</dl>
+</li>
+<li><p>feat: franka_bringup package that contains various launch files to start controller examples or Moveit2.</p></li>
+<li><p>feat: franka_moveit_config package that contains a minimal moveit config to control the robot.</p></li>
+<li><p>feat: franka_example_controllers package that contains some example controllers to use.</p></li>
+<li><p>feat: franka_hardware package that contains a plugin to access the robot.</p></li>
+<li><p>feat: franka_msgs package that contains common message, service and action type definitions.</p></li>
+<li><p>feat: franka_description package that contains all meshes and xacro files.</p></li>
+<li><p>feat: franka_gripper package that offers action and service interfaces to use the Franka Hand gripper.</p></li>
+<li><p>fix:  franka_hardware Fix the mismatched joint state interface type logger error message.</p></li>
+<li><p>test: CI tests in Jenkins.</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libfranka client library &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Overview" href="overview.html" />
+    <link rel="prev" title="Franka Control Interface Overview" href="../../overview.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">libfranka client library</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libfranka_architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility_with_images.html">Robot System Version Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Build / Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="real_time_kernel.html">Setting up the Real-Time Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Setting Up the Robot System and Network for FCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage_examples.html">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_references.html">API References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration_notes.html">Migration Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#changelog">ChangeLog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>libfranka client library</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libfranka/docs/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="libfranka-client-library">
+<h1>libfranka client library<a class="headerlink" href="#libfranka-client-library" title="Permalink to this heading"></a></h1>
+<p>This documentation should help you to get started with libfranka. libfranka is a C++ library that allows you to control a Franka robot from a remote computer. The library is open-source and can be found on <a class="reference external" href="https://github.com/frankarobotics/libfranka">GitHub</a>.</p>
+<div class="toctree-wrapper compound">
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="overview.html#getting-started">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka_architecture.html">Library Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="system_requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility_with_images.html">Robot System Version Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Build / Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="real_time_kernel.html">Setting up the Real-Time Kernel</a></li>
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Setting Up the Robot System and Network for FCI</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage_examples.html">Usage Examples</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api_references.html">API References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="migration_notes.html">Migration Notes</a></li>
+</ul>
+</div>
+<section id="changelog">
+<h2>ChangeLog<a class="headerlink" href="#changelog" title="Permalink to this heading"></a></h2>
+<div class="highlight-markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># CHANGELOG</span>
+
+All notable changes to libfranka and pylibfranka will be documented in this file.
+
+<span class="gu">## [0.18.2]</span>
+Requires Franka Research 3 System Version &gt;= 5.9.0
+
+<span class="gu">### libfranka - C++</span>
+<span class="gu">#### Documentation</span>
+<span class="k">-</span><span class="w"> </span>Enhanced documentation with expanded installation methods, and reorganized getting started guide
+
+<span class="gu">#### Added</span>
+<span class="k">-</span><span class="w"> </span>upload debian packages automatically to releases
+
+<span class="gu">#### Fixed</span>
+<span class="k">-</span><span class="w"> </span>Fixed a compile issue with TinyXML2 dependency (see [<span class="nt">github</span>](<span class="na">https://github.com/frankarobotics/libfranka/issues/215</span>))
+
+
+<span class="gu">### pylibfranka - Python</span>
+<span class="gu">#### Added</span>
+<span class="k">-</span><span class="w"> </span>Added Joint and Cartesian Velocity controller examples.
+
+<span class="gu">## [0.18.1]</span>
+Requires Franka Research 3 System Version &gt;= 5.9.0
+
+<span class="gu">### libfranka - C++</span>
+<span class="gu">#### Changed</span>
+<span class="k">-</span><span class="w"> </span>The libfranka library is built with static links - removing the need for dynamic dependencies at runtime
+<span class="k">-</span><span class="w"> </span>Fix the acceleration link addition bug and robot model link parsing [<span class="nt">github</span>](<span class="na">https://github.com/frankarobotics/libfranka/issues/213</span>)
+<span class="k">-</span><span class="w"> </span>Update the test urdf with the acceleration links and joint
+
+<span class="gu">### pylibfranka - Python</span>
+<span class="gu">#### Added</span>
+<span class="k">-</span><span class="w"> </span>Added API documentation section to the official docs: [<span class="nt">API References</span>](<span class="na">https://frankarobotics.github.io/docs/libfranka/docs/api_references.html</span>)
+
+<span class="gu">## [0.18.0]</span>
+Requires Franka Research 3 System Version &gt;= 5.9.0
+
+<span class="gu">### libfranka - C++</span>
+<span class="gu">#### Added</span>
+</pre></div>
+</div>
+<p><a class="reference external" href="https://github.com/frankarobotics/libfranka/blob/main/CHANGELOG.md">Full Libfranka CHANGELOG</a> is available on <a class="reference external" href="https://github.com/frankarobotics/libfranka/">GitHub</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../overview.html" class="btn btn-neutral float-left" title="Franka Control Interface Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="overview.html" class="btn btn-neutral float-right" title="Overview" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

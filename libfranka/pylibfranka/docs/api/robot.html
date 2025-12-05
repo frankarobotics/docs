@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Robot &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Robot</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/libfranka/pylibfranka/docs/api/robot.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="robot">
+<h1>Robot<a class="headerlink" href="#robot" title="Permalink to this heading"></a></h1>
+<p>The <code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code> class maintains a network connection to the robot, provides the current robot state, gives access to the model library and allows to control the robot.</p>
+<section id="class-definition">
+<h2>Class Definition<a class="headerlink" href="#class-definition" title="Permalink to this heading"></a></h2>
+</section>
+<section id="constructor">
+<h2>Constructor<a class="headerlink" href="#constructor" title="Permalink to this heading"></a></h2>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">pylibfranka.</span></span><span class="sig-name descname"><span class="pre">Robot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">robot_ip_address</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">realtime_config</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">RealtimeConfig.kEnforce</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Establishes a connection with the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>robot_ip_address</strong> (<em>str</em>) – IP address or hostname of the robot controller</p></li>
+<li><p><strong>realtime_config</strong> (<em>RealtimeConfig</em>) – Real-time scheduling requirements. Default: <code class="docutils literal notranslate"><span class="pre">RealtimeConfig.kEnforce</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>NetworkException</strong> – if the connection cannot be established</p></li>
+<li><p><strong>IncompatibleVersionException</strong> – if the robot’s software version is incompatible</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pylibfranka</span>
+
+<span class="c1"># Connect with real-time enforcement</span>
+<span class="n">robot</span> <span class="o">=</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="s2">&quot;172.16.0.2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Connect without real-time enforcement (for testing)</span>
+<span class="n">robot_test</span> <span class="o">=</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span>
+    <span class="s2">&quot;172.16.0.2&quot;</span><span class="p">,</span>
+    <span class="n">pylibfranka</span><span class="o">.</span><span class="n">RealtimeConfig</span><span class="o">.</span><span class="n">kIgnore</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+</section>
+<section id="control-methods">
+<h2>Control Methods<a class="headerlink" href="#control-methods" title="Permalink to this heading"></a></h2>
+<section id="start-torque-control">
+<h3>start_torque_control<a class="headerlink" href="#start-torque-control" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">start_torque_control</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Starts a new torque controller.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Active control interface for sending torque commands</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>ActiveControlBase</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ControlException</strong> – if an error related to torque control occurred</p></li>
+<li><p><strong>InvalidOperationException</strong> – if a conflicting operation is already running</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost, e.g. after a timeout</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span> <span class="o">=</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="s2">&quot;172.16.0.2&quot;</span><span class="p">)</span>
+
+<span class="c1"># Start torque control mode (gravity is automatically compensated)</span>
+<span class="n">control</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">start_torque_control</span><span class="p">()</span>
+
+<span class="c1"># Control loop at 1 kHz</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5000</span><span class="p">):</span>
+    <span class="n">state</span><span class="p">,</span> <span class="n">duration</span> <span class="o">=</span> <span class="n">control</span><span class="o">.</span><span class="n">readOnce</span><span class="p">()</span>
+
+    <span class="c1"># Send zero torque for compliant mode</span>
+    <span class="n">tau</span> <span class="o">=</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">Torques</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+
+    <span class="c1"># Send torque command</span>
+    <span class="n">control</span><span class="o">.</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">tau</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><code class="xref py py-meth docutils literal notranslate"><span class="pre">ActiveControlBase.writeOnce()</span></code> for sending torque commands</p>
+</div>
+</dd></dl>
+
+</section>
+<section id="start-joint-position-control">
+<h3>start_joint_position_control<a class="headerlink" href="#start-joint-position-control" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">start_joint_position_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_type</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Starts a new joint position motion generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>control_type</strong> (<em>ControllerMode</em>) – Controller mode for the operation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Active control interface for sending position commands</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ActiveControlBase</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ControlException</strong> – if an error related to motion generation occurred</p></li>
+<li><p><strong>InvalidOperationException</strong> – if a conflicting operation is already running</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost, e.g. after a timeout</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="start-joint-velocity-control">
+<h3>start_joint_velocity_control<a class="headerlink" href="#start-joint-velocity-control" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">start_joint_velocity_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_type</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Starts a new joint velocity motion generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>control_type</strong> (<em>ControllerMode</em>) – Controller mode for the operation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Active control interface for sending velocity commands</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ActiveControlBase</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ControlException</strong> – if an error related to motion generation occurred</p></li>
+<li><p><strong>InvalidOperationException</strong> – if a conflicting operation is already running</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost, e.g. after a timeout</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="start-cartesian-pose-control">
+<h3>start_cartesian_pose_control<a class="headerlink" href="#start-cartesian-pose-control" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">start_cartesian_pose_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_type</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Starts a new cartesian pose motion generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>control_type</strong> (<em>ControllerMode</em>) – Controller mode for the operation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Active control interface for sending position commands</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ActiveControlBase</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ControlException</strong> – if an error related to motion generation occurred</p></li>
+<li><p><strong>InvalidOperationException</strong> – if a conflicting operation is already running</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost, e.g. after a timeout</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="start-cartesian-velocity-control">
+<h3>start_cartesian_velocity_control<a class="headerlink" href="#start-cartesian-velocity-control" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">start_cartesian_velocity_control</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">control_type</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Starts a new cartesian velocity motion generator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>control_type</strong> (<em>ControllerMode</em>) – Controller mode for the operation</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Active control interface for sending velocity commands</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>ActiveControlBase</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>ControlException</strong> – if an error related to motion generation occurred</p></li>
+<li><p><strong>InvalidOperationException</strong> – if a conflicting operation is already running</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost, e.g. after a timeout</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="state-and-model">
+<h2>State and Model<a class="headerlink" href="#state-and-model" title="Permalink to this heading"></a></h2>
+<section id="read-once">
+<h3>read_once<a class="headerlink" href="#read-once" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">read_once</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Read current robot state once.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Current robot state containing all state information</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>RobotState</p>
+</dd>
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>NetworkException</strong> – if the connection is lost</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="load-model">
+<h3>load_model<a class="headerlink" href="#load-model" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">load_model</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Load robot dynamics model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Model object for computing dynamics quantities</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>Model</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="configuration-methods">
+<h2>Configuration Methods<a class="headerlink" href="#configuration-methods" title="Permalink to this heading"></a></h2>
+<section id="set-collision-behavior">
+<h3>set_collision_behavior<a class="headerlink" href="#set-collision-behavior" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">set_collision_behavior</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lower_torque_thresholds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_torque_thresholds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lower_force_thresholds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">upper_force_thresholds</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Configure collision detection thresholds.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>lower_torque_thresholds</strong> (<em>array_like</em>) – Lower torque thresholds [Nm] for each joint (7,)</p></li>
+<li><p><strong>upper_torque_thresholds</strong> (<em>array_like</em>) – Upper torque thresholds [Nm] for each joint (7,)</p></li>
+<li><p><strong>lower_force_thresholds</strong> (<em>array_like</em>) – Lower Cartesian force thresholds [N, Nm] (6,)</p></li>
+<li><p><strong>upper_force_thresholds</strong> (<em>array_like</em>) – Upper Cartesian force thresholds [N, Nm] (6,)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>CommandException</strong> – if the Control reports an error</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="set-joint-impedance">
+<h3>set_joint_impedance<a class="headerlink" href="#set-joint-impedance" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">set_joint_impedance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K_theta</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Sets the impedance for each joint in the internal controller.</p>
+<p>User-provided torques are not affected by this setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>K_theta</strong> (<em>array_like</em>) – Joint impedance values <span class="math notranslate nohighlight">\(K_{\theta_{1-7}} \in [0, 14250]\)</span> [Nm/rad] (7,)</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>CommandException</strong> – if the Control reports an error</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="set-cartesian-impedance">
+<h3>set_cartesian_impedance<a class="headerlink" href="#set-cartesian-impedance" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">set_cartesian_impedance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">K_x</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Sets the Cartesian impedance for the internal controller.</p>
+<p>User-provided torques are not affected by this setting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>K_x</strong> (<em>array_like</em>) – Cartesian impedance values [N/m, Nm/rad] for (x, y, z, roll, pitch, yaw) (6,)</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>CommandException</strong> – if the Control reports an error</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="set-k">
+<h3>set_K<a class="headerlink" href="#set-k" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">set_K</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">EE_T_K</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Sets the transformation <span class="math notranslate nohighlight">\(^{EE}T_K\)</span> from end effector frame to stiffness frame.</p>
+<p>The transformation matrix is represented as a vectorized 4x4 matrix in column-major format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>EE_T_K</strong> (<em>array_like</em>) – Vectorized EE-to-K transformation matrix <span class="math notranslate nohighlight">\(^{EE}T_K\)</span>, column-major (16,)</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>CommandException</strong> – if the Control reports an error</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="set-ee">
+<h3>set_EE<a class="headerlink" href="#set-ee" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">set_EE</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">NE_T_EE</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Sets the transformation <span class="math notranslate nohighlight">\(^{NE}T_{EE}\)</span> from nominal end effector to end effector frame.</p>
+<p>The transformation matrix is represented as a vectorized 4x4 matrix in column-major format.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>NE_T_EE</strong> (<em>array_like</em>) – Vectorized NE-to-EE transformation matrix <span class="math notranslate nohighlight">\(^{NE}T_{EE}\)</span>, column-major (16,)</p>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>CommandException</strong> – if the Control reports an error</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<ul class="simple">
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">RobotState.NE_T_EE</span></code> for end effector pose in nominal end effector frame</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">RobotState.O_T_EE</span></code> for end effector pose in world base frame</p></li>
+<li><p><code class="xref py py-attr docutils literal notranslate"><span class="pre">RobotState.F_T_EE</span></code> for end effector pose in flange frame</p></li>
+</ul>
+</div>
+</dd></dl>
+
+</section>
+<section id="set-load">
+<h3>set_load<a class="headerlink" href="#set-load" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">set_load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">load_mass</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">F_x_Cload</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_inertia</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Sets dynamic parameters of a payload.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is not for setting end effector parameters, which have to be set in the administrator’s interface.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>load_mass</strong> (<em>float</em>) – Mass of the load [kg]</p></li>
+<li><p><strong>F_x_Cload</strong> (<em>array_like</em>) – Translation from flange to center of mass of load <span class="math notranslate nohighlight">\(^Fx_{C_{load}}\)</span> [m] (3,)</p></li>
+<li><p><strong>load_inertia</strong> (<em>array_like</em>) – Inertia matrix <span class="math notranslate nohighlight">\(I_{load}\)</span> [kg·m²], column-major (9,)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>CommandException</strong> – if the Control reports an error</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="error-handling">
+<h2>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this heading"></a></h2>
+<section id="automatic-error-recovery">
+<h3>automatic_error_recovery<a class="headerlink" href="#automatic-error-recovery" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">automatic_error_recovery</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Attempt automatic error recovery.</p>
+<p>Executes automatic error recovery if the robot is in an error state. This can clear recoverable errors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>CommandException</strong> – if recovery fails</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="stop">
+<h3>stop<a class="headerlink" href="#stop" title="Permalink to this heading"></a></h3>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">Robot.</span></span><span class="sig-name descname"><span class="pre">stop</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Stops all currently running motions.</p>
+<p>If a control or motion generator loop is running in another thread, it will be preempted with a <code class="xref py py-class docutils literal notranslate"><span class="pre">ControlException</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>CommandException</strong> – if the Control reports an error</p></li>
+<li><p><strong>NetworkException</strong> – if the connection is lost</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+<section id="related-classes">
+<h2>Related Classes<a class="headerlink" href="#related-classes" title="Permalink to this heading"></a></h2>
+<section id="realtimeconfig">
+<h3>RealtimeConfig<a class="headerlink" href="#realtimeconfig" title="Permalink to this heading"></a></h3>
+</section>
+<section id="controllermode">
+<h3>ControllerMode<a class="headerlink" href="#controllermode" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">ActiveControlBase</span></code> – Control interface returned by start_* methods</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> – Robot state data structure</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> – Dynamics model for computing kinematics and dynamics</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Errors</span></code> – Robot error state information</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

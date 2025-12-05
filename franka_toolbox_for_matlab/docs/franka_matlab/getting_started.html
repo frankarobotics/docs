@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting started &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Fanka Library for Simulink - Reference" href="simulink_library.html" />
+    <link rel="prev" title="Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Franka Toolbox for MATLAB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simulink">Simulink</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#simulink-solver-settings">Simulink Solver Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulink-build-deploy-target-pc-franka-ai-companion">Simulink Build &amp; Deploy - Target PC: Franka AI Companion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulink-build-deploy-target-pc-linux-host">Simulink Build &amp; Deploy - Target PC: Linux Host</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#simulink-external-mode-monitor-tune-necessary-settings">Simulink External Mode (“Monitor &amp; Tune”) - Necessary Settings</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#matlab">MATLAB</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#demo-pick-place-with-rrt">Demo Pick &amp; Place with RRT</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#automatic-error-recovery">Automatic error recovery</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="simulink_library.html">Fanka Library for Simulink - Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_library.html">Franka Library for MATLAB - Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Franka Toolbox for MATLAB</a> &raquo;</li>
+      <li>Getting started</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_toolbox_for_matlab/docs/franka_matlab/getting_started.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="getting-started">
+<h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<section id="simulink">
+<span id="id1"></span><h2>Simulink<a class="headerlink" href="#simulink" title="Permalink to this heading"></a></h2>
+<p>The Franka MATLAB Toolbox includes a comprehensive set of Simulink and MATLAB examples. These examples are designed to help you understand the toolbox’s capabilities and can be customized to meet your project requirements.</p>
+<p>To browse the available examples, use the following command:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_examples</span><span class="p">();</span>
+</pre></div>
+</div>
+<figure class="align-center" id="id2">
+<img alt="../../../_images/franka_matlab_toolbox_examples.png" src="../../../_images/franka_matlab_toolbox_examples.png" />
+<figcaption>
+<p><span class="caption-text">Franka Toolbox for MATLAB Examples Navigator.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id3">
+<img alt="../../../_images/cartesian_impedance_control_overview.png" src="../../../_images/cartesian_impedance_control_overview.png" />
+<figcaption>
+<p><span class="caption-text">The Cartesian Impedance Control Example equiped with sliders as UI elements for controlling the End-Effector position.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>After opening, by double clicking, any of the Simulink models the robot settings will be loaded automatically in the
+workspace, in the form of the <cite>frs</cite> object.</p>
+<figure class="align-center" id="id4">
+<img alt="../../../_images/workspace_parameters.png" src="../../../_images/workspace_parameters.png" />
+<figcaption>
+<p><span class="caption-text">The Franka Robot Settings object.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The robot_ip is set to 172.16.0.2. Make sure that the robot_ip, as well as all the other parameters matches your
+setup for your intended purposes.</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">frs</span><span class="p">.</span><span class="n">robot_ip</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">your</span><span class="w"> </span><span class="n">robot</span><span class="w"> </span><span class="n">ip</span><span class="w"> </span><span class="nb">string</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>You can modify the default settings for the FrankaRobotSettings with</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="nb">edit</span><span class="w"> </span><span class="n">FrankaRobotSettings</span><span class="p">.</span><span class="n">m</span>
+</pre></div>
+</div>
+<section id="simulink-solver-settings">
+<h3>Simulink Solver Settings<a class="headerlink" href="#simulink-solver-settings" title="Permalink to this heading"></a></h3>
+<p>The requirements for the solver settings for the Simulink model should be:</p>
+<ul class="simple">
+<li><p>Fixed-step</p></li>
+<li><p>discrete (no continuous states)</p></li>
+<li><p>With Fixed-step sixe (fundamental sample time) of <cite>0.001</cite>.</p></li>
+</ul>
+</section>
+<section id="simulink-build-deploy-target-pc-franka-ai-companion">
+<h3>Simulink Build &amp; Deploy - Target PC: Franka AI Companion<a class="headerlink" href="#simulink-build-deploy-target-pc-franka-ai-companion" title="Permalink to this heading"></a></h3>
+<p>For building &amp; deploying to the Franka AI Companion you can
+use the following recommended workflow:</p>
+<p>Start by clicking “Run on Hardware Board” in the Simulink APPS pane and select
+the “NVIDIA Jetson” option.</p>
+<figure class="align-center" id="id5">
+<img alt="../../../_images/cartesian_impedance_control_run_on_hardware.png" src="../../../_images/cartesian_impedance_control_run_on_hardware.png" />
+<figcaption>
+<p><span class="caption-text">Run on Hardware Board - Select “NVIDIA Jetson”.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In case this option is not visible make sure that the
+<a class="reference external" href="https://www.mathworks.com/matlabcentral/fileexchange/68644-matlab-coder-support-package-for-nvidia-jetson-and-nvidia-drive-platforms">MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms</a>
+is installed.</p>
+</div>
+<p>We need to proceed with a couple of “Hardware Settings” before building &amp; running the model.</p>
+<figure class="align-center" id="id6">
+<img alt="../../../_images/hardware_settings.png" src="../../../_images/hardware_settings.png" />
+<figcaption>
+<p><span class="caption-text">Select the “Hardware Settings”</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Select the “NVIDIA Jetson” Hardware board</p>
+<p>Set the <cite>Device Address</cite>, <cite>Username</cite> and <cite>Password</cite> which correspond to your docker instance as it is running in the Franka AI Companion.</p>
+<figure class="align-center" id="id7">
+<img alt="../../../_images/board_parameters.png" src="../../../_images/board_parameters.png" />
+<figcaption>
+<p><span class="caption-text">“Board Parameters”</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>It is recommended to select the “C++11” option in order to ensure compatibility with the MATLAB Coder Support Package for NVIDIA Jetson and NVIDIA DRIVE Platforms.</p>
+<figure class="align-center" id="id8">
+<img alt="../../../_images/jetson_config_c++11.png" src="../../../_images/jetson_config_c++11.png" />
+<figcaption>
+<p><span class="caption-text">Select the “C++11” option.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>For setting the specific port in which the ssh server is exposed by the currently targeted docker
+instance, please excecute the following MATLAB command:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>franka_ai_companion_port_switch<span class="o">(</span>&lt;desired<span class="w"> </span>port<span class="w"> </span>number&gt;<span class="o">)</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you are planning to utilize the External Mode for “Monitoring  &amp; Tuning” make sure
+that you’ve applied the settings descibed in the section bellow <a class="reference internal" href="#external-mode-settings"><span class="std std-ref">Simulink External Mode (“Monitor &amp; Tune”) - Necessary Settings</span></a>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before executing make sure that the brakes of the robot are disengaged, the FCI mode is activated
+in Desk and that the robot is in execution mode (user-button is released)!</p>
+</div>
+<p>You can now “Build and Deploy” or “Monitor and Tune” for running the Simulink Model!</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The robot will move! Make sure that you are monitoring the situation, ready to take action if necessary!</p>
+</div>
+<figure class="align-center" id="id9">
+<img alt="../../../_images/jetson_deploy.png" src="../../../_images/jetson_deploy.png" />
+<figcaption>
+<p><span class="caption-text">“Build &amp; Deploy” or “Monitor &amp; Tune” for enabling the External Mode.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="simulink-build-deploy-target-pc-linux-host">
+<h3>Simulink Build &amp; Deploy - Target PC: Linux Host<a class="headerlink" href="#simulink-build-deploy-target-pc-linux-host" title="Permalink to this heading"></a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you are planning to build, run &amp; deploy the application to your linux host pc
+make sure that you’ve installed libfranka and a Real-Time kernel as described in the
+previous installation page.</p>
+</div>
+<p>Let’s start by selecting the <cite>Run on Custom Hardware</cite> App from the Apps pane in Simulink.
+Allow the grt.tlc target to be auto-selected, as prompted.</p>
+<figure class="align-center" id="id10">
+<img alt="../../../_images/cartesian_impedance_control_apps.png" src="../../../_images/cartesian_impedance_control_apps.png" />
+<figcaption>
+<p><span class="caption-text">“Run on custom hardware” Simulink App.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Please proceed with the following necessary model checks before proceeding:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The Device vendor under “Hardware Implementation” is either “Intel” or “AMD” and device type “x86-64 (Linux 64)”.</p></li>
+<li><p>Code interface packaging options is set to “Nonreusable function”.</p></li>
+</ul>
+</div></blockquote>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="../../../_images/linux_host_hardware_implementation.png"><img alt="../../../_images/linux_host_hardware_implementation.png" src="../../../_images/linux_host_hardware_implementation.png" style="width: 487.79999999999995px; height: 204.0px;" /></a>
+<figcaption>
+<p><span class="caption-text">Hardware Implementation - Device vendor selection.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="../../../_images/interface_pane.png"><img alt="../../../_images/interface_pane.png" src="../../../_images/interface_pane.png" style="width: 467.59999999999997px; height: 322.0px;" /></a>
+<figcaption>
+<p><span class="caption-text">“Code interface packaging” options.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If you are planning to utilize the External Mode for “Monitoring  &amp; Tuning” make sure
+that you’ve applied the settings descibed in the section bellow <a class="reference internal" href="#external-mode-settings"><span class="std std-ref">Simulink External Mode (“Monitor &amp; Tune”) - Necessary Settings</span></a>.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before executing make sure that the brakes of the robot are disengaged, the FCI mode is activated
+in Desk and that the robot is in execution mode (user-button is released)!</p>
+</div>
+<p>You can then select from the Hardware tab either <cite>Monitor &amp; Tune</cite> in case monitoring through the external mode is
+desired or <cite>Build, Deploy &amp; Start</cite> for just executing the application without monitoring.</p>
+<figure class="align-center" id="id13">
+<img alt="../../../_images/cartesian_impedance_control_hardware.png" src="../../../_images/cartesian_impedance_control_hardware.png" />
+<figcaption>
+<p><span class="caption-text">Hardware Simulink App.</span><a class="headerlink" href="#id13" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>The robot will move! Make sure that you are monitoring the situation, ready to take action if necessary!</p>
+</div>
+</section>
+<section id="simulink-external-mode-monitor-tune-necessary-settings">
+<span id="external-mode-settings"></span><h3>Simulink External Mode (“Monitor &amp; Tune”) - Necessary Settings<a class="headerlink" href="#simulink-external-mode-monitor-tune-necessary-settings" title="Permalink to this heading"></a></h3>
+<p>In case you are planning to execute with External Mode for “Monitor &amp; Tuning”,
+it is also necessary to apply the following settings:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>“Run external mode in a background thread”.</p></li>
+<li><p>The Code interface packaging is “Nonreusable function”.</p></li>
+<li><p>“MAT-file logging” is unchecked.</p></li>
+</ul>
+</div></blockquote>
+<figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="../../../_images/external_mode_background_thread.png"><img alt="../../../_images/external_mode_background_thread.png" src="../../../_images/external_mode_background_thread.png" style="width: 496.0px; height: 265.0px;" /></a>
+<figcaption>
+<p><span class="caption-text">“Run external mode in a background thread” is necessary so that the 1kHz loop won’t get disturbed</span><a class="headerlink" href="#id14" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id15">
+<a class="reference internal image-reference" href="../../../_images/model_settings_interface_non_reusable_function.png"><img alt="../../../_images/model_settings_interface_non_reusable_function.png" src="../../../_images/model_settings_interface_non_reusable_function.png" style="width: 471.79999999999995px; height: 344.4px;" /></a>
+<figcaption>
+<p><span class="caption-text">“Nonreusable function option is required for building with External-Mode</span><a class="headerlink" href="#id15" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id16">
+<a class="reference internal image-reference" href="../../../_images/model_settings_interface_mat_file_logging.png"><img alt="../../../_images/model_settings_interface_mat_file_logging.png" src="../../../_images/model_settings_interface_mat_file_logging.png" style="width: 494.5px; height: 315.0px;" /></a>
+<figcaption>
+<p><span class="caption-text">“MAT-file logging” should be unchecked unchecked for building with External-Mode”</span><a class="headerlink" href="#id16" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="matlab">
+<h2>MATLAB<a class="headerlink" href="#matlab" title="Permalink to this heading"></a></h2>
+<section id="demo-pick-place-with-rrt">
+<h3>Demo Pick &amp; Place with RRT<a class="headerlink" href="#demo-pick-place-with-rrt" title="Permalink to this heading"></a></h3>
+<p>For familiarization with the Matlab API for the Franka Robot the <cite>pick_and_place_with_RRT.mlx</cite> demo is a good starting point.</p>
+<figure class="align-center" id="id17">
+<img alt="../../../_images/matlab_pick_and_place_with_RRT_demo.png" src="../../../_images/matlab_pick_and_place_with_RRT_demo.png" />
+<figcaption>
+<p><span class="caption-text">Live Matlab Script and Figure of the pick^and^place demo.</span><a class="headerlink" href="#id17" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="automatic-error-recovery">
+<h3>Automatic error recovery<a class="headerlink" href="#automatic-error-recovery" title="Permalink to this heading"></a></h3>
+<p>If the robot encounters an error state and transitions to reflex mode,
+you may attempt a recovery by executing the automatic error recovery command in Matlab.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nv">fr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>FrankaRobot<span class="o">(</span><span class="s1">&#39;RobotIP&#39;</span>,<span class="w"> </span>&lt;robot<span class="w"> </span>ip<span class="w"> </span>as<span class="w"> </span>string&gt;<span class="o">)</span><span class="p">;</span>
+fr.automatic_error_recovery<span class="o">()</span><span class="p">;</span>
+</pre></div>
+</div>
+<p>In case the command fails and the robot remains in the erroneous state try using the guiding mode to manually bring
+back the robot to a valid configuration.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Checkout the <a class="reference internal" href="matlab_library.html#matlab-library"><span class="std std-ref">Franka library for MATLAB</span></a> for a set of helper
+functions that can help to optimize your workflow.</p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="simulink_library.html" class="btn btn-neutral float-right" title="Fanka Library for Simulink - Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

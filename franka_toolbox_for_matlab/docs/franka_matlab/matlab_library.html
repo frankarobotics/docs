@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Franka Library for MATLAB - Reference &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="Fanka Library for Simulink - Reference" href="simulink_library.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Franka Toolbox for MATLAB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulink_library.html">Fanka Library for Simulink - Reference</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Franka Library for MATLAB - Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#frankarobot-class">FrankaRobot Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#automatic-error-recovery">Automatic Error Recovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-joint-poses">Get Joint Poses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#get-robot-state">Get Robot State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-point-to-point-motion">Joint Point to Point Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-trajectory-motion">Joint Trajectory Motion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#collision-thresholds">Collision Thresholds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#load-inertia">Load Inertia</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#robot-homing">Robot Homing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#reset-settings">Reset Settings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gripper-control">Gripper Control</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frankagripper-class">FrankaGripper Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-gripper-state">Get Gripper State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gripper-homing">Gripper Homing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#grasp-object">Grasp Object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#move-gripper">Move Gripper</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stop-gripper">Stop Gripper</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#frankavacuumgripper-class">FrankaVacuumGripper Class</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#get-vacuum-gripper-state">Get Vacuum Gripper State</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#apply-vacuum">Apply Vacuum</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#drop-off">Drop Off</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stop-vacuum-gripper">Stop Vacuum Gripper</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Franka Toolbox for MATLAB</a> &raquo;</li>
+      <li>Franka Library for MATLAB - Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_toolbox_for_matlab/docs/franka_matlab/matlab_library.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-library-for-matlab-reference">
+<span id="matlab-library"></span><h1>Franka Library for MATLAB - Reference<a class="headerlink" href="#franka-library-for-matlab-reference" title="Permalink to this heading"></a></h1>
+<section id="frankarobot-class">
+<h2>FrankaRobot Class<a class="headerlink" href="#frankarobot-class" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">FrankaRobot</span></code> constructor initializes a connection to the Franka robot. It can be configured for two primary scenarios: connecting to a robot on a local network (Host PC) or connecting to a robot via an external AI companion computer like a Jetson.</p>
+<p><strong>Local Host PC as Target PC</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">FrankaRobot</span><span class="p">(</span><span class="s">&#39;RobotIP&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;172.16.0.2&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>Connecting via AI Companion/NVIDIA Jetson</strong></p>
+<p>When using an external Target PC to control the robot, you must provide connection details for that computer, including its IP address and a username.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Before attempting to connect to the robot via an external AI companion or NVIDIA Jetson,
+ensure that you have copied your SSH key to the target PC, e.g with <code class="docutils literal notranslate"><span class="pre">ssh-copy-id</span></code> for Linux.
+This step is crucial for establishing an SSH connection without requiring a password each time.</p>
+</div>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">FrankaRobot</span><span class="p">(</span><span class="s">&#39;RobotIP&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;172.16.0.2&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                 </span><span class="s">&#39;Username&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;jetson_user&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">...</span>
+<span class="w">                 </span><span class="s">&#39;ServerIP&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;192.168.1.100&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>All constructor parameters are optional and have default values.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>RobotIP: IP address of the Franka robot (default: ‘172.16.0.2’)</p></li>
+<li><p>Username: Username for the server on the AI companion (default: ‘franka’)</p></li>
+<li><p>ServerIP: IP address of the server on the AI companion (default: ‘172.16.1.2’)</p></li>
+<li><p>SSHPort: SSH port for server connection (default: ‘22’)</p></li>
+<li><p>ServerPort: Server port for communication (default: ‘5001’)</p></li>
+</ul>
+</dd>
+</dl>
+<section id="automatic-error-recovery">
+<h3>Automatic Error Recovery<a class="headerlink" href="#automatic-error-recovery" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="p">.</span><span class="n">automatic_error_recovery</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Attempts an automatic error recovery of the robot.</p>
+</section>
+<section id="get-joint-poses">
+<h3>Get Joint Poses<a class="headerlink" href="#get-joint-poses" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">jp</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">joint_poses</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Returns a 7-element array with the current robot joint poses.</p>
+</section>
+<section id="get-robot-state">
+<h3>Get Robot State<a class="headerlink" href="#get-robot-state" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">rs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">robot_state</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Returns a struct with the current robot state.</p>
+</section>
+<section id="joint-point-to-point-motion">
+<h3>Joint Point to Point Motion<a class="headerlink" href="#joint-point-to-point-motion" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="p">.</span><span class="n">joint_point_to_point_motion</span><span class="p">(</span><span class="n">joints_target_configuration</span><span class="p">,</span><span class="w"> </span><span class="n">speed_factor</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Moves the robot into a desired joint configuration.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>joints_target_configuration: 7-element double array with target configuration</p></li>
+<li><p>speed_factor: Scalar between 0 and 1 (default: 0.5)</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="joint-trajectory-motion">
+<h3>Joint Trajectory Motion<a class="headerlink" href="#joint-trajectory-motion" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="p">.</span><span class="n">joint_trajectory_motion</span><span class="p">(</span><span class="n">positions</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Moves the robot based on the given desired joint trajectory.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>positions: 7xN double array with desired joint trajectory</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Make sure that the current configuration of the robot matches the initial trajectory element <cite>q(1:7,1)</cite> that is passed in the function! Additionally make sure that
+the given trajectory is sufficiently smooth and continuous.</p>
+</div>
+</section>
+<section id="collision-thresholds">
+<h3>Collision Thresholds<a class="headerlink" href="#collision-thresholds" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="p">.</span><span class="n">setCollisionThresholds</span><span class="p">(</span><span class="n">thresholds</span><span class="p">);</span>
+<span class="n">thresholds</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">getCollisionThresholds</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Sets or gets the collision thresholds for the robot.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>thresholds: Struct containing collision threshold parameters</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="load-inertia">
+<h3>Load Inertia<a class="headerlink" href="#load-inertia" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="p">.</span><span class="n">setLoadInertia</span><span class="p">(</span><span class="n">loadInertia</span><span class="p">);</span>
+<span class="n">inertia</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">getLoadInertia</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Sets or gets the load inertia parameters for the robot.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>loadInertia: Struct containing mass, center of mass, and inertia matrix</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="robot-homing">
+<h3>Robot Homing<a class="headerlink" href="#robot-homing" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">robot_homing</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Moves the robot to its home configuration using point-to-point motion.</p>
+<dl class="simple">
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>true if the motion was successful, false otherwise</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="reset-settings">
+<h3>Reset Settings<a class="headerlink" href="#reset-settings" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="p">.</span><span class="n">resetSettings</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Resets all robot settings to their default values.</p>
+</section>
+<section id="gripper-control">
+<h3>Gripper Control<a class="headerlink" href="#gripper-control" title="Permalink to this heading"></a></h3>
+<p>The FrankaRobot class provides access to both standard and vacuum grippers through the following properties:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">fr</span><span class="p">.</span><span class="n">Gripper</span><span class="w">        </span><span class="c">% Standard gripper interface</span>
+<span class="n">fr</span><span class="p">.</span><span class="n">VacuumGripper</span><span class="w">  </span><span class="c">% Vacuum gripper interface</span>
+</pre></div>
+</div>
+<p>See the respective gripper class documentation for available methods.</p>
+</section>
+</section>
+<section id="frankagripper-class">
+<h2>FrankaGripper Class<a class="headerlink" href="#frankagripper-class" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">FrankaGripper</span></code> class is accessed through the <code class="docutils literal notranslate"><span class="pre">Gripper</span></code> property of a <code class="docutils literal notranslate"><span class="pre">FrankaRobot</span></code> instance.</p>
+<section id="get-gripper-state">
+<h3>Get Gripper State<a class="headerlink" href="#get-gripper-state" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">Gripper</span><span class="p">.</span><span class="n">state</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Returns a struct with the current gripper state.</p>
+</section>
+<section id="gripper-homing">
+<h3>Gripper Homing<a class="headerlink" href="#gripper-homing" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">Gripper</span><span class="p">.</span><span class="n">homing</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Performs gripper homing. Returns true if successful.</p>
+</section>
+<section id="grasp-object">
+<h3>Grasp Object<a class="headerlink" href="#grasp-object" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">Gripper</span><span class="p">.</span><span class="n">grasp</span><span class="p">(</span><span class="nb">width</span><span class="p">,</span><span class="w"> </span><span class="n">speed</span><span class="p">,</span><span class="w"> </span><span class="n">force</span><span class="p">,</span><span class="w"> </span><span class="n">epsilon_inner</span><span class="p">,</span><span class="w"> </span><span class="n">epsilon_outer</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Grasps an object with the specified width.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>width: Target width in meters.</p></li>
+<li><p>speed: Speed of the motion (default: 0.1).</p></li>
+<li><p>force: Grasping force in N (default: 50).</p></li>
+<li><p>epsilon_inner: Inner epsilon for grasping (default: 0.1).</p></li>
+<li><p>epsilon_outer: Outer epsilon for grasping (default: 0.1).</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>true if grasping was successful, false otherwise.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="move-gripper">
+<h3>Move Gripper<a class="headerlink" href="#move-gripper" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">Gripper</span><span class="p">.</span><span class="n">move</span><span class="p">(</span><span class="nb">width</span><span class="p">,</span><span class="w"> </span><span class="n">speed</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Moves the gripper to a specific width.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>width: Target width in meters.</p></li>
+<li><p>speed: Speed of the motion (default: 0.1).</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>true if motion was successful, false otherwise.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="stop-gripper">
+<h3>Stop Gripper<a class="headerlink" href="#stop-gripper" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">Gripper</span><span class="p">.</span><span class="n">stop</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Stops the gripper motion. Returns true if successful.</p>
+</section>
+</section>
+<section id="frankavacuumgripper-class">
+<h2>FrankaVacuumGripper Class<a class="headerlink" href="#frankavacuumgripper-class" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">FrankaVacuumGripper</span></code> class is accessed through the <code class="docutils literal notranslate"><span class="pre">VacuumGripper</span></code> property of a <code class="docutils literal notranslate"><span class="pre">FrankaRobot</span></code> instance.</p>
+<section id="get-vacuum-gripper-state">
+<h3>Get Vacuum Gripper State<a class="headerlink" href="#get-vacuum-gripper-state" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">state</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">VacuumGripper</span><span class="p">.</span><span class="n">state</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Returns a struct with the current vacuum gripper state, including vacuum level and part presence.</p>
+</section>
+<section id="apply-vacuum">
+<h3>Apply Vacuum<a class="headerlink" href="#apply-vacuum" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">VacuumGripper</span><span class="p">.</span><span class="n">vacuum</span><span class="p">(</span><span class="n">control_point</span><span class="p">,</span><span class="w"> </span><span class="n">timeout</span><span class="p">,</span><span class="w"> </span><span class="nb">profile</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Applies vacuum to the gripper.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>control_point: Vacuum control point (default: 0).</p></li>
+<li><p>timeout: Timeout in milliseconds (default: 5000).</p></li>
+<li><p>profile: Production setup profile (default: 0).</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>true if vacuum was successfully applied, false otherwise.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="drop-off">
+<h3>Drop Off<a class="headerlink" href="#drop-off" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">VacuumGripper</span><span class="p">.</span><span class="n">dropOff</span><span class="p">(</span><span class="n">timeout</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Drops off the currently held object.</p>
+<dl class="simple">
+<dt>Parameters:</dt><dd><ul class="simple">
+<li><p>timeout: Timeout in milliseconds (default: 5000).</p></li>
+</ul>
+</dd>
+<dt>Returns:</dt><dd><ul class="simple">
+<li><p>true if drop off was successful, false otherwise.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="stop-vacuum-gripper">
+<h3>Stop Vacuum Gripper<a class="headerlink" href="#stop-vacuum-gripper" title="Permalink to this heading"></a></h3>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">fr</span><span class="p">.</span><span class="n">VacuumGripper</span><span class="p">.</span><span class="n">stop</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>Stops the vacuum gripper. Returns true if successful.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="simulink_library.html" class="btn btn-neutral float-left" title="Fanka Library for Simulink - Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

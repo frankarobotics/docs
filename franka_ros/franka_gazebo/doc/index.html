@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_gazebo &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="franka_gripper" href="../../franka_gripper/doc/index.html" />
+    <link rel="prev" title="franka_example_controllers" href="../../franka_example_controllers/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros/doc/index.html">franka_ros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_control/doc/index.html">franka_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_description/doc/index.html">franka_description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">franka_gazebo</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pick-place-example">Pick &amp; Place Example</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#customization">Customization</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frankahwsim">FrankaHWSim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frankagrippersim">FrankaGripperSim</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jointstateinterface">JointStateInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#effortjointinterface">EffortJointInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frankastateinterface">FrankaStateInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#frankamodelinterface">FrankaModelInterface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#friction">Friction</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hw/doc/index.html">franka_hw</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html#panda-moveit-config">panda_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_visualization/doc/index.html">franka_visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/index.html#writing-your-own-controller">Writing  your own controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros</a> &raquo;</li>
+      <li>franka_gazebo</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_ros/franka_gazebo/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-gazebo">
+<span id="id1"></span><h1>franka_gazebo<a class="headerlink" href="#franka-gazebo" title="Permalink to this heading"></a></h1>
+<p>This package allows you to simulate our robot in <a class="reference external" href="https://gazebosim.org/">Gazebo</a>. This is possible
+because Gazebo is able to integrate into the ROS control framework with the
+<a class="reference external" href="https://classic.gazebosim.org/tutorials?tut=ros_control&amp;cat=connect_ros">gazebo_ros</a> package.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This package is available from 0.8.0</p>
+</div>
+<section id="pick-place-example">
+<h2>Pick &amp; Place Example<a class="headerlink" href="#pick-place-example" title="Permalink to this heading"></a></h2>
+<p>Let’s dive in and simulate transporting a stone from A to B. Run the following command to start Gazebo with a Panda
+and an example world.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>roslaunch<span class="w"> </span>franka_gazebo<span class="w"> </span>panda.launch<span class="w"> </span>x:<span class="o">=</span>-0.5<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>world:<span class="o">=</span><span class="k">$(</span>rospack<span class="w"> </span>find<span class="w"> </span>franka_gazebo<span class="k">)</span>/world/stone.sdf<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>controller:<span class="o">=</span>cartesian_impedance_example_controller<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>rviz:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>This will bring up the Gazebo GUI where you see the environment with the stone and RViz with which you can control
+the end-effector pose of the robot.</p>
+<figure class="align-center" id="id2">
+<img alt="../../../_images/franka-gazebo-example.png" src="../../../_images/franka-gazebo-example.png" />
+<figcaption>
+<p><span class="caption-text">Gazebo GUI (left) and RViz (right) of the pick and place example</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>To open the gripper, simply send a goal to the <code class="docutils literal notranslate"><span class="pre">move</span></code> action, similar to how the real <code class="docutils literal notranslate"><span class="pre">franka_gripper</span></code>
+works. Let’s move the gripper to a width of <span class="math notranslate nohighlight">\(8\:cm\)</span> between the fingers with <span class="math notranslate nohighlight">\(10\:\frac{cm}{s}\)</span>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rostopic<span class="w"> </span>pub<span class="w"> </span>--once<span class="w"> </span>/franka_gripper/move/goal<span class="w"> </span>franka_gripper/MoveActionGoal<span class="w"> </span><span class="s2">&quot;goal: { width: 0.08, speed: 0.1 }&quot;</span>
+</pre></div>
+</div>
+<p>Since we launched our robot with the Cartesian Impedance controller from
+<a class="reference internal" href="../../franka_example_controllers/doc/index.html#example-controllers"><span class="std std-ref">franka_example_controllers</span></a>, we can move the end-effector around, just like in reality,
+with the interactive marker gizmo in RViz. Move the robot such that the white stone is between the fingers of the
+gripper ready to be picked up.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the robot moves strangely with the elbow, this is because the default nullspace stiffness of the cartesian
+impedance example controller is set to low. Launch <a class="reference external" href="http://wiki.ros.org/rqt_reconfigure">Dynamic Reconfigure</a>
+and adjust <code class="docutils literal notranslate"><span class="pre">panda</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">cartesian_impedance_example_controller</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">nullspace_stiffness</span></code> if necessary.</p>
+</div>
+<p>To pick up the object, we use the <code class="docutils literal notranslate"><span class="pre">grasp</span></code> action this time, since we want to excerpt a force after
+the grasp to not drop the object. The stone is around <span class="math notranslate nohighlight">\(3\:cm\)</span> wide and <span class="math notranslate nohighlight">\(50\:g\)</span> heavy.
+Let’s grasp it with <span class="math notranslate nohighlight">\(5\:N\)</span>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rostopic<span class="w"> </span>pub<span class="w"> </span>--once<span class="w"> </span>/franka_gripper/grasp/goal<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span>franka_gripper/GraspActionGoal<span class="w"> </span><span class="se">\</span>
+<span class="w">             </span><span class="s2">&quot;goal: { width: 0.03, epsilon:{ inner: 0.005, outer: 0.005 }, speed: 0.1, force: 5.0}&quot;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In top menu of Gazebo go to <strong>View</strong> &gt; <strong>Contacts</strong> to visualize contact points and forces</p>
+</div>
+<p>If the grasp succeeded, the fingers will now hold the stone in place. If not, probably the goal tolerances (inner
+and outer epsilon) were too small and the action failed. Now move the object gently over to the red dropoff area.</p>
+<figure class="align-center" id="id3">
+<img alt="../../../_images/franka-gazebo-example-grasp.png" src="../../../_images/franka-gazebo-example-grasp.png" />
+<figcaption>
+<p><span class="caption-text">Transport the stone from blue to red</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>After you placed it gently on the red pad, stop the grasp with the <code class="docutils literal notranslate"><span class="pre">stop</span></code> action from the gripper:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rostopic<span class="w"> </span>pub<span class="w"> </span>--once<span class="w"> </span>/franka_gripper/stop/goal<span class="w"> </span>franka_gripper/StopActionGoal<span class="w"> </span><span class="o">{}</span>
+</pre></div>
+</div>
+<p>Note that the contact forces disappear now, since no force is applied anymore. Alternatively you can also use
+the <code class="docutils literal notranslate"><span class="pre">move</span></code> action.</p>
+</section>
+<section id="customization">
+<h2>Customization<a class="headerlink" href="#customization" title="Permalink to this heading"></a></h2>
+<p>The launch file from <code class="docutils literal notranslate"><span class="pre">franka_gazebo</span></code> takes a lot of arguments with which you can customize the behavior
+of the simulation. For example to spawn two pandas in one simulation you can use the following:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="cp">&lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="nt">&lt;launch&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;include</span><span class="w"> </span><span class="na">file=</span><span class="s">&quot;$(find gazebo_ros)/launch/empty_world.launch&quot;</span><span class="w"> </span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="cm">&lt;!-- Start paused, simulation will be started, when Pandas were loaded --&gt;</span>
+<span class="w">    </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;paused&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;use_sim_time&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;true&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/include&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;group</span><span class="w"> </span><span class="na">ns=</span><span class="s">&quot;panda_1&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;include</span><span class="w"> </span><span class="na">file=</span><span class="s">&quot;$(find franka_gazebo)/launch/panda.launch&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;arm_id&quot;</span><span class="w">     </span><span class="na">value=</span><span class="s">&quot;panda_1&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;y&quot;</span><span class="w">          </span><span class="na">value=</span><span class="s">&quot;-0.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;controller&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;cartesian_impedance_example_controller&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rviz&quot;</span><span class="w">       </span><span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo&quot;</span><span class="w">     </span><span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;paused&quot;</span><span class="w">     </span><span class="na">value=</span><span class="s">&quot;true&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/include&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/group&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;group</span><span class="w"> </span><span class="na">ns=</span><span class="s">&quot;panda_2&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;include</span><span class="w"> </span><span class="na">file=</span><span class="s">&quot;$(find franka_gazebo)/launch/panda.launch&quot;</span><span class="nt">&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;arm_id&quot;</span><span class="w">     </span><span class="na">value=</span><span class="s">&quot;panda_2&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;y&quot;</span><span class="w">          </span><span class="na">value=</span><span class="s">&quot;0.5&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;controller&quot;</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;force_example_controller&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;rviz&quot;</span><span class="w">       </span><span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo&quot;</span><span class="w">     </span><span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;arg</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;paused&quot;</span><span class="w">     </span><span class="na">value=</span><span class="s">&quot;false&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/include&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/group&gt;</span>
+
+<span class="nt">&lt;/launch&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>To see which arguments are supported use: <code class="docutils literal notranslate"><span class="pre">roslaunch</span> <span class="pre">franka_gazebo</span> <span class="pre">panda.launch</span> <span class="pre">--ros-args</span></code></p>
+</div>
+</section>
+<section id="frankahwsim">
+<h2>FrankaHWSim<a class="headerlink" href="#frankahwsim" title="Permalink to this heading"></a></h2>
+<p>By default Gazebo ROS can only simulate joints with “standard” hardware interfaces like <cite>Joint State Interfaces</cite>
+and <cite>Joint Command Interfaces</cite>. However our robot is quite different from this architecture! Next to
+these joint-specific interfaces it also supports <strong>robot-specific</strong> interfaces like the <code class="docutils literal notranslate"><span class="pre">FrankaModelInterface</span></code> (see
+<a class="reference internal" href="../../franka_hw/doc/index.html#franka-hw"><span class="std std-ref">franka_hw</span></a>). Naturally gazebo does not understand these custom hardware interfaces by default.
+This is where the <code class="docutils literal notranslate"><span class="pre">FrankaHWSim</span></code> plugin comes in.</p>
+<p>To make your robot capable of supporting Franka interfaces, simply declare a custom <code class="docutils literal notranslate"><span class="pre">robotSimType</span></code> in your URDF:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo&gt;</span>
+<span class="w">  </span><span class="nt">&lt;plugin</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;gazebo_ros_control&quot;</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;libgazebo_ros_control.so&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;robotNamespace&gt;</span>${arm_id}<span class="nt">&lt;/robotNamespace&gt;</span>
+<span class="w">    </span><span class="nt">&lt;controlPeriod&gt;</span>0.001<span class="nt">&lt;/controlPeriod&gt;</span>
+<span class="w">    </span><span class="nt">&lt;robotSimType&gt;</span>franka_gazebo/FrankaHWSim<span class="nt">&lt;/robotSimType&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/plugin&gt;</span>
+<span class="w">  </span><span class="nt">&lt;self_collide&gt;</span>true<span class="nt">&lt;/self_collide&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+<p>When you spawn this robot with the <a class="reference external" href="http://wiki.ros.org/simulator_gazebo/Tutorials/SpawningObjectInSimulation#Spawn_Model_in_Simulation">model spawner</a> this plugin
+will be loaded into the gazebo node. It will scan your URDF and try to find supported hardware interfaces. Up to now
+only some of the interfaces provided by <a class="reference internal" href="../../franka_hw/doc/index.html#franka-hw"><span class="std std-ref">franka_hw</span></a> are supported:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 50%" />
+<col style="width: 47%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Interface</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::JointStateInterface</span></code></p></td>
+<td><p>Reads joint states.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::EffortJointInterface</span></code></p></td>
+<td><p>Commands joint-level torques and reads
+joint states.</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::VelocityJointInterface</span></code></p></td>
+<td><p>Commands joint velocities and reads joint
+states.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::PositionJointInterface</span></code></p></td>
+<td><p>Commands joint positions and reads joint
+states.</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaStateInterface</span></code></p></td>
+<td><p>Reads the full robot state.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaModelInterface</span></code></p></td>
+<td><p>Reads the dynamic and kinematic model of the
+robot.</p></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaPoseCartesianInterface</span></code></p></td>
+<td><p>Commands Cartesian poses and reads the full
+robot state.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaVelocityCartesianInterface</span></code></p></td>
+<td><p>Commands Cartesian velocities and reads the
+full robot state.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This implies that you can only simulate controllers, that claim these supported interfaces and none other!
+For example the Cartesian Impedance Example Controller can be simulated, because it only requires the
+<code class="docutils literal notranslate"><span class="pre">EffortJoint</span></code>-, <code class="docutils literal notranslate"><span class="pre">FrankaState</span></code>- and <code class="docutils literal notranslate"><span class="pre">FrankaModelInterface</span></code>. However the Joint Impedance Example Controller
+can’t be simulated, because it requires the <code class="docutils literal notranslate"><span class="pre">FrankaPoseCartesianInterface</span></code> which is not supported yet.</p>
+</div>
+<p>Next to the realtime hardware interfaces the <code class="docutils literal notranslate"><span class="pre">FrankaHWSim</span></code> plugin supports some of the non-realtime commands
+that <a class="reference internal" href="../../franka_control/doc/index.html#franka-control"><span class="std std-ref">franka_control</span></a> supports:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 40%" />
+<col style="width: 57%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Service / Type</p></th>
+<th class="head"><p>Explanation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_joint_impedance</span></code> /
+<a class="reference external" href="http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetJointImpedance.html">SetJointImpedance</a></p></td>
+<td><p>Gazebo does not simulate an internal impedance
+controller, but sets commanded torques directly</p></td>
+</tr>
+<tr class="row-odd"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_cartesian_impedance</span></code> /
+<a class="reference external" href="http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetCartesianImpedance.html">SetCartesianImpedance</a></p></td>
+<td><p>Gazebo does not simulate an internal impedance
+controller, but sets commanded torques directly</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_EE_frame</span></code> /
+<a class="reference external" href="http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetEEFrame.html">SetEEFrame</a></p></td>
+<td><p>Sets the <span class="math notranslate nohighlight">\({}^{\mathrm{NE}}\mathbf{T}_{\mathrm{EE}}\)</span>
+i.e. the homogenous transformation from nominal end-effector
+to end-effector. You can also initialize this by setting the
+ROS parameter <code class="docutils literal notranslate"><span class="pre">/&lt;arm_id&gt;/NE_T_EE</span></code>. Normally you would set
+<span class="math notranslate nohighlight">\({}^{\mathrm{F}}\mathbf{T}_{\mathrm{NE}}\)</span> in Desk, but
+in <code class="docutils literal notranslate"><span class="pre">franka_gazebo</span></code> it’s assumed as identity if no gripper
+was specified or defines a rotation around Z by <span class="math notranslate nohighlight">\(45\:°\)</span>
+and an offset by <span class="math notranslate nohighlight">\(10.34\:cm\)</span> (same as Desk for the
+hand). You can always overwrite this value by setting the ROS
+parameter <code class="docutils literal notranslate"><span class="pre">/&lt;arm_id&gt;/NE_T_EE</span></code> manually.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_K_frame</span></code> /
+<a class="reference external" href="http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetKFrame.html">SetKFrame</a></p></td>
+<td><p>Sets the <span class="math notranslate nohighlight">\({}^{\mathrm{EE}}\mathbf{T}_{\mathrm{K}}\)</span> i.e.
+the homogenous transformation from end-effector to stiffness
+frame.</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_force_torque_collision_behavior</span></code> /
+<a class="reference external" href="http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetForceTorqueCollisionBehavior.html">SetForceTorqueCollisionBehavior</a></p></td>
+<td><p>Sets thresholds above which external wrenches are treated as
+contacts and collisions.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_full_collision_behavior</span></code> /
+<a class="reference external" href="http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetFullCollisionBehavior.html">SetFullCollisionBehavior</a></p></td>
+<td><p>Not yet implemented</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_load</span></code> /
+<a class="reference external" href="http://docs.ros.org/en/noetic/api/franka_msgs/html/srv/SetLoad.html">SetLoad</a></p></td>
+<td><p>Sets an external load to compensate its gravity for, e.g. of
+a grasped object. You can also initialize this by setting
+the ROS parameters <code class="docutils literal notranslate"><span class="pre">/&lt;arm_id&gt;/{m_load,I_load,F_x_load}</span></code>
+for mass, inertia tensor and center of mass for the load,
+respectively.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">set_user_stop</span></code> /
+<a class="reference external" href="http://docs.ros.org/en/noetic/api/std_srvs/html/srv/SetBool.html">std_srvs::SetBool</a>
+(since 0.9.1)</p></td>
+<td><p>This is a special service only available in <code class="docutils literal notranslate"><span class="pre">franka_gazebo</span></code>
+to simulate the user stop. Pressing the user stop (a.k.a
+publishing a <code class="docutils literal notranslate"><span class="pre">true</span></code> via this service) will <em>disconnect</em>
+all command signals from ROS controllers to be fed to the
+joints. To connect them again call the <code class="docutils literal notranslate"><span class="pre">error_recovery</span></code>
+action.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="frankagrippersim">
+<h2>FrankaGripperSim<a class="headerlink" href="#frankagrippersim" title="Permalink to this heading"></a></h2>
+<p>This plugin simulates the <a class="reference internal" href="../../franka_gripper/doc/index.html#franka-gripper"><span class="std std-ref">franka_gripper_node</span></a> in Gazebo. This is done as a ROS controller for
+the two finger joints with a position &amp; force controller. It offers the same five actions like the real gripper node:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">/&lt;arm_id&gt;/franka_gripper/homing</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/&lt;arm_id&gt;/franka_gripper/stop</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/&lt;arm_id&gt;/franka_gripper/move</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/&lt;arm_id&gt;/franka_gripper/grasp</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">/&lt;arm_id&gt;/franka_gripper/gripper_action</span></code></p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">grasp</span></code> action has a bug, that it will not succeed nor abort if the target width
+lets the fingers <strong>open</strong>. This is because of missing the joint limits interface which
+lets the finger oscillate at their limits. For now only use the <code class="docutils literal notranslate"><span class="pre">grasp</span></code> action to <em>close</em>
+the fingers!</p>
+</div>
+<p>It is assumed that the URDF contains two finger joints which can be force controlled, i.e. have a corresponding
+<code class="docutils literal notranslate"><span class="pre">EffortJointInterface</span></code> transmission declared. This controller expects the following parameters in its namespace:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">type</span></code>          (string, required): Should be <code class="docutils literal notranslate"><span class="pre">franka_gazebo/FrankaGripperSim</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arm_id</span></code>        (string, required): The arm id of the panda, to infer the name of the finger joints</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finger1/gains/p</span></code> (double, required): The proportional gain for the position-force controller of the first finger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finger1/gains/i</span></code> (double, default: 0): The integral gain for the position-force controller of the first finger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finger1/gains/d</span></code> (double, default: 0): The differential gain for the position-force controller of the first finger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finger2/gains/p</span></code> (double, required): The proportional gain for the position-force controller of the second finger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finger2/gains/i</span></code> (double, default: 0): The integral gain for the position-force controller of the second finger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">finger2/gains/d</span></code> (double, default: 0): The differential gain for the position-force controller of the second finger</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">move/width_tolerance</span></code> (double, default <span class="math notranslate nohighlight">\(5\:mm\)</span>): The move action succeeds, when the finger width becomes
+below this threshold</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grasp/resting_threshold</span></code> (double, default <span class="math notranslate nohighlight">\(1\:\frac{mm}{s}\)</span>):  Below which speed the target width should
+be checked to abort or succeed the grasp action</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">grasp/consecutive_samples</span></code> (double, default: 3): How many times the speed has to be consecutively below
+<code class="docutils literal notranslate"><span class="pre">resting_threshold</span></code> before the grasping will be evaluated</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gripper_action/width_tolerance</span></code> (double, default <span class="math notranslate nohighlight">\(5\:mm\)</span>): The gripper action succeeds, when the finger
+width becomes below this threshold</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gripper_action/speed</span></code> (double, default <span class="math notranslate nohighlight">\(10\:\frac{cm}{s}\)</span>): The speed to use during the gripper action</p></li>
+</ul>
+</section>
+<section id="jointstateinterface">
+<h2>JointStateInterface<a class="headerlink" href="#jointstateinterface" title="Permalink to this heading"></a></h2>
+<p>To be able to access the joint state interface from a ROS controller you only have to declare the corresponding
+joint in any transmission tag in the URDF. Then a joint state interface will be automatically available. Usually
+you declare transmission tags for command interfaces like the <a class="reference internal" href="#effort-joint-interface"><span class="std std-ref">EffortJointInterface</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For any joint named <code class="docutils literal notranslate"><span class="pre">&lt;arm_id&gt;_jointN</span></code> (with N as integer) FrankaHWSim will automatically compensate its gravity
+to mimic the behavior of libfranka.</p>
+</div>
+</section>
+<section id="effortjointinterface">
+<span id="effort-joint-interface"></span><h2>EffortJointInterface<a class="headerlink" href="#effortjointinterface" title="Permalink to this heading"></a></h2>
+<p>To be able to send effort commands from your controller to a joint, you simply declare a transmission tag for the
+joint in your URDF with the corresponding hardware interface type:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;transmission</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${joint}_transmission&quot;</span><span class="nt">&gt;</span>
+<span class="w"> </span><span class="nt">&lt;type&gt;</span>transmission_interface/SimpleTransmission<span class="nt">&lt;/type&gt;</span>
+<span class="w"> </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${joint}&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;hardwareInterface&gt;</span>hardware_interface/EffortJointInterface<span class="nt">&lt;/hardwareInterface&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w"> </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${joint}_motor&quot;</span><span class="nt">&gt;</span>
+<span class="w">   </span><span class="nt">&lt;hardwareInterface&gt;</span>${transmission}<span class="nt">&lt;/hardwareInterface&gt;</span>
+<span class="w"> </span><span class="nt">&lt;/actuator&gt;</span>
+<span class="nt">&lt;/transmission&gt;</span>
+
+<span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;${joint}&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="cm">&lt;!-- Needed for ODE to output external wrenches on joints --&gt;</span>
+<span class="w">  </span><span class="nt">&lt;provideFeedback&gt;</span>true<span class="nt">&lt;/provideFeedback&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you want to be able to read external forces or torques, which come e.g. from collisions, make sure to set the
+<code class="docutils literal notranslate"><span class="pre">&lt;provideFeedback&gt;</span></code> tag to <code class="docutils literal notranslate"><span class="pre">true</span></code>.</p>
+</div>
+</section>
+<section id="frankastateinterface">
+<h2>FrankaStateInterface<a class="headerlink" href="#frankastateinterface" title="Permalink to this heading"></a></h2>
+<p>This is a <strong>robot-specific</strong> interface and thus a bit different from the normal hardware interfaces.
+To be able to access the franka state interface from your controller declare the following transmission tag with
+all seven joints in your URDF:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;transmission</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_franka_state&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;type&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/type&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_joint1&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_joint2&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_joint3&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_joint4&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_joint5&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_joint6&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_joint7&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/joint&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_motor1&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_motor2&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_motor3&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_motor4&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_motor5&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_motor6&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_motor7&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaStateInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="nt">&lt;/transmission&gt;</span>
+</pre></div>
+</div>
+<p>When your controller accesses the <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/structfranka_1_1RobotState.html">RobotState</a> via the <code class="docutils literal notranslate"><span class="pre">FrankaStateInterface</span></code> it can
+expect the following values to be simulated:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 3%" />
+<col style="width: 31%" />
+<col style="width: 66%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Field</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O_T_EE</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O_T_EE_d</span></code></p></td>
+<td><p>Motion generation not yet supported, field will contain only zeros</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">F_T_EE</span></code></p></td>
+<td><p>Can be configured via parameters <code class="docutils literal notranslate"><span class="pre">F_T_NE</span></code>, <code class="docutils literal notranslate"><span class="pre">NE_T_EE</span></code> and/or
+service calls to <code class="docutils literal notranslate"><span class="pre">set_EE_frame</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">NE_T_EE</span></code></p></td>
+<td><p>Can be configured via parameter <code class="docutils literal notranslate"><span class="pre">NE_T_EE</span></code> and/or service calls
+to <code class="docutils literal notranslate"><span class="pre">set_EE_frame</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">EE_T_K</span></code></p></td>
+<td><p>Can be configured via parameter <code class="docutils literal notranslate"><span class="pre">EE_T_K</span></code> and/or service calls
+to <code class="docutils literal notranslate"><span class="pre">set_K_frame</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m_ee</span></code></p></td>
+<td><p>Will be set from the mass in the inertial tag of URDF, if a hand can
+be found, otherwise zero. Can be overwritten by parameter <code class="docutils literal notranslate"><span class="pre">m_ee</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">I_ee</span></code></p></td>
+<td><p>Will be set from the inertia in the inertial tag of URDF, if a hand
+be found, otherwise zero. Can be overwritten by parameter <code class="docutils literal notranslate"><span class="pre">I_ee</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">F_x_Cee</span></code></p></td>
+<td><p>Will be set from the origin in the inertial tag of URDF, if a hand can
+be found, otherwise zero. Can be overwritten by parameter <code class="docutils literal notranslate"><span class="pre">F_x_Cee</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m_load</span></code></p></td>
+<td><p>Can be configured via parameter <code class="docutils literal notranslate"><span class="pre">m_load</span></code> and/or service calls to
+<code class="docutils literal notranslate"><span class="pre">set_load</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">I_load</span></code></p></td>
+<td><p>Can be configured via parameter <code class="docutils literal notranslate"><span class="pre">I_load</span></code> and/or service calls to
+<code class="docutils literal notranslate"><span class="pre">set_load</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">F_x_Cload</span></code></p></td>
+<td><p>Can be configured via parameter <code class="docutils literal notranslate"><span class="pre">F_x_Cload</span></code> and/or service calls to
+<code class="docutils literal notranslate"><span class="pre">set_load</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">m_total</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">I_total</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">F_x_Ctotal</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elbow</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elbow_d</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">elbow_c</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">delbow_d</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">delbow_c</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tau_J</span></code></p></td>
+<td><p>Comes directly from Gazebo</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tau_J_d</span></code></p></td>
+<td><p>The values send by your effort controller. Zero otherwise.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dtau_J</span></code></p></td>
+<td><p>Numerical derivative of <code class="docutils literal notranslate"><span class="pre">tau_J</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">q</span></code></p></td>
+<td><p>Comes directly from Gazebo</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">q_d</span></code></p></td>
+<td><p>The last commanded joint position when using the position interface.
+Same as <code class="docutils literal notranslate"><span class="pre">q</span></code> when using the velocity interface. However,
+the value will not be updated when using the effort interface.</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dq</span></code></p></td>
+<td><p>Comes directly from Gazebo</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dq_d</span></code></p></td>
+<td><p>The last commanded joint velocity when using the velocity interface.
+Same as <code class="docutils literal notranslate"><span class="pre">dq</span></code> when using the position interface. However,
+the value will be zero when using the effort interface.</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ddq_d</span></code></p></td>
+<td><p>Current acceleration when using the position or velocity interface.
+However, the value will be zero when using the effort interface.</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">joint_contact</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mid \hat{\tau}_{ext} \mid &gt; \mathrm{thresh}_{lower}\)</span> where the
+threshold can be set by calling <code class="docutils literal notranslate"><span class="pre">set_force_torque_collision_behavior</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">joint_collision</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mid \hat{\tau}_{ext} \mid &gt; \mathrm{thresh}_{upper}\)</span> where the
+threshold can be set by calling <code class="docutils literal notranslate"><span class="pre">set_force_torque_collision_behavior</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cartesian_contact</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mid {}^K \hat{F}_{K,ext} \mid &gt; \mathrm{thresh}_{lower}\)</span> where
+threshold can be set by calling <code class="docutils literal notranslate"><span class="pre">set_force_torque_collision_behavior</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">cartesian_collision</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mid {}^K \hat{F}_{K,ext} \mid &gt; \mathrm{thresh}_{upper}\)</span> where
+threshold can be set by calling <code class="docutils literal notranslate"><span class="pre">set_force_torque_collision_behavior</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">tau_ext_hat_filtered</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\(\hat{\tau}_{ext}\)</span> i.e. estimated external torques and forces at
+the end-effector, filtered with a exponential moving average filter
+(EMA). This filtering <span class="math notranslate nohighlight">\(\alpha\)</span> can be configured via a ROS
+parameter. This field does not contain any gravity, i.e.
+<span class="math notranslate nohighlight">\(\tau_{ext} = \tau_J - \tau_{J_d} - \tau_{gravity}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O_F_ext_hat_K</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\({}^O\hat{F}_{K,ext} = J_O^{\top +} \cdot \hat{\tau}_{ext}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">K_F_ext_hat_K</span></code></p></td>
+<td><p><span class="math notranslate nohighlight">\({}^K\hat{F}_{K,ext} = J_K^{\top +} \cdot \hat{\tau}_{ext}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O_dP_EE_d</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O_ddP_0</span></code></p></td>
+<td><p>Will be the same as the <code class="docutils literal notranslate"><span class="pre">gravity_vector</span></code> ROS parameter.
+By  default it is {0,0,-9.8}</p></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O_T_EE_c</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O_dP_EE_c</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">O_ddP_EE_c</span></code></p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">theta</span></code></p></td>
+<td><p>Same as <code class="docutils literal notranslate"><span class="pre">q</span></code>, since we don’t simulate soft joints in Gazebo</p></td>
+</tr>
+<tr class="row-even"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">dtheta</span></code></p></td>
+<td><p>Same as <code class="docutils literal notranslate"><span class="pre">dq</span></code>, since we don’t simulate soft joints in Gazebo</p></td>
+</tr>
+<tr class="row-odd"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">current_errors</span></code></p></td>
+<td><p>Will entirely be false, reflex system not yet implemented</p></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">last_motion_errors</span></code></p></td>
+<td><p>Will entirely be false, reflex system not yet implemented</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">control_command_success_rate</span></code></p></td>
+<td><p>Always 1.0</p></td>
+</tr>
+<tr class="row-even"><td><p>✘</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">robot_mode</span></code></p></td>
+<td><p>Robot mode switches and reflex system not yet implemented</p></td>
+</tr>
+<tr class="row-odd"><td><p>✔</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">time</span></code></p></td>
+<td><p>Current ROS time in simulation, comes from Gazebo</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="frankamodelinterface">
+<h2>FrankaModelInterface<a class="headerlink" href="#frankamodelinterface" title="Permalink to this heading"></a></h2>
+<p>This is a <strong>robot-specific</strong> interface and thus a bit different from the normal hardware interfaces.
+To be able to access the franka model interface from your controller declare the following transmission tag with
+the root (e.g. <code class="docutils literal notranslate"><span class="pre">panda_joint1</span></code>) and the tip (e.g. <code class="docutils literal notranslate"><span class="pre">panda_joint8</span></code>) of your kinematic chain in your URDF:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;transmission</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${arm_id}_franka_model&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;type&gt;</span>franka_hw/FrankaModelInterface<span class="nt">&lt;/type&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${root}&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;role&gt;</span>root<span class="nt">&lt;/role&gt;</span>
+<span class="w">    </span><span class="nt">&lt;hardwareInterface&gt;</span>franka_hw/FrankaModelInterface<span class="nt">&lt;/hardwareInterface&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${tip}&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;role&gt;</span>tip<span class="nt">&lt;/role&gt;</span>
+<span class="w">    </span><span class="nt">&lt;hardwareInterface&gt;</span>franka_hw/FrankaModelInterface<span class="nt">&lt;/hardwareInterface&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${root}_motor_root&quot;</span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaModelInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="w">  </span><span class="nt">&lt;actuator</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${tip}_motor_tip&quot;</span><span class="w">  </span><span class="nt">&gt;&lt;hardwareInterface&gt;</span>franka_hw/FrankaModelInterface<span class="nt">&lt;/hardwareInterface&gt;&lt;/actuator&gt;</span>
+<span class="nt">&lt;/transmission&gt;</span>
+</pre></div>
+</div>
+<p>The model functions themselve are implemented with <a class="reference external" href="https://www.orocos.org/kdl.html">KDL</a>. This takes the kinematic
+structure and the inertial properties from the URDF to calculate model properties like the Jacobian or the mass matrix.</p>
+</section>
+<section id="friction">
+<h2>Friction<a class="headerlink" href="#friction" title="Permalink to this heading"></a></h2>
+<p>For objects to have proper friction between each other (like fingers and objects) you need to tune
+some Gazebo parameters in your URDF. For the links <code class="docutils literal notranslate"><span class="pre">panda_finger_joint1</span></code> and <code class="docutils literal notranslate"><span class="pre">panda_finger_joint2</span></code> we recommend to
+set the following parameters:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;gazebo</span><span class="w"> </span><span class="na">reference=</span><span class="s">&quot;${link}&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">    </span><span class="nt">&lt;max_contacts&gt;</span>10<span class="nt">&lt;/max_contacts&gt;</span>
+<span class="w">    </span><span class="nt">&lt;surface&gt;</span>
+<span class="w">      </span><span class="nt">&lt;contact&gt;</span>
+<span class="w">        </span><span class="nt">&lt;ode&gt;</span>
+<span class="w">          </span><span class="cm">&lt;!-- These two parameter need application specific tuning. --&gt;</span>
+<span class="w">          </span><span class="cm">&lt;!-- Usually you want no &quot;snap out&quot; velocity and a generous --&gt;</span>
+<span class="w">          </span><span class="cm">&lt;!-- penetration depth to keep the grasping stable --&gt;</span>
+<span class="w">          </span><span class="nt">&lt;max_vel&gt;</span>0<span class="nt">&lt;/max_vel&gt;</span>
+<span class="w">          </span><span class="nt">&lt;min_depth&gt;</span>0.003<span class="nt">&lt;/min_depth&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/ode&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/contact&gt;</span>
+<span class="w">      </span><span class="nt">&lt;friction&gt;</span>
+<span class="w">        </span><span class="nt">&lt;ode&gt;</span>
+<span class="w">          </span><span class="cm">&lt;!-- Rubber/Rubber contact --&gt;</span>
+<span class="w">          </span><span class="nt">&lt;mu&gt;</span>1.16<span class="nt">&lt;/mu&gt;</span>
+<span class="w">          </span><span class="nt">&lt;mu2&gt;</span>1.16<span class="nt">&lt;/mu2&gt;</span>
+<span class="w">        </span><span class="nt">&lt;/ode&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/friction&gt;</span>
+<span class="w">      </span><span class="nt">&lt;bounce/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/surface&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/collision&gt;</span>
+<span class="nt">&lt;/gazebo&gt;</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Refer to <a class="reference external" href="https://classic.gazebosim.org/tutorials?tut=friction">Gazebo Friction Documentation</a></p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../franka_example_controllers/doc/index.html" class="btn btn-neutral float-left" title="franka_example_controllers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../franka_gripper/doc/index.html" class="btn btn-neutral float-right" title="franka_gripper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

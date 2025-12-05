@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Franka Toolbox for MATLAB: Matlab &amp; Simulink library for Franka Robotics research robots &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Franka Toolbox for MATLAB: Matlab &amp; Simulink library for Franka Robotics research robots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/franka_toolbox_for_matlab/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-toolbox-for-matlab-matlab-simulink-library-for-franka-robotics-research-robots">
+<h1>Franka Toolbox for MATLAB: Matlab &amp; Simulink library for Franka Robotics research robots<a class="headerlink" href="#franka-toolbox-for-matlab-matlab-simulink-library-for-franka-robotics-research-robots" title="Permalink to this heading"></a></h1>
+<p>A Simulink &amp; Matlab library and tools for the Franka Robotics Robots based on the <a class="reference external" href="https://frankarobotics.github.io/docs/">Franka Control Interface (FCI)</a>. See the <a class="reference external" href="https://frankarobotics.github.io/docs/franka_toolbox_for_matlab/docs/franka_matlab/index.html">documentation page</a> for more information.</p>
+<p>The repository includes a complete franka.mtlbx distribution (including pre-built binaries) which you can find either under the <code class="docutils literal notranslate"><span class="pre">dist</span></code> folder or in the github release page.</p>
+<p>You can alternatively build the project for your own machine configuration following the instructions bellow.</p>
+<section id="generating-a-franka-mtlbx-distribution">
+<h2>Generating a franka.mtlbx distribution<a class="headerlink" href="#generating-a-franka-mtlbx-distribution" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Requirements:</p></li>
+</ol>
+<ul>
+<li><p>Host PC: Windows</p>
+<ul class="simple">
+<li><p>MATLAB R2022a or newer</p></li>
+<li><p>Microsoft Visual Studio 2019 or newer</p></li>
+<li><p>CMake 3.15 or newer</p></li>
+<li><p>Git</p></li>
+<li><p>Cap’n Proto: check https://capnproto.org/install.html#installation-windows</p></li>
+</ul>
+</li>
+<li><p>Host PC: Linux</p>
+<ul>
+<li><p>MATLAB R2022a or newer</p></li>
+<li><p>Build essentials (gcc, g++, make)</p></li>
+<li><p>CMake 3.15 or newer</p></li>
+<li><p>Git</p></li>
+<li><p>Cap’n Proto (build static library):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install build dependencies</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>autoconf<span class="w"> </span>pkg-config<span class="w"> </span>libtool
+
+<span class="c1"># Download and build Cap&#39;n Proto from source</span>
+curl<span class="w"> </span>-O<span class="w"> </span>https://capnproto.org/capnproto-c++-1.1.0.tar.gz
+tar<span class="w"> </span>zxf<span class="w"> </span>capnproto-c++-1.1.0.tar.gz
+<span class="nb">cd</span><span class="w"> </span>capnproto-c++-1.1.0
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+<span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+cmake<span class="w"> </span>-DBUILD_TESTING<span class="o">=</span>OFF<span class="w"> </span>-DCMAKE_POSITION_INDEPENDENT_CODE<span class="o">=</span>ON<span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+make<span class="w"> </span>-j10<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+<span class="nb">cd</span><span class="w"> </span>../..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+rm<span class="w"> </span>-rf<span class="w"> </span>capnproto-c++-1.1.0*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+sudo<span class="w"> </span>ldconfig
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+<li><p>Target PC: Host PC Linux or Jetson platform connected</p>
+<ul>
+<li><p>libfranka’s 3d party dependencies (based on libfranka’s version). Refer to the <a class="reference external" href="https://github.com/frankarobotics/libfranka/blob/main/README.md">Documentation</a> for more information. The dependencies in the local Linux native target PC (not AI Companion) should be installed in the native system and not in a container. For the AI compantion a running container can be targeted as well.</p></li>
+<li><p>ssh keys setup for connection without password request.</p></li>
+<li><p>Cap’n Proto (build static library):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Install build dependencies</span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>autoconf<span class="w"> </span>pkg-config<span class="w"> </span>libtool
+
+<span class="c1"># Install capnproto</span>
+curl<span class="w"> </span>-O<span class="w"> </span>https://capnproto.org/capnproto-c++-1.1.0.tar.gz<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+tar<span class="w"> </span>zxf<span class="w"> </span>capnproto-c++-1.1.0.tar.gz<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+<span class="nb">cd</span><span class="w"> </span>capnproto-c++-1.1.0<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+<span class="nb">cd</span><span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+cmake<span class="w"> </span>-DBUILD_TESTING<span class="o">=</span>OFF<span class="w"> </span>..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+make<span class="w"> </span>-j3<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+sudo<span class="w"> </span>make<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+<span class="nb">cd</span><span class="w"> </span>../..<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+rm<span class="w"> </span>-rf<span class="w"> </span>capnproto-c++-1.1.0*<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>
+sudo<span class="w"> </span>ldconfig
+</pre></div>
+</div>
+</li>
+</ul>
+</li>
+</ul>
+<ol class="arabic" start="2">
+<li><p>Set the desired libfranka version in the <code class="docutils literal notranslate"><span class="pre">libfranka_ver.csv</span></code> file under the <code class="docutils literal notranslate"><span class="pre">configs</span></code> folder</p></li>
+<li><p>Build the binaries:</p>
+<ol class="arabic simple">
+<li><p>If executed in windows: franka_toolbox_binaries_all_build(); will generate the necessary binaries for windows host (no libfranka related).</p></li>
+<li><p>If executed in Linux: franka_toolbox_binaries_all_build(); will generate the necessary binaries for linux host (no libfranka related) + the necessary binaries for linux as target (libfranka dependent).</p></li>
+<li><p>If executed with AI Companion connected as well from Linux host: franka_toolbox_binaries_all_build(user,ip,port); will generate the necessary binaries for linux host (no libfranka related) + the necessary binaries for linux as target (libfranka dependent) + the necessary binaries for the AI Companion (libfranka dependent).</p></li>
+</ol>
+<p>For generating all the necessary binaries for the final project packaging &amp; distribution –&gt; Steps 1. &amp; 3. MUST be performed!</p>
+<p>a. First from a Ubuntu Host PC with AI companion PC connected with user, ip, port provided</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">franka_toolbox_binaries_all_build</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">ip</span><span class="p">,</span> <span class="n">port</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>b. Then from a Windows Host PC (no Jetson connected)</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">franka_toolbox_binaries_all_build</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>For Windows only the Simulink sfunctions and the Matlab Franka Robot client will be built.</p>
+</li>
+<li><p>Generate the distribution (Tested in Linux Host PC):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">franka_toolbox_dist_make</span><span class="p">();</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

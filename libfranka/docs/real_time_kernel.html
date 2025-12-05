@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting up the Real-Time Kernel &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Setting Up the Robot System and Network for FCI" href="getting_started.html" />
+    <link rel="prev" title="Build / Installation" href="installation.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">libfranka client library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libfranka_architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility_with_images.html">Robot System Version Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Build / Installation</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setting up the Real-Time Kernel</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#kernel-compatibility">Kernel Compatibility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-file-integrity">Verifying File Integrity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#compiling-the-kernel">Compiling the Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-the-new-kernel">Verifying the New Kernel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#allowing-real-time-permissions">Allowing Real-Time Permissions</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Setting Up the Robot System and Network for FCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage_examples.html">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_references.html">API References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration_notes.html">Migration Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#changelog">ChangeLog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">libfranka client library</a> &raquo;</li>
+      <li>Setting up the Real-Time Kernel</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libfranka/docs/real_time_kernel.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-up-the-real-time-kernel">
+<span id="realtime-kernel-setup"></span><h1>Setting up the Real-Time Kernel<a class="headerlink" href="#setting-up-the-real-time-kernel" title="Permalink to this heading"></a></h1>
+<section id="kernel-compatibility">
+<h2>Kernel Compatibility<a class="headerlink" href="#kernel-compatibility" title="Permalink to this heading"></a></h2>
+<p>Different kernel versions are compatible with specific Ubuntu releases. The table below provides an overview of the recommended kernel versions for each supported Ubuntu distribution.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 39%" />
+<col style="width: 61%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Kernel Version</p></th>
+<th class="head"><p>Ubuntu Version</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Pro Kernel</p></td>
+<td><p>22.04 (Jammy Jellyfish)</p></td>
+</tr>
+<tr class="row-odd"><td><p>5.9.1</p></td>
+<td><p>20.04 (Focal Fossa)</p></td>
+</tr>
+<tr class="row-even"><td><p>5.4.19</p></td>
+<td><p>18.04 (Bionic Beaver)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4.14.12</p></td>
+<td><p>16.04 (Xenial Xerus)</p></td>
+</tr>
+</tbody>
+</table>
+<p>To control your robot using <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>, the controller program on the
+workstation PC must run with <cite>real-time priority</cite> under a <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code>
+kernel. This section describes how to patch a kernel and create an installation package.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>NVIDIA drivers are not officially supported on <code class="docutils literal notranslate"><span class="pre">PREEMPT_RT</span></code> kernels, but installation might work by passing the environment variable <code class="docutils literal notranslate"><span class="pre">IGNORE_PREEMPT_RT_PRESENCE=1</span></code> to the installation command.</p>
+</div>
+<p>First, install the necessary dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">build</span><span class="o">-</span><span class="n">essential</span> <span class="n">bc</span> <span class="n">curl</span> <span class="n">debhelper</span> <span class="n">dpkg</span><span class="o">-</span><span class="n">dev</span> <span class="n">devscripts</span> \
+<span class="n">fakeroot</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">libelf</span><span class="o">-</span><span class="n">dev</span> <span class="n">bison</span> <span class="n">flex</span> <span class="n">cpio</span> <span class="n">kmod</span> <span class="n">rsync</span> <span class="n">libncurses</span><span class="o">-</span><span class="n">dev</span>
+</pre></div>
+</div>
+<p>Then decide which kernel version to use. Check your current version with <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-r</span></code>.
+Real-time patches are only available for select versions: <a class="reference external" href="https://www.kernel.org/pub/linux/kernel/projects/rt/">RT Kernel Patches</a>.
+Choose the version closest to your current kernel. Use <code class="docutils literal notranslate"><span class="pre">curl</span></code> to download the sources.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ubuntu 16.04 (tested with kernel 4.14.12):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.xz
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/v4.x/linux-4.14.12.tar.sign
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.xz
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/projects/rt/4.14/older/patch-4.14.12-rt10.patch.sign
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ubuntu 18.04 (tested with kernel 5.4.19):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.xz
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.4.19.tar.sign
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.xz
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/projects/rt/5.4/older/patch-5.4.19-rt10.patch.sign
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ubuntu 20.04 (tested with kernel 5.9.1):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.xz
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/v5.x/linux-5.9.1.tar.sign
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.xz
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/projects/rt/5.9/patch-5.9.1-rt20.patch.sign
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ubuntu 22.04: We recommend using the <a class="reference external" href="https://ubuntu.com/real-time">Ubuntu Pro real-time kernel</a>.
+After enabling it, you can skip directly to <a class="reference internal" href="#installation-real-time"><span class="std std-ref">Allowing Real-Time Permissions</span></a>.
+If you prefer not to use Ubuntu Pro, you can patch manually (tested with kernel 6.8.0):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.8.tar.xz
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/v6.x/linux-6.8.tar.sign
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/projects/rt/6.8/older/patch-6.8-rt8.patch.xz
+curl<span class="w"> </span>-LO<span class="w"> </span>https://www.kernel.org/pub/linux/kernel/projects/rt/6.8/older/patch-6.8-rt8.patch.sign
+</pre></div>
+</div>
+</div>
+<p>Decompress the files:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xz</span> <span class="o">-</span><span class="n">d</span> <span class="o">*.</span><span class="n">xz</span>
+</pre></div>
+</div>
+</section>
+<section id="verifying-file-integrity">
+<h2>Verifying File Integrity<a class="headerlink" href="#verifying-file-integrity" title="Permalink to this heading"></a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Optional but recommended!</p>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">.sign</span></code> files to verify downloads. Adapted from the
+<a class="reference external" href="https://www.kernel.org/signature.html">Linux Kernel Archive</a>.</p>
+<p>Verify archives:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpg2</span> <span class="o">--</span><span class="n">verify</span> <span class="n">linux</span><span class="o">-*.</span><span class="n">tar</span><span class="o">.</span><span class="n">sign</span>
+<span class="n">gpg2</span> <span class="o">--</span><span class="n">verify</span> <span class="n">patch</span><span class="o">-*.</span><span class="n">patch</span><span class="o">.</span><span class="n">sign</span>
+</pre></div>
+</div>
+<p>If you get a “No public key” warning, download the key (example for kernel 4.14.12):</p>
+<blockquote>
+<div><p>gpg2 –keyserver hkp://keyserver.ubuntu.com:80 –recv-keys 6092693E
+gpg2 –keyserver hkp://keyserver.ubuntu.com:80 –recv-keys 2872E4CC</p>
+</div></blockquote>
+<p>Then verify again. A correct output looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gpg</span><span class="p">:</span> <span class="n">Good</span> <span class="n">signature</span> <span class="kn">from</span> <span class="s2">&quot;Greg Kroah-Hartman &lt;gregkh@linuxfoundation.org&gt;&quot;</span>
+</pre></div>
+</div>
+<p>For details, see the <a class="reference external" href="https://www.kernel.org/signature.html">Linux Kernel Archive</a>.</p>
+</section>
+<section id="compiling-the-kernel">
+<h2>Compiling the Kernel<a class="headerlink" href="#compiling-the-kernel" title="Permalink to this heading"></a></h2>
+<p>Extract the source and apply the patch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">xf</span> <span class="n">linux</span><span class="o">-*.</span><span class="n">tar</span>
+<span class="n">cd</span> <span class="n">linux</span><span class="o">-*/</span>
+<span class="n">patch</span> <span class="o">-</span><span class="n">p1</span> <span class="o">&lt;</span> <span class="o">../</span><span class="n">patch</span><span class="o">-*.</span><span class="n">patch</span>
+</pre></div>
+</div>
+<p>Copy your current kernel config:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>cp -v /boot/config-$(uname -r) .config
+</pre></div>
+</div>
+<p>Disable debug info:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">DEBUG_INFO</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">DEBUG_INFO_DWARF_TOOLCHAIN_DEFAULT</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">DEBUG_KERNEL</span>
+</pre></div>
+</div>
+<p>Disable system-wide trusted keys:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">SYSTEM_TRUSTED_KEYS</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">SYSTEM_REVOCATION_LIST</span>
+</pre></div>
+</div>
+<p>Enable the Fully Preemptible Kernel:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">PREEMPT_NONE</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">PREEMPT_VOLUNTARY</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">disable</span> <span class="n">PREEMPT</span>
+<span class="n">scripts</span><span class="o">/</span><span class="n">config</span> <span class="o">--</span><span class="n">enable</span> <span class="n">PREEMPT_RT</span>
+</pre></div>
+</div>
+<p>Configure the build:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">olddefconfig</span>
+</pre></div>
+</div>
+<p>Compile the kernel (use multithreading based on CPU cores):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>make -j$(nproc) deb-pkg
+</pre></div>
+</div>
+<p>Install the generated packages:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">IGNORE_PREEMPT_RT_PRESENCE</span><span class="o">=</span><span class="mi">1</span> <span class="n">dpkg</span> <span class="o">-</span><span class="n">i</span> <span class="o">../</span><span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-*.</span><span class="n">deb</span> <span class="o">../</span><span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-*.</span><span class="n">deb</span>
+</pre></div>
+</div>
+</section>
+<section id="verifying-the-new-kernel">
+<h2>Verifying the New Kernel<a class="headerlink" href="#verifying-the-new-kernel" title="Permalink to this heading"></a></h2>
+<p>Reboot and select the new kernel in GRUB. Check with <code class="docutils literal notranslate"><span class="pre">uname</span> <span class="pre">-a</span></code> — it should include <code class="docutils literal notranslate"><span class="pre">PREEMPT</span> <span class="pre">RT</span></code>.
+Also, <code class="docutils literal notranslate"><span class="pre">/sys/kernel/realtime</span></code> should exist and contain <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If boot fails, see <a class="reference internal" href="../../troubleshooting.html#troubleshooting-realtime-kernel"><span class="std std-ref">Cannot boot realtime kernel because of “Invalid Signature”</span></a>.</p>
+</div>
+</section>
+<section id="allowing-real-time-permissions">
+<span id="installation-real-time"></span><h2>Allowing Real-Time Permissions<a class="headerlink" href="#allowing-real-time-permissions" title="Permalink to this heading"></a></h2>
+<p>After the kernel is running, create a <cite>realtime</cite> group and add the user controlling the robot:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>sudo addgroup realtime
+sudo usermod -a -G realtime $(whoami)
+</pre></div>
+</div>
+<p>Add limits in <code class="docutils literal notranslate"><span class="pre">/etc/security/limits.conf</span></code>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">rtprio</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">priority</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">soft</span> <span class="n">memlock</span> <span class="mi">102400</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">rtprio</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">priority</span> <span class="mi">99</span>
+<span class="nd">@realtime</span> <span class="n">hard</span> <span class="n">memlock</span> <span class="mi">102400</span>
+</pre></div>
+</div>
+<p>Log out and back in to apply the limits.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="installation.html" class="btn btn-neutral float-left" title="Build / Installation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="getting_started.html" class="btn btn-neutral float-right" title="Setting Up the Robot System and Network for FCI" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

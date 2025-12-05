@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Interface Specification and Robot Limits &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FR3 certification remarks" href="fr3-certification-remarks.html" />
+    <link rel="prev" title="Software Versions Compatibility" href="compatibility.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Control Interface Specification and Robot Limits</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#control-modes">Control Modes</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#joint-space-control-requirements">Joint Space Control Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#necessary-conditions">Necessary Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recommended-conditions">Recommended Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#torque-control-requirements">Torque Control Requirements</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#cartesian-space-control-requirements">Cartesian Space Control Requirements</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-space-necessary">Necessary Conditions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-space-recommended">Recommended Conditions</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#system-limits-for-supported-robot-models">System Limits for Supported Robot Models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#limits-for-franka-research-3-fr3">Limits for Franka Research 3 (FR3)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#position-based-velocity-limits">Position-Based Velocity Limits</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#limits-for-franka-emika-robot-fer">Limits for Franka Emika Robot (FER)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#kinematic-configuration">Kinematic Configuration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#denavithartenberg-parameters">Denavit–Hartenberg Parameters</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Control Interface Specification and Robot Limits</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/robot_specifications.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="control-interface-specification-and-robot-limits">
+<span id="control-interface-specifications"></span><h1>Control Interface Specification and Robot Limits<a class="headerlink" href="#control-interface-specification-and-robot-limits" title="Permalink to this heading"></a></h1>
+<section id="overview">
+<span id="id1"></span><h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>Realtime control commands sent to the robot must satisfy a set of <em>recommended</em> and
+<em>necessary</em> conditions. Recommended conditions ensure optimal and stable behavior,
+while necessary conditions are strict safety and feasibility requirements. Violating
+any necessary condition results in an immediate motion abort.</p>
+<p>The executed robot trajectory is based on the user-defined trajectory but adjusted
+to ensure that recommended conditions are respected. As long as all necessary
+conditions are satisfied, the robot will follow the commanded trajectory; however,
+it will only match it exactly if the recommended conditions are also fulfilled.</p>
+<p>If a necessary condition is violated, the system raises an error and stops the
+motion. For example, if the first point of a user-provided joint trajectory differs
+too much from the robot’s actual start configuration
+(<span class="math notranslate nohighlight">\(q(t=0) \neq q_c(t=0)\)</span>), a <code class="docutils literal notranslate"><span class="pre">start_pose_invalid</span></code> error is triggered.</p>
+<p>All constants referenced in the equations below are provided in the
+<a class="reference internal" href="#limits-for-franka-emika-robot-fer">Limits for Franka Emika Robot (FER)</a> and <a class="reference internal" href="#limits-for-franka-research-3-fr3">Limits for Franka Research 3 (FR3)</a>
+sections.</p>
+</section>
+<section id="control-modes">
+<span id="id2"></span><h2>Control Modes<a class="headerlink" href="#control-modes" title="Permalink to this heading"></a></h2>
+<section id="joint-space-control-requirements">
+<span id="joint-space-control"></span><h3>Joint Space Control Requirements<a class="headerlink" href="#joint-space-control-requirements" title="Permalink to this heading"></a></h3>
+<section id="necessary-conditions">
+<span id="joint-space-necessary"></span><h4>Necessary Conditions<a class="headerlink" href="#necessary-conditions" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(q_{min} &lt; q_c &lt; q_{max}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(-\dot{q}_{max} &lt; \dot{q}_c &lt; \dot{q}_{max}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(-\ddot{q}_{max} &lt; \ddot{q}_c &lt; \ddot{q}_{max}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(-\dddot{q}_{max} &lt; \dddot{q}_c &lt; \dddot{q}_{max}\)</span></p></li>
+</ul>
+</section>
+<section id="recommended-conditions">
+<span id="joint-space-recommended"></span><h4>Recommended Conditions<a class="headerlink" href="#recommended-conditions" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(-{\tau_j}_{max} &lt; {\tau_j}_d &lt; {\tau_j}_{max}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(-\dot{\tau_j}_{max} &lt; \dot{\tau_j}_d &lt; \dot{\tau_j}_{max}\)</span></p></li>
+</ul>
+<p id="joint-space-initial">Initial trajectory requirements:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(q = q_c\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\dot{q}_c = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\ddot{q}_c = 0\)</span></p></li>
+</ul>
+<p id="joint-space-final">Final trajectory requirements:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\dot{q}_c = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\ddot{q}_c = 0\)</span></p></li>
+</ul>
+</section>
+<section id="torque-control-requirements">
+<span id="torque-control"></span><h4>Torque Control Requirements<a class="headerlink" href="#torque-control-requirements" title="Permalink to this heading"></a></h4>
+<section id="torque-necessary">
+<span id="id3"></span><h5>Necessary Conditions<a class="headerlink" href="#torque-necessary" title="Permalink to this heading"></a></h5>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(-\dot{\tau_j}_{max} &lt; \dot{{\tau_j}_d} &lt; \dot{\tau_j}_{max}\)</span></p></li>
+</ul>
+</section>
+<section id="torque-recommended">
+<span id="id4"></span><h5>Recommended Conditions<a class="headerlink" href="#torque-recommended" title="Permalink to this heading"></a></h5>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(-{\tau_j}_{max} &lt; {\tau_j}_d &lt; {\tau_j}_{max}\)</span></p></li>
+</ul>
+<p id="torque-initial">Initial controller requirements:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\({\tau_j}_d = 0\)</span></p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="cartesian-space-control-requirements">
+<span id="cartesian-space-control"></span><h3>Cartesian Space Control Requirements<a class="headerlink" href="#cartesian-space-control-requirements" title="Permalink to this heading"></a></h3>
+<section id="cartesian-space-necessary">
+<span id="id5"></span><h4>Necessary Conditions<a class="headerlink" href="#cartesian-space-necessary" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(T\)</span> is a proper transformation matrix.</p></li>
+<li><p><span class="math notranslate nohighlight">\(-\dot{p}_{max} &lt; \dot{p}_c &lt; \dot{p}_{max}\)</span> (Cartesian velocity)</p></li>
+<li><p><span class="math notranslate nohighlight">\(-\ddot{p}_{max} &lt; \ddot{p}_c &lt; \ddot{p}_{max}\)</span> (Cartesian acceleration)</p></li>
+<li><p><span class="math notranslate nohighlight">\(-\dddot{p}_{max} &lt; \dddot{p}_c &lt; \dddot{p}_{max}\)</span> (Cartesian jerk)</p></li>
+</ul>
+<p>Conditions derived from inverse kinematics:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(q_{min} &lt; q_c &lt; q_{max}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(-\dot{q}_{max} &lt; \dot{q}_c &lt; \dot{q}_{max}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(-\ddot{q}_{max} &lt; \ddot{q}_c &lt; \ddot{q}_{max}\)</span></p></li>
+</ul>
+</section>
+<section id="cartesian-space-recommended">
+<span id="id6"></span><h4>Recommended Conditions<a class="headerlink" href="#cartesian-space-recommended" title="Permalink to this heading"></a></h4>
+<p>Conditions derived from inverse kinematics:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(-{\tau_j}_{max} &lt; {\tau_j}_d &lt; {\tau_j}_{max}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(-\dot{\tau_j}_{max} &lt; \dot{{\tau_j}_d} &lt; \dot{\tau_j}_{max}\)</span></p></li>
+</ul>
+<p id="cartesian-space-initial">Initial trajectory requirements:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\({}^OT_{EE} = {{}^OT_{EE}}_c\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\dot{p}_c = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\ddot{p}_c = 0\)</span></p></li>
+</ul>
+<p id="cartesian-space-final">Final trajectory requirements:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\dot{p}_c = 0\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\ddot{p}_c = 0\)</span></p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="system-limits-for-supported-robot-models">
+<span id="robot-models"></span><h2>System Limits for Supported Robot Models<a class="headerlink" href="#system-limits-for-supported-robot-models" title="Permalink to this heading"></a></h2>
+<section id="limits-for-franka-research-3-fr3">
+<span id="limits-fr3"></span><h3>Limits for Franka Research 3 (FR3)<a class="headerlink" href="#limits-for-franka-research-3-fr3" title="Permalink to this heading"></a></h3>
+<p id="fr3-cartesian-limits">Cartesian-space limits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 29%" />
+<col style="width: 29%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Translation</p></th>
+<th class="head"><p>Rotation</p></th>
+<th class="head"><p>Elbow</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\dot{p}_{max}\)</span></p></td>
+<td><p>3.0 <span class="math notranslate nohighlight">\(\frac{\text{m}}{\text{s}}\)</span></p></td>
+<td><p>2.5 <span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}}\)</span></p></td>
+<td><p>2.620 <span class="math notranslate nohighlight">\(\frac{rad}{\text{s}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\ddot{p}_{max}\)</span></p></td>
+<td><p>9.0 <span class="math notranslate nohighlight">\(\frac{\text{m}}{\text{s}^2}\)</span></p></td>
+<td><p>17.0 <span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}^2}\)</span></p></td>
+<td><p>10.0 <span class="math notranslate nohighlight">\(\frac{rad}{\text{s}^2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\dddot{p}_{max}\)</span></p></td>
+<td><p>4500.0 <span class="math notranslate nohighlight">\(\frac{\text{m}}{\text{s}^3}\)</span></p></td>
+<td><p>8500.0 <span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}^3}\)</span></p></td>
+<td><p>5000.0 <span class="math notranslate nohighlight">\(\frac{rad}{\text{s}^3}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p id="fr3-joint-limits">Joint-space limits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Joint 1</p></th>
+<th class="head"><p>Joint 2</p></th>
+<th class="head"><p>Joint 3</p></th>
+<th class="head"><p>Joint 4</p></th>
+<th class="head"><p>Joint 5</p></th>
+<th class="head"><p>Joint 6</p></th>
+<th class="head"><p>Joint 7</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(q_{max}\)</span></p></td>
+<td><p>2.9007</p></td>
+<td><p>1.8361</p></td>
+<td><p>2.9007</p></td>
+<td><p>-0.1169</p></td>
+<td><p>2.8763</p></td>
+<td><p>4.6216</p></td>
+<td><p>3.0508</p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{rad}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(q_{min}\)</span></p></td>
+<td><p>-2.9007</p></td>
+<td><p>-1.8361</p></td>
+<td><p>-2.9007</p></td>
+<td><p>-3.0770</p></td>
+<td><p>-2.8763</p></td>
+<td><p>0.4398</p></td>
+<td><p>-3.0508</p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{rad}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\dot{q}_{max}\)</span></p></td>
+<td><p>2.62</p></td>
+<td><p>2.62</p></td>
+<td><p>2.62</p></td>
+<td><p>2.62</p></td>
+<td><p>5.26</p></td>
+<td><p>4.18</p></td>
+<td><p>5.26</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\ddot{q}_{max}\)</span></p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p>10</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}^2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\dddot{q}_{max}\)</span></p></td>
+<td><p>5000</p></td>
+<td><p>5000</p></td>
+<td><p>5000</p></td>
+<td><p>5000</p></td>
+<td><p>5000</p></td>
+<td><p>5000</p></td>
+<td><p>5000</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}^3}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\({\tau_j}_{max}\)</span></p></td>
+<td><p>87</p></td>
+<td><p>87</p></td>
+<td><p>87</p></td>
+<td><p>87</p></td>
+<td><p>12</p></td>
+<td><p>12</p></td>
+<td><p>12</p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{Nm}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\dot{\tau_j}_{max}\)</span></p></td>
+<td><p>1000</p></td>
+<td><p>1000</p></td>
+<td><p>1000</p></td>
+<td><p>1000</p></td>
+<td><p>1000</p></td>
+<td><p>1000</p></td>
+<td><p>1000</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\text{Nm}}{\text{s}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\dot{q}_{offset}\)</span></p></td>
+<td><p>0.6599</p></td>
+<td><p>0.2517</p></td>
+<td><p>0.2000</p></td>
+<td><p>0.3533</p></td>
+<td><p>0.5757</p></td>
+<td><p>0.4878</p></td>
+<td><p>0.4628</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\ddot{q}_{dec}\)</span></p></td>
+<td><p>6.0</p></td>
+<td><p>2.585</p></td>
+<td><p>3.5</p></td>
+<td><p>4.0</p></td>
+<td><p>17.0</p></td>
+<td><p>5.5</p></td>
+<td><p>17.0</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}^2}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p>The arm reaches its maximum extension when joint 4 is at
+<span class="math notranslate nohighlight">\(q_{elbow-flip} = -0.467002423653011\:rad\)</span>.</p>
+<section id="position-based-velocity-limits">
+<span id="fr3-position-based-velocity"></span><h4>Position-Based Velocity Limits<a class="headerlink" href="#position-based-velocity-limits" title="Permalink to this heading"></a></h4>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The maximum joint velocity depends on both the joint position and the direction
+of motion. The position-dependent velocity limits can be queried via:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">Robot</span><span class="o">::</span><span class="n">getUpperJointVelocityLimits</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">7UL</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">joint_positions</span>
+<span class="p">);</span>
+<span class="n">Robot</span><span class="o">::</span><span class="n">getLowerJointVelocityLimits</span><span class="p">(</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">7UL</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">joint_positions</span>
+<span class="p">);</span>
+</pre></div>
+</div>
+<p>Position-based limits are computed as:</p>
+<div class="math notranslate nohighlight">
+\[\dot{q_i}(q_i)_{max} =
+\min(
+    \dot{q}_{max,i},
+    \max(
+        0,
+        -\dot{q}_{offset,i} +
+        \sqrt{\max(0, 2 \cdot \ddot{q}_{dec,i} (q_{max,i} - q_i))}
+    )
+)\]</div>
+<div class="math notranslate nohighlight">
+\[\dot{q_i}(q_i)_{min} =
+\max(
+    \dot{q}_{min,i},
+    \min(
+        0,
+        \dot{q}_{offset,i} -
+        \sqrt{\max(0, 2 \cdot \ddot{q}_{dec,i} (-q_{min,i} + q_i))}
+    )
+)\]</div>
+<p>These limits ensure safety and may be more restrictive than the nominal
+hardware capabilities.</p>
+</div>
+<p>Users may choose their own joint ranges and velocity limits depending on the
+requirements of their motion generator.</p>
+<figure class="align-center" id="id8">
+<img alt="_images/pbv_limits_generic.svg" src="_images/pbv_limits_generic.svg" /><figcaption>
+<p><span class="caption-text">Position-based velocity limits.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Suggested rectangular position–velocity limits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+<col style="width: 11%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Joint 1</p></th>
+<th class="head"><p>Joint 2</p></th>
+<th class="head"><p>Joint 3</p></th>
+<th class="head"><p>Joint 4</p></th>
+<th class="head"><p>Joint 5</p></th>
+<th class="head"><p>Joint 6</p></th>
+<th class="head"><p>Joint 7</p></th>
+<th class="head"><p>Unit</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(q_{max}\)</span></p></td>
+<td><p>2.3476</p></td>
+<td><p>1.5454</p></td>
+<td><p>2.4937</p></td>
+<td><p>-0.4226</p></td>
+<td><p>2.5100</p></td>
+<td><p>4.2841</p></td>
+<td><p>2.7045</p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{rad}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(q_{min}\)</span></p></td>
+<td><p>-2.3476</p></td>
+<td><p>-1.5454</p></td>
+<td><p>-2.4937</p></td>
+<td><p>-2.7714</p></td>
+<td><p>-2.5100</p></td>
+<td><p>0.7773</p></td>
+<td><p>-2.7045</p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{rad}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\dot{q}_{max}\)</span></p></td>
+<td><p>2</p></td>
+<td><p>1</p></td>
+<td><p>1.5</p></td>
+<td><p>1.25</p></td>
+<td><p>3</p></td>
+<td><p>1.5</p></td>
+<td><p>3</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="limits-for-franka-emika-robot-fer">
+<span id="limits-fer"></span><h3>Limits for Franka Emika Robot (FER)<a class="headerlink" href="#limits-for-franka-emika-robot-fer" title="Permalink to this heading"></a></h3>
+<p id="fer-cartesian-limits">Cartesian-space limits:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15%" />
+<col style="width: 29%" />
+<col style="width: 29%" />
+<col style="width: 27%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Name</p></th>
+<th class="head"><p>Translation</p></th>
+<th class="head"><p>Rotation</p></th>
+<th class="head"><p>Elbow</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\dot{p}_{max}\)</span></p></td>
+<td><p>1.7 <span class="math notranslate nohighlight">\(\frac{\text{m}}{\text{s}}\)</span></p></td>
+<td><p>2.5 <span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}}\)</span></p></td>
+<td><p>2.1750 <span class="math notranslate nohighlight">\(\frac{rad}{\text{s}}\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\ddot{p}_{max}\)</span></p></td>
+<td><p>13.0 <span class="math notranslate nohighlight">\(\frac{\text{m}}{\text{s}^2}\)</span></p></td>
+<td><p>25.0 <span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}^2}\)</span></p></td>
+<td><p>10.0 <span class="math notranslate nohighlight">\(\frac{rad}{\text{s}^2}\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\dddot{p}_{max}\)</span></p></td>
+<td><p>6500.0 <span class="math notranslate nohighlight">\(\frac{\text{m}}{\text{s}^3}\)</span></p></td>
+<td><p>12500.0 <span class="math notranslate nohighlight">\(\frac{\text{rad}}{\text{s}^3}\)</span></p></td>
+<td><p>5000.0 <span class="math notranslate nohighlight">\(\frac{rad}{\text{s}^3}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<p id="fer-joint-limits">Joint-space limits:</p>
+<p>The arm reaches its maximum extension when joint 4 is at
+<span class="math notranslate nohighlight">\(q_{elbow-flip} = -0.467002423653011\:rad\)</span>. This parameter determines the elbow
+flip direction.</p>
+</section>
+</section>
+<section id="kinematic-configuration">
+<span id="id7"></span><h2>Kinematic Configuration<a class="headerlink" href="#kinematic-configuration" title="Permalink to this heading"></a></h2>
+<section id="denavithartenberg-parameters">
+<span id="dh-parameters"></span><h3>Denavit–Hartenberg Parameters<a class="headerlink" href="#denavithartenberg-parameters" title="Permalink to this heading"></a></h3>
+<p>The Denavit–Hartenberg parameters for the Franka Research 3 kinematic chain
+(following Craig’s convention) are shown below:</p>
+<figure class="align-center" id="id9">
+<img alt="_images/dh-diagram-frankarobotics.png" src="_images/dh-diagram-frankarobotics.png" />
+<figcaption>
+<p><span class="caption-text">Franka Research 3 kinematic chain.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<table class="docutils align-default" id="dh-table">
+<colgroup>
+<col style="width: 11%" />
+<col style="width: 19%" />
+<col style="width: 19%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Joint</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(a\;(\text{m})\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(d\;(\text{m})\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\alpha\;(\text{rad})\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(\theta\;(\text{rad})\)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Joint 1</p></td>
+<td><p>0</p></td>
+<td><p>0.333</p></td>
+<td><p>0</p></td>
+<td><p><span class="math notranslate nohighlight">\(\theta_1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Joint 2</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p><span class="math notranslate nohighlight">\(-\frac{\pi}{2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\theta_2\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Joint 3</p></td>
+<td><p>0</p></td>
+<td><p>0.316</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\theta_3\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Joint 4</p></td>
+<td><p>0.0825</p></td>
+<td><p>0</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\theta_4\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Joint 5</p></td>
+<td><p>-0.0825</p></td>
+<td><p>0.384</p></td>
+<td><p><span class="math notranslate nohighlight">\(-\frac{\pi}{2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\theta_5\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Joint 6</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\theta_6\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Joint 7</p></td>
+<td><p>0.088</p></td>
+<td><p>0</p></td>
+<td><p><span class="math notranslate nohighlight">\(\frac{\pi}{2}\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\theta_7\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>Flange</p></td>
+<td><p>0</p></td>
+<td><p>0.107</p></td>
+<td><p>0</p></td>
+<td><p>0</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><span class="math notranslate nohighlight">\({}^0T_{1}\)</span> describes the pose of frame 1 in frame 0.</p>
+<p>The full kinematic chain is computed as:</p>
+<p><span class="math notranslate nohighlight">\({}^0T_{2} = {}^0T_{1} \cdot {}^1T_{2} \cdot {}^2T_{n}\)</span></p>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="compatibility.html" class="btn btn-neutral float-left" title="Software Versions Compatibility" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fr3-certification-remarks.html" class="btn btn-neutral float-right" title="FR3 certification remarks" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

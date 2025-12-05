@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_hw &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="franka_msgs" href="../../franka_msgs/doc/index.html" />
+    <link rel="prev" title="franka_gripper" href="../../franka_gripper/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros/doc/index.html">franka_ros</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_control/doc/index.html">franka_control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_description/doc/index.html">franka_description</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo/doc/index.html">franka_gazebo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">franka_hw</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html#panda-moveit-config">panda_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_visualization/doc/index.html">franka_visualization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../docs/index.html#writing-your-own-controller">Writing  your own controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros</a> &raquo;</li>
+      <li>franka_hw</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_ros/franka_hw/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-hw">
+<span id="id1"></span><h1>franka_hw<a class="headerlink" href="#franka-hw" title="Permalink to this heading"></a></h1>
+<p>This package contains the hardware abstraction of the robot for the ROS control framework
+based on the <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> API. The hardware class <code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaHW</span></code> is implemented in this
+package offering the following interfaces to controllers:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Interface</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::JointStateInterface</span></code></p></td>
+<td><p>Reads joint states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::VelocityJointInterface</span></code></p></td>
+<td><p>Commands joint velocities and reads joint
+states.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::PositionJointInterface</span></code></p></td>
+<td><p>Commands joint positions and reads joint
+states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::EffortJointInterface</span></code></p></td>
+<td><p>Commands joint-level torques and reads
+joint states.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaStateInterface</span></code></p></td>
+<td><p>Reads the full robot state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaPoseCartesianInterface</span></code></p></td>
+<td><p>Commands Cartesian poses and reads the full
+robot state.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaVelocityCartesianInterface</span></code></p></td>
+<td><p>Commands Cartesian velocities and reads the
+full robot state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaModelInterface</span></code></p></td>
+<td><p>Reads the dynamic and kinematic model of the
+robot.</p></td>
+</tr>
+</tbody>
+</table>
+<p>To use ROS control interfaces, you have to retrieve resource handles by name:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 55%" />
+<col style="width: 45%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Interface</p></th>
+<th class="head"><p>Resource handle name</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::JointStateInterface</span></code></p></td>
+<td><p>“&lt;arm_id&gt;_joint1” to “&lt;arm_id&gt;_joint7”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::VelocityJointInterface</span></code></p></td>
+<td><p>“&lt;arm_id&gt;_joint1” to “&lt;arm_id&gt;_joint7”</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::PositionJointInterface</span></code></p></td>
+<td><p>“&lt;arm_id&gt;_joint1” to “&lt;arm_id&gt;_joint7”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::EffortJointInterface</span></code></p></td>
+<td><p>“&lt;arm_id&gt;_joint1” to “&lt;arm_id&gt;_joint7”</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaStateInterface</span></code></p></td>
+<td><p>“&lt;arm_id&gt;_robot”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaPoseCartesianInterface</span></code></p></td>
+<td><p>“&lt;arm_id&gt;_robot”</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaVelocityCartesianInterface</span></code></p></td>
+<td><p>“&lt;arm_id&gt;_robot”</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaModelInterface</span></code></p></td>
+<td><p>“&lt;arm_id&gt;_robot”</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>By default, &lt;arm_id&gt; is set to “panda”.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaHW</span></code> class also implements the starting, stopping and switching of
+controllers.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">FrankaHW</span></code> class also serves as base class for <code class="docutils literal notranslate"><span class="pre">FrankaCombinableHW</span></code>, a hardware class that
+can be combined with others to control multiple robots from a single controller. The combination of
+an arbitrary number of Panda robots (number configured by parameters) based on <code class="docutils literal notranslate"><span class="pre">FrankaCombinableHW</span></code>
+for the ROS control framework <a class="reference external" href="https://github.com/ros-controls/ros_control">https://github.com/ros-controls/ros_control</a> is implemented
+in <code class="docutils literal notranslate"><span class="pre">FrankaCombinedHW</span></code>. The key-difference between <code class="docutils literal notranslate"><span class="pre">FrankaHW</span></code> and <code class="docutils literal notranslate"><span class="pre">FrankaCombinedHW</span></code> is
+that the latter supports torque control only.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">FrankaCombinableHW</span></code> class is available from version 0.7.0 and allows torque/effort control only.</p>
+</div>
+<p>The ROS parameter server is used to determine at runtime which robots are loaded in the combined
+class. For an example on how to configure the <code class="docutils literal notranslate"><span class="pre">FrankaCombinedHW</span></code> in the according hardware node,
+see <a class="reference internal" href="../../franka_control/doc/index.html#franka-control"><span class="std std-ref">franka_control</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The approach of <code class="docutils literal notranslate"><span class="pre">FrankaHW</span></code> is optimal for controlling single robots. Thus we recommend using
+the <code class="docutils literal notranslate"><span class="pre">FrankaCombinableHW</span></code>/<code class="docutils literal notranslate"><span class="pre">FrankaCombinedHW</span></code> classes only for controlling multiple robots.</p>
+</div>
+<p>The interfaces offered by the <code class="docutils literal notranslate"><span class="pre">FrankaCombinableHW</span></code>/<code class="docutils literal notranslate"><span class="pre">FrankaCombinedHW</span></code> classes are the following:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 52%" />
+<col style="width: 48%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Interface</p></th>
+<th class="head"><p>Function</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::EffortJointInterface</span></code></p></td>
+<td><p>Commands joint-level torques and reads
+joint states.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">hardware_interface::JointStateInterface</span></code></p></td>
+<td><p>Reads joint states.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaStateInterface</span></code></p></td>
+<td><p>Reads the full robot state.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">franka_hw::FrankaModelInterface</span></code></p></td>
+<td><p>Reads the dynamic and kinematic model of the
+robot.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The only admissible command interface claim is the <code class="docutils literal notranslate"><span class="pre">EffortJointInterface</span></code> which can be combined
+with any set of read-only-interfaces (<code class="docutils literal notranslate"><span class="pre">FrankaModelInterface</span></code>, <code class="docutils literal notranslate"><span class="pre">JointStateInterface</span></code>,
+<code class="docutils literal notranslate"><span class="pre">FrankaStateInterface</span></code>). The resource handles offered by all interfaces are claimed by name and
+follow the same naming conventions as described for <cite>FrankaHW</cite>. Every instance of
+<code class="docutils literal notranslate"><span class="pre">FrankaCombinableHW</span></code> offers the complete set of service and action interfaces
+(see <a class="reference internal" href="../../franka_control/doc/index.html#franka-control"><span class="std std-ref">franka_control</span></a>).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">FrankaCombinedHW</span></code> class offers an additional action server in the control node namespace
+to recover all robots. If a reflex or error occurs on any of the robots, the control loop of all
+robots stops until they are recovered.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code class="docutils literal notranslate"><span class="pre">FrankaHW</span></code> makes use of the ROS <a class="reference external" href="http://wiki.ros.org/ros_control#Joint_limits_interface">joint_limits_interface</a>
+to <a class="reference external" href="http://wiki.ros.org/pr2_controller_manager/safety_limits">enforce position, velocity and effort safety limits</a>.
+The utilized interfaces are listed below:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>joint_limits_interface::PositionJointSoftLimitsInterface</p></li>
+<li><p>joint_limits_interface::VelocityJointSoftLimitsInterface</p></li>
+<li><p>joint_limits_interface::EffortJointSoftLimitsInterface</p></li>
+</ul>
+</div></blockquote>
+<p>Approaching the limits will result in the (unannounced) modification of the commands.</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../franka_gripper/doc/index.html" class="btn btn-neutral float-left" title="franka_gripper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../franka_msgs/doc/index.html" class="btn btn-neutral float-right" title="franka_msgs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

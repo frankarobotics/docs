@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROS 2 Integration for Franka Robotics Research Robots &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>ROS 2 Integration for Franka Robotics Research Robots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/franka_ros2/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ros-2-integration-for-franka-robotics-research-robots">
+<h1>ROS 2 Integration for Franka Robotics Research Robots<a class="headerlink" href="#ros-2-integration-for-franka-robotics-research-robots" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="https://github.com/frankarobotics/franka_ros2/actions/workflows/ci.yml"><img alt="CI" src="https://github.com/frankarobotics/franka_ros2/actions/workflows/ci.yml/badge.svg" /></a></p>
+<blockquote>
+<div><p><strong>Note:</strong> <em>franka_ros2</em> is not officially supported on Windows.</p>
+</div></blockquote>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><span class="xref myst">About</span></p></li>
+<li><p><span class="xref myst">Caution</span></p></li>
+<li><p><span class="xref myst">Setup</span></p>
+<ul>
+<li><p><span class="xref myst">Local Machine Installation</span></p></li>
+<li><p><span class="xref myst">Docker Container Installation</span></p></li>
+</ul>
+</li>
+<li><p><span class="xref myst">Test the Setup</span></p></li>
+<li><p><span class="xref myst">Troubleshooting</span></p>
+<ul>
+<li><p><span class="xref myst">libfranka: UDP receive: Timeout error</span></p></li>
+</ul>
+</li>
+<li><p><span class="xref myst">Contributing</span></p></li>
+<li><p><span class="xref myst">License</span></p></li>
+<li><p><span class="xref myst">Contact</span></p></li>
+</ul>
+</section>
+<section id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this heading"></a></h2>
+<p>The <strong>franka_ros2</strong> repository provides a <strong>ROS 2</strong> integration of <strong>libfranka</strong>, allowing efficient control of the Franka Robotics arm within the ROS 2 framework. This project is designed to facilitate robotic research and development by providing a robust interface for controlling the research versions of Franka Robotics robots.</p>
+<p>For convenience, we provide Dockerfile and docker-compose.yml files. While it is possible to build <strong>franka_ros2</strong> directly on your local machine, this approach requires manual installation of certain dependencies, while many others will be automatically installed by the <strong>ROS 2</strong> build system (e.g., via <strong>rosdep</strong>). This can result in a large number of libraries being installed on your system, potentially causing conflicts. Using Docker encapsulates these dependencies within the container, minimizing such risks. Docker also ensures a consistent and reproducible build environment across systems. For these reasons, we recommend using Docker.</p>
+</section>
+<section id="caution">
+<h2>Caution<a class="headerlink" href="#caution" title="Permalink to this heading"></a></h2>
+<p>This package is in rapid development. Users should expect breaking changes and are encouraged to report any bugs via <a class="reference external" href="https://github.com/frankarobotics/franka_ros2/issues">GitHub Issues page</a>.</p>
+</section>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading"></a></h2>
+</section>
+<section id="franka-ros-2-dependencies-setup">
+<h2>Franka ROS 2 Dependencies Setup<a class="headerlink" href="#franka-ros-2-dependencies-setup" title="Permalink to this heading"></a></h2>
+<p>This repository contains a <code class="docutils literal notranslate"><span class="pre">.repos</span></code> file that helps you clone the required dependencies for Franka ROS 2.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+</section>
+<section id="local-machine-installation">
+<h2>Local Machine Installation<a class="headerlink" href="#local-machine-installation" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p><strong>Install ROS 2 Development environment</strong></p>
+<p><em><strong>franka_ros2</strong></em> is built upon <em><strong>ROS 2 jazzy</strong></em>.</p>
+<p>To set up your ROS 2 environment, follow the official <em><strong>jazzy</strong></em> installation instructions provided <a class="reference external" href="https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debs.html"><strong>here</strong></a>.
+The guide discusses two main installation options: <strong>Desktop</strong> and <strong>Bare Bones</strong>.</p>
+</li>
+<li><p><strong>Create a ROS 2 Workspace:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/franka_ros2_ws/src
+<span class="nb">cd</span><span class="w"> </span>~/franka_ros2_ws<span class="w">  </span><span class="c1"># not into src</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Clone the Repositories:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/frankarobotics/franka_ros2.git<span class="w"> </span>src
+</pre></div>
+</div>
+</li>
+<li><p><strong>Install the dependencies</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>src/franka.repos<span class="w"> </span>--recursive<span class="w"> </span>--skip-existing
+</pre></div>
+</div>
+</li>
+<li><p><strong>Detect and install project dependencies</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rosdep<span class="w"> </span>install<span class="w"> </span>--from-paths<span class="w"> </span>src<span class="w"> </span>--ignore-src<span class="w"> </span>--rosdistro<span class="w"> </span>jazzy<span class="w"> </span>-y
+</pre></div>
+</div>
+</li>
+<li><p><strong>Build</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># use the --symlinks option to reduce disk usage, and facilitate development.</span>
+colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</pre></div>
+</div>
+</li>
+<li><p><strong>Adjust Enviroment</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Adjust environment to recognize packages and dependencies in your newly built ROS 2 workspace.</span>
+<span class="nb">source</span><span class="w"> </span>install/setup.sh
+</pre></div>
+</div>
+</li>
+</ol>
+<section id="choose-one-of-the-following">
+<h3>Choose <strong>one</strong> of the following:<a class="headerlink" href="#choose-one-of-the-following" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>ROS 2 “Desktop Install”</strong> (<code class="docutils literal notranslate"><span class="pre">ros-jazzy-desktop</span></code>)
+Includes a full ROS 2 installation with GUI tools and visualization packages (e.g., Rviz and Gazebo).
+<strong>Recommended</strong> for users who need simulation or visualization capabilities.</p></li>
+<li><p><strong>“ROS-Base Install (Bare Bones)”</strong> (<code class="docutils literal notranslate"><span class="pre">ros-jazzy-ros-base</span></code>)
+A minimal installation that includes only the core ROS 2 libraries.
+Suitable for resource-constrained environments or headless systems.</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># replace &lt;YOUR CHOICE&gt; with either ros-jazzy-desktop or ros-jazzy-ros-base</span>
+sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>&lt;YOUR<span class="w"> </span>CHOICE&gt;
+</pre></div>
+</div>
+<hr class="docutils" />
+<p>Also install the <strong>Development Tools</strong> package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>ros-dev-tools
+</pre></div>
+</div>
+<p>Installing the <strong>Desktop</strong> or <strong>Bare Bones</strong> should automatically source the <strong>ROS 2</strong> environment but, under some circumstances you may need to do this again:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/jazzy/setup.sh
+</pre></div>
+</div>
+</section>
+</section>
+<section id="docker-container-installation">
+<h2>Docker Container Installation<a class="headerlink" href="#docker-container-installation" title="Permalink to this heading"></a></h2>
+<p>The <strong>franka_ros2</strong> package includes a <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> and a <code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code>, which allows you to use <code class="docutils literal notranslate"><span class="pre">franka_ros2</span></code> packages without manually installing <strong>ROS 2</strong>. Also, the support for Dev Containers in Visual Studio Code is provided.</p>
+<p>For detailed instructions, on preparing VSCode to use the <code class="docutils literal notranslate"><span class="pre">.devcontainer</span></code> follow the setup guide from <a class="reference external" href="https://code.visualstudio.com/docs/devcontainers/tutorial">VSCode devcontainer_setup</a>.</p>
+<ol class="arabic">
+<li><p><strong>Clone the Repositories:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/frankarobotics/franka_ros2.git
+<span class="nb">cd</span><span class="w"> </span>franka_ros2
+</pre></div>
+</div>
+<p>We provide separate instructions for using Docker with Visual Studio Code or the command line. Choose one of the following options:</p>
+<p>Option A: Set up and use Docker from the command line (without Visual Studio Code).</p>
+<p>Option B: Set up and use Docker with Visual Studio Code’s Docker support.</p>
+</li>
+</ol>
+<section id="option-a-using-docker-compose">
+<h3>Option A: using Docker Compose<a class="headerlink" href="#option-a-using-docker-compose" title="Permalink to this heading"></a></h3>
+<ol class="arabic" start="2">
+<li><p><strong>Save the current user id into a file:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span><span class="w"> </span>-e<span class="w"> </span><span class="s2">&quot;USER_UID=</span><span class="k">$(</span>id<span class="w"> </span>-u<span class="w"> </span><span class="nv">$USER</span><span class="k">)</span><span class="s2">\nUSER_GID=</span><span class="k">$(</span>id<span class="w"> </span>-g<span class="w"> </span><span class="nv">$USER</span><span class="k">)</span><span class="s2">&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>.env
+</pre></div>
+</div>
+<p>It is needed to mount the folder from inside the Docker container.</p>
+</li>
+<li><p><strong>Build the container:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>build
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run the container:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d
+</pre></div>
+</div>
+</li>
+<li><p><strong>Open a shell inside the container:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>franka_ros2<span class="w"> </span>/bin/bash
+</pre></div>
+</div>
+</li>
+<li><p><strong>Clone the latests dependencies:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>src/franka.repos<span class="w"> </span>--recursive<span class="w"> </span>--skip-existing
+</pre></div>
+</div>
+</li>
+<li><p><strong>Build the workspace:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</pre></div>
+</div>
+</li>
+<li><p><strong>Source the built workspace:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</li>
+<li><p><strong>When you are done, you can exit the shell and delete the container</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>compose<span class="w"> </span>down<span class="w"> </span>-t<span class="w"> </span><span class="m">0</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="option-b-using-dev-containers-in-visual-studio-code">
+<h3>Option B: using Dev Containers in Visual Studio Code<a class="headerlink" href="#option-b-using-dev-containers-in-visual-studio-code" title="Permalink to this heading"></a></h3>
+<ol class="arabic" start="2">
+<li><p><strong>Open Visual Studio Code …</strong></p>
+<p>Then, open folder  <code class="docutils literal notranslate"><span class="pre">franka_ros2</span></code></p>
+</li>
+<li><p><strong>Choose <code class="docutils literal notranslate"><span class="pre">Reopen</span> <span class="pre">in</span> <span class="pre">container</span></code> when prompted.</strong></p>
+<p>The container will be built automatically, as required.</p>
+</li>
+<li><p><strong>Clone the latests dependencies:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>vcs<span class="w"> </span>import<span class="w"> </span>src<span class="w"> </span>&lt;<span class="w"> </span>src/franka.repos<span class="w"> </span>--recursive<span class="w"> </span>--skip-existing
+</pre></div>
+</div>
+</li>
+<li><p><strong>Open a terminal and build the workspace:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>build<span class="w"> </span>--symlink-install<span class="w"> </span>--cmake-args<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release
+</pre></div>
+</div>
+</li>
+<li><p><strong>Source the built workspace environment:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>install/setup.bash
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
+</section>
+<section id="test-the-build">
+<h1>Test the build<a class="headerlink" href="#test-the-build" title="Permalink to this heading"></a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span>
+</pre></div>
+</div>
+<blockquote>
+<div><p>Remember, franka_ros2 is under development.
+Warnings can be expected.</p>
+</div></blockquote>
+<section id="test-the-setup">
+<h2>Test the Setup<a class="headerlink" href="#test-the-setup" title="Permalink to this heading"></a></h2>
+<section id="run-a-sample-ros-2-application">
+<h3>Run a sample ROS 2 application<a class="headerlink" href="#run-a-sample-ros-2-application" title="Permalink to this heading"></a></h3>
+<p>To verify that your setup works correctly without a robot, you can run the following command to use dummy hardware:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_fr3_moveit_config<span class="w"> </span>moveit.launch.py<span class="w"> </span>robot_ip:<span class="o">=</span>dont-care<span class="w"> </span>use_fake_hardware:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>You can use the arguments <code class="docutils literal notranslate"><span class="pre">load_gripper</span></code> to activate or deactivate the end-effector and <code class="docutils literal notranslate"><span class="pre">ee_id</span></code> to set which end-effector you want to use. By default, the Franka Hand is activated.</p>
+<p>If you want to run this example with namespaces, you would need to use the argument <code class="docutils literal notranslate"><span class="pre">namespace</span></code> and manually write your namespace in <code class="docutils literal notranslate"><span class="pre">moveit.rviz</span></code> under <code class="docutils literal notranslate"><span class="pre">Move</span> <span class="pre">Group</span> <span class="pre">Namespace</span></code>.</p>
+</section>
+<section id="run-a-ros-2-example-controller">
+<h3>Run a ROS 2 example controller<a class="headerlink" href="#run-a-ros-2-example-controller" title="Permalink to this heading"></a></h3>
+<p>To run any example controller, make sure to add your desired configuration in <code class="docutils literal notranslate"><span class="pre">franka.config.yaml</span></code> and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>your_desired_controller
+</pre></div>
+</div>
+<p>You can select one of the controllers from <code class="docutils literal notranslate"><span class="pre">controllers.yaml</span></code>.</p>
+</section>
+<section id="run-gazebo-examples-with-ros-2">
+<h3>Run Gazebo examples with ROS 2<a class="headerlink" href="#run-gazebo-examples-with-ros-2" title="Permalink to this heading"></a></h3>
+<p>If you want to use Gazebo to run your code, you can find some examples here: <a class="reference internal" href="franka_gazebo/README.html"><span class="doc std std-doc">franka_gazebo</span></a></p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<section id="libfranka-udp-receive-timeout-error">
+<h3><code class="docutils literal notranslate"><span class="pre">libfranka:</span> <span class="pre">UDP</span> <span class="pre">receive:</span> <span class="pre">Timeout</span> <span class="pre">error</span></code><a class="headerlink" href="#libfranka-udp-receive-timeout-error" title="Permalink to this heading"></a></h3>
+<p>If you encounter a UDP receive timeout error while communicating with the robot, avoid using Docker Desktop. It may not provide the necessary real-time capabilities required for reliable communication with the robot. Instead, using Docker Engine is sufficient for this purpose.</p>
+<p>A real-time kernel is essential to ensure proper communication and to prevent timeout issues. For guidance on setting up a real-time kernel, please refer to the <a class="reference external" href="https://frankarobotics.github.io/docs/installation_linux.html#setting-up-the-real-time-kernel">Franka installation documentation</a>.</p>
+</section>
+</section>
+<section id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this heading"></a></h2>
+<p>Contributions are welcome! Please see <a class="reference external" href="https://github.com/frankarobotics/franka_ros2/blob/jazzy/CONTRIBUTING.md">CONTRIBUTING.md</a> for more details on how to contribute to this project.</p>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<p>All packages of franka_ros2 are licensed under the Apache 2.0 license.</p>
+</section>
+<section id="contact">
+<h2>Contact<a class="headerlink" href="#contact" title="Permalink to this heading"></a></h2>
+<p>For questions or support, please open an issue on the <a class="reference external" href="https://github.com/frankarobotics/franka_ros2/issues">GitHub Issues</a> page.</p>
+<p>See the <a class="reference external" href="https://frankarobotics.github.io/docs">Franka Control Interface (FCI) documentation</a> for more information.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

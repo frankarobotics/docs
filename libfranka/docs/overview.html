@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Library Architecture" href="libfranka_architecture.html" />
+    <link rel="prev" title="libfranka client library" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">libfranka client library</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">Getting Started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#connection-and-basic-usage">Connection and Basic Usage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#non-realtime-commands">Non-realtime Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hand-commands">Hand Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arm-commands">Arm Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#example-usage">Example Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#realtime-commands">Realtime Commands</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control-modes">Control Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#implementing-control-loops">Implementing Control Loops</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#motion-finished-flag">Motion Finished Flag</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#selecting-internal-controllers">Selecting Internal Controllers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#external-controller-example">External Controller Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-examples">Running Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#signal-processing">Signal Processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#controlling-signal-processing">Controlling Signal Processing</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#under-the-hood">Under the Hood</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#motion-generators">Motion Generators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#external-controller">External Controller</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#robot-state">Robot State</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#reading-a-single-sample">Reading a Single Sample</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#continuous-reading">Continuous Reading</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#robot-models">Robot Models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#errors">Errors</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#errors-due-to-noncompliant-commanded-values">Errors Due to Noncompliant Commanded Values</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#errors-due-to-communication-problems">Errors Due to Communication Problems</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#behavioral-errors">Behavioral Errors</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="libfranka_architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility_with_images.html">Robot System Version Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Build / Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="real_time_kernel.html">Setting up the Real-Time Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Setting Up the Robot System and Network for FCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage_examples.html">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_references.html">API References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration_notes.html">Migration Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#changelog">ChangeLog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">libfranka client library</a> &raquo;</li>
+      <li>Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libfranka/docs/overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
+<figure class="align-center" id="id1">
+<img alt="../../_images/libfranka-architecture.png" src="../../_images/libfranka-architecture.png" />
+<figcaption>
+<p><span class="caption-text">Schematic overview of libfranka architecture</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p><code class="docutils literal notranslate"><span class="pre">libfranka</span></code> is the C++ implementation of the client side of the Franka Control Interface (FCI). It handles the network communication with Control and provides interfaces to easily:</p>
+<ul class="simple">
+<li><p>execute <strong>non-realtime commands</strong> to control the Hand and configure Arm parameters</p></li>
+<li><p>execute <strong>realtime commands</strong> to run your own 1 kHz control loops</p></li>
+<li><p>read the <strong>robot state</strong> to get sensor data at 1 kHz</p></li>
+<li><p>access the <strong>robot models</strong> to compute your desired kinematic and dynamic parameters</p></li>
+</ul>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Low-level control</strong>: Access precise motion control for research robots</p></li>
+<li><p><strong>Real-time communication</strong>: Interact with the robot in real-time at 1 kHz</p></li>
+<li><p><strong>Dual interface</strong>: Control both the robot arm and gripper</p></li>
+<li><p><strong>Flexible architecture</strong>: Combine motion generators and controllers as needed</p></li>
+</ul>
+</section>
+</section>
+<section id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h1>
+<section id="connection-and-basic-usage">
+<h2>Connection and Basic Usage<a class="headerlink" href="#connection-and-basic-usage" title="Permalink to this heading"></a></h2>
+<p>All operations (non-realtime or realtime) on the Arm or the Hand are performed through the <code class="docutils literal notranslate"><span class="pre">franka::Robot</span></code> and <code class="docutils literal notranslate"><span class="pre">franka::Gripper</span></code> objects respectively. A connection to the Arm/Hand will be established when the object is created:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;franka/robot.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;franka/gripper.h&gt;</span>
+
+<span class="p">...</span>
+
+<span class="n">franka</span><span class="o">::</span><span class="n">Gripper</span><span class="w"> </span><span class="n">gripper</span><span class="p">(</span><span class="s">&quot;&lt;fci-ip&gt;&quot;</span><span class="p">);</span>
+<span class="n">franka</span><span class="o">::</span><span class="n">Robot</span><span class="w"> </span><span class="n">robot</span><span class="p">(</span><span class="s">&quot;&lt;fci-ip&gt;&quot;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The address can be passed either as a hostname or an IP address. In case of any error, either due to networking or conflicting library version, an exception of type <code class="docutils literal notranslate"><span class="pre">franka::Exception</span></code> will be thrown. When using several robots at the same time, simply create several objects with appropriate IP addresses.</p>
+</section>
+<section id="non-realtime-commands">
+<h2>Non-realtime Commands<a class="headerlink" href="#non-realtime-commands" title="Permalink to this heading"></a></h2>
+<p>Non-realtime commands are blocking, TCP/IP-based and always executed <strong>outside</strong> of any realtime control loop. They encompass all of the Hand commands and some configuration-related commands for the Arm.</p>
+<figure class="align-center" id="id2">
+<img alt="../../_images/fci-architecture-non-realtime.png" src="../../_images/fci-architecture-non-realtime.png" />
+<figcaption>
+<p><span class="caption-text">Non-realtime commands for both Arm and Hand</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="hand-commands">
+<h3>Hand Commands<a class="headerlink" href="#hand-commands" title="Permalink to this heading"></a></h3>
+<p>The most relevant commands for the Hand are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">homing</span></code> - calibrates the maximum grasping width of the Hand</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">move</span></code>, <code class="docutils literal notranslate"><span class="pre">grasp</span></code>, and <code class="docutils literal notranslate"><span class="pre">stop</span></code> - to move or grasp with the Hand</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">readOnce</span></code> - reads the Hand state</p></li>
+</ul>
+</section>
+<section id="arm-commands">
+<h3>Arm Commands<a class="headerlink" href="#arm-commands" title="Permalink to this heading"></a></h3>
+<p>Some useful non-realtime commands for the Arm are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setCollisionBehavior</span></code> - sets the contact and collision detection thresholds</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setCartesianImpedance</span></code> and <code class="docutils literal notranslate"><span class="pre">setJointImpedance</span></code> - set the impedance parameters for the internal Cartesian impedance and internal joint impedance controllers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setEE</span></code> - sets the transformation <em>NE_T_EE</em> from nominal end effector to end effector frame. The transformation from flange to end effector frame <em>F_T_EE</em> is split into two transformations: <em>F_T_NE</em> and <em>NE_T_EE</em>. The transformation from flange to nominal end effector frame <em>F_T_NE</em> can only be set through the administrator’s interface</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setK</span></code> - sets the transformation <em>EE_T_K</em> from end effector frame to stiffness frame</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">setLoad</span></code> - sets the dynamic parameters of a payload</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">automaticErrorRecovery</span></code> - clears any command or control exception that previously happened in the robot</p></li>
+</ul>
+<p>For a complete and fully specified list check the API documentation for the <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/classfranka_1_1Robot.html">Robot</a> or the <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/classfranka_1_1Gripper.html">Gripper</a>.</p>
+</section>
+<section id="example-usage">
+<h3>Example Usage<a class="headerlink" href="#example-usage" title="Permalink to this heading"></a></h3>
+<p>To run a specific command, simply call the corresponding method:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">gripper</span><span class="p">.</span><span class="n">homing</span><span class="p">();</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">automaticErrorRecovery</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="realtime-commands">
+<h2>Realtime Commands<a class="headerlink" href="#realtime-commands" title="Permalink to this heading"></a></h2>
+<p>Realtime commands are UDP based and require a 1 kHz connection to Control. There are two types of realtime interfaces:</p>
+<ul class="simple">
+<li><p><strong>Motion generators</strong> - define a robot motion in joint or Cartesian space</p></li>
+<li><p><strong>Controllers</strong> - define the torques to be sent to the robot joints</p></li>
+</ul>
+<figure class="align-center" id="id3">
+<img alt="../../_images/rt-interfaces.png" src="../../_images/rt-interfaces.png" />
+<figcaption>
+<p><span class="caption-text">Realtime interfaces: motion generators and controllers</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>There are 4 different types of external motion generators and 3 different types of controllers (one external and 2 internal). You can either use a single interface or combine two different types.</p>
+<section id="control-modes">
+<h3>Control Modes<a class="headerlink" href="#control-modes" title="Permalink to this heading"></a></h3>
+<p>You can command:</p>
+<ul class="simple">
+<li><p><strong>only a motion generator</strong> - and therefore use one of the two internal controllers to follow the commanded motion</p></li>
+<li><p><strong>only an external controller</strong> - and ignore any motion generator signals (i.e., torque control only)</p></li>
+<li><p><strong>a motion generator and an external controller</strong> - to use the inverse kinematics of Control in your external controller</p></li>
+</ul>
+</section>
+<section id="implementing-control-loops">
+<h3>Implementing Control Loops<a class="headerlink" href="#implementing-control-loops" title="Permalink to this heading"></a></h3>
+<p>All realtime loops (motion generator or controller) are defined by a callback function that receives the robot state and the duration of the last cycle (1 ms unless packet losses occur) and returns the specific type of the interface. The <code class="docutils literal notranslate"><span class="pre">control</span></code> method of the <code class="docutils literal notranslate"><span class="pre">franka::Robot</span></code> class will then run the control loop by executing the callback function at a 1 kHz frequency:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">franka</span><span class="o">::</span><span class="n">Torques</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">RobotState</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">Duration</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="w">   </span><span class="n">my_external_controller_callback</span><span class="p">;</span>
+<span class="c1">// Define my_external_controller_callback</span>
+<span class="p">...</span>
+
+<span class="n">std</span><span class="o">::</span><span class="n">function</span><span class="o">&lt;</span><span class="n">franka</span><span class="o">::</span><span class="n">JointVelocities</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">RobotState</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">Duration</span><span class="p">)</span><span class="o">&gt;</span>
+<span class="w">    </span><span class="n">my_external_motion_generator_callback</span><span class="p">;</span>
+<span class="c1">// Define my_external_motion_generator_callback</span>
+<span class="p">...</span>
+
+<span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">franka</span><span class="o">::</span><span class="n">Robot</span><span class="w"> </span><span class="n">robot</span><span class="p">(</span><span class="s">&quot;&lt;fci-ip&gt;&quot;</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// only a motion generator</span>
+<span class="w">  </span><span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_motion_generator_callback</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// only an external controller</span>
+<span class="w">  </span><span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_controller_callback</span><span class="p">);</span>
+<span class="w">  </span><span class="c1">// a motion generator and an external controller</span>
+<span class="w">  </span><span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_motion_generator_callback</span><span class="p">,</span><span class="w"> </span><span class="n">my_external_controller_callback</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="n">franka</span><span class="o">::</span><span class="n">Exception</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="motion-finished-flag">
+<h3>Motion Finished Flag<a class="headerlink" href="#motion-finished-flag" title="Permalink to this heading"></a></h3>
+<p>All control loops are finished once the <code class="docutils literal notranslate"><span class="pre">motion_finished</span></code> flag of a realtime command is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>. An excerpt of the <code class="docutils literal notranslate"><span class="pre">generate_joint_velocity_motion</span></code> example included in the <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/examples.html">libfranka examples</a> is shown here:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span>
+<span class="w">     </span><span class="p">[</span><span class="o">=</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">time</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">RobotState</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">JointVelocities</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="n">time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">period</span><span class="p">.</span><span class="n">toSec</span><span class="p">();</span>
+
+<span class="w">       </span><span class="kt">double</span><span class="w"> </span><span class="n">cycle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">floor</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">pow</span><span class="p">(</span><span class="mf">-1.0</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">fmod</span><span class="p">(</span><span class="n">time</span><span class="p">,</span><span class="w"> </span><span class="n">time_max</span><span class="p">))</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">time_max</span><span class="p">));</span>
+<span class="w">       </span><span class="kt">double</span><span class="w"> </span><span class="n">omega</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cycle</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">omega_max</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">2.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="p">(</span><span class="mf">1.0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">cos</span><span class="p">(</span><span class="mf">2.0</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">M_PI</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">time_max</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time</span><span class="p">));</span>
+
+<span class="w">       </span><span class="n">franka</span><span class="o">::</span><span class="n">JointVelocities</span><span class="w"> </span><span class="n">velocities</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{{</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">,</span><span class="w"> </span><span class="n">omega</span><span class="p">}};</span>
+
+<span class="w">       </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">time_max</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">         </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Finished motion, shutting down example&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">         </span><span class="k">return</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">MotionFinished</span><span class="p">(</span><span class="n">velocities</span><span class="p">);</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">       </span><span class="k">return</span><span class="w"> </span><span class="n">velocities</span><span class="p">;</span>
+<span class="w">     </span><span class="p">});</span>
+</pre></div>
+</div>
+<p>In this case, the callback function is defined directly in the call of the <code class="docutils literal notranslate"><span class="pre">robot.control(</span> <span class="pre">...</span> <span class="pre">)</span></code> function. It uses the joint velocity motion generator interface, as it returns a <code class="docutils literal notranslate"><span class="pre">franka::JointVelocities</span></code> object. It commands joint velocities to the last four joints and moves them by approx. +/-12 degrees. After <code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">*</span> <span class="pre">time_max</span></code> seconds it will return a <code class="docutils literal notranslate"><span class="pre">motion_finished</span></code> flag by setting it to true with the <code class="docutils literal notranslate"><span class="pre">franka::MotionFinished</span></code> method and the control loop will stop.</p>
+</section>
+<section id="selecting-internal-controllers">
+<h3>Selecting Internal Controllers<a class="headerlink" href="#selecting-internal-controllers" title="Permalink to this heading"></a></h3>
+<p>Note that if you use only a motion generator, the default controller is the internal joint impedance controller. You can however use the internal Cartesian impedance controller by setting the optional argument of the control function:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set joint impedance (optional)</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">setJointImpedance</span><span class="p">({{</span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"> </span><span class="mi">3000</span><span class="p">}});</span>
+<span class="c1">// Runs my_external_motion_generator_callback with the default joint impedance controller</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_motion_generator_callback</span><span class="p">);</span>
+<span class="c1">// Identical to the previous line (default franka::ControllerMode::kJointImpedance)</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_motion_generator_callback</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">ControllerMode</span><span class="o">::</span><span class="n">kJointImpedance</span><span class="p">);</span>
+
+<span class="c1">// Set Cartesian impedance (optional)</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">setCartesianImpedance</span><span class="p">({{</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">}});</span>
+<span class="c1">// Runs my_external_motion_generator_callback with the Cartesian impedance controller</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_motion_generator_callback</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">ControllerMode</span><span class="o">::</span><span class="n">kCartesianImpedance</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="external-controller-example">
+<h3>External Controller Example<a class="headerlink" href="#external-controller-example" title="Permalink to this heading"></a></h3>
+<p>For writing a controller, the <code class="docutils literal notranslate"><span class="pre">franka::Robot::control</span></code> function is used as well. The following example shows a simple controller commanding zero torque for each joint. Gravity is compensated by the robot:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">RobotState</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">Duration</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">Torques</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">{{</span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">}};</span>
+<span class="w">    </span><span class="p">});</span>
+</pre></div>
+</div>
+</section>
+<section id="running-examples">
+<h3>Running Examples<a class="headerlink" href="#running-examples" title="Permalink to this heading"></a></h3>
+<p>You can find examples for all interfaces and combinations of control loops in the <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/examples.html">examples</a>. Prior to running the examples, verify that the robot has enough free space to move without colliding. Then, for instance for the <code class="docutils literal notranslate"><span class="pre">generate_joint_velocity_motion</span></code> example execute the following command from the <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> build directory:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./examples/generate_joint_velocity_motion<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For writing your own motion generators or controllers it is crucial to deliver a smooth signal to the robot. Nonsmooth signals can easily generate discontinuity errors or even make the robot unstable. Check the <span class="xref std std-ref">interface specifications</span> before starting.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>For writing your own motion generators or controllers it is crucial to deliver a smooth signal to the robot. Nonsmooth signals can easily generate discontinuity errors or even make the robot unstable. Check the <span class="xref std std-ref">interface specifications</span> before starting.</p>
+</div>
+</section>
+</section>
+<section id="signal-processing">
+<h2>Signal Processing<a class="headerlink" href="#signal-processing" title="Permalink to this heading"></a></h2>
+<p>To facilitate the control of the robot under non-ideal network connections, libfranka includes signal processing functions that will modify the user-commanded values to make them conform with the <span class="xref std std-ref">limits of the interface</span>. There are two <em>optional</em> functions included in all realtime control loops:</p>
+<ul class="simple">
+<li><p>A first-order <strong>low-pass filter</strong> to smooth the user-commanded signal</p></li>
+<li><p>A <strong>rate limiter</strong>, that saturates the time derivatives of the user-commanded values</p></li>
+</ul>
+<p>As of version <code class="docutils literal notranslate"><span class="pre">0.5.0</span></code>, libfranka includes a <strong>low-pass filter</strong> for all realtime interfaces <strong>running by default</strong> with a 100 Hz cutoff frequency. The filter smooths commanded signals to provide more stable robot motions but does not prevent the violation of the <span class="xref std std-ref">limits of the interface</span>.</p>
+<p>As of version <code class="docutils literal notranslate"><span class="pre">0.4.0</span></code>, <strong>rate limiters</strong> for all realtime interfaces are <strong>running by default</strong>. Rate limiters, also called safe controllers, will limit the rate of change of the signals sent by the user to prevent the violation of the <span class="xref std std-ref">limits of the interface</span>. For motion generators, it will limit the acceleration and jerk, while, for an external controller, it will limit the torque rate. Their main purpose is to increase the robustness of your control loop. In case of packet losses, even when the signals that you send conform with the interface limits, Control might detect a violation of velocity, acceleration or jerk limits. Rate limiting will adapt your commands to make sure that this does not happen. Check the <span class="xref std std-ref">noncompliant errors section</span> for more details.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Rate limiting will ensure no limits are violated except for the joint limits after inverse kinematics, whose violation produces the family of errors starting with <code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_joint_*</span></code>. Check the <span class="xref std std-ref">noncompliant errors section</span> for more details.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The limits used in the rate limiter are defined in <code class="docutils literal notranslate"><span class="pre">franka/rate_limiting.h</span></code> and are set to the interface limits. If this produces a jerky or unstable behavior you can set the limits to lower values, activate the low-pass filter or reduce its cutoff frequency.</p>
+</div>
+<section id="controlling-signal-processing">
+<h3>Controlling Signal Processing<a class="headerlink" href="#controlling-signal-processing" title="Permalink to this heading"></a></h3>
+<p>To control the signal processing functions, all <code class="docutils literal notranslate"><span class="pre">robot.control()</span></code> function calls have two additional optional parameters. The first one is a flag to activate or deactivate the rate limiter while the second one specifies the cutoff frequency of the first-order low-pass filter. If the cutoff frequency <code class="docutils literal notranslate"><span class="pre">&gt;=1000.0</span></code> the filter will be deactivated. For instance:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set Cartesian impedance (optional)</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">setCartesianImpedance</span><span class="p">({{</span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">2000</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">}});</span>
+<span class="c1">// Runs my_external_motion_generator_callback with the Cartesian impedance controller,</span>
+<span class="c1">// rate limiters on and low-pass filter with 100 Hz cutoff</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_motion_generator_callback</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">ControllerMode</span><span class="o">::</span><span class="n">kCartesianImpedance</span><span class="p">);</span>
+<span class="c1">// Identical to the previous line (default true, 100.0 Hz cutoff)</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_motion_generator_callback</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">ControllerMode</span><span class="o">::</span><span class="n">kCartesianImpedance</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mf">100.0</span><span class="p">);</span>
+<span class="c1">// Runs my_external_motion_generator_callback with the Cartesian impedance controller,</span>
+<span class="c1">// rate limiters off and low-pass filter off</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_motion_generator_callback</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">ControllerMode</span><span class="o">::</span><span class="n">kCartesianImpedance</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Or similarly for an external controller:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="c1">// With rate limiting and filter</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_controller</span><span class="p">);</span>
+<span class="c1">// Identical to the previous line (default true, 100.0 Hz cutoff)</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_controller</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="mf">100.0</span><span class="p">);</span>
+<span class="c1">// Without rate limiting but with low-pass filter (100.0 Hz)</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_controller</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">);</span>
+<span class="c1">// Without rate limiting and without low-pass filter</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span><span class="n">my_external_controller</span><span class="p">,</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="mf">1000.0</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Danger</p>
+<p>The low-pass filter and the rate limiter are robustness features against packet losses to be used <strong>after</strong> you have already designed a smooth motion generator or controller. For the first tests of a new control loop we strongly recommend to deactivate these features. Filtering and limiting the rate of a nonsmooth signal can yield instabilities or unexpected behavior. Too many packet losses can also generate unstable behavior. Check your communication quality by monitoring the <code class="docutils literal notranslate"><span class="pre">control_command_success_rate</span></code> signal of the robot state.</p>
+</div>
+</section>
+</section>
+<section id="under-the-hood">
+<h2>Under the Hood<a class="headerlink" href="#under-the-hood" title="Permalink to this heading"></a></h2>
+<p>Until now we have covered details of the interface running on the client side, i.e your own workstation PC. The behavior of the full control loop including the Control side of the realtime interface is shown in the following figure:</p>
+<figure class="align-center" id="id4">
+<img alt="../../_images/rt-loop.png" src="../../_images/rt-loop.png" />
+<figcaption>
+<p><span class="caption-text">Realtime loop: from control commands to the robot desired joint torques</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="motion-generators">
+<h3>Motion Generators<a class="headerlink" href="#motion-generators" title="Permalink to this heading"></a></h3>
+<p>All motion generator commands sent by the user have the subscript <cite>c</cite> which stands for ‘commanded’. When a motion generator is sent, the <cite>Robot Kinematics completion</cite> block will compute the forward/inverse kinematics of the user-commanded signal yielding the ‘desired’ signals, subscript <cite>d</cite>. If an internal controller is used, it will generate the necessary torques <span class="math notranslate nohighlight">\(\tau_{d}\)</span> to track the corresponding computed <cite>d</cite> signals (the internal joint impedance controller will follow the joint signals <span class="math notranslate nohighlight">\(q_{d}, \dot{q}_{d}\)</span> and the internal Cartesian impedance controller the Cartesian ones <span class="math notranslate nohighlight">\({}^OT_{EE,d}, {}^O\dot{P}_{EE,d}\)</span>) and send them to the robot joints. All variables on the Control side of the figure, i.e. the last received <cite>c</cite> values (after the low pass filter and the extrapolation due to packet losses, read below for an explanation), the computed <cite>d</cite> values and their time derivatives are sent back to the user in the robot state. This way you can take advantage of the inverse kinematics in your own external controller and, at the same time, it will offer you <cite>full transparency</cite>: you will always know the exact values and derivatives that the robot received and tracked in the last sample.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>When you are using a <em>joint</em> motion generator, the <cite>Robot kinematics completion</cite> block will not modify the commanded <em>joint</em> values and therefore <span class="math notranslate nohighlight">\(q_d, \dot{q}_d, \ddot{q}_d\)</span> and <span class="math notranslate nohighlight">\(q_c, \dot{q}_c, \ddot{q}_c\)</span> are equivalent. Note that you will only find the <cite>d</cite> signals in the robot state. If you use a <em>Cartesian</em> motion generator, the <cite>Robot kinematics completion</cite> block might modify the user-commanded values to avoid singularities and therefore the desired signals <span class="math notranslate nohighlight">\({}^OT_{EE,d}, {}^O\dot{P}_{EE,d}\)</span> and the commanded signals <span class="math notranslate nohighlight">\({}^OT_{EE,c}, {}^O\dot{P}_{EE,c}, {}^O\ddot{P}_{EE,c}\)</span> might differ. You will find both the <cite>d</cite> and the <cite>c</cite> signals in the robot state.</p>
+</div>
+</section>
+<section id="external-controller">
+<h3>External Controller<a class="headerlink" href="#external-controller" title="Permalink to this heading"></a></h3>
+<p>If an external controller is sent, the desired joint torques commanded by the user <span class="math notranslate nohighlight">\(\tau_{d}\)</span> are directly fed to the robot joints with the additional compensation of gravity and motor friction, resulting in the following equation:</p>
+<p><span class="math notranslate nohighlight">\(\tau_{c} = \tau_{d} + \tau_{f} + \tau_{g}\)</span></p>
+<p>Where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\tau_{d}\)</span> is the desired torque given as input by the libfranka user</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau_{c}\)</span> is the torque effectively commanded to the joint</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau_{f}\)</span> is the torque to compensate the motor friction</p></li>
+<li><p><span class="math notranslate nohighlight">\(\tau_{g}\)</span> is the torque required for compensating the gravity of the whole kinematic chain</p></li>
+</ul>
+<p>Note that, on the Control side, there are two things that could modify your signals:</p>
+<ul>
+<li><p><strong>Packet losses</strong>, which may occur if you:</p>
+<ul class="simple">
+<li><p>don’t have a very good connection due to the performance of your PC + network card</p></li>
+<li><p>your control loop is taking too long to compute (you have, depending on you network card and PC configuration, approx. &lt; 300 <span class="math notranslate nohighlight">\(\mu s\)</span> for your own control loop)</p></li>
+</ul>
+<p>In this case, Control assumes a constant acceleration model or a constant torque to extrapolate your signals. If <code class="docutils literal notranslate"><span class="pre">&gt;=20</span></code> packets are lost in a row the control loop is stopped with the <code class="docutils literal notranslate"><span class="pre">communication_constraints_violation</span></code> exception.</p>
+</li>
+</ul>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you are not sure if your signals are being filtered or extrapolated, you can always check the last commanded values that you sent and compare them with the values you receive on the robot state in the next sample. You will also find these values after an exception occurs in the <code class="docutils literal notranslate"><span class="pre">franka::ControlException::log</span></code> member of the exception.</p>
+</div>
+</section>
+</section>
+<section id="robot-state">
+<h2>Robot State<a class="headerlink" href="#robot-state" title="Permalink to this heading"></a></h2>
+<p>The robot state delivers the robot sensor readings and estimated values at a 1 kHz rate. It provides:</p>
+<ul class="simple">
+<li><p><em>Joint level signals</em>: motor and estimated joint angles and their derivatives, joint torque and derivatives, estimated external torque, joint collision/contacts</p></li>
+<li><p><em>Cartesian level signals</em>: Cartesian pose, configured endeffector and load parameters, external wrench acting on the endeffector, Cartesian collision</p></li>
+<li><p><em>Interface signals</em>: the last commanded and desired values and their derivatives, as explained in the previous subsection</p></li>
+</ul>
+<p>For a complete list check the API of the <code class="docutils literal notranslate"><span class="pre">franka::RobotState</span></code> <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/structfranka_1_1RobotState.html">RobotState</a>. As shown in the the previous subsection, the robot state is always an input of all callback functions for control loops. However, if you wish to only read the robot state without controlling it, the functions <code class="docutils literal notranslate"><span class="pre">read</span></code> or <code class="docutils literal notranslate"><span class="pre">readOnce</span></code> can be used to gather it, e.g. for logging or visualization purposes.</p>
+<section id="reading-a-single-sample">
+<h3>Reading a Single Sample<a class="headerlink" href="#reading-a-single-sample" title="Permalink to this heading"></a></h3>
+<p>With a valid connection, <em>a single sample of the robot state</em> can be read using the <code class="docutils literal notranslate"><span class="pre">readOnce</span></code> function:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="n">franka</span><span class="o">::</span><span class="n">RobotState</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">robot</span><span class="p">.</span><span class="n">readOnce</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="continuous-reading">
+<h3>Continuous Reading<a class="headerlink" href="#continuous-reading" title="Permalink to this heading"></a></h3>
+<p>The next example shows how to continuously read the robot state using the <code class="docutils literal notranslate"><span class="pre">read</span></code> function and a callback. Returning <code class="docutils literal notranslate"><span class="pre">false</span></code> in the callback stops the loop. In the following, an excerpt of the <code class="docutils literal notranslate"><span class="pre">echo_robot_state</span></code> example is shown:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">read</span><span class="p">([</span><span class="o">&amp;</span><span class="n">count</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">RobotState</span><span class="o">&amp;</span><span class="w"> </span><span class="n">robot_state</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Printing to std::cout adds a delay. This is acceptable for a read loop such as this,</span>
+<span class="w">  </span><span class="c1">// but should not be done in a control loop.</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">robot_state</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">count</span><span class="o">++</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">100</span><span class="p">;</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="robot-models">
+<h2>Robot Models<a class="headerlink" href="#robot-models" title="Permalink to this heading"></a></h2>
+<p>libfranka provides:</p>
+<ul class="simple">
+<li><p>The forward kinematics of all robot joints</p></li>
+<li><p>The body and zero jacobian matrices of all robot joints</p></li>
+<li><p>Dynamic parameters: inertia matrix, Coriolis and centrifugal vector and gravity vector</p></li>
+</ul>
+<p>Note that after you load the robot models, you can compute kinematic and dynamic parameters for an arbitrary robot state, not just the current one. You can also use the robot models in a non realtime fashion, e.g. in an optimization loop. The libfranka examples include exemplary code for <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/print_joint_poses_8cpp-example.html">printing joint poses</a> or <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/cartesian_impedance_control_8cpp-example.html">computing jacobians</a>.</p>
+</section>
+<section id="errors">
+<h2>Errors<a class="headerlink" href="#errors" title="Permalink to this heading"></a></h2>
+<p>Using the FCI you will encounter several errors that happen either due to noncompliant commands sent by the user, due to communication problems or due to the robot behavior. The most relevant ones are detailed in the following subsections. For a complete list please check the API documentation at <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/structfranka_1_1Errors.html">Errors</a>.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Note that, after an error occurs, you can automatically clear it and continue running your program with the <code class="docutils literal notranslate"><span class="pre">franka::Robot::automaticErrorRecovery()</span></code> command without user intervention. Check the exception string before continuing to make sure that the error is not a critical one.</p>
+<p>Some errors can also be cleared manually by toggling the external activation device or by using the error recovery button in Desk.</p>
+</div>
+<section id="errors-due-to-noncompliant-commanded-values">
+<h3>Errors Due to Noncompliant Commanded Values<a class="headerlink" href="#errors-due-to-noncompliant-commanded-values" title="Permalink to this heading"></a></h3>
+<p>If the <span class="xref std std-ref">commanded values</span> sent by the user do not comply with the <span class="xref std std-ref">interface requirements</span>, one of the following errors will occur:</p>
+<p><strong>Errors due to wrong initial values of a motion generator:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_motion_generator_start_pose_invalid</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_position_motion_generator_start_pose_invalid</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_start_elbow_invalid</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_elbow_sign_inconsistent</span></code></p></li>
+</ul>
+<p>These errors indicate a discrepancy between the current robot values and the initial values sent by the user. To fix these errors, make sure that your control loop starts with the last commanded value observed in the robot state. For instance, for the joint position interface:</p>
+<div class="highlight-c++ notranslate"><div class="highlight"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">time</span><span class="p">{</span><span class="mf">0.0</span><span class="p">};</span>
+<span class="n">robot</span><span class="p">.</span><span class="n">control</span><span class="p">(</span>
+<span class="w"> </span><span class="p">[</span><span class="o">=</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">time</span><span class="p">](</span><span class="k">const</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">RobotState</span><span class="o">&amp;</span><span class="w"> </span><span class="n">robot_state</span><span class="p">,</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">Duration</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">JointPositions</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="n">time</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">period</span><span class="p">.</span><span class="n">toSec</span><span class="p">();</span>
+<span class="w">   </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">time</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="c1">// Send the last commanded q_c as the initial value</span>
+<span class="w">     </span><span class="k">return</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">JointPositions</span><span class="p">(</span><span class="n">robot_state</span><span class="p">.</span><span class="n">q_c</span><span class="p">);</span>
+<span class="w">   </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">     </span><span class="c1">// The rest of your control loop</span>
+<span class="w">     </span><span class="p">...</span>
+<span class="w">   </span><span class="p">}</span>
+<span class="w"> </span><span class="p">});</span>
+</pre></div>
+</div>
+<p><strong>Errors due to position limit violation:</strong></p>
+<p>Using a joint position/velocity motion generator, which will produce a <code class="docutils literal notranslate"><span class="pre">joint_motion_generator_position_limits_violation</span></code>. Solving this error should be simple: make sure that the values that you send are in the <span class="xref std std-ref">limits</span>. Cartesian interfaces also have limits on the joint signals that result after the inverse kinematics: the <code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_joint_position_limits_violation</span></code> will be triggered if the inverse kinematics solver of Control yields a joint configuration out of the limits.</p>
+<p><strong>Errors due to velocity limits violation and discontinuity errors:</strong></p>
+<p>Which refer to <strong>acceleration</strong> and/or <strong>jerk</strong> limits violation. If you use a joint motion generator the possible errors are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_motion_generator_velocity_limits_violation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_motion_generator_velocity_discontinuity</span></code> (acceleration limit violation)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">joint_motion_generator_acceleration_discontinuity</span></code> (jerk limit violation)</p></li>
+</ul>
+<p>If you use a Cartesian one, the possible errors are:</p>
+<p><em>Cartesian limits:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_velocity_limits_violation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_velocity_discontinuity</span></code> (acceleration limit violation)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_acceleration_discontinuity</span></code> (jerk limit violation)</p></li>
+</ul>
+<p><em>Joint limits after the inverse kinematics:</em></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_joint_velocity_limits_violation</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_joint_velocity_discontinuity</span></code> (acceleration limit violation)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">cartesian_motion_generator_joint_acceleration_discontinuity</span></code> (jerk limit violation)</p></li>
+</ul>
+<p>To mitigate velocity violations or discontinuity errors, make sure that the signals that you command do not violate the <span class="xref std std-ref">limits</span>. For every motion generator, Control differentiates the signals sent by the user with backwards Euler. For instance, if, using a joint position motion generator, at time <span class="math notranslate nohighlight">\(k\)</span> the user sends the command <span class="math notranslate nohighlight">\(q_{c,k}\)</span>, the resulting velocity, acceleration and jerk will be:</p>
+<ul class="simple">
+<li><p>Velocity <span class="math notranslate nohighlight">\(\dot{q}_{c,k} = \frac{q_{c,k} - q_{c,k-1}}{\Delta t}\)</span></p></li>
+<li><p>Acceleration <span class="math notranslate nohighlight">\(\ddot{q}_{c,k} = \frac{\dot{q}_{c,k} - \dot{q}_{c,k-1}}{\Delta t}\)</span></p></li>
+<li><p>Jerk <span class="math notranslate nohighlight">\(\dddot{q}_{c,k} = \frac{\ddot{q}_{c,k} - \ddot{q}_{c,k-1}}{\Delta t}\)</span></p></li>
+</ul>
+<p>where <span class="math notranslate nohighlight">\(\Delta t = 0.001\)</span>. Note that <span class="math notranslate nohighlight">\(q_{c,k-1}, \dot{q}_{c,k-1}\)</span> and <span class="math notranslate nohighlight">\(\ddot{q}_{c,k-1}\)</span> are always sent back to the user in the robot state as <span class="math notranslate nohighlight">\(q_{d}, \dot{q}_{d}\)</span> and <span class="math notranslate nohighlight">\(\ddot{q}_{d}\)</span> so you will be able to compute the resulting derivatives in advance, even in case of packet losses. Check the <span class="xref std std-ref">section about the details of the Control side of the interface</span> for more details.</p>
+<p>Finally, for the torque interface a <strong>torque rate</strong> limit violation triggers the error:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">controller_torque_discontinuity</span></code></p></li>
+</ul>
+<p>Control also computes the torque rate with backwards Euler, i.e. <span class="math notranslate nohighlight">\(\dot{\tau}_{d,k} = \frac{\tau_{d,k} - \tau_{d,k-1}}{\Delta t}\)</span>. The previous desired torque commanded by the user is also sent back in the robot state as <span class="math notranslate nohighlight">\(\tau_d\)</span> so you will also be able to compute the resulting torque rate in advance, even in case of packet losses.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>The rate limiters included in <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> since version <code class="docutils literal notranslate"><span class="pre">0.4.0</span></code> modify the signals sent by the user to make them conform with all these limits except for the joint limits after the inverse kinematics. You can check the <code class="docutils literal notranslate"><span class="pre">include/franka/rate_limiting.h</span></code> and <code class="docutils literal notranslate"><span class="pre">src/rate_limiting.cpp</span></code> for exemplary code on how to compute resulting velocity, acceleration and jerk for all interfaces. We emphasize again that using rate limiting on a discontinuous signal can easily yield to unstable behavior, so please make sure that your signal is smooth enough before enabling this <em>robustness</em> feature.</p>
+</div>
+</section>
+<section id="errors-due-to-communication-problems">
+<h3>Errors Due to Communication Problems<a class="headerlink" href="#errors-due-to-communication-problems" title="Permalink to this heading"></a></h3>
+<p>If during a realtime loop Control does not receive any packets during 20 cycles, i.e. 20 ms, you will receive a <code class="docutils literal notranslate"><span class="pre">communication_constraints_violation</span></code> error. Note that if your connection has intermittent packet drops, it might not stop, but it could trigger <cite>discontinuity</cite> errors even when your source signals conform with the interface specification. In that case, check our <a class="reference internal" href="../../troubleshooting.html#motion-stopped-due-to-discontinuities"><span class="std std-ref">troubleshooting section</span></a> and consider enabling the <span class="xref std std-ref">signal processing functions</span> to increase the robustness of your control loop.</p>
+</section>
+<section id="behavioral-errors">
+<h3>Behavioral Errors<a class="headerlink" href="#behavioral-errors" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>These monitoring features are by no means conform with any safety norm and do not guarantee any safety to the user. They only aim for helping researchers during the development and testing of their control algorithms.</p>
+</div>
+<p><strong>Reflex errors:</strong> If the estimated external torques <span class="math notranslate nohighlight">\(\hat{\tau}_{ext}\)</span> or forces <span class="math notranslate nohighlight">\({}^O\hat{F}_{ext}\)</span> surpass the configured thresholds, a <code class="docutils literal notranslate"><span class="pre">cartesian_reflex</span></code> or <code class="docutils literal notranslate"><span class="pre">joint_reflex</span></code> error will be triggered respectively. You can configure the thresholds with the <code class="docutils literal notranslate"><span class="pre">franka::Robot::setCollisionBehavior</span></code> non realtime command.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If you wish the robot to have contacts with the environment you must set the collision thresholds to higher values. Otherwise, once you grasp an object or push against a surface, a reflex will be triggered. Also, very fast or abrupt motions without contacts could trigger a reflex if thresholds are low; the external torques and forces are only <em>estimated</em> values that could be innacurate depending on the robot configuration, especially during high acceleration phases. You can monitor their values observing <span class="math notranslate nohighlight">\(\hat{\tau}_{ext}\)</span> and <span class="math notranslate nohighlight">\({}^O\hat{F}_{ext}\)</span> in the robot state.</p>
+</div>
+<p><strong>Self-collision avoidance:</strong> If the robot reaches a configuration which is close to a self-collision, it will trigger a <code class="docutils literal notranslate"><span class="pre">self_collision_avoidance_violation</span></code> error.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This error does not guarantee that the robot will prevent a self collision at any configuration and speed. If, using the torque interface, you drive the robot at full speed against itself the robot might self-collide.</p>
+</div>
+<p><strong>Other behavioral errors:</strong></p>
+<ul class="simple">
+<li><p>If the <strong>torque sensor limit</strong> is reached, a <code class="docutils literal notranslate"><span class="pre">tau_j_range_violation</span></code> will be triggered. This does not guarantee that the sensor will not be damaged after any high-torque interactions or motions but aims for preventing some of it</p></li>
+<li><p>If the <strong>maximum allowed power</strong> is reached, the <code class="docutils literal notranslate"><span class="pre">power_limit_violation</span></code> will be triggered. It will prevent the robot from moving and continuing the control loop</p></li>
+<li><p>If you reach the joint or the Cartesian limits you will get a <code class="docutils literal notranslate"><span class="pre">joint_velocity_violation</span></code> or a <code class="docutils literal notranslate"><span class="pre">cartesian_velocity_violation</span></code> error respectively</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="libfranka client library" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="libfranka_architecture.html" class="btn btn-neutral float-right" title="Library Architecture" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

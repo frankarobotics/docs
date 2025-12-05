@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exceptions &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Exceptions</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/libfranka/pylibfranka/docs/api/exceptions.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="exceptions">
+<h1>Exceptions<a class="headerlink" href="#exceptions" title="Permalink to this heading"></a></h1>
+<p>Exception hierarchy for error handling in pylibfranka.</p>
+<section id="exception-hierarchy">
+<h2>Exception Hierarchy<a class="headerlink" href="#exception-hierarchy" title="Permalink to this heading"></a></h2>
+<p>All pylibfranka exceptions inherit from <code class="xref py py-class docutils literal notranslate"><span class="pre">FrankaException</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>FrankaException (base)
+├── CommandException
+├── NetworkException
+├── ControlException
+├── InvalidOperationException
+└── RealtimeException
+</pre></div>
+</div>
+</section>
+<section id="exception-classes">
+<h2>Exception Classes<a class="headerlink" href="#exception-classes" title="Permalink to this heading"></a></h2>
+<section id="frankaexception">
+<h3>FrankaException<a class="headerlink" href="#frankaexception" title="Permalink to this heading"></a></h3>
+<p>Base exception for all Franka-related errors.</p>
+<p>All exceptions in pylibfranka inherit from this base class, allowing you to catch all library-specific exceptions with a single except clause.</p>
+<p><strong>Example:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pylibfranka</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">robot</span> <span class="o">=</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="s2">&quot;172.16.0.2&quot;</span><span class="p">)</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">start_torque_control</span><span class="p">()</span>
+    <span class="c1"># ... control code ...</span>
+<span class="k">except</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">FrankaException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Franka error occurred: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="commandexception">
+<h3>CommandException<a class="headerlink" href="#commandexception" title="Permalink to this heading"></a></h3>
+<p>Thrown if an error occurs during command execution.</p>
+<p>This exception is raised when:</p>
+<ul class="simple">
+<li><p>A robot command (e.g., <code class="xref py py-meth docutils literal notranslate"><span class="pre">Robot.set_collision_behavior()</span></code>) fails</p></li>
+<li><p>Configuration changes are rejected by the robot</p></li>
+<li><p>Commands contain invalid parameters</p></li>
+</ul>
+</section>
+<section id="networkexception">
+<h3>NetworkException<a class="headerlink" href="#networkexception" title="Permalink to this heading"></a></h3>
+<p>Thrown if a connection to the robot cannot be established, or when a timeout occurs.</p>
+<p>This exception is raised when:</p>
+<ul class="simple">
+<li><p>Initial connection to the robot fails</p></li>
+<li><p>Network connection is lost during operation</p></li>
+<li><p>Communication timeout occurs</p></li>
+<li><p>Robot is not reachable on the network</p></li>
+</ul>
+<p><strong>Handling in control loop:</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pylibfranka</span>
+
+<span class="n">robot</span> <span class="o">=</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="s2">&quot;172.16.0.2&quot;</span><span class="p">)</span>
+
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">state</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">read_once</span><span class="p">()</span>
+<span class="k">except</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">NetworkException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Lost connection: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="c1"># Attempt reconnection...</span>
+</pre></div>
+</div>
+</section>
+<section id="controlexception">
+<h3>ControlException<a class="headerlink" href="#controlexception" title="Permalink to this heading"></a></h3>
+<p>Thrown if an error occurs during motion generation or torque control.</p>
+<p>This exception is raised when:</p>
+<ul class="simple">
+<li><p>Motion generator detects discontinuities</p></li>
+<li><p>Joint limits are violated</p></li>
+<li><p>Cartesian limits are exceeded</p></li>
+<li><p>Safety thresholds are triggered</p></li>
+<li><p>Commanded values cause instability</p></li>
+</ul>
+<p><strong>Common causes:</strong></p>
+<ul class="simple">
+<li><p>Velocity discontinuities in commands</p></li>
+<li><p>Acceleration discontinuities</p></li>
+<li><p>Torque discontinuities</p></li>
+<li><p>Collision detected</p></li>
+<li><p>Position limits exceeded</p></li>
+</ul>
+</section>
+<section id="invalidoperationexception">
+<h3>InvalidOperationException<a class="headerlink" href="#invalidoperationexception" title="Permalink to this heading"></a></h3>
+<p>Thrown if an operation cannot be performed.</p>
+<p>This exception is raised when:</p>
+<ul class="simple">
+<li><p>Attempting to start a control loop while one is already running</p></li>
+<li><p>Calling methods in an invalid state</p></li>
+<li><p>Conflicting operations are requested</p></li>
+</ul>
+</section>
+<section id="realtimeexception">
+<h3>RealtimeException<a class="headerlink" href="#realtimeexception" title="Permalink to this heading"></a></h3>
+<p>Thrown if real-time scheduling requirements cannot be met.</p>
+<p>This exception is raised when:</p>
+<ul class="simple">
+<li><p>Real-time scheduling cannot be enabled (Linux RT kernel required)</p></li>
+<li><p>Real-time priority cannot be set</p></li>
+<li><p>RealtimeConfig.kEnforce is used without proper permissions</p></li>
+</ul>
+</section>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code> – Robot control interface that may raise exceptions</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> – Use <code class="docutils literal notranslate"><span class="pre">current_errors</span></code> and <code class="docutils literal notranslate"><span class="pre">last_motion_errors</span></code> attributes</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Errors</span></code> – Detailed error information</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

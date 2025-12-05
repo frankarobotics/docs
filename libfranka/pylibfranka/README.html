@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pylibfranka Installation and Usage Guide &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>pylibfranka Installation and Usage Guide</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libfranka/pylibfranka/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pylibfranka-installation-and-usage-guide">
+<h1>pylibfranka Installation and Usage Guide<a class="headerlink" href="#pylibfranka-installation-and-usage-guide" title="Permalink to this heading"></a></h1>
+<p>This document provides comprehensive instructions for installing and using pylibfranka, a Python binding for libfranka that enables control of Franka Robotics robots.</p>
+<section id="table-of-contents">
+<h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><span class="xref myst">Prerequisites</span></p></li>
+<li><p><span class="xref myst">Installation</span></p>
+<ul>
+<li><p><span class="xref myst">Installation from Source</span></p></li>
+</ul>
+</li>
+<li><p><span class="xref myst">Examples</span></p>
+<ul>
+<li><p><span class="xref myst">Joint Position Example</span></p></li>
+<li><p><span class="xref myst">Print Robot State Example</span></p></li>
+<li><p><span class="xref myst">Joint Impedance Control Example</span></p></li>
+<li><p><span class="xref myst">Gripper Control Example</span></p></li>
+</ul>
+</li>
+<li><p><span class="xref myst">Troubleshooting</span></p></li>
+</ul>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h2>
+<p>Before installing pylibfranka, ensure you have the following prerequisites:</p>
+<ul class="simple">
+<li><p>Python 3.8 or newer</p></li>
+<li><p>CMake 3.16 or newer</p></li>
+<li><p>C++ compiler with C++17 support</p></li>
+<li><p>Eigen3 development headers</p></li>
+<li><p>Poco development headers</p></li>
+</ul>
+<p><strong>Disclaimer: If you are using the provided devcontainer, you can skip the prerequisites installation as they are already included in the container.</strong></p>
+<section id="installing-prerequisites-on-ubuntu-debian">
+<h3>Installing Prerequisites on Ubuntu/Debian<a class="headerlink" href="#installing-prerequisites-on-ubuntu-debian" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>libeigen3-dev<span class="w"> </span>libpoco-dev<span class="w"> </span>python3-dev
+</pre></div>
+</div>
+<section id="installing-pylibfranka-via-pip">
+<h4>Installing pylibfranka via PIP<a class="headerlink" href="#installing-pylibfranka-via-pip" title="Permalink to this heading"></a></h4>
+<p>From the root folder, you can install <code class="docutils literal notranslate"><span class="pre">pylibfranka</span></code> (therefore, NOT in the build folder) using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip3<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+<p>This will install pylibfranka in your current Python environment.</p>
+</section>
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>pylibfranka comes with three example scripts that demonstrate how to use the library to control a Franka robot.</p>
+<section id="joint-position-example">
+<h3>Joint Position Example<a class="headerlink" href="#joint-position-example" title="Permalink to this heading"></a></h3>
+<p>This example demonstrates how to use an external control loop with pylibfranka to move the robot joints.</p>
+<p>To run the example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+python3<span class="w"> </span>joint_position_example.py<span class="w"> </span>--ip<span class="w"> </span>&lt;robot_ip&gt;
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">&lt;robot_ip&gt;</span></code> is the IP address of your Franka robot. If not specified, it defaults to “localhost”.</p>
+<p>The active control example:</p>
+<ul class="simple">
+<li><p>Sets collision behavior parameters</p></li>
+<li><p>Starts joint position control with CartesianImpedance controller mode</p></li>
+<li><p>Moves the robot using an external control loop</p></li>
+<li><p>Performs a simple motion of selected joints</p></li>
+</ul>
+</section>
+<section id="print-robot-state-example">
+<h3>Print Robot State Example<a class="headerlink" href="#print-robot-state-example" title="Permalink to this heading"></a></h3>
+<p>This example shows how to read and display the complete state of the robot.</p>
+<p>To run the example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+python3<span class="w"> </span>print_robot_state.py<span class="w"> </span>--ip<span class="w"> </span>&lt;robot_ip&gt;<span class="w"> </span><span class="o">[</span>--rate<span class="w"> </span>&lt;rate&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--count<span class="w"> </span>&lt;count&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--ip</span></code> is the robot’s IP address (defaults to “localhost”)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--rate</span></code> is the frequency at which to print the state in Hz (defaults to 0.5)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--count</span></code> is the number of state readings to print (defaults to 1, use 0 for continuous)</p></li>
+</ul>
+<p>The print robot state example:</p>
+<ul class="simple">
+<li><p>Connects to the robot</p></li>
+<li><p>Reads the complete robot state</p></li>
+<li><p>Prints detailed information about:</p>
+<ul>
+<li><p>Joint positions, velocities, and torques</p></li>
+<li><p>End effector pose and velocities</p></li>
+<li><p>External forces and torques</p></li>
+<li><p>Robot mode and error states</p></li>
+<li><p>Mass and inertia properties</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="joint-impedance-control-example">
+<h3>Joint Impedance Control Example<a class="headerlink" href="#joint-impedance-control-example" title="Permalink to this heading"></a></h3>
+<p>This example demonstrates how to implement a joint impedance controller that renders a spring-damper system to move the robot through a sequence of target joint configurations.</p>
+<p>To run the example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+python3<span class="w"> </span>joint_impedance_example.py<span class="w"> </span>--ip<span class="w"> </span>&lt;robot_ip&gt;
+</pre></div>
+</div>
+<p>Where <code class="docutils literal notranslate"><span class="pre">--ip</span></code> is the robot’s IP address (defaults to “localhost”).</p>
+<p>The joint impedance example:</p>
+<ul class="simple">
+<li><p>Implements a minimum jerk trajectory generator for smooth joint motion</p></li>
+<li><p>Uses a spring-damper system for compliant control</p></li>
+<li><p>Moves through a sequence of predefined joint configurations:</p>
+<ul>
+<li><p>Home position (slightly bent arm)</p></li>
+<li><p>Extended arm pointing forward</p></li>
+<li><p>Arm pointing to the right</p></li>
+<li><p>Arm pointing to the left</p></li>
+<li><p>Return to home position</p></li>
+</ul>
+</li>
+<li><p>Includes position holding with dwell time between movements</p></li>
+<li><p>Compensates for Coriolis effects</p></li>
+</ul>
+</section>
+<section id="and-more-control-examples">
+<h3>And more control examples<a class="headerlink" href="#and-more-control-examples" title="Permalink to this heading"></a></h3>
+<p>There are more control examples to discover. All of them can be executed in a similar way:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+python3<span class="w"> </span>other_example.py<span class="w"> </span>--ip<span class="w"> </span>&lt;robot_ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="gripper-control-example">
+<h3>Gripper Control Example<a class="headerlink" href="#gripper-control-example" title="Permalink to this heading"></a></h3>
+<p>This example demonstrates how to control the Franka gripper, including homing, grasping, and reading gripper state.</p>
+<p>To run the example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>examples
+python3<span class="w"> </span>move_gripper.py<span class="w"> </span>--robot_ip<span class="w"> </span>&lt;robot_ip&gt;<span class="w"> </span><span class="o">[</span>--width<span class="w"> </span>&lt;width&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--homing<span class="w"> </span>&lt;<span class="m">0</span><span class="p">|</span><span class="m">1</span>&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--speed<span class="w"> </span>&lt;speed&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--force<span class="w"> </span>&lt;force&gt;<span class="o">]</span>
+</pre></div>
+</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--robot_ip</span></code> is the robot’s IP address (required)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--width</span></code> is the object width to grasp in meters (defaults to 0.005)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--homing</span></code> enables/disables gripper homing (0 or 1, defaults to 1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--speed</span></code> is the gripper speed (defaults to 0.1)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--force</span></code> is the gripper force in N (defaults to 60)</p></li>
+</ul>
+<p>The gripper example:</p>
+<ul class="simple">
+<li><p>Connects to the gripper</p></li>
+<li><p>Performs homing to estimate maximum grasping width</p></li>
+<li><p>Reads and displays gripper state including:</p>
+<ul>
+<li><p>Current width</p></li>
+<li><p>Maximum width</p></li>
+<li><p>Grasp status</p></li>
+<li><p>Temperature</p></li>
+<li><p>Timestamp</p></li>
+</ul>
+</li>
+<li><p>Attempts to grasp an object with specified parameters</p></li>
+<li><p>Verifies successful grasping</p></li>
+<li><p>Releases the object</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

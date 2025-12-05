@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="FAQ" href="faq.html" />
+    <link rel="prev" title="FR3 certification remarks" href="fr3-certification-remarks.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cannot-boot-realtime-kernel-because-of-invalid-signature">Cannot boot realtime kernel because of “Invalid Signature”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-libfranka-executable-fails-with-connection-timeout">Running a libfranka executable fails with “Connection timeout”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#motion-stopped-due-to-discontinuities-or-communication-constraints-violation">Motion stopped due to discontinuities or <code class="docutils literal notranslate"><span class="pre">communication_constraints_violation</span></code></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#disabling-cpu-frequency-scaling">Disabling CPU frequency scaling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#robot-is-not-reachable">Robot is not reachable</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-libfranka-executable-fails-with-udp-receive-timeout">Running a libfranka executable fails with “UDP receive: Timeout”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#network-bandwidth-delay-and-jitter-test">Network bandwidth, delay and jitter test</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#simple-ping-tests">Simple ping tests</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-network-performance-analysis">Advanced network performance analysis</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-libfranka-executable-fails-with-incompatible-library-version">Running a libfranka executable fails with “Incompatible Library Version”</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-a-libfranka-executable-fails-with-safety-function-errors">Running a libfranka executable fails with safety function errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#realtime-control-loop-best-practices">Realtime Control Loop Best Practices</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-not-to-do-in-1-khz-control-loops">What NOT to do in 1 kHz control loops</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/troubleshooting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="troubleshooting">
+<span id="id1"></span><h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h1>
+<p>This section lists solutions to a set of possible errors that may occur when using the FCI.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Further help is provided in the troubleshooting page of the manual shipped with your robot.</p>
+</div>
+<section id="cannot-boot-realtime-kernel-because-of-invalid-signature">
+<span id="troubleshooting-realtime-kernel"></span><h2>Cannot boot realtime kernel because of “Invalid Signature”<a class="headerlink" href="#cannot-boot-realtime-kernel-because-of-invalid-signature" title="Permalink to this heading"></a></h2>
+<p>When you have successfully installed the real-time kernel and try to boot it, Linux may fail to boot.
+This can happen when Ubuntu is installed alongside Windows (e.g., dual-boot). In such cases, the UEFI
+bootloader often has <em>Secure Boot</em> enabled, which prevents the unsigned real-time kernel from loading.</p>
+<p>The easiest solution is to <strong>disable “Secure Boot”</strong> in your bootloader. This depends on your system,
+but it is commonly accessed by pressing F2, F3, F12, or DEL during startup.</p>
+</section>
+<section id="running-a-libfranka-executable-fails-with-connection-timeout">
+<span id="troubleshooting-connection-timeout"></span><h2>Running a libfranka executable fails with “Connection timeout”<a class="headerlink" href="#running-a-libfranka-executable-fails-with-connection-timeout" title="Permalink to this heading"></a></h2>
+<p>This error occurs if <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> cannot connect to the robot at all. Please check:</p>
+<ul class="simple">
+<li><p>Robots with system version 4.2.0+ require FCI mode to be enabled. To enable: open Desk → expand sidebar menu → click <strong>Activate FCI</strong>.</p></li>
+<li><p>Your workstation is directly connected to Control, <strong>not</strong> the Arm LAN port (see <a class="reference internal" href="libfranka/docs/system_requirements.html#requirement-network"><span class="std std-ref">Network</span></a>).</p></li>
+<li><p>The robot is reachable from your workstation (see <a class="reference internal" href="#troubleshooting-robot-not-reachable"><span class="std std-ref">Robot is not reachable</span></a>).</p></li>
+<li><p>The FCI feature file is installed on the robot (“Settings → System → Installed Features”).
+Contact <code class="docutils literal notranslate"><span class="pre">support&#64;franka.de</span></code> with your robot’s serial number if you need access to the feature.</p></li>
+</ul>
+</section>
+<section id="motion-stopped-due-to-discontinuities-or-communication-constraints-violation">
+<span id="motion-stopped-due-to-discontinuities"></span><h2>Motion stopped due to discontinuities or <code class="docutils literal notranslate"><span class="pre">communication_constraints_violation</span></code><a class="headerlink" href="#motion-stopped-due-to-discontinuities-or-communication-constraints-violation" title="Permalink to this heading"></a></h2>
+<p>If the difference between commanded values between cycles is too large, motion stops with errors such as
+<code class="docutils literal notranslate"><span class="pre">joint_motion_generator_velocity_discontinuity</span></code>. Ensure the command changes do not exceed the
+<span class="xref std std-ref">limits</span>.</p>
+<p>Discontinuities can result from:</p>
+<ul class="simple">
+<li><p>Actual command jumps in your code</p></li>
+<li><p>Network packet losses</p></li>
+</ul>
+<p>Packet loss can also produce <code class="docutils literal notranslate"><span class="pre">communication_constraints_violation</span></code>.
+If it happens even when running official examples, the issue is likely network-related.</p>
+<p>Check:</p>
+<ul class="simple">
+<li><p>Source code is compiled with optimizations (<code class="docutils literal notranslate"><span class="pre">-DCMAKE_BUILD_TYPE=Release</span></code>)</p></li>
+<li><p>Direct PC → Control connection without switches (see <span class="xref std std-ref">setting-up-the-network</span>)</p></li>
+<li><p>Network performance using the <a class="reference internal" href="#network-bandwidth-delay-and-jitter-test">network bandwidth, delay and jitter test</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka::Robot</span></code> instantiated using <code class="docutils literal notranslate"><span class="pre">RealtimeConfig::kEnforce</span></code> (default)</p></li>
+<li><p>CPU power-saving features are disabled (see <a class="reference internal" href="#disable-cpu-frequency-scaling"><span class="std std-ref">Disabling CPU frequency scaling</span></a>)</p></li>
+</ul>
+<section id="disabling-cpu-frequency-scaling">
+<span id="disable-cpu-frequency-scaling"></span><h3>Disabling CPU frequency scaling<a class="headerlink" href="#disabling-cpu-frequency-scaling" title="Permalink to this heading"></a></h3>
+<p>CPUs often reduce frequency under low load, increasing latency in real-time systems.
+Install the <code class="docutils literal notranslate"><span class="pre">cpufrequtils</span></code> package:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>cpufrequtils
+</pre></div>
+</div>
+<p>Run <code class="docutils literal notranslate"><span class="pre">cpufreq-info</span></code> to inspect frequency governors. Example output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>cpufreq-info
+...
+current<span class="w"> </span>CPU<span class="w"> </span>frequency<span class="w"> </span>is<span class="w"> </span><span class="m">500</span><span class="w"> </span>MHz.
+...
+</pre></div>
+</div>
+<p>If the “powersave” governor is active, switch to <code class="docutils literal notranslate"><span class="pre">performance</span></code> using Ubuntu GUI (<code class="docutils literal notranslate"><span class="pre">indicator-cpufreq</span></code>)
+or via terminal:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>systemctl<span class="w"> </span>disable<span class="w"> </span>ondemand
+sudo<span class="w"> </span>systemctl<span class="w"> </span><span class="nb">enable</span><span class="w"> </span>cpufrequtils
+sudo<span class="w"> </span>sh<span class="w"> </span>-c<span class="w"> </span><span class="s1">&#39;echo &quot;GOVERNOR=performance&quot; &gt; /etc/default/cpufrequtils&#39;</span>
+sudo<span class="w"> </span>systemctl<span class="w"> </span>daemon-reload<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>cpufrequtils
+</pre></div>
+</div>
+<p>Afterward, <code class="docutils literal notranslate"><span class="pre">cpufreq-info</span></code> should show the CPU running near its maximum frequency.</p>
+</section>
+</section>
+<section id="robot-is-not-reachable">
+<span id="troubleshooting-robot-not-reachable"></span><h2>Robot is not reachable<a class="headerlink" href="#robot-is-not-reachable" title="Permalink to this heading"></a></h2>
+<p>Ping the robot:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ping<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+<p>If unreachable, the network or assigned IP is incorrect.
+Please follow the official network setup instructions provided with your robot.</p>
+</section>
+<section id="running-a-libfranka-executable-fails-with-udp-receive-timeout">
+<span id="troubleshooting-udp-timeout"></span><h2>Running a libfranka executable fails with “UDP receive: Timeout”<a class="headerlink" href="#running-a-libfranka-executable-fails-with-udp-receive-timeout" title="Permalink to this heading"></a></h2>
+<p>This occurs when the robot state cannot be received.
+Check that your workstation firewall is not blocking UDP traffic:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>iptables<span class="w"> </span>-L
+</pre></div>
+</div>
+</section>
+<section id="network-bandwidth-delay-and-jitter-test">
+<span id="network-bandwidth-delay-test"></span><h2>Network bandwidth, delay and jitter test<a class="headerlink" href="#network-bandwidth-delay-and-jitter-test" title="Permalink to this heading"></a></h2>
+<p>Two diagnostic tests are provided:</p>
+<ol class="arabic simple">
+<li><p>A basic ping test</p></li>
+<li><p>An advanced UDP performance test using <code class="docutils literal notranslate"><span class="pre">communication_test</span></code></p></li>
+</ol>
+<section id="simple-ping-tests">
+<span id="network-ping-test"></span><h3>Simple ping tests<a class="headerlink" href="#simple-ping-tests" title="Permalink to this heading"></a></h3>
+<p>Simulate FCI-level network load:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>ping<span class="w"> </span>&lt;fci-ip&gt;<span class="w"> </span>-i<span class="w"> </span><span class="m">0</span>.001<span class="w"> </span>-D<span class="w"> </span>-c<span class="w"> </span><span class="m">10000</span><span class="w"> </span>-s<span class="w"> </span><span class="m">1200</span>
+</pre></div>
+</div>
+<p>Example output:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>---<span class="w"> </span>&lt;fci-ip&gt;<span class="w"> </span>ping<span class="w"> </span>statistics<span class="w"> </span>---
+rtt<span class="w"> </span>min/avg/max/mdev<span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0</span>.147/0.240/0.502/0.038<span class="w"> </span>ms
+</pre></div>
+</div>
+<p>As described in the <a class="reference internal" href="libfranka/docs/system_requirements.html#requirement-network"><span class="std std-ref">Network requirements</span></a>,
+<strong>round-trip time + control loop execution must remain below 1 ms</strong>.</p>
+</section>
+<section id="advanced-network-performance-analysis">
+<h3>Advanced network performance analysis<a class="headerlink" href="#advanced-network-performance-analysis" title="Permalink to this heading"></a></h3>
+<p>Run <code class="docutils literal notranslate"><span class="pre">communication_test</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>/opt/ros/noetic/setup.sh<span class="w">   </span><span class="c1"># if installed via ROS</span>
+communication_test<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+<p>Or from a local build:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./examples/communication_test<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="running-a-libfranka-executable-fails-with-incompatible-library-version">
+<span id="troubleshooting-incompatible-library"></span><h2>Running a libfranka executable fails with “Incompatible Library Version”<a class="headerlink" href="#running-a-libfranka-executable-fails-with-incompatible-library-version" title="Permalink to this heading"></a></h2>
+<p>Your <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> version does not match the robot’s system version.
+Use the reported server version to select the correct version (see <span class="xref std std-ref">libfranka_compatibility</span>).</p>
+</section>
+<section id="running-a-libfranka-executable-fails-with-safety-function-errors">
+<span id="troubleshooting-safety-function-active"></span><h2>Running a libfranka executable fails with safety function errors<a class="headerlink" href="#running-a-libfranka-executable-fails-with-safety-function-errors" title="Permalink to this heading"></a></h2>
+<p>Errors such as:</p>
+<ul class="simple">
+<li><p><cite>“command rejected due to activated safety function!”</cite></p></li>
+<li><p><cite>“command preempted due to activated safety function!”</cite></p></li>
+</ul>
+<p>occur when a safety rule in Watchman prevents robot motion (e.g., speed limits).
+Disable or remove the relevant safety rule to allow FCI motion commands.</p>
+</section>
+<section id="realtime-control-loop-best-practices">
+<span id="troubleshooting-realtime-control-loops"></span><h2>Realtime Control Loop Best Practices<a class="headerlink" href="#realtime-control-loop-best-practices" title="Permalink to this heading"></a></h2>
+<p>When implementing a 1 kHz control loop, the interval between <strong>read</strong> and <strong>write</strong> must complete within <strong>500 µs</strong>.</p>
+<p>Delays may increase if:</p>
+<ul class="simple">
+<li><p>A switch is used instead of a direct connection</p></li>
+<li><p>The Ethernet card is low-performance</p></li>
+<li><p>A real-time kernel is not used</p></li>
+</ul>
+<section id="what-not-to-do-in-1-khz-control-loops">
+<span id="realtime-what-not-to-do"></span><h3>What NOT to do in 1 kHz control loops<a class="headerlink" href="#what-not-to-do-in-1-khz-control-loops" title="Permalink to this heading"></a></h3>
+<p><strong>❌ Load the model inside the loop</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="c1">// BAD</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">torques</span><span class="p">.</span><span class="n">motion_finished</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">robot_state</span><span class="p">,</span><span class="w"> </span><span class="n">period</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">readOnce</span><span class="p">();</span>
+<span class="w">  </span><span class="n">franka</span><span class="o">::</span><span class="n">Model</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">robot</span><span class="p">.</span><span class="n">loadModel</span><span class="p">();</span><span class="w">  </span><span class="c1">// NEVER do this!</span>
+<span class="w">  </span><span class="k">auto</span><span class="w"> </span><span class="n">gravity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">model</span><span class="p">.</span><span class="n">gravity</span><span class="p">(</span><span class="n">robot_state</span><span class="p">);</span>
+<span class="w">  </span><span class="n">rw_interface</span><span class="o">-&gt;</span><span class="n">writeOnce</span><span class="p">(</span><span class="n">torques</span><span class="p">);</span>
+<span class="hll"><span class="p">}</span>
+</span></pre></div>
+</div>
+<p><strong>Good practice: load once before loop</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">franka</span><span class="o">::</span><span class="n">Model</span><span class="w"> </span><span class="n">model</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">robot</span><span class="p">.</span><span class="n">loadModel</span><span class="p">();</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// use model</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>❌ Sleep or block inside the loop</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">chrono</span><span class="o">::</span><span class="n">microseconds</span><span class="p">(</span><span class="mi">100</span><span class="p">));</span><span class="w">  </span><span class="c1">// BLOCKS RT!</span>
+</pre></div>
+</div>
+<p><strong>❌ Print every cycle</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;State: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">robot_state</span><span class="p">.</span><span class="n">q</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span><span class="w">  </span><span class="c1">// TOO SLOW</span>
+</pre></div>
+</div>
+<p><strong>❌ Dynamic memory allocations</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;</span><span class="w"> </span><span class="n">error</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span><span class="w">  </span><span class="c1">// allocated every cycle → BAD</span>
+</pre></div>
+</div>
+<p><strong>Good alternatives: preallocate or use fixed-size arrays</strong></p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">array</span><span class="o">&lt;</span><span class="kt">double</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="o">&gt;</span><span class="w"> </span><span class="n">tau_d</span><span class="p">{};</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(...)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// deterministic</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="fr3-certification-remarks.html" class="btn btn-neutral float-left" title="FR3 certification remarks" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="faq.html" class="btn btn-neutral float-right" title="FAQ" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

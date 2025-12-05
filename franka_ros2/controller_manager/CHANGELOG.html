@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Changelog for package controller_manager &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Changelog for package controller_manager</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/franka_ros2/controller_manager/CHANGELOG.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="changelog-for-package-controller-manager">
+<h1>Changelog for package controller_manager<a class="headerlink" href="#changelog-for-package-controller-manager" title="Permalink to this heading"></a></h1>
+<section id="id1">
+<h2>4.36.0 (2025-08-26)<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id2">
+<h2>4.35.0 (2025-07-31)<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix the prepare_command_mode_switch behaviour when HW is INACTIVE (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2347">#2347</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2418">#2418</a>)</p></li>
+<li><p>Contributors: mergify[bot]</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2>4.34.0 (2025-07-21)<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Further Struct based Method changes to support propagation in <cite>gz_ros2_control</cite> (backport <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2340">#2340</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2407">#2407</a>)</p></li>
+<li><p>Shift to Struct based Method and Constructors, with Executor passed from CM to <cite>on_init()</cite> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2323">#2323</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2339">#2339</a>)</p></li>
+<li><p>Increase controller period tolerance further (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2405">#2405</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2406">#2406</a>)</p></li>
+<li><p>Fix controller activation crash on macOS (Fixes <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/604">#604</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2391">#2391</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2396">#2396</a>)</p></li>
+<li><p>Increase controller period tolerance in tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2388">#2388</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2389">#2389</a>)</p></li>
+<li><p>[spawner] Fix Lock timeout error crashes (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2386">#2386</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2387">#2387</a>)</p></li>
+<li><p>[Spawner] Fix the scope issue of the logger (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2382">#2382</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2383">#2383</a>)</p></li>
+<li><p>Increase tolerance to improve the success rate of the tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2373">#2373</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2377">#2377</a>)</p></li>
+<li><p>[Spawner] Change strategy for <cite>–unload-on-kill</cite> option (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2372">#2372</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2376">#2376</a>)</p></li>
+<li><p>Contributors: mergify[bot]</p></li>
+</ul>
+</section>
+<section id="id25">
+<h2>4.33.0 (2025-07-02)<a class="headerlink" href="#id25" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Deactivate controllers with command interfaces to hardware on DEACTIVATE (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2334">#2334</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2341">#2341</a>)</p></li>
+<li><p>Contributors: mergify[bot]</p></li>
+</ul>
+</section>
+<section id="id28">
+<h2>4.32.0 (2025-06-06)<a class="headerlink" href="#id28" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Move <cite>enforce_command_limits</cite> parameter to GPL parameters (backport <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2305">#2305</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2316">#2316</a>)</p></li>
+<li><p>Cleanup test name (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2295">#2295</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2298">#2298</a>)</p></li>
+<li><p>check_controllers_running: Make timeout a parameter  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2278">#2278</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2281">#2281</a>)</p></li>
+<li><p>Contributors: mergify[bot]</p></li>
+</ul>
+</section>
+<section id="id35">
+<h2>4.31.0 (2025-05-24)<a class="headerlink" href="#id35" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add <cite>data_type</cite> field to the HardwareInterfaces message (backport <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2204">#2204</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2232">#2232</a>)</p></li>
+<li><p>Use target_link_libraries instead of ament_target_dependencies (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2266">#2266</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2271">#2271</a>)</p></li>
+<li><p>Add new strictness modes to SwitchController service (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2224">#2224</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2231">#2231</a>)</p></li>
+<li><p>Contributors: mergify[bot]</p></li>
+</ul>
+</section>
+<section id="id42">
+<h2>4.30.0 (2025-05-21)<a class="headerlink" href="#id42" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Keep current shutdown behaviour in Jazzy (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2254">#2254</a>)</p></li>
+<li><p>[CM] Add option to avoid shutting down on hardware initial state failure (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2230">#2230</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2251">#2251</a>)</p></li>
+<li><p>Statically allocate string concatenations using FMT formatting (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2205">#2205</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2249">#2249</a>)</p></li>
+<li><p>Suppress the deprecation warnings of the hardware_interface API (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2223">#2223</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2247">#2247</a>)</p></li>
+<li><p>Use <cite>warning</cite> attribute of RcutilsLogger (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2244">#2244</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2245">#2245</a>)</p></li>
+<li><p>[CM] Set default strictness of switch_controllers using parameters (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2168">#2168</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2233">#2233</a>)</p></li>
+<li><p>Contributors: Bence Magyar, mergify[bot]</p></li>
+</ul>
+</section>
+<section id="id54">
+<h2>4.29.0 (2025-05-04)<a class="headerlink" href="#id54" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use the new reusable helpers methods in hardware diagnostics (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2216">#2216</a>)</p></li>
+<li><p>[Diagnostics] Add diagnostics of execution time and periodicity of the hardware components (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2086">#2086</a>)</p></li>
+<li><p>Add common reusable helper methods header (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2099">#2099</a>)</p></li>
+<li><p>Use filelock in spawner to avoid concurrent operations (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2202">#2202</a>)</p></li>
+<li><p>increase test tolerance to reduce flakiness (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2212">#2212</a>)</p></li>
+<li><p>Add a method to perform the hardware command mode changes (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2203">#2203</a>)</p></li>
+<li><p>Fix typos: preceeding -&gt; preceding (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2206">#2206</a>)</p></li>
+<li><p>Throttle the overrun logs (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2201">#2201</a>)</p></li>
+<li><p>doc: Added explanation of preceding/following controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2192">#2192</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Martin Pecka, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id64">
+<h2>4.28.1 (2025-04-17)<a class="headerlink" href="#id64" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix the enforce_command_limits deactivation (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2181">#2181</a>)</p></li>
+<li><p>Contributors: Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id66">
+<h2>4.28.0 (2025-04-10)<a class="headerlink" href="#id66" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Integrate joint limit enforcement into <cite>ros2_control</cite> framework functional with Async controllers and components  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2047">#2047</a>)</p></li>
+<li><p>Make all packages use gmock, not gtest (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2162">#2162</a>)</p></li>
+<li><p>Fix async controllers deactivation regime (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2017">#2017</a>)</p></li>
+<li><p>apply pre-commit changes (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2160">#2160</a>)</p></li>
+<li><p>Add tests for multiple controller ros args (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2155">#2155</a>)</p></li>
+<li><p>Bump version of pre-commit hooks (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2156">#2156</a>)</p></li>
+<li><p>Allow for multiple controller-ros-args arguments in spawner.py (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2150">#2150</a>)</p></li>
+<li><p>Update <cite>rqt_controller_manager</cite> controller state color scheme to match list_controllers color scheme (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2143">#2143</a>)</p></li>
+<li><p>Fix generate_controllers_spawner_launch_description_from_dict (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2146">#2146</a>)</p></li>
+<li><p>Use ros2_control_cmake (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2134">#2134</a>)</p></li>
+<li><p>[Docs] Update determinism section (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2131">#2131</a>)</p></li>
+<li><p>Remove the dangling param flag for robot_description fom ROS parameters (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2115">#2115</a>)</p></li>
+<li><p>[Doc] Add documentation of different controller manager clocks (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2109">#2109</a>)</p></li>
+<li><p>[CM] Extend the list controller and hardware components messages (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2102">#2102</a>)</p></li>
+<li><p>Improve package descriptions &amp; update maintainers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2103">#2103</a>)</p></li>
+<li><p>Reject duplicate state/command interfaces after configuring the controller  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2090">#2090</a>)</p></li>
+<li><p>[CM] Add message field to the <cite>switch_controller</cite> service (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2088">#2088</a>)</p></li>
+<li><p>Update doc: async update support for controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2096">#2096</a>)</p></li>
+<li><p>Use monotonic clock for triggering read-update-write cycles + fix for overruns (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2046">#2046</a>)</p></li>
+<li><p>Add some logging for <cite>unload_on_kill</cite> keyboard interrupt (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2097">#2097</a>)</p></li>
+<li><p>[CM] Add controller_manager activity topic (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2006">#2006</a>)</p></li>
+<li><p>Improve diagnostics strings (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2078">#2078</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Christoph Fröhlich, Julia Jia, Sai Kishor Kothakota, Soham Patil, danielcostanzi18, github-actions[bot]</p></li>
+</ul>
+</section>
+<section id="id89">
+<h2>4.27.0 (2025-03-01)<a class="headerlink" href="#id89" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>[HW Components] Add fix for async hardware components improper rate (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2076">#2076</a>)</p></li>
+<li><p>[CM] Skip <cite>robot_description</cite> topic remapping for controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2082">#2082</a>)</p></li>
+<li><p>[Spawner] Fix case with wildcard AND explicit controller in the same file (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2080">#2080</a>)</p></li>
+<li><p>[Handle] Use <cite>get_optional</cite> instead of <cite>get_value&lt;double&gt;</cite> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2061">#2061</a>)</p></li>
+<li><p>[CM] Fix <cite>switch_controller</cite> behaviour with unknown controller switch request (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2060">#2060</a>)</p></li>
+<li><p>Cleanup chainable controller exported interfaces to allow reconfiguring  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2073">#2073</a>)</p></li>
+<li><p>Update memlock values in doc (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2066">#2066</a>)</p></li>
+<li><p>Add new <cite>get_value</cite> API for Handles and Interfaces (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1976">#1976</a>)</p></li>
+<li><p>Fix unused timeouts in load/unload controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2052">#2052</a>)</p></li>
+<li><p>[CM] Improve memory allocation with buffer variables (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1801">#1801</a>)</p></li>
+<li><p>Integrate pal_statistics for introspection of controllers, hardware components and more (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1918">#1918</a>)</p></li>
+<li><p>[CM] Fix the controller deactivation on the control cycles returning ERROR  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1756">#1756</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Dawid Kmak, Sai Kishor Kothakota, bijoua29</p></li>
+</ul>
+</section>
+<section id="id102">
+<h2>4.26.0 (2025-02-07)<a class="headerlink" href="#id102" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Slightly increase timeout of test_spawner_unspawner (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2037">#2037</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich</p></li>
+</ul>
+</section>
+<section id="id104">
+<h2>4.25.0 (2025-01-29)<a class="headerlink" href="#id104" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Handle SIGINT properly in the controller manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2014">#2014</a>)</p></li>
+<li><p>Fix the initial wrong periodicity reported by controller_manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2018">#2018</a>)</p></li>
+<li><p>Use <cite>target_compile_definitions</cite> instead of installing test files (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2009">#2009</a>)</p></li>
+<li><p>Fix a heading level (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/2007">#2007</a>)</p></li>
+<li><p>Update path of GPL (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1994">#1994</a>)</p></li>
+<li><p>Fix: on_shutdown callback of controllers never get executed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1995">#1995</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Sai Kishor Kothakota, Wiktor Bajor</p></li>
+</ul>
+</section>
+<section id="id111">
+<h2>4.24.0 (2025-01-13)<a class="headerlink" href="#id111" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>[CM] Remove obsolete ControllerMock from the tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1990">#1990</a>)</p></li>
+<li><p>Initialize robot description in ControllerManager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1983">#1983</a>)</p></li>
+<li><p>Contributors: Dominic Reber, Wiktor Bajor</p></li>
+</ul>
+</section>
+<section id="id114">
+<h2>4.23.0 (2024-12-29)<a class="headerlink" href="#id114" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Remove boilerplate visibility macros (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1972">#1972</a>)</p></li>
+<li><p>Move test_utils module from demos repo (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1955">#1955</a>)</p></li>
+<li><p>Fix deprecated usage of lock_memory API (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1970">#1970</a>)</p></li>
+<li><p>Fix spawner behaviour on failing controller activation or deactivation (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1941">#1941</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Christoph Fröhlich, Sai Kishor Kothakota, Sudip Roy</p></li>
+</ul>
+</section>
+<section id="id119">
+<h2>4.22.0 (2024-12-20)<a class="headerlink" href="#id119" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Async Hardware Components (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1567">#1567</a>)</p></li>
+<li><p>Add controller node options args to be able to set controller specific node arguments (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1713">#1713</a>)</p></li>
+<li><p>Use singleton approach to store and reuse the service clients (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1949">#1949</a>)</p></li>
+<li><p>Increase the max and min periodicity tolerances to fix flaky tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1937">#1937</a>)</p></li>
+<li><p>Fix the spawner to support full wildcard parameter entries (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1933">#1933</a>)</p></li>
+<li><p>Suppress unnecessary warnings in clock received validation (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1935">#1935</a>)</p></li>
+<li><p>Optimize the valid time check in the update loop (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1923">#1923</a>)</p></li>
+<li><p>[CI] Add clang job, setup concurrency, use rt_tools humble branch (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1910">#1910</a>)</p></li>
+<li><p>Update CPU affinity parameter to be able to set multiple CPUs (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1915">#1915</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Sai Kishor Kothakota, Takashi Sato</p></li>
+</ul>
+</section>
+<section id="id129">
+<h2>4.21.0 (2024-12-06)<a class="headerlink" href="#id129" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use the .hpp headers from realtime_tools package (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1916">#1916</a>)</p></li>
+<li><p>CM: Check if a valid time is received (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1901">#1901</a>)</p></li>
+<li><p>Lock memory by default on a realtime system setup (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1896">#1896</a>)</p></li>
+<li><p>Fix the launch_utils regression (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1909">#1909</a>)</p></li>
+<li><p>[Diagnostics] Add diagnostics of execution time and periodicity of the controllers and controller_manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1871">#1871</a>)</p></li>
+<li><p>Add more parameter overriding tests by parsing multiple parameter files (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1899">#1899</a>)</p></li>
+<li><p>add logic for ‘params_file’ to handle both string and string_array (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1898">#1898</a>)</p></li>
+<li><p>[Spawner] Accept parsing multiple <cite>–param-file</cite> arguments to spawner  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1805">#1805</a>)</p></li>
+<li><p>Add documentation on <cite>ros2_control_node</cite> and make lock_memory false by default (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1890">#1890</a>)</p></li>
+<li><p>Add service call timeout argument in spawner (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1808">#1808</a>)</p></li>
+<li><p>Add CM <cite>switch_controller</cite> service timeout as parameter to spawner.py (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1790">#1790</a>)</p></li>
+<li><p>Fix the missing bcolors.ENDC in hardware_spawner log prints (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1870">#1870</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Sai Kishor Kothakota, Tony Najjar</p></li>
+</ul>
+</section>
+<section id="id142">
+<h2>4.20.0 (2024-11-08)<a class="headerlink" href="#id142" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>change from thread_priority.hpp to realtime_helpers.hpp (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1829">#1829</a>)</p></li>
+<li><p>Use Clock instead of Rate for backward compatibility of rolling (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1864">#1864</a>)</p></li>
+<li><p>[ros2_control_node] Handle simulation environment clocks (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1810">#1810</a>)</p></li>
+<li><p>[CM] Fix controller missing update cycles in a real setup (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1774">#1774</a>)</p></li>
+<li><p>[ros2_control_node] Add option to set the CPU affinity  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1852">#1852</a>)</p></li>
+<li><p>[ros2_control_node] Add the realtime_tools lock_memory method to prevent page faults (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1822">#1822</a>)</p></li>
+<li><p>Fix CMP0115 (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1830">#1830</a>)</p></li>
+<li><p>fix: typo use thread_priority (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1844">#1844</a>)</p></li>
+<li><p>Fix Hardware spawner and add tests for it (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1759">#1759</a>)</p></li>
+<li><p>add thread_priority option to the ros2_control_node (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1820">#1820</a>)</p></li>
+<li><p>Contributors: Baris Yazici, Christoph Fröhlich, Felix Exner (fexner), Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id153">
+<h2>4.19.0 (2024-10-26)<a class="headerlink" href="#id153" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix timeout value in std output (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1807">#1807</a>)</p></li>
+<li><p>[CM] Async Function Handler for Controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1489">#1489</a>)</p></li>
+<li><p>[Spawner] Add support for wildcard entries in the controller param files  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1724">#1724</a>)</p></li>
+<li><p>[Feature] Fallback controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1789">#1789</a>)</p></li>
+<li><p>Check the update_rate set to the controllers to be a valid one (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1788">#1788</a>)</p></li>
+<li><p>[PR-1689] Follow-up PR of the controller interface variants integration (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1779">#1779</a>)</p></li>
+<li><p>Improve diagnostics of Controllers, Hardware Components and Controller Manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1764">#1764</a>)</p></li>
+<li><p>Improve launch utils to support the multiple controller names (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1782">#1782</a>)</p></li>
+<li><p>[RM/HW] Constify the exported state interfaces using ConstSharedPtr (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1767">#1767</a>)</p></li>
+<li><p>[CM] Throw an exception when the components initially fail to be in the required state (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1729">#1729</a>)</p></li>
+<li><p>Contributors: Felix Exner (fexner), Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id164">
+<h2>4.18.0 (2024-10-07)<a class="headerlink" href="#id164" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Adapt controller Reference/StateInterfaces to New Way of Exporting (variant support) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1689">#1689</a>)</p></li>
+<li><p>Add test coverage for <cite>params_file</cite> parameter in spawner/unspawner tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1754">#1754</a>)</p></li>
+<li><p>[ros2controlcli] add params file parsing to load_controller verb and add namespacing support  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1703">#1703</a>)</p></li>
+<li><p>Contributors: Manuel Muth, Sai Kishor Kothakota, Santosh Govindaraj</p></li>
+</ul>
+</section>
+<section id="id168">
+<h2>4.17.0 (2024-09-11)<a class="headerlink" href="#id168" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Log exception type when catching the exception (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1749">#1749</a>)</p></li>
+<li><p>[CM] Handle other exceptions while loading the controller plugin (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1731">#1731</a>)</p></li>
+<li><p>remove unnecessary log of the CM args (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1720">#1720</a>)</p></li>
+<li><p>Fix unload of controllers when spawned with <cite>–unload-on-kill</cite> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1717">#1717</a>)</p></li>
+<li><p>Rename <cite>get_state</cite> and <cite>set_state</cite> Functions to <cite>get/set_lifecylce_state</cite> (variant support) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1683">#1683</a>)</p></li>
+<li><p>Contributors: Manuel Muth, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id174">
+<h2>4.16.1 (2024-08-24)<a class="headerlink" href="#id174" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>propage a portion of global args to the controller nodes (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1712">#1712</a>)</p></li>
+<li><p>Contributors: Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id176">
+<h2>4.16.0 (2024-08-22)<a class="headerlink" href="#id176" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>inform user what reason is for not setting rt policy, inform is policy (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1705">#1705</a>)</p></li>
+<li><p>Fix params_file typo in spawner and update release notes for use_global_arguments (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1701">#1701</a>)</p></li>
+<li><p>Fix spawner tests timeout (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1692">#1692</a>)</p></li>
+<li><p>Refactor spawner to be able to reuse code for ros2controlcli (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1661">#1661</a>)</p></li>
+<li><p>Robustify controller spawner and add integration test with many controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1501">#1501</a>)</p></li>
+<li><p>Handle waiting in Spawner and align Hardware Spawner functionality (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1562">#1562</a>)</p></li>
+<li><p>Make list controller and list hardware components immediately visualize the state. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1606">#1606</a>)</p></li>
+<li><p>[CI] Add coveragepy and remove ignore: test (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1668">#1668</a>)</p></li>
+<li><p>Fix spawner unload on kill test (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1675">#1675</a>)</p></li>
+<li><p>[CM] Add more logging for easier debugging (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1645">#1645</a>)</p></li>
+<li><p>refactor SwitchParams to fix the incosistencies in the spawner tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1638">#1638</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Christoph Fröhlich, Dr. Denis, Felix Exner (fexner), Manuel Muth, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id188">
+<h2>4.15.0 (2024-08-05)<a class="headerlink" href="#id188" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add missing include for executors (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1653">#1653</a>)</p></li>
+<li><p>Fix the namespaced controller_manager spawner + added tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1640">#1640</a>)</p></li>
+<li><p>CM: Add missing includes (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1641">#1641</a>)</p></li>
+<li><p>Fix rst markup (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1642">#1642</a>)</p></li>
+<li><p>Add a pytest launch file to test ros2_control_node (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1636">#1636</a>)</p></li>
+<li><p>[CM] Remove deprecated spawner args (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1639">#1639</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id195">
+<h2>4.14.0 (2024-07-23)<a class="headerlink" href="#id195" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Unused header cleanup (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1627">#1627</a>)</p></li>
+<li><p>Remove noqa (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1626">#1626</a>)</p></li>
+<li><p>Fix controller starting with later load of robot description test (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1624">#1624</a>)</p></li>
+<li><p>[CM] Remove support for the description parameter and use only <cite>robot_description</cite> topic (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1358">#1358</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Dr. Denis, Henry Moore, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id200">
+<h2>4.13.0 (2024-07-08)<a class="headerlink" href="#id200" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Change the spamming checking interface ERROR to DEBUG (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1605">#1605</a>)</p></li>
+<li><p>[ResourceManager] Propagate access to logger and clock interfaces to HardwareComponent (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1585">#1585</a>)</p></li>
+<li><p>[ControllerChaining] Export state interfaces from chainable controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1021">#1021</a>)</p></li>
+<li><p>Contributors: Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id204">
+<h2>4.12.0 (2024-07-01)<a class="headerlink" href="#id204" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>[rqt_controller_manager] Add hardware components (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1455">#1455</a>)</p></li>
+<li><p>[RM] Rename <cite>load_urdf</cite> method to <cite>load_and_initialize_components</cite> and add error handling there to avoid stack crashing when error happens. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1354">#1354</a>)</p></li>
+<li><p>Fix update <cite>period</cite> for the first update after activation (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1551">#1551</a>)</p></li>
+<li><p>Bump version of pre-commit hooks (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1556">#1556</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Dr. Denis, github-actions[bot]</p></li>
+</ul>
+</section>
+<section id="id209">
+<h2>4.11.0 (2024-05-14)<a class="headerlink" href="#id209" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add find_package for ament_cmake_gen_version_h (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1534">#1534</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich</p></li>
+</ul>
+</section>
+<section id="id211">
+<h2>4.10.0 (2024-05-08)<a class="headerlink" href="#id211" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>allow extra spawner arguments to not declare every argument in launch utils (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1505">#1505</a>)</p></li>
+<li><p>Working async controllers and components [not synchronized] (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1041">#1041</a>)</p></li>
+<li><p>Add fallback controllers list to the ControllerInfo (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1503">#1503</a>)</p></li>
+<li><p>Add a functionality to look for the controller type in the params file when not parsed (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1502">#1502</a>)</p></li>
+<li><p>Add controller exception handling in controller manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1507">#1507</a>)</p></li>
+<li><p>Contributors: Márk Szitanics, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id217">
+<h2>4.9.0 (2024-04-30)<a class="headerlink" href="#id217" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Deactivate the controllers when they return error similar to hardware (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1499">#1499</a>)</p></li>
+<li><p>Component parser: Get mimic information from URDF (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1256">#1256</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id220">
+<h2>4.8.0 (2024-03-27)<a class="headerlink" href="#id220" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>generate version.h file per package using the ament_generate_version_header  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1449">#1449</a>)</p></li>
+<li><p>Use ament_cmake generated rclcpp version header (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1448">#1448</a>)</p></li>
+<li><p>Replace random_shuffle with shuffle. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1446">#1446</a>)</p></li>
+<li><p>Contributors: Chris Lalancette, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id224">
+<h2>4.7.0 (2024-03-22)<a class="headerlink" href="#id224" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>add missing compiler definitions of RCLCPP_VERSION_MAJOR (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1440">#1440</a>)</p></li>
+<li><p>Codeformat from new pre-commit config (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1433">#1433</a>)</p></li>
+<li><p>add conditioning to get_parameter_value method import (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1428">#1428</a>)</p></li>
+<li><p>Change the controller sorting with an approach similar to directed acyclic graphs (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1384">#1384</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id229">
+<h2>4.6.0 (2024-03-02)<a class="headerlink" href="#id229" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add -Werror=missing-braces to compile options (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1423">#1423</a>)</p></li>
+<li><p>added conditioning to have rolling tags compilable in older versions (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1422">#1422</a>)</p></li>
+<li><p>[CM] Remove deprecated parameters for initial component states. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1357">#1357</a>)</p></li>
+<li><p>[BREAKING CHANGE] Use <cite>robot_description</cite> topic instead of <cite>~/robot_description</cite> and update docs regarding this (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1410">#1410</a>)</p></li>
+<li><p>[CI] Code coverage + pre-commit (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1413">#1413</a>)</p></li>
+<li><p>Fix multiple chainable controller activation bug (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1401">#1401</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Dr. Denis, Felix Exner (fexner), Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id236">
+<h2>4.5.0 (2024-02-12)<a class="headerlink" href="#id236" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>check for state of the controller node before cleanup (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1363">#1363</a>)</p></li>
+<li><p>[CM] Use explicit constants in controller tests. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1356">#1356</a>)</p></li>
+<li><p>[CM] Optimized debug output about interfaces when switching controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1355">#1355</a>)</p></li>
+<li><p>A method to get node options to setup the controller node #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1169">#1169</a>)</p></li>
+<li><p>Contributors: Dr. Denis, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id241">
+<h2>4.4.0 (2024-01-31)<a class="headerlink" href="#id241" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Move <cite>test_components</cite> to own package (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1325">#1325</a>)</p></li>
+<li><p>Fix controller parameter loading issue in different cases (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1293">#1293</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id244">
+<h2>4.3.0 (2024-01-20)<a class="headerlink" href="#id244" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>[CM] Better readability and maintainability: rename variables, move code to more logical places 🔧 (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1227">#1227</a>)</p></li>
+<li><p>Initialize the controller manager services after initializing resource manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1271">#1271</a>)</p></li>
+<li><p>Issue 695: Changing ‘namespace_’ variables to ‘node_namespace’ to make it more explicit (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1239">#1239</a>)</p></li>
+<li><p>Fix rqt controller manager crash on ros2_control restart (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1273">#1273</a>)</p></li>
+<li><p>[docs] Remove joint_state_controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1263">#1263</a>)</p></li>
+<li><p>controller_manager: Add space to string literal concatenation (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1245">#1245</a>)</p></li>
+<li><p>Try using SCHED_FIFO on any kernel (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1142">#1142</a>)</p></li>
+<li><p>[CM] Set chained controller interfaces ‘available’ for activated controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1098">#1098</a>)</p></li>
+<li><p>[CM] Increase tests timeout (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1224">#1224</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Dr. Denis, Felix Exner (fexner), Sai Kishor Kothakota, Yasushi SHOJI, bailaC</p></li>
+</ul>
+</section>
+<section id="id254">
+<h2>4.2.0 (2023-12-12)<a class="headerlink" href="#id254" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>[CM] Linting if/else statements (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1193">#1193</a>)</p></li>
+<li><p>Reformat with braces added (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1209">#1209</a>)</p></li>
+<li><p>Report inactive controllers as a diagnostics ok instead of an error (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1184">#1184</a>)</p></li>
+<li><p>Fix controller sorting issue while loading large number of controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1180">#1180</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Dr. Denis, Lennart Nachtigall, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id259">
+<h2>4.1.0 (2023-11-30)<a class="headerlink" href="#id259" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add few warning compiler options to error (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1181">#1181</a>)</p></li>
+<li><p>[ControllerManager] Fix all warnings from the latets features. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1174">#1174</a>)</p></li>
+<li><p>Compute the actual update period for each controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1140">#1140</a>)</p></li>
+<li><p>Contributors: Dr. Denis, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id263">
+<h2>4.0.0 (2023-11-21)<a class="headerlink" href="#id263" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Pass controller manager update rate on the init of the controller interface  (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1141">#1141</a>)</p></li>
+<li><p>Fix the controller sorting bug when the interfaces are not configured (fixes <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1164">#1164</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1165">#1165</a>)</p></li>
+<li><p>Pass URDF to controllers on init (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1088">#1088</a>)</p></li>
+<li><p>Remove deprecation warning (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1101">#1101</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Christoph Fröhlich, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id269">
+<h2>3.21.0 (2023-11-06)<a class="headerlink" href="#id269" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Sort controllers while configuring instead of while activating (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1107">#1107</a>)</p></li>
+<li><p>Contributors: Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id271">
+<h2>3.20.0 (2023-10-31)<a class="headerlink" href="#id271" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Update spawner to accept controllers list and start them in sequence (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1139">#1139</a>)</p></li>
+<li><p>[ResourceManager] deactivate hardware from read/write return value (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/884">#884</a>)</p></li>
+<li><p>Export of the get_cm_node_options() from robostack (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1129">#1129</a>)</p></li>
+<li><p>Contributors: Felix Exner (fexner), Olivier Stasse, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id275">
+<h2>3.19.1 (2023-10-04)<a class="headerlink" href="#id275" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix next controller update cycle time clock (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1127">#1127</a>)</p></li>
+<li><p>Contributors: Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id277">
+<h2>3.19.0 (2023-10-03)<a class="headerlink" href="#id277" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Proper controller update rate (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1105">#1105</a>)</p></li>
+<li><p>Fix multiple calls to export reference interfaces (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1108">#1108</a>)</p></li>
+<li><p>[Docs] Fix information about activation and deactivation of chainable controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1104">#1104</a>)</p></li>
+<li><p>Contributors: Dr. Denis, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id281">
+<h2>3.18.0 (2023-08-17)<a class="headerlink" href="#id281" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Controller sorting and proper execution in a chain (Fixes <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/853">#853</a>) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1063">#1063</a>)</p></li>
+<li><p>Contributors: Sai Kishor Kothakota, Christoph Fröhlich, Dr Denis, Bence Magyar</p></li>
+</ul>
+</section>
+<section id="id284">
+<h2>3.17.0 (2023-08-07)<a class="headerlink" href="#id284" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>[CM] Fixes the issue with individual controller’s update rate (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1082">#1082</a>)</p></li>
+<li><p>Fix deprecation warning (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1093">#1093</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id287">
+<h2>3.16.0 (2023-07-09)<a class="headerlink" href="#id287" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>added controller manager runner to have update cycles (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1075">#1075</a>)</p></li>
+<li><p>[CM] Make error message after trying to active controller more informative. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1066">#1066</a>)</p></li>
+<li><p>Fix equal and higher controller update rate (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1070">#1070</a>)</p></li>
+<li><p>Create doc file for chained controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/985">#985</a>)</p></li>
+<li><p>Contributors: Dr. Denis, Sai Kishor Kothakota</p></li>
+</ul>
+</section>
+<section id="id292">
+<h2>3.15.0 (2023-06-23)<a class="headerlink" href="#id292" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Enable setting of initial state in HW compoments (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1046">#1046</a>)</p></li>
+<li><p>[CM] Improve output when using robot description topic and give output about correct topic even remapped. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1059">#1059</a>)</p></li>
+<li><p>Contributors: Dr. Denis</p></li>
+</ul>
+</section>
+<section id="id295">
+<h2>3.14.0 (2023-06-14)<a class="headerlink" href="#id295" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add -Wconversion flag to protect future developments (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1053">#1053</a>)</p></li>
+<li><p>[CM] Use <cite>robot_description</cite> topic instead of parameter and don’t crash on empty URDF 🦿 (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/940">#940</a>)</p></li>
+<li><p>enable ReflowComments to also use ColumnLimit on comments (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1037">#1037</a>)</p></li>
+<li><p>Docs: Use branch name substitution for all links (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1031">#1031</a>)</p></li>
+<li><p>Add text to assertions references (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1023">#1023</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Felix Exner (fexner), Manuel Muth, Sai Kishor Kothakota, gwalck</p></li>
+</ul>
+</section>
+<section id="id301">
+<h2>3.13.0 (2023-05-18)<a class="headerlink" href="#id301" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add class for thread management of async hw interfaces (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/981">#981</a>)</p></li>
+<li><p>Fix GitHub link on control.ros.org (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1022">#1022</a>)</p></li>
+<li><p>Remove log-level argument from spawner script (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/1013">#1013</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Márk Szitanics, Bijou Abraham</p></li>
+</ul>
+</section>
+<section id="id305">
+<h2>3.12.2 (2023-04-29)<a class="headerlink" href="#id305" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id306">
+<h2>3.12.1 (2023-04-14)<a class="headerlink" href="#id306" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id307">
+<h2>3.12.0 (2023-04-02)<a class="headerlink" href="#id307" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>[Controller Interface] Add time and period paramters to update_reference_from_subscribers() (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/846">#846</a>) #API-break</p></li>
+<li><p>Contributors: Robotgir</p></li>
+</ul>
+</section>
+<section id="id309">
+<h2>3.11.0 (2023-03-22)<a class="headerlink" href="#id309" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>[ControllerManager] Add Class for Async Controllers and Lifecycle Management (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/932">#932</a>)</p></li>
+<li><p>Consistent use of colors for warning and error msgs in spawner (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/974">#974</a>)</p></li>
+<li><p>Fix wrong warning messages (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/973">#973</a>)</p></li>
+<li><p>Add log level support to spawner node (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/972">#972</a>)</p></li>
+<li><p>Contributors: Dr. Denis, Márk Szitanics, Bijou Abraham</p></li>
+</ul>
+</section>
+<section id="id314">
+<h2>3.10.0 (2023-03-16)<a class="headerlink" href="#id314" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>add spawner for hardware (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/941">#941</a>)</p></li>
+<li><p>Contributors: Manuel Muth</p></li>
+</ul>
+</section>
+<section id="id316">
+<h2>3.9.1 (2023-03-09)<a class="headerlink" href="#id316" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id317">
+<h2>3.9.0 (2023-02-28)<a class="headerlink" href="#id317" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>fix AttributeError: Parameter object attribute name is read-only (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/957">#957</a>)</p></li>
+<li><p>Remove deprecations from CLI and controller_manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/948">#948</a>)</p></li>
+<li><p>Expose node options to controller manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/942">#942</a>)</p></li>
+<li><p>Contributors: Christoph Fröhlich, Noel Jiménez García, methylDragon</p></li>
+</ul>
+</section>
+<section id="id321">
+<h2>3.8.0 (2023-02-10)<a class="headerlink" href="#id321" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix CMake install so overriding works (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/926">#926</a>)</p></li>
+<li><p>🖤 Add Black formatter for Python files. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/936">#936</a>)</p></li>
+<li><p>Add list_hardware_components CLI &lt;<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/796">https://github.com/ros-controls/ros2_control/issues/796</a>&gt;`_ - Adds list_hardware_components to CLI (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/891">#891</a>)</p></li>
+<li><p>Contributors: Andy McEvoy, Dr. Denis, Tyler Weaver</p></li>
+</ul>
+</section>
+<section id="id325">
+<h2>3.7.0 (2023-01-24)<a class="headerlink" href="#id325" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Do not use CLI calls but direct API for setting parameters. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/910">#910</a>)</p></li>
+<li><p>Optimize output of controller spawner (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/909">#909</a>)</p></li>
+<li><p>ControllerManager: catch exception by reference (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/906">#906</a>)</p></li>
+<li><p>Test fix: don’t keep reference to the controller in the test when it should be destroyed in the controller manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/883">#883</a>)</p></li>
+<li><p>Merge branch ‘fix-update-rate’ into humble (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/874">#874</a>)</p></li>
+<li><p>Contributors: Christopher Wecht, Dr. Denis, Tony Najjar, sgmurray</p></li>
+</ul>
+</section>
+<section id="id331">
+<h2>3.6.0 (2023-01-12)<a class="headerlink" href="#id331" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix QoS deprecation warnings (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/879">#879</a>)</p></li>
+<li><p>Add backward_ros to controller_manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/886">#886</a>)</p></li>
+<li><p>Contributors: Andy McEvoy, Bence Magyar</p></li>
+</ul>
+</section>
+<section id="id334">
+<h2>3.5.1 (2023-01-06)<a class="headerlink" href="#id334" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Prevent controller manager from crashing when controller’s plugin has error during loading. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/881">#881</a>)</p></li>
+<li><p>Contributors: Denis Štogl</p></li>
+</ul>
+</section>
+<section id="id336">
+<h2>3.5.0 (2022-12-06)<a class="headerlink" href="#id336" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Rename class type to plugin name #api-breaking #abi-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/780">#780</a>)</p></li>
+<li><p>Namespace Loaded Controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/852">#852</a>)</p></li>
+<li><p>Contributors: Bence Magyar, sp-sophia-labs</p></li>
+</ul>
+</section>
+<section id="id339">
+<h2>3.4.0 (2022-11-27)<a class="headerlink" href="#id339" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use a thread priority library from realtime_tools (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/794">#794</a>)</p></li>
+<li><p>[Doc] Correct type of update_rate parameter (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/858">#858</a>)</p></li>
+<li><p>Contributors: Andy Zelenak, Denis Štogl, Bence Magyar</p></li>
+</ul>
+</section>
+<section id="id342">
+<h2>3.3.0 (2022-11-15)<a class="headerlink" href="#id342" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Adding activation/deactivation tests for chain controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/809">#809</a>)</p></li>
+<li><p>Fix const-ness in std::chrono::time_point construction and explicitly use std::chrono::nanoseconds as std::chrono::time_point template parameter to help compilation on macOS as its std::chrono::system_clock::time_point defaults to std::chrono::milliseconds for duration type (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/848">#848</a>)</p></li>
+<li><p>[ControllerManager] Fix wrong initialization order and avoid compiler warnings (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/836">#836</a>)</p></li>
+<li><p>Contributors: Adrian Zwiener, Bilal Gill, Felix Exner, light-tech</p></li>
+</ul>
+</section>
+<section id="id346">
+<h2>3.2.0 (2022-10-15)<a class="headerlink" href="#id346" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id347">
+<h2>3.1.0 (2022-10-05)<a class="headerlink" href="#id347" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Don’t ask to export reference interface if controller not ‘inactive’ or ‘active’ (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/824">#824</a>)</p></li>
+<li><p>Add diagnostics for controllers activity (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/820">#820</a>)</p></li>
+<li><p>Search for controller manager in the same namespace as spawner (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/810">#810</a>)</p></li>
+<li><p>Handle HW errors on read and write in CM by stopping controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/742">#742</a>)
+Add code for deactivating controller when hardware gets an error on read and write.
+Fix misleading variable name in the tests.
+Remove all interface from available list for hardware when an error happens.
+Do some more variable renaming to the new nomenclature.</p></li>
+<li><p>Contributors: Denis Štogl, Tony Najjar</p></li>
+</ul>
+</section>
+<section id="id352">
+<h2>3.0.0 (2022-09-19)<a class="headerlink" href="#id352" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id353">
+<h2>2.15.0 (2022-09-19)<a class="headerlink" href="#id353" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id354">
+<h2>2.14.0 (2022-09-04)<a class="headerlink" href="#id354" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add doxygen comments (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/777">#777</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Denis Štogl</p></li>
+</ul>
+</section>
+<section id="id356">
+<h2>2.13.0 (2022-08-03)<a class="headerlink" href="#id356" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Clang tidy: delete a redundant return (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/790">#790</a>)</p></li>
+<li><p>Add chained controllers information in list controllers service #abi-braking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/758">#758</a>)
+* add chained controllers in ros2controlcli
+* remove controller_group from service
+* added comments to ControllerState message
+* added comments to ChainedConnection message</p></li>
+<li><p>spawner.py: Fix python logging on deprecation warning (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/787">#787</a>)</p></li>
+<li><p>Add documentation for realtime permission (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/781">#781</a>)</p></li>
+<li><p>Fix bug in spawner with getter for node’s logger (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/776">#776</a>)</p></li>
+<li><p>Contributors: Andy Zelenak, Felix Exner, Paul Gesel, Bijou Abraham</p></li>
+</ul>
+</section>
+<section id="id362">
+<h2>2.12.1 (2022-07-14)<a class="headerlink" href="#id362" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Rename CM members from start/stop to activate/deactivate nomenclature. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/756">#756</a>)</p></li>
+<li><p>Fix spelling in comment (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/769">#769</a>)</p></li>
+<li><p>Contributors: Denis Štogl, Tyler Weaver</p></li>
+</ul>
+</section>
+<section id="id365">
+<h2>2.12.0 (2022-07-09)<a class="headerlink" href="#id365" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Deprecate and rename <cite>start</cite> and <cite>stop</cite> nomenclature toward user to <cite>activate</cite> and <cite>deactivate</cite> #ABI-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/755">#755</a>)
+* Rename fields and deprecate old nomenclature.
+* Add new defines to SwitchController.srv
+* Deprecated start/stop nomenclature in all CLI commands.
+* Deprecate ‘start_asap’ too as other fields.</p></li>
+<li><p>[ros2_control_node] Automatically detect if RT kernel is used and opportunistically enable SCHED_FIFO (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/748">#748</a>)</p></li>
+<li><p>Contributors: Denis Štogl, Tyler Weaver</p></li>
+</ul>
+</section>
+<section id="id368">
+<h2>2.11.0 (2022-07-03)<a class="headerlink" href="#id368" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Remove hybrid services in controller manager. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/761">#761</a>)</p></li>
+<li><p>[Interfaces] Improved <code class="docutils literal notranslate"><span class="pre">`get_name()`</span></code> method of hardware interfaces #api-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/737">#737</a>)</p></li>
+<li><p>Update maintainers of packages (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/753">#753</a>)</p></li>
+<li><p>Fix test dependency for chainable test (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/751">#751</a>)</p></li>
+<li><p>Remove ament autolint (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/749">#749</a>)</p></li>
+<li><p>Full functionality of chainable controllers in controller manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/667">#667</a>)
+* auto-switching of chained mode in controllers
+* interface-matching approach for managing chaining controllers</p></li>
+<li><p>Fixup spanwer and unspawner tests. It changes spawner a bit to handle interupts internally. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/745">#745</a>)</p></li>
+<li><p>Add missing field to initializer lists in tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/746">#746</a>)</p></li>
+<li><p>Small but useful output update on controller manager. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/741">#741</a>)</p></li>
+<li><p>Fixed period passed to hardware components always 0 (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/738">#738</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Denis Štogl, Maciej Bednarczyk, Lucas Schulze</p></li>
+</ul>
+</section>
+<section id="id379">
+<h2>2.10.0 (2022-06-18)<a class="headerlink" href="#id379" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Make RHEL CI happy! (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/730">#730</a>)</p></li>
+<li><p>CMakeLists cleanup (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/733">#733</a>)</p></li>
+<li><p>Update to clang format 12 (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/731">#731</a>)</p></li>
+<li><p>Contributors: Andy Zelenak, Bence Magyar, Márk Szitanics</p></li>
+</ul>
+</section>
+<section id="id383">
+<h2>2.9.0 (2022-05-19)<a class="headerlink" href="#id383" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Adding base class for chained controllers: <cite>ChainedControllersInterface</cite> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/663">#663</a>)
+* Extending ControllerInterface with methods for chainable controllers.
+* Switching to chained_mode is only forbidden if controller is active.
+* Default implementation for ‘on_set_chained_mode’ method.
+* Use two internal methods instead of ‘update’ directly on chained controllers.</p></li>
+<li><p>Add ControllerInterfaceBase class with methods for chainable controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/717">#717</a>)</p></li>
+<li><p>Contributors: Denis Štogl</p></li>
+</ul>
+</section>
+<section id="id386">
+<h2>2.8.0 (2022-05-13)<a class="headerlink" href="#id386" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Pass time and period to read() and write() (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/715">#715</a>)</p></li>
+<li><p>Contributors: Bence Magyar</p></li>
+</ul>
+</section>
+<section id="id388">
+<h2>2.7.0 (2022-04-29)<a class="headerlink" href="#id388" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Update ControllerManager documenation describing some concepts (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/677">#677</a>)</p></li>
+<li><p>Make node private in ControllerInterface (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/699">#699</a>)</p></li>
+<li><p>Contributors: Chen Bainian, Denis Štogl, Jack Center, Bence Magyar</p></li>
+</ul>
+</section>
+<section id="id391">
+<h2>2.6.0 (2022-04-20)<a class="headerlink" href="#id391" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add controller_manager_msgs dependency to test_hardware_management_srvs (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/702">#702</a>)</p></li>
+<li><p>Remove unused variable from the test (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/700">#700</a>)</p></li>
+<li><p>Enable namespaces for controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/693">#693</a>)</p></li>
+<li><p>Spawner waits for services (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/683">#683</a>)</p></li>
+<li><p>Contributors: Denis Štogl, Rufus Wong, Tyler Weaver</p></li>
+</ul>
+</section>
+<section id="id396">
+<h2>2.5.0 (2022-03-25)<a class="headerlink" href="#id396" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Make ControllerManager tests more flexible and reusable for different scenarios. Use more parameterized tests regarding strictness. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/661">#661</a>)</p></li>
+<li><p>Use lifecycle nodes in controllers again (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/538">#538</a>)
+* Add lifecycle nodes
+* Add custom ‘configure’ to controller interface to get ‘update_rate’ parameter.
+* Disable external interfaces of LifecycleNode.</p></li>
+<li><p>Small fixes in controller manager tests. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/660">#660</a>)</p></li>
+<li><p>Enable controller manager services to control hardware lifecycle #abi-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/637">#637</a>)
+* Implement CM services for hardware lifecycle management.
+* Added default behavior to activate all controller and added description of CM parameters.</p></li>
+<li><p>Contributors: Denis Štogl, Vatan Aksoy Tezer, Bence Magyar</p></li>
+</ul>
+</section>
+<section id="id401">
+<h2>2.4.0 (2022-02-23)<a class="headerlink" href="#id401" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fixes of issue with seg-fault when checking interfaces on unconfigured controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/580">#580</a>)</p></li>
+<li><p>Update CM service QoS so that we don’t lose service calls when using many controllers. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/643">#643</a>)</p></li>
+<li><p>Contributors: Denis Štogl, Bence Magyar</p></li>
+</ul>
+</section>
+<section id="id404">
+<h2>2.3.0 (2022-02-18)<a class="headerlink" href="#id404" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>added a fixed control period to loop (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/647">#647</a>)</p></li>
+<li><p>install spawner/unspawner using console_script entrypoint (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/607">#607</a>)</p></li>
+<li><p>Add BEST_EFFORT in the controller switch tests. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/582">#582</a>)</p></li>
+<li><p>Resolve unused parameter warnings (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/636">#636</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Denis Štogl, Jack Center, Melvin Wang, Xi-Huang</p></li>
+</ul>
+</section>
+<section id="id409">
+<h2>2.2.0 (2022-01-24)<a class="headerlink" href="#id409" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Resource Manager API changes for hardware lifecycle #api-breaking #abi-breaking (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/589">#589</a>)
+* Towards selective starting and stoping of hardware components. Cleaning and renaming.
+* Move Lifecycle of hardware component to the bottom for better overview.
+* Use the same nomenclature as for controllers. ‘start’ -&gt; ‘activate’; ‘stop’ -&gt; ‘deactivate’
+* Add selective starting and stopping of hardware resources.
+Add HardwareComponentInfo structure in resource manager.
+Use constants for HW parameters in tests of resource_manager.
+Add list hardware components in CM to get details about them and check their status.
+Use clear name for ‘guard’ and move release cmd itfs for better readability.
+RM: Add lock for accesing maps with stored interfaces.
+Separate hardware components-related services after controllers-related services.
+Add service for activate/deactive hardware components.
+Add activation and deactivation through ResourceStorage. This helps to manage available command interfaces.
+* Use lifecycle_msgs/State in ListHardwareCompoents for state representation.
+* Simplify repeatable code in methods.
+* Add HW shutdown structure into ResouceManager.
+* Fill out service callback in CM and add parameter for auto-configure.
+* Move claimed_command_itf_map to ResourceStorage from ResourceManager.
+* Do not automatically configure hardware in RM.
+* Lifecycle and claiming in Resource Manager is working.
+* Extend controller manager to support HW lifecycle.
+* Add also available and claimed status into list components service output.
+* Add SetHardwareComponentState service.
+* Make all output in services debug-output.
+* Remove specific services for hardware lifecycle management and leave only ‘set_hardware_component_state’ service.
+* Make init_resource_manager less stateful.
+* Keep old api to start/activate all components per default.
+* Remove ‘moving’/’non-moving’ interface-handling.
+* Remove obsolete ‘import_components’ methods without hardware info and fix post_initialization test.
+Co-authored-by: Bence Magyar &lt;<a class="reference external" href="mailto:bence&#46;magyar&#46;robotics&#37;&#52;&#48;gmail&#46;com">bence<span>&#46;</span>magyar<span>&#46;</span>robotics<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;</p></li>
+<li><p>Contributors: Denis Štogl</p></li>
+</ul>
+</section>
+<section id="id411">
+<h2>2.1.0 (2022-01-11)<a class="headerlink" href="#id411" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id412">
+<h2>2.0.0 (2021-12-29)<a class="headerlink" href="#id412" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add service-skeletons for controlling hardware lifecycle. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/585">#585</a>)</p></li>
+<li><p>fix get_update_rate visibility in windows (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/586">#586</a>)</p></li>
+<li><p>Make output of not available controller nicer and make it informational. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/577">#577</a>)</p></li>
+<li><p>Contributors: Denis Štogl, Melvin Wang</p></li>
+</ul>
+</section>
+<section id="id416">
+<h2>1.2.0 (2021-11-05)<a class="headerlink" href="#id416" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id417">
+<h2>1.1.0 (2021-10-25)<a class="headerlink" href="#id417" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>feat: add colored output into spawner.py (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/560">#560</a>)</p></li>
+<li><p>Added timeout argument for service_caller timeout (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/552">#552</a>)</p></li>
+<li><p>controller_manager: Use command_interface_configuration for the claimed interfaces when calling list_controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/544">#544</a>)</p></li>
+<li><p>Clean up test_load_controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/532">#532</a>)</p></li>
+<li><p>Contributors: Jack Center, Jafar Abdi, Michael, Nour Saeed</p></li>
+</ul>
+</section>
+<section id="id422">
+<h2>1.0.0 (2021-09-29)<a class="headerlink" href="#id422" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use ControllerManager node clock for control loop timepoints (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/542">#542</a>)</p></li>
+<li><p>Per controller update rate(<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/513">#513</a>)</p></li>
+<li><p>added dt to controller interface and controller manager <a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/438">#438</a> (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/520">#520</a>)</p></li>
+<li><p>Update nomenclature in CM for better code and output understanding (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/517">#517</a>)</p></li>
+<li><p>Methods controlling the lifecycle of controllers all have on_ prefix</p></li>
+<li><p>Controller Manager should not crash when trying to start finalized or unconfigured controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/461">#461</a>)</p></li>
+<li><p>Fix deprecation warning from rclcpp::Duration (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/511">#511</a>)</p></li>
+<li><p>Remove BOOST compiler definitions for pluginlib from CMakeLists (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/514">#514</a>)</p></li>
+<li><p>Do not manually set C++ version to 14 (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/516">#516</a>)</p></li>
+<li><p>Refactor INSTANTIATE_TEST_CASE_P -&gt; INSTANTIATE_TEST_SUITE_P (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/515">#515</a>)
+Also removed the duplicated format &amp; compiler fixes as on Galactic this shouldn’t be an issue</p></li>
+<li><p>rename get_current_state() to get_state() (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/512">#512</a>)</p></li>
+<li><p>Fix spawner tests (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/509">#509</a>)</p></li>
+<li><p>Removed deprecated CLI verbs (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/420">#420</a>)</p></li>
+<li><p>Remove extensions from executable nodes (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/453">#453</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Denis Štogl, Dmitri Ignakov, Joseph Schornak, Márk Szitanics, Tim Clephas, bailaC, Mathias Aarbo</p></li>
+</ul>
+</section>
+<section id="id437">
+<h2>0.8.0 (2021-08-28)<a class="headerlink" href="#id437" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use clang format as code formatter (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/491">#491</a>)</p></li>
+<li><p>Use example urdf from the test_assests package. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/495">#495</a>)</p></li>
+<li><p>Separate controller manager test cases (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/476">#476</a>)</p></li>
+<li><p>Add Controller Manager docs (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/467">#467</a>)</p></li>
+<li><p>sort interfaces in resource manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/483">#483</a>)</p></li>
+<li><p>Add pre-commit setup. (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/473">#473</a>)</p></li>
+<li><p>Make controller_manager set controller’s use_sim_time param when use_sim_time=True (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/468">#468</a>)
+* potential solution to controller_manager use_sim_time sharing issue
+* removed debug print statements
+* added INFO message to warn user that use_sim_time is being set automatically</p></li>
+<li><p>Add load-only option into controller spawner (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/427">#427</a>)</p></li>
+<li><p>Fixes for windows (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/443">#443</a>)
+* Fix building on windows
+* Fix MSVC linker error when building tests
+* Fix hang when loading controller on windows
+* Use better log for configuring controller
+* Be consistent with visibility control
+* Use try_lock throw exception on failure</p></li>
+<li><p>Add an argument to define controller manager timeout (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/444">#444</a>)</p></li>
+<li><p>Contributors: Akash, Bence Magyar, Darko Lukić, Denis Štogl, Karsten Knese, Simon Honigmann</p></li>
+</ul>
+</section>
+<section id="id448">
+<h2>0.7.1 (2021-06-15)<a class="headerlink" href="#id448" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Use namespace in controller_manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/435">#435</a>)</p></li>
+<li><p>Contributors: Jonatan Olofsson</p></li>
+</ul>
+</section>
+<section id="id450">
+<h2>0.7.0 (2021-06-06)<a class="headerlink" href="#id450" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id451">
+<h2>0.6.1 (2021-05-31)<a class="headerlink" href="#id451" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add missing dependency on controller_manager_msgs (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/426">#426</a>)</p></li>
+<li><p>Contributors: Denis Štogl</p></li>
+</ul>
+</section>
+<section id="id453">
+<h2>0.6.0 (2021-05-23)<a class="headerlink" href="#id453" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>List controller claimed interfaces (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/407">#407</a>)
+* List controllers now also shows the claimed interfaces
+* Fixed tests that perform switches
+Successfull controller switches require more than one call to update()
+in order to update the controller list
+* Can now set the command interface configuration
+* Added checks for the claimed interfaces</p></li>
+<li><p>Contributors: Jordan Palacios</p></li>
+</ul>
+</section>
+<section id="id455">
+<h2>0.5.0 (2021-05-03)<a class="headerlink" href="#id455" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Make controller manager update rate optional (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/404">#404</a>)</p></li>
+<li><p>Bump <cite>wait_for_service</cite> timeout to 10 seconds (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/403">#403</a>)</p></li>
+<li><p>introduce –stopped for spawner (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/402">#402</a>)</p></li>
+<li><p>hardware_interface mode switching using prepareSwitch doSwitch approach (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/348">#348</a>)</p></li>
+<li><p>Avoid std::stringstream (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/391">#391</a>)</p></li>
+<li><p>avoid deprecations (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/393">#393</a>)</p></li>
+<li><p>Use RCLCPP_DEBUG_STREAM for char * (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/389">#389</a>)</p></li>
+<li><p>Check controller_interface::init return value when loading (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/386">#386</a>)</p></li>
+<li><p>Do not throw when controller type is not found, return nullptr instead (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/387">#387</a>)</p></li>
+<li><p>Contributors: Auguste Bourgois, Karsten Knese, Matt Reynolds, Tyler Weaver, Mathias Hauan Arbo, Bence Magyar</p></li>
+</ul>
+</section>
+<section id="id465">
+<h2>0.4.0 (2021-04-07)<a class="headerlink" href="#id465" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix deprecation warnings: SUCCESS -&gt; OK (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/375">#375</a>)</p></li>
+<li><p>Don’t use FileType for param-file (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/351">#351</a>)</p></li>
+<li><p>Remodel ros2controlcli, refactor spawner/unspawner and fix test (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/349">#349</a>)</p></li>
+<li><p>Add spawner and unspawner scripts (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/310">#310</a>)</p></li>
+<li><p>Contributors: Bence Magyar, Jordan Palacios, Karsten Knese, Victor Lopez</p></li>
+</ul>
+</section>
+<section id="id470">
+<h2>0.3.0 (2021-03-21)<a class="headerlink" href="#id470" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>release_interfaces when stopping controller (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/343">#343</a>)
+* release_interfaces when stopping controller
+* Moved release_interfaces after deactivate
+* First attempt at test_release_interfaces
+* Switched to std::async with cm_-&gt;update</p></li>
+<li><p>Capatalized error message and put the controllers name and resource name inside quote (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/338">#338</a>)</p></li>
+<li><p>Contributors: mahaarbo, suab321321</p></li>
+</ul>
+</section>
+<section id="id473">
+<h2>0.2.1 (2021-03-02)<a class="headerlink" href="#id473" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id474">
+<h2>0.2.0 (2021-02-26)<a class="headerlink" href="#id474" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add “Fake” components for simple integration of framework (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/323">#323</a>)</p></li>
+<li><p>Contributors: Denis Štogl</p></li>
+</ul>
+</section>
+<section id="id476">
+<h2>0.1.6 (2021-02-05)<a class="headerlink" href="#id476" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id477">
+<h2>0.1.5 (2021-02-04)<a class="headerlink" href="#id477" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id478">
+<h2>0.1.4 (2021-02-03)<a class="headerlink" href="#id478" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>fix float conversion warning (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/312">#312</a>)</p></li>
+<li><p>update doxygen style according to ros2 core standard (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/300">#300</a>)</p></li>
+<li><p>Capitalized messages in controller_manager.cpp upto line669 (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/285">#285</a>)</p></li>
+<li><p>Sleep accurate duration on ros2_control_node (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/302">#302</a>)</p></li>
+<li><p>Contributors: Achinta-Choudhury, João Victor Torres Borges, Karsten Knese, Yutaka Kondo</p></li>
+</ul>
+</section>
+<section id="id483">
+<h2>0.1.3 (2021-01-21)<a class="headerlink" href="#id483" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix building on macOS with clang (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/292">#292</a>)</p></li>
+</ul>
+<p>ail.com&gt;
+* Contributors: Karsten Knese</p>
+</section>
+<section id="id485">
+<h2>0.1.2 (2021-01-06)<a class="headerlink" href="#id485" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Fix update rate issues by working around MutliThreadedExecutor (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/275">#275</a>)
+* Fix update rate issues by working around MutliThreadedExecutor
+Currently the MutliThreadedExecutor performance is very bad. This leads
+to controllers not meeting their update rate. This PR is a temporary
+workaround for these issues.
+The current approach uses a <cite>rclcpp</cite> timer to execute the control loop.
+When used in combination with the <cite>MutliThreadedExecutor</cite>, the timers
+are not execute at their target frequency. I’ve converted the control
+loop to a while loop on a separate thread that uses <cite>nanosleep</cite> to
+execute the correct update rate. This means that <cite>rclcpp</cite> is not
+involved in the execution and leads to much better performance.
+* Address review comments by rewriting several comments</p></li>
+<li><p>Contributors: Ramon Wijnands</p></li>
+</ul>
+</section>
+<section id="id487">
+<h2>0.1.1 (2020-12-23)<a class="headerlink" href="#id487" title="Permalink to this heading"></a></h2>
+</section>
+<section id="id488">
+<h2>0.1.0 (2020-12-22)<a class="headerlink" href="#id488" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Add configure controller service (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/272">#272</a>)</p></li>
+<li><p>Remove lifecycle node (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/261">#261</a>)</p></li>
+<li><p>Added starting of resources into CM and RM (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/240">#240</a>)</p></li>
+<li><p>Use resource manager (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/236">#236</a>)</p></li>
+<li><p>Remove pluginlib warnings on reload test (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/237">#237</a>)</p></li>
+<li><p>resource loaning (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/224">#224</a>)</p></li>
+<li><p>Allocate memory for components and handles (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/207">#207</a>)</p></li>
+<li><p>Add controller manager services (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/139">#139</a>)</p></li>
+<li><p>Change Hardware return type to enum class (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/114">#114</a>)</p></li>
+<li><p>Use rclcpp::Executor instead of rclcpp::executor::Executor(deprecated) (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/82">#82</a>)</p></li>
+<li><p>Replace RCUTILS_ with RCLCPP_ for logging (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/62">#62</a>)</p></li>
+<li><p>dont include pluginlib header in controller manager header (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/63">#63</a>)</p></li>
+<li><p>export controller_interface (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/58">#58</a>)</p></li>
+<li><p>Use pluginlib instead of class_loader for loading controllers (<a class="reference external" href="https://github.com/ros-controls/ros2_control/issues/41">#41</a>)</p></li>
+<li><p>import controller_manager</p></li>
+<li><p>Contributors: Bence Magyar, Denis Štogl, Jafar Abdi, Jordan Palacios, Karsten Knese, Parth Chopra, Victor Lopez</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

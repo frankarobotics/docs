@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Control Interface &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Control Interface</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/libfranka/pylibfranka/docs/api/control.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="control-interface">
+<h1>Control Interface<a class="headerlink" href="#control-interface" title="Permalink to this heading"></a></h1>
+<p>The control interface provides real-time command and feedback for robot control.
+It is returned by the <code class="docutils literal notranslate"><span class="pre">start_*</span></code> methods of the <code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code> class.</p>
+<section id="activecontrolbase-class">
+<h2>ActiveControlBase Class<a class="headerlink" href="#activecontrolbase-class" title="Permalink to this heading"></a></h2>
+<section id="methods">
+<h3>Methods<a class="headerlink" href="#methods" title="Permalink to this heading"></a></h3>
+<section id="readonce">
+<h4>readOnce<a class="headerlink" href="#readonce" title="Permalink to this heading"></a></h4>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ActiveControlBase.</span></span><span class="sig-name descname"><span class="pre">readOnce</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Read robot state once from the control loop.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Tuple of (RobotState, Duration) containing the robot state and time since last read operation</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>tuple(RobotState, Duration)</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="writeonce-torques">
+<h4>writeOnce (Torques)<a class="headerlink" href="#writeonce-torques" title="Permalink to this heading"></a></h4>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ActiveControlBase.</span></span><span class="sig-name descname"><span class="pre">writeOnce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Torques</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Write torque command to the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<em>Torques</em>) – Torque command to send</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="writeonce-jointpositions">
+<h4>writeOnce (JointPositions)<a class="headerlink" href="#writeonce-jointpositions" title="Permalink to this heading"></a></h4>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ActiveControlBase.</span></span><span class="sig-name descname"><span class="pre">writeOnce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">JointPositions</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Write joint position command to the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<em>JointPositions</em>) – Joint position command to send</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="writeonce-jointvelocities">
+<h4>writeOnce (JointVelocities)<a class="headerlink" href="#writeonce-jointvelocities" title="Permalink to this heading"></a></h4>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ActiveControlBase.</span></span><span class="sig-name descname"><span class="pre">writeOnce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">JointVelocities</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Write joint velocity command to the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<em>JointVelocities</em>) – Joint velocity command to send</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="writeonce-cartesianpose">
+<h4>writeOnce (CartesianPose)<a class="headerlink" href="#writeonce-cartesianpose" title="Permalink to this heading"></a></h4>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ActiveControlBase.</span></span><span class="sig-name descname"><span class="pre">writeOnce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CartesianPose</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Write Cartesian pose command to the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<em>CartesianPose</em>) – Cartesian pose command to send</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="writeonce-cartesianvelocities">
+<h4>writeOnce (CartesianVelocities)<a class="headerlink" href="#writeonce-cartesianvelocities" title="Permalink to this heading"></a></h4>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-prename descclassname"><span class="pre">ActiveControlBase.</span></span><span class="sig-name descname"><span class="pre">writeOnce</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">command</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CartesianVelocities</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Write Cartesian velocity command to the robot.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>command</strong> (<em>CartesianVelocities</em>) – Cartesian velocity command to send</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+<section id="command-types">
+<h2>Command Types<a class="headerlink" href="#command-types" title="Permalink to this heading"></a></h2>
+<section id="torques">
+<h3>Torques<a class="headerlink" href="#torques" title="Permalink to this heading"></a></h3>
+</section>
+<section id="jointpositions">
+<h3>JointPositions<a class="headerlink" href="#jointpositions" title="Permalink to this heading"></a></h3>
+</section>
+<section id="jointvelocities">
+<h3>JointVelocities<a class="headerlink" href="#jointvelocities" title="Permalink to this heading"></a></h3>
+</section>
+<section id="cartesianpose">
+<h3>CartesianPose<a class="headerlink" href="#cartesianpose" title="Permalink to this heading"></a></h3>
+</section>
+<section id="cartesianvelocities">
+<h3>CartesianVelocities<a class="headerlink" href="#cartesianvelocities" title="Permalink to this heading"></a></h3>
+</section>
+</section>
+<section id="see-also">
+<h2>See Also<a class="headerlink" href="#see-also" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Robot</span></code> – Main robot control interface</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RobotState</span></code> – Robot state information</p></li>
+<li><p><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code> – Dynamics model</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

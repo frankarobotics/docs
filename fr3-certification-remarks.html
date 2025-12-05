@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FR3 certification remarks &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="Control Interface Specification and Robot Limits" href="robot_specifications.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>FR3 certification remarks</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/fr3-certification-remarks.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fr3-certification-remarks">
+<h1>FR3 certification remarks<a class="headerlink" href="#fr3-certification-remarks" title="Permalink to this heading"></a></h1>
+<p>Congratulations on your new Franka Research 3.
+As part of the package you received the documentation including Product Manual Franka Production 3 (110010/1.5/EN).
+Even though its title indicates it is for the other Franka robot arm - FP3,
+it is in general also valid for Franka Research 3.
+We recommend reading this product manual before using the robot. Please be aware that especially
+when using the FCI and in general use cases in research applications there might be some deviations from this manual.
+Therefore, please consult the following table, where the applicability is stated and check the
+referred documentation like the datasheet.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Chapter</p></th>
+<th class="head"><p>Content</p></th>
+<th class="head"><p>Applicable for FR3</p></th>
+<th class="head"><p>Comment</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>ABOUT Franka Robotics</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>RIGHTS OF USE AND PROPERTY RIGHTS</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>2.1</p></td>
+<td><p>General</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>2.2</p></td>
+<td><p>Identification</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>DECLARATION OF INCORPORATION AND CERTIFICATES</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3.1</p></td>
+<td><p>Declaration of Incorporation</p></td>
+<td><p>not applicable</p></td>
+<td><p>Research use not in scope according to article 1 2. (h)</p></td>
+</tr>
+<tr class="row-even"><td><p>3.2</p></td>
+<td><p>Certificates</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>3.3</p></td>
+<td><p>Further Statements</p></td>
+<td><p>not applicable</p></td>
+<td><p>Due to intended use partially applicable as stated in RoHS directive 2011/65/EU article 2 4 (j).  Content regarding Battery Directive applies fully.</p></td>
+</tr>
+<tr class="row-even"><td><p>3.4</p></td>
+<td><p>Labeling on the Equipment</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>SAFETY</p></td>
+<td></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4.1</p></td>
+<td><p>Safety Instructions and General Indications</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4.2</p></td>
+<td><p>Notice of Liability</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4.3</p></td>
+<td><p>Intended Use</p></td>
+<td><p>fully with remark</p></td>
+<td><p>With the extension of use in research applications</p></td>
+</tr>
+<tr class="row-odd"><td><p>4.4</p></td>
+<td><p>Misuse</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4.5</p></td>
+<td><p>General Possible Dangers and Safety Measures when Working with Robots</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4.6</p></td>
+<td><p>Application Related Possible Dangers and Safety Measures</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4.7</p></td>
+<td><p>Installation of Safety Peripherals</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4.8</p></td>
+<td><p>Fail-safe Locking System</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4.9</p></td>
+<td><p>Manually Moving the Arm</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>4.10</p></td>
+<td><p>Safety Concept</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>4.11</p></td>
+<td><p>Safety Functionalities</p></td>
+<td><p>with limitations for FCI Usage</p></td>
+<td><p>As mentioned in Datasheet Franka Research 3 (120020)</p></td>
+</tr>
+<tr class="row-odd"><td><p>4.12</p></td>
+<td><p>Safety Settings and Watchman</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>ROLES AND PERSONAE</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>SCOPE OF DELIVERY AND ACCESSORIES</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>6.1</p></td>
+<td><p>Equipment Overview</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>6.2</p></td>
+<td><p>Scope of Delivery and Additional Equipment</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI reference pager (120070)</p></td>
+</tr>
+<tr class="row-even"><td><p>6.3</p></td>
+<td><p>Available Spare Parts and Accessories</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>TECHNICAL SPECIFICATIONS</p></td>
+<td><p>partly applicable</p></td>
+<td><p>Datasheet ( pages) replaced by Franka Research 3 Datasheet - Safety notice still valid</p></td>
+</tr>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>TRANSPORT AND HANDLING</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>8.1</p></td>
+<td><p>Ambient Conditions for Delivery and Transport</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>MOUNTING AND INSTALLATION</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9.1</p></td>
+<td><p>Unpacking the Equipment</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>9.2</p></td>
+<td><p>Correct Installation Site</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9.3</p></td>
+<td><p>Preparing the Installation Site</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>9.4</p></td>
+<td><p>Mounting the Arm</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9.5</p></td>
+<td><p>Positioning the Control</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>9.6</p></td>
+<td><p>Wiring and Electrical Installation</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9.7</p></td>
+<td><p>Mounting End Effectors</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>9.8</p></td>
+<td><p>Practical Tips for Usage and Positioning of Franka Production 3</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>9.9</p></td>
+<td><p>Re-packing the Arm</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10</p></td>
+<td><p>OPERATION</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>10.1</p></td>
+<td><p>Switching On</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10.2</p></td>
+<td><p>Safety Relevant Tests of Franka Production 3</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>10.3</p></td>
+<td><p>Connecting a User Interface Device</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>10.4</p></td>
+<td><p>Software Setup</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>10.5</p></td>
+<td><p>Switching Off and Restarting</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>WORKING WITH FRANKA PRODUCTION 3</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>11.1</p></td>
+<td><p>Robotic Basics</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>11.2</p></td>
+<td><p>Franka UI</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>11.3</p></td>
+<td><p>Apps</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>11.4</p></td>
+<td><p>Operating Modes</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>11.5</p></td>
+<td><p>Single Point of Control</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-even"><td><p>11.6</p></td>
+<td><p>Teach a Task</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>11.7</p></td>
+<td><p>Test &amp; Jog</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>11.8</p></td>
+<td><p>Work</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>11.09</p></td>
+<td><p>Troubleshooting</p></td>
+<td><p>fully with remark</p></td>
+<td><p>As mentioned in FCI documentation.</p></td>
+</tr>
+<tr class="row-even"><td><p>12</p></td>
+<td><p>MANAGING FRANKA PRODUCTION 3</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12.1</p></td>
+<td><p>Franka World</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12.2</p></td>
+<td><p>Managing Apps and Updates</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>12.3</p></td>
+<td><p>Hub</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>12.4</p></td>
+<td><p>Updates</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13</p></td>
+<td><p>MAINTENANCE AND DISPOSAL</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>13.1</p></td>
+<td><p>Maintenance</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13.2</p></td>
+<td><p>Cleaning</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>13.3</p></td>
+<td><p>System Lifetime</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>13.4</p></td>
+<td><p>Disposal</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>14</p></td>
+<td><p>SERVICE AND SUPPORT</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15</p></td>
+<td><p>APPENDIX</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15.1</p></td>
+<td><p>Stopping Times and Distances</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>15.2</p></td>
+<td><p>Response times</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>15.3</p></td>
+<td><p>Safe Position Accuracy</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>GLOSSARY</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>INDEX</p></td>
+<td><p>fully</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="robot_specifications.html" class="btn btn-neutral float-left" title="Control Interface Specification and Robot Limits" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Troubleshooting &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Software Versions Compatibility" href="../../../compatibility.html" />
+    <link rel="prev" title="Franka Library for MATLAB - Reference" href="matlab_library.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Franka Toolbox for MATLAB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulink_library.html">Fanka Library for Simulink - Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_library.html">Franka Library for MATLAB - Reference</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Troubleshooting</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#control-modes-h-no-such-file-or-directory-error">control_modes.h: No such file or directory error.</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#missing-mw-custom-rtos-header-h">missing “MW_custom_RTOS_header.h”</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#libfranka-reference">libfranka reference</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#issues-with-the-graphics-driver-in-linux">Issues with the graphics driver in Linux</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#issues-with-libstdc-so-and-other-system-dynamic-libraries">Issues with libstdc++.so and other system dynamic libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#franka-simulink-library-number-of-block-instances">Franka Simulink library number of block instances</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Franka Toolbox for MATLAB</a> &raquo;</li>
+      <li>Troubleshooting</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_toolbox_for_matlab/docs/franka_matlab/troubleshooting.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="troubleshooting">
+<h1>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h1>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Checkout the <a class="reference external" href="https://www.franka-community.de">Franka Community</a>  and the
+<a class="reference external" href="https://www.franka-community.de/c/franka-matlab/15">franka_matlab category</a> for relevant posts or for creating new ones!</p>
+</div>
+<section id="control-modes-h-no-such-file-or-directory-error">
+<h2>control_modes.h: No such file or directory error.<a class="headerlink" href="#control-modes-h-no-such-file-or-directory-error" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id1">
+<img alt="../../../_images/simulink_model_apply_control_only_build_error.png" src="../../../_images/simulink_model_apply_control_only_build_error.png" />
+<figcaption>
+<p><span class="caption-text">The build error message in simulink when only the “apply control is present”.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>This is a known current limitation of the system, as the build process will fail if only
+the “apply control” block is present in a simulink model.</p>
+<figure class="align-center" id="id2">
+<img alt="../../../_images/simulink_model_apply_control_only.png" src="../../../_images/simulink_model_apply_control_only.png" />
+<figcaption>
+<p><span class="caption-text">Example of a Simulink model with only “apply control”. The build will fail.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For fixing the issue just include any other block from the Franka Simulink Library, e.g
+with the terminal if it will be left unused.</p>
+<figure class="align-center" id="id3">
+<img alt="../../../_images/simulink_model_apply_control_only_fix.png" src="../../../_images/simulink_model_apply_control_only_fix.png" />
+<figcaption>
+<p><span class="caption-text">Fixing the “control_modes.h: No such file or directory error.” by including any other
+block from the Franka Simulink Library.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="missing-mw-custom-rtos-header-h">
+<h2>missing “MW_custom_RTOS_header.h”<a class="headerlink" href="#missing-mw-custom-rtos-header-h" title="Permalink to this heading"></a></h2>
+<p>When working with the AI Companion or a NVIDIA Jetson platform, if you encounter an error
+releated to missing “MW_custom_RTOS_header.h”, you can try forcing the NVIDIA Simulink Code Generation settings to reset:</p>
+<figure class="align-center" id="id4">
+<img alt="../../../_images/ai_companion_jetson_trouble.png" src="../../../_images/ai_companion_jetson_trouble.png" />
+<figcaption>
+<p><span class="caption-text">Fixing the “missing MW_custom_RTOS_header.h” error by forcing the Simulink Jetson related
+settings to reset.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="libfranka-reference">
+<h2>libfranka reference<a class="headerlink" href="#libfranka-reference" title="Permalink to this heading"></a></h2>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Same error messages and advised troubleshooting applies as <a class="reference external" href="https://frankarobotics.github.io/docs/troubleshooting.html">libfranka</a>.</p>
+</div>
+</section>
+<section id="issues-with-the-graphics-driver-in-linux">
+<h2>Issues with the graphics driver in Linux<a class="headerlink" href="#issues-with-the-graphics-driver-in-linux" title="Permalink to this heading"></a></h2>
+<p>NVIDIA’s graphics driver’s are not officially supported in Linux with Real-Time Kernel. This could cause issues in graphics renderings in Matlab
+and Simulink, e.g with figures and scopes respectively. We would then recommend starting matlab with the <cite>-softwareopengl</cite> for avoiding these issues:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>matlab<span class="w"> </span>-softwareopengl
+</pre></div>
+</div>
+</section>
+<section id="issues-with-libstdc-so-and-other-system-dynamic-libraries">
+<h2>Issues with libstdc++.so and other system dynamic libraries<a class="headerlink" href="#issues-with-libstdc-so-and-other-system-dynamic-libraries" title="Permalink to this heading"></a></h2>
+<p>Make sure that you have installed the <a class="reference external" href="https://packages.ubuntu.com/search?keywords=matlab-support">matlab-support package</a> for your system, in order for Matlab to reference the system dynamic libraries
+instead of the precompiled ones that it ships with:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>matlab-support
+</pre></div>
+</div>
+</section>
+<section id="franka-simulink-library-number-of-block-instances">
+<h2>Franka Simulink library number of block instances<a class="headerlink" href="#franka-simulink-library-number-of-block-instances" title="Permalink to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The Simulink library has been designed for rapid-prototyping of robot controllers with one-robot
+in mind. Multiple instances for the Apply Control block are not encouraged as this has not been tested.
+Multiple instances of all the other Simulink blocks, as long as they point to the same robot ip, can be
+utilized.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="matlab_library.html" class="btn btn-neutral float-left" title="Franka Library for MATLAB - Reference" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../compatibility.html" class="btn btn-neutral float-right" title="Software Versions Compatibility" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

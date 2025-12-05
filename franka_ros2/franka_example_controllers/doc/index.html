@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_example_controllers &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="franka_hardware" href="../../franka_hardware/doc/index.html" />
+    <link rel="prev" title="franka_bringup" href="../../franka_bringup/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">franka_example_controllers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#example-controllers">Example Controllers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#move-to-start">Move-to-start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gravity-compensation">Gravity Compensation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gripper-example">Gripper Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-impedance-example">Joint Impedance Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-impedance-with-ik-example">Joint Impedance With IK Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#model-example-controller">Model Example Controller</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-position-example">Joint Position Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#joint-velocity-example">Joint Velocity Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-pose-example">Cartesian Pose Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-orientation-example">Cartesian Orientation Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-pose-elbow-example">Cartesian Pose Elbow Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-velocity-example">Cartesian Velocity Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cartesian-elbow-example">Cartesian Elbow Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#writing-custom-controllers">Writing Custom Controllers</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo/doc/index.html">franka_gazebo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2</a> &raquo;</li>
+      <li>franka_example_controllers</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_ros2/franka_example_controllers/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-example-controllers">
+<h1>franka_example_controllers<a class="headerlink" href="#franka-example-controllers" title="Permalink to this heading"></a></h1>
+<p>This package contains a few controllers that can be seen as example of how to write controllers in ROS 2. Currently,
+a controller only has access to measured joint positions and joint velocities. Based on this information the controller
+can send torque commands. It is currently not possible to use other interfaces like the joint position interface.</p>
+<section id="example-controllers">
+<h2>Example Controllers<a class="headerlink" href="#example-controllers" title="Permalink to this heading"></a></h2>
+<p>This repo comes with a few example controllers located in the <code class="docutils literal notranslate"><span class="pre">franka_example_controllers</span></code> package.</p>
+<p>The following launch files are executed with the gripper by default. If you
+do not have the gripper attached you can disable the gripper in the launch file with <code class="docutils literal notranslate"><span class="pre">load_gripper:=false</span></code>.</p>
+<section id="move-to-start">
+<h3>Move-to-start<a class="headerlink" href="#move-to-start" title="Permalink to this heading"></a></h3>
+<p>This controller moves the robot to its home configuration.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>move_to_start_example_controller
+</pre></div>
+</div>
+</section>
+<section id="gravity-compensation">
+<span id="gravity-example"></span><h3>Gravity Compensation<a class="headerlink" href="#gravity-compensation" title="Permalink to this heading"></a></h3>
+<p>This is the simplest controller that we have and is a good starting point to write your own.
+It sends zero as torque command to all joints, which means that the robot only compensates its own weight.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>gravity_compensation_example_controller
+</pre></div>
+</div>
+</section>
+<section id="gripper-example">
+<h3>Gripper Example<a class="headerlink" href="#gripper-example" title="Permalink to this heading"></a></h3>
+<p>Demonstrates the Franka <em>Action Interface</em> for controlling the Franka Hand (aka: Gripper). The controller submits <em>Goals</em> to repeatedly close, then reopen, the gripper given a hard-coded target grasp size with epsilon. It evaluates whether the grasp is successful or
+failed based on the object’s size and the defined tolerances.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>gripper_example_controller
+</pre></div>
+</div>
+</section>
+<section id="joint-impedance-example">
+<h3>Joint Impedance Example<a class="headerlink" href="#joint-impedance-example" title="Permalink to this heading"></a></h3>
+<p>The example moves joints 4 and 5 in a periodic movement that is very compliant. You can try to move the
+joints while it is running.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>joint_impedance_example_controller
+</pre></div>
+</div>
+</section>
+<section id="joint-impedance-with-ik-example">
+<h3>Joint Impedance With IK Example<a class="headerlink" href="#joint-impedance-with-ik-example" title="Permalink to this heading"></a></h3>
+<p>The example uses the LMA-Orocos solver from MoveIt service to compute the joint positions for the desired pose.
+The desired pose is to move the end-effector periodically in x and z directions. You can change the kinematic solver
+in the franka_fr3_moveit_config package, kinematics.yaml file.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>joint_impedance_with_ik_example_controller.launch.py
+</pre></div>
+</div>
+</section>
+<section id="model-example-controller">
+<h3>Model Example Controller<a class="headerlink" href="#model-example-controller" title="Permalink to this heading"></a></h3>
+<p>This is a read-only controller which prints the coriolis force vector, gravity force vector, pose matrix of Joint4,
+Joint4 body jacobian and end-effector jacobian with respect to the base frame.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>model_example_controller
+</pre></div>
+</div>
+</section>
+<section id="joint-position-example">
+<h3>Joint Position Example<a class="headerlink" href="#joint-position-example" title="Permalink to this heading"></a></h3>
+<p>This example sends periodic position commands to the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>joint_position_example_controller
+</pre></div>
+</div>
+</section>
+<section id="joint-velocity-example">
+<h3>Joint Velocity Example<a class="headerlink" href="#joint-velocity-example" title="Permalink to this heading"></a></h3>
+<p>This example sends periodic velocity commands to the 4th and 5th joint of the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>joint_velocity_example_controller
+</pre></div>
+</div>
+</section>
+<section id="cartesian-pose-example">
+<h3>Cartesian Pose Example<a class="headerlink" href="#cartesian-pose-example" title="Permalink to this heading"></a></h3>
+<p>This example uses the CartesianPose interface to send periodic pose commands to the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>cartesian_pose_example_controller
+</pre></div>
+</div>
+</section>
+<section id="cartesian-orientation-example">
+<h3>Cartesian Orientation Example<a class="headerlink" href="#cartesian-orientation-example" title="Permalink to this heading"></a></h3>
+<p>This example uses CartesianOrientation interface to send periodic orientation commands around X axis of the end effector of the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>cartesian_orientation_example_controller
+</pre></div>
+</div>
+</section>
+<section id="cartesian-pose-elbow-example">
+<h3>Cartesian Pose Elbow Example<a class="headerlink" href="#cartesian-pose-elbow-example" title="Permalink to this heading"></a></h3>
+<p>This example sends periodic elbow commands while keeping the end effector pose constant.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>cartesian_elbow_example_controller
+</pre></div>
+</div>
+</section>
+<section id="cartesian-velocity-example">
+<h3>Cartesian Velocity Example<a class="headerlink" href="#cartesian-velocity-example" title="Permalink to this heading"></a></h3>
+<p>This example uses the CartesianVelocity interface to send periodic velocity commands to the robot.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>cartesian_velocity_example_controller
+</pre></div>
+</div>
+</section>
+<section id="cartesian-elbow-example">
+<h3>Cartesian Elbow Example<a class="headerlink" href="#cartesian-elbow-example" title="Permalink to this heading"></a></h3>
+<p>This example uses the CartesianElbow interface to send periodic elbow commands to the robot while keeping the end effector velocity constant.</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>example.launch.py<span class="w"> </span>controller_name:<span class="o">=</span>elbow_example_controller
+</pre></div>
+</div>
+</section>
+</section>
+<section id="writing-custom-controllers">
+<h2>Writing Custom Controllers<a class="headerlink" href="#writing-custom-controllers" title="Permalink to this heading"></a></h2>
+<p>Compared to <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> we currently offer a reduced set of controller interfaces:</p>
+<ul class="simple">
+<li><p>Joint positions</p></li>
+<li><p>Joint velocities</p></li>
+<li><p>Measured torques</p></li>
+<li><p>Franka robot state</p></li>
+<li><p>Franka robot model</p></li>
+</ul>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Franka robot state is published through <a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html"><span class="doc">franka_robot_state_broadcaster</span></a>
+package to the topic named  <cite>/franka_robot_state_broadcaster/robot_state</cite></p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Both Franka robot state and Franka robot model are advised to use through <a class="reference internal" href="../../franka_semantic_components/doc/index.html"><span class="doc">franka_semantic_components</span></a> class.
+They are stored in the state_interface as double pointers and casted back to their original objects inside the franka_semantic_component class.</p>
+<p>Example of using franka_model can be found in the franka_example_controllers package:
+<a class="reference external" href="https://github.com/frankarobotics/franka_ros2/blob/jazzy/franka_example_controllers/src/model_example_controller.cpp">model_example_controller</a>.</p>
+</div>
+<p>You can base your own controller on one of the example controllers in this package. To compute kinematic
+and dynamic quantities of the robot you can use the joint states and the URDF of the robot in libraries like
+<a class="reference external" href="https://www.orocos.org/kdl/user-manual">KDL</a> (of which there is also a ROS 2 package available).</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../franka_bringup/doc/index.html" class="btn btn-neutral float-left" title="franka_bringup" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../franka_hardware/doc/index.html" class="btn btn-neutral float-right" title="franka_hardware" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

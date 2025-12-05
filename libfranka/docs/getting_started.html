@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Setting Up the Robot System and Network for FCI &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Usage Examples" href="usage_examples.html" />
+    <link rel="prev" title="Setting up the Real-Time Kernel" href="real_time_kernel.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">libfranka client library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libfranka_architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="compatibility_with_images.html">Robot System Version Compatibility</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Build / Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="real_time_kernel.html">Setting up the Real-Time Kernel</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Setting Up the Robot System and Network for FCI</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#operating-the-robot">Operating the Robot</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installing-the-fci-feature">Installing the FCI Feature</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#setting-up-the-network">Setting Up the Network</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#control-network-configuration">Control Network Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#linux-workstation-network-configuration">Linux Workstation Network Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#preparing-the-robot-for-fci-in-desk">Preparing the Robot for FCI in Desk</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#activating-fci-mode">Activating FCI Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#verifying-the-connection">Verifying the Connection</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="usage_examples.html">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_references.html">API References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration_notes.html">Migration Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#changelog">ChangeLog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">libfranka client library</a> &raquo;</li>
+      <li>Setting Up the Robot System and Network for FCI</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/libfranka/docs/getting_started.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="setting-up-the-robot-system-and-network-for-fci">
+<span id="fci-setup-overview"></span><h1>Setting Up the Robot System and Network for FCI<a class="headerlink" href="#setting-up-the-robot-system-and-network-for-fci" title="Permalink to this heading"></a></h1>
+<p>After completing the <a class="reference internal" href="real_time_kernel.html#realtime-kernel-setup"><span class="std std-ref">real-time kernel setup</span></a>, ensuring proper network configuration (see <a class="reference internal" href="system_requirements.html#requirement-network"><span class="std std-ref">Network requirements</span></a>), and installing <a class="reference internal" href="installation.html#libfranka-installation"><span class="std std-ref">libfranka</span></a>, you can connect to the robot and verify the setup by using FCI to read the current robot state.</p>
+<section id="operating-the-robot">
+<span id="id1"></span><h2>Operating the Robot<a class="headerlink" href="#operating-the-robot" title="Permalink to this heading"></a></h2>
+<p>Before proceeding, review the following safety considerations:</p>
+<ol class="arabic simple">
+<li><p>Ensure the Arm is mounted on a stable base that cannot topple over, even during fast motions or abrupt stops.</p></li>
+</ol>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Only tabletop mounting is supported (the Arm must be perpendicular to the ground).
+Other mountings <strong>void the warranty</strong> and <strong>may damage the robot</strong>.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Verify that the cable connecting Arm and Control is firmly attached on both sides.</p></li>
+<li><p>Connect the external activation device to the Arm’s base and keep it accessible to stop the robot at any time.</p></li>
+</ol>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Activating the external activation device will disconnect the Arm from Control.
+The joint motor controllers will hold their current position.
+<strong>The external activation device is not an emergency stop.</strong></p>
+</div>
+<p>This list is non-exhaustive. The robot manual contains a dedicated chapter on safety and is available via the
+<a class="reference external" href="https://world.franka.de/resources">Franka World Hub</a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The workstation PC controlling the robot with FCI must be connected to the LAN port of Control
+(shop floor network), <strong>not</strong> the LAN port of the Arm (robot network).</p>
+</div>
+</section>
+<section id="installing-the-fci-feature">
+<span id="installing-fci-feature"></span><h2>Installing the FCI Feature<a class="headerlink" href="#installing-the-fci-feature" title="Permalink to this heading"></a></h2>
+<p>To operate the robot through the Franka Control Interface, the corresponding Feature must be installed.
+Check Desk –&gt; Settings –&gt; System –&gt; Installed Features.</p>
+<p>If FCI is not installed, synchronize it from your Franka World account to your controller.
+You must have an FCI license and a registered controller in your account.
+Refer to the <a class="reference external" href="https://download.franka.de/franka-world-manual/">Franka World user manual</a> for details.</p>
+</section>
+<section id="setting-up-the-network">
+<span id="network-setup"></span><h2>Setting Up the Network<a class="headerlink" href="#setting-up-the-network" title="Permalink to this heading"></a></h2>
+<p>Good network performance is critical when using FCI.
+A direct connection between the workstation PC and Franka’s Control is recommended.</p>
+<figure class="align-center" id="id3">
+<img alt="../../_images/control.png" src="../../_images/control.png" />
+<figcaption>
+<p><span class="caption-text">Use Control’s LAN port when controlling the robot through FCI.
+Do not connect to the port in the Arm’s base.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Control and workstation must appear on the same network.
+For this tutorial, the following static IP addresses are used:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 43%" />
+<col style="width: 32%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Workstation PC</p></th>
+<th class="head"><p>Control</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Address</p></td>
+<td><p>172.16.0.1</p></td>
+<td><p>172.16.0.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>Netmask</p></td>
+<td><p>24</p></td>
+<td><p>24</p></td>
+</tr>
+</tbody>
+</table>
+<p>The Control’s address (172.16.0.2) is referred to as <code class="docutils literal notranslate"><span class="pre">&lt;fci-ip&gt;</span></code> in the following sections.</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Desk can be accessed via <code class="docutils literal notranslate"><span class="pre">https://&lt;fci-ip&gt;</span></code>, though your browser may display a certificate warning.</p>
+</div>
+<p>The configuration consists of two steps:</p>
+<ul class="simple">
+<li><p>Configuring Control’s network settings.</p></li>
+<li><p>Configuring your workstation’s network settings.</p></li>
+</ul>
+<section id="control-network-configuration">
+<span id="control-network-config"></span><h3>Control Network Configuration<a class="headerlink" href="#control-network-configuration" title="Permalink to this heading"></a></h3>
+<p>Before configuring, ensure the robot is installed and tested according to the documents shipped with it.</p>
+<p>For system version &gt;= 5.5.0, configure Control’s network via the settings interface.
+You may temporarily connect through the Arm’s base port.
+Refer to <cite>Connecting a user interface device</cite> in the robot manual.</p>
+<figure class="align-center" id="id4">
+<img alt="../../_images/FrankaUI_Settings_Bar.png" src="../../_images/FrankaUI_Settings_Bar.png" />
+<figcaption>
+<p><span class="caption-text">Access the Franka settings interface through Desk.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<figure class="align-center" id="id5">
+<img alt="../../_images/FrankaUI_Settings_Network.png" src="../../_images/FrankaUI_Settings_Network.png" />
+<figcaption>
+<p><span class="caption-text">Set a static IP for the Control’s LAN port (Shop Floor network).
+DHCP Client option is deselected.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>After applying the settings, connect the workstation LAN port to the Control unit.</p>
+</section>
+<section id="linux-workstation-network-configuration">
+<span id="linux-network-config"></span><h3>Linux Workstation Network Configuration<a class="headerlink" href="#linux-workstation-network-configuration" title="Permalink to this heading"></a></h3>
+<p>On Ubuntu 16.04 (GUI):</p>
+<ol class="arabic simple">
+<li><p>Open the Network Connection widget, select the wired connection, and click <strong>Edit</strong>.</p></li>
+</ol>
+<figure class="align-center" id="id6">
+<img alt="../../_images/edit-connections.png" src="../../_images/edit-connections.png" />
+<figcaption>
+<p><span class="caption-text">Edit the connection in the Ethernet section.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<ol class="arabic simple" start="2">
+<li><p>In the IPv4 settings tab, set the method to <strong>Manual</strong> and enter the values:</p></li>
+</ol>
+<figure class="align-center" id="id7">
+<img alt="../../_images/static-ip-ubuntu.png" src="../../_images/static-ip-ubuntu.png" />
+<figcaption>
+<p><span class="caption-text">Set a static IP for the workstation PC.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>This disables DHCP. When no longer using FCI, revert the Method to <cite>Automatic (DHCP)</cite>.</p>
+</div>
+<ol class="arabic simple" start="3">
+<li><p>Save changes and reconnect. Test connectivity using <a class="reference internal" href="../../troubleshooting.html#network-bandwidth-delay-test"><span class="std std-ref">Network bandwidth, delay and jitter test</span></a>.
+Desk can now be accessed via the assigned IP in your browser.</p></li>
+</ol>
+</section>
+</section>
+<section id="preparing-the-robot-for-fci-in-desk">
+<span id="preparing-robot-in-desk"></span><h2>Preparing the Robot for FCI in Desk<a class="headerlink" href="#preparing-the-robot-for-fci-in-desk" title="Permalink to this heading"></a></h2>
+<p>Ensure the robot’s brakes are unlocked and the activation device released.
+The robot is ready when the blue LED is active.</p>
+<section id="activating-fci-mode">
+<span id="id2"></span><h3>Activating FCI Mode<a class="headerlink" href="#activating-fci-mode" title="Permalink to this heading"></a></h3>
+<p>In Desk:</p>
+<ol class="arabic simple">
+<li><p>Release the robot brakes.</p></li>
+<li><p>Expand the top menu and click <strong>Activate FCI</strong>.</p></li>
+</ol>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="../../_images/FrankaUI_System_ActivateFCI.png"><img alt="../../_images/FrankaUI_System_ActivateFCI.png" src="../../_images/FrankaUI_System_ActivateFCI.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-text">Activating FCI mode in Desk (system version &gt;= 5.5.0).</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<section id="fci-mode-in-franka-emika-robot-fer">
+<span id="fci-mode-fer"></span><h4>FCI Mode in Franka Emika Robot (FER)<a class="headerlink" href="#fci-mode-in-franka-emika-robot-fer" title="Permalink to this heading"></a></h4>
+<p>Once FCI mode is activated, a pop-up confirms the mode is active and Desk interactions are disabled.
+The pop-up must remain open while working with FCI.</p>
+<figure class="align-center" id="id9">
+<img alt="../../_images/pop_up_fci.png" src="../../_images/pop_up_fci.png" />
+<figcaption>
+<p><span class="caption-text">Pop-up when FCI mode is active.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="fci-mode-in-franka-research-3">
+<span id="fci-mode-fr3"></span><h4>FCI Mode in Franka Research 3<a class="headerlink" href="#fci-mode-in-franka-research-3" title="Permalink to this heading"></a></h4>
+<figure class="align-center">
+<a class="reference internal image-reference" href="../../_images/FrankaUI_System_ActivateFCI_Done.png"><img alt="../../_images/FrankaUI_System_ActivateFCI_Done.png" src="../../_images/FrankaUI_System_ActivateFCI_Done.png" style="width: 354.9px; height: 566.3px;" /></a>
+</figure>
+<p>After activation, a pop-up appears requiring user confirmation.</p>
+</section>
+</section>
+</section>
+<section id="verifying-the-connection">
+<span id="verifying-fci-connection"></span><h2>Verifying the Connection<a class="headerlink" href="#verifying-the-connection" title="Permalink to this heading"></a></h2>
+<p>The IP of the Control’s LAN port is referred to as <code class="docutils literal notranslate"><span class="pre">&lt;fci-ip&gt;</span></code> in the following examples.</p>
+<p>Ensure <a class="reference internal" href="#preparing-robot-in-desk"><span class="std std-ref">the robot is prepared for FCI usage in Desk</span></a>.
+Run the <code class="docutils literal notranslate"><span class="pre">echo_robot_state</span></code> example from <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>./examples/echo_robot_state<span class="w"> </span>&lt;fci-ip&gt;
+</pre></div>
+</div>
+<p>The program prints the current robot state to the console. Refer to <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.18.0/structfranka_1_1RobotState.html">RobotState</a> for field explanations.</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+  &quot;O_T_EE&quot;: [0.998578,0.0328747,-0.0417381,0,0.0335224,-0.999317,0.0149157,0,-0.04122,-0.016294,
+             -0.999017,0,0.305468,-0.00814133,0.483198,1],
+  &quot;O_T_EE_d&quot;: [0.998582,0.0329548,-0.041575,0,0.0336027,-0.999313,0.0149824,0,-0.0410535,
+               -0.0163585,-0.999023,0,0.305444,-0.00810967,0.483251,1],
+  &quot;F_T_EE&quot;: [0.7071,-0.7071,0,0,0.7071,0.7071,0,0,0,0,1,0,0,0,0.1034,1],
+  &quot;EE_T_K&quot;: [1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1],
+  &quot;m_ee&quot;: 0.73, &quot;F_x_Cee&quot;: [-0.01,0,0.03], &quot;I_ee&quot;: [0.001,0,0,0,0.0025,0,0,0,0.0017],
+  ...
+}
+</pre></div>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If an error occurs, perform the <a class="reference internal" href="../../troubleshooting.html#troubleshooting-robot-not-reachable"><span class="std std-ref">ping test</span></a> and ensure
+the fail-safe locking system is open. Refer to the robot manual for additional instructions.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="real_time_kernel.html" class="btn btn-neutral float-left" title="Setting up the Real-Time Kernel" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="usage_examples.html" class="btn btn-neutral float-right" title="Usage Examples" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

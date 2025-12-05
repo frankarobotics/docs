@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>libfranka: C++ Library for Franka Robotics Research Robots &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>libfranka: C++ Library for Franka Robotics Research Robots</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/libfranka/README.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="libfranka-c-library-for-franka-robotics-research-robots">
+<h1>libfranka: C++ Library for Franka Robotics Research Robots<a class="headerlink" href="#libfranka-c-library-for-franka-robotics-research-robots" title="Permalink to this heading"></a></h1>
+<a class="reference external image-reference" href="https://codecov.io/gh/frankarobotics/libfranka"><img alt="codecov" src="https://codecov.io/gh/frankarobotics/libfranka/branch/master/graph/badge.svg" /></a>
+<p><strong>libfranka</strong> is a C++ library that provides low-level control of Franka Robotics research robots.
+The <a class="reference external" href="https://frankarobotics.github.io/docs/libfranka/docs/api_references.html">API References</a> offers an overview of its capabilities,
+while the <a class="reference external" href="https://frankarobotics.github.io/docs">Franka Control Interface (FCI) documentation</a> provides more information on setting up the robot and utilizing its features and functionalities.</p>
+<p>To find the appropriate version to use, please refer to the <a class="reference external" href="https://frankarobotics.github.io/docs/libfranka/docs/compatibility_with_images.html">Robot System Version Compatibility</a>.</p>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Low-level control</strong>: Access precise motion control for research robots.</p></li>
+<li><p><strong>Real-time communication</strong>: Interact with the robot in real-time.</p></li>
+</ul>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this heading"></a></h2>
+<section id="system-requirements">
+<span id="id1"></span><h3>1. System Requirements<a class="headerlink" href="#system-requirements" title="Permalink to this heading"></a></h3>
+<p>Before using <strong>libfranka</strong>, ensure your system meets the following requirements:</p>
+<ul class="simple">
+<li><p><strong>Operating System</strong>: <a class="reference external" href="https://frankarobotics.github.io/docs/libfranka/docs/real_time_kernel.html">Linux with PREEMPT_RT patched kernel</a>  (Ubuntu 16.04 or later, Ubuntu 22.04 recommended)</p></li>
+<li><p><strong>Compiler</strong>: GCC 7 or later</p></li>
+<li><p><strong>CMake</strong>: Version 3.10 or later</p></li>
+<li><p><strong>Robot</strong>: Franka Robotics robot with FCI feature installed</p></li>
+</ul>
+</section>
+<section id="installing-dependencies">
+<span id="id2"></span><h3>2. Installing dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>git<span class="w"> </span>libpoco-dev<span class="w"> </span>libeigen3-dev<span class="w"> </span>libfmt-dev
+</pre></div>
+</div>
+</section>
+<section id="install-from-debian-package-generic-pattern">
+<h3>3. Install from Debian Package - Generic Pattern<a class="headerlink" href="#install-from-debian-package-generic-pattern" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The installation packages currently only support Ubuntu 20 (focal). Please ensure you are using this version to avoid compatibility issues.</p>
+</div>
+<p><strong>Check your architecture:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dpkg<span class="w"> </span>--print-architecture
+</pre></div>
+</div>
+<p><strong>Download and install:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://github.com/frankarobotics/libfranka/releases/download/&lt;version&gt;/libfranka_&lt;version&gt;_&lt;Ubuntu_version&gt;_&lt;architecture&gt;.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libfranka_&lt;version&gt;_&lt;Ubuntu_version&gt;_&lt;architecture&gt;.deb
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">&lt;version&gt;</span></code> with the desired release version (e.g., <code class="docutils literal notranslate"><span class="pre">0.18.2</span></code>, &lt;Ubuntu_version&gt; with <code class="docutils literal notranslate"><span class="pre">focal</span></code> and <code class="docutils literal notranslate"><span class="pre">&lt;architecture&gt;</span></code> with your system architecture (e.g., <code class="docutils literal notranslate"><span class="pre">amd64</span></code> or <code class="docutils literal notranslate"><span class="pre">arm64</span></code>).</p>
+<p><strong>Example for version 0.18.2 on amd64:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://github.com/frankarobotics/libfranka/releases/download/0.18.2/libfranka_0.18.2_focal_amd64.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libfranka_0.18.2_focal_amd64.deb
+</pre></div>
+</div>
+</section>
+<section id="building-libfranka-inside-docker">
+<h3>4. Building libfranka Inside Docker<a class="headerlink" href="#building-libfranka-inside-docker" title="Permalink to this heading"></a></h3>
+<p>If you prefer to build <strong>libfranka</strong> inside a Docker container, you can use the provided Docker setup. This ensures a consistent build environment and avoids dependency conflicts on your host system.</p>
+<p>Docker creates a self-contained environment, which is helpful if:</p>
+<ul class="simple">
+<li><p>Your system doesn’t meet the requirements</p></li>
+<li><p>You want to avoid installing dependencies on your main system</p></li>
+<li><p>You prefer a clean, reproducible setup</p></li>
+</ul>
+<p>If you haven’t already, clone the <strong>libfranka</strong> repository:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/frankarobotics/libfranka.git
+<span class="nb">cd</span><span class="w"> </span>libfranka
+git<span class="w"> </span>checkout<span class="w"> </span>&lt;desired-tag-or-branch&gt;
+</pre></div>
+</div>
+</div></blockquote>
+<section id="using-docker-command-line">
+<h4>Using Docker command line<a class="headerlink" href="#using-docker-command-line" title="Permalink to this heading"></a></h4>
+<ol class="arabic">
+<li><p><strong>Build the Docker image</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>.ci
+docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>libfranka:latest<span class="w"> </span>-f<span class="w"> </span>Dockerfile.focal<span class="w"> </span>.
+<span class="nb">cd</span><span class="w"> </span>..
+</pre></div>
+</div>
+</li>
+<li><p><strong>Run the Docker container</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>-it<span class="w"> </span>-v<span class="w"> </span><span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/workspace<span class="w"> </span>libfranka:latest
+</pre></div>
+</div>
+<p>If you already have a build folder, you must remove it first to avoid issues:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>rm<span class="w"> </span>-rf<span class="w"> </span>/workspace/build
+mkdir<span class="w"> </span>-p<span class="w"> </span>/workspace/build
+<span class="nb">cd</span><span class="w"> </span>/workspace/build
+cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-DBUILD_TESTS<span class="o">=</span>OFF<span class="w"> </span>/workspace
+make
+</pre></div>
+</div>
+<p>To generate a Debian package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cpack<span class="w"> </span>-G<span class="w"> </span>DEB
+</pre></div>
+</div>
+<p>Exit the Docker container by typing <code class="docutils literal notranslate"><span class="pre">exit</span></code> in the terminal.</p>
+</li>
+<li><p><strong>Install libfranka on your host system</strong>:</p>
+<p>Inside the libfranka build folder <code class="docutils literal notranslate"><span class="pre">cd</span> <span class="pre">build</span></code> on your host system, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libfranka*.deb
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="using-visual-studio-code">
+<h4>Using Visual Studio Code<a class="headerlink" href="#using-visual-studio-code" title="Permalink to this heading"></a></h4>
+<p>You can also build <strong>libfranka</strong> inside Docker using <strong>VS Code</strong> with the <strong>Dev Containers</strong> extension. This provides an integrated development environment inside the container.</p>
+<ol class="arabic">
+<li><p><strong>Install Visual Studio Code</strong>:</p>
+<ul class="simple">
+<li><p>Download and install <strong>Visual Studio Code</strong> from the official website: <a class="reference external" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>.</p></li>
+<li><p>Follow the installation instructions for your operating system.</p></li>
+</ul>
+</li>
+<li><p><strong>Open the Project in VS Code</strong>:</p>
+<p>Inside the libfranka folder, open a new terminal and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>code<span class="w"> </span>.
+</pre></div>
+</div>
+<p>This will open the project in VS Code.</p>
+</li>
+<li><p><strong>Install the Dev Containers Extension</strong>:</p>
+<p>Install the “Dev Containers” extension in VS Code from the Extensions Marketplace.</p>
+</li>
+<li><p><strong>Open the Project in a Dev Container</strong>:</p>
+<ul class="simple">
+<li><p>Open the <strong>Command Palette</strong> (<code class="docutils literal notranslate"><span class="pre">Ctrl+Shift+P</span></code>).</p></li>
+<li><p>Select <strong>Dev Containers: Reopen in Container</strong>.</p></li>
+<li><p>VS Code will build the Docker image and start a container based on the provided <code class="docutils literal notranslate"><span class="pre">.ci/Dockerfile</span></code>.</p></li>
+</ul>
+</li>
+<li><p><strong>Build libfranka</strong>:</p>
+<ul class="simple">
+<li><p>Open a terminal in VS Code.</p></li>
+<li><p>Run the following commands:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-DBUILD_TESTS<span class="o">=</span>OFF<span class="w"> </span>..
+make
+</pre></div>
+</div>
+</li>
+<li><p><strong>Install libfranka</strong>:</p>
+<p>If you want to install <strong>libfranka</strong> inside the container, you can run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>make<span class="w"> </span>install
+</pre></div>
+</div>
+<p>If you want to install <strong>libfranka</strong> on your host system, you can run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>cpack<span class="w"> </span>-G<span class="w"> </span>DEB
+</pre></div>
+</div>
+<p>Then in a new terminal on your host system, navigate to the libfranka <code class="docutils literal notranslate"><span class="pre">build</span></code> folder and run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libfranka*.deb
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+<section id="verify-the-installation-on-your-local-system">
+<h4>Verify the installation on your local system<a class="headerlink" href="#verify-the-installation-on-your-local-system" title="Permalink to this heading"></a></h4>
+<p>To verify its installation, you can run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/usr/lib/libfranka.so
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>/usr/lib/libfranka.so
+</pre></div>
+</div>
+<p>Check the installed headers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls<span class="w"> </span>/usr/include/franka/
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>active_control_base.h      active_torque_control.h  control_tools.h      errors.h
+gripper_state.h            lowpass_filter.h         robot.h              robot_state.h
+active_control.h           async_control            control_types.h      exception.h
+joint_velocity_limits.h    model.h                  robot_model_base.h   vacuum_gripper.h
+active_motion_generator.h  commands                 duration.h           gripper.h
+logging                    rate_limiting.h          robot_model.h        vacuum_gripper_state.h
+</pre></div>
+</div>
+<p>You can check the version of the installed library:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dpkg<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>libfranka
+</pre></div>
+</div>
+<p>Expected output:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>ii  libfranka  0.18.2-9-g722bf63  amd64  libfranka built using CMake
+</pre></div>
+</div>
+</section>
+</section>
+<section id="building-and-installation-from-source">
+<span id="building-from-source"></span><h3>5. Building and Installation from Source<a class="headerlink" href="#building-and-installation-from-source" title="Permalink to this heading"></a></h3>
+<p>Before building and installing from source, please uninstall existing installations of libfranka to avoid conflicts:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>remove<span class="w"> </span><span class="s2">&quot;*libfranka*&quot;</span>
+</pre></div>
+</div>
+<section id="clone-the-repository">
+<h4>Clone the Repository<a class="headerlink" href="#clone-the-repository" title="Permalink to this heading"></a></h4>
+<p>You can clone the repository and choose the version you need by selecting a specific tag:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/frankarobotics/libfranka.git
+<span class="nb">cd</span><span class="w"> </span>libfranka
+</pre></div>
+</div>
+<p>List available tags</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>tag<span class="w"> </span>-l
+</pre></div>
+</div>
+<p>Checkout a specific tag (e.g., 0.15.0)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>checkout<span class="w"> </span><span class="m">0</span>.15.0
+</pre></div>
+</div>
+<p>Update submodules</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>submodule<span class="w"> </span>update
+</pre></div>
+</div>
+<p>Create a build directory and navigate to it</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build
+<span class="nb">cd</span><span class="w"> </span>build
+</pre></div>
+</div>
+<p>Configure the project and build</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cmake<span class="w"> </span>-DCMAKE_BUILD_TYPE<span class="o">=</span>Release<span class="w"> </span>-DCMAKE_PREFIX_PATH<span class="o">=</span>/opt/openrobots/lib/cmake<span class="w"> </span>-DBUILD_TESTS<span class="o">=</span>OFF<span class="w"> </span>..
+make
+</pre></div>
+</div>
+</section>
+<section id="installing-libfranka-as-a-debian-package-optional-but-recommended">
+<span id="installing-debian-package"></span><h4>Installing libfranka as a Debian Package (Optional but recommended)<a class="headerlink" href="#installing-libfranka-as-a-debian-package-optional-but-recommended" title="Permalink to this heading"></a></h4>
+<p>Building a Debian package is optional but recommended for easier installation and management. In the build folder, execute:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cpack<span class="w"> </span>-G<span class="w"> </span>DEB
+</pre></div>
+</div>
+<p>This command creates a Debian package named libfranka-&lt;version&gt;-&lt;architecture&gt;.deb. You can then install it with:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libfranka*.deb
+</pre></div>
+</div>
+<p>Installing via a Debian package simplifies the process compared to building from source every time. Additionally the package integrates better with
+system tools and package managers, which can help manage updates and dependencies more effectively.</p>
+</section>
+</section>
+<section id="usage">
+<span id="id3"></span><h3>6. Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h3>
+<p>After installation, check the <a class="reference external" href="https://frankarobotics.github.io/docs/libfranka/docs/system_requirements.html">Minimum System and Network Requirements</a> for network settings,
+the <a class="reference external" href="https://frankarobotics.github.io/docs/libfranka/docs/real_time_kernel.html">Setting up the Real-Time Kernel</a> for system setup,
+and the <a class="reference external" href="https://frankarobotics.github.io/docs/libfranka/docs/getting_started.html">Getting Started Manual</a> for initial steps. Once configured,
+you can control the robot using the example applications provided in the examples folder (<a class="reference external" href="https://frankarobotics.github.io/docs/libfranka/docs/usage_examples.html">Usage Examples</a>).</p>
+<p>To run a sample program, navigate to the build folder and execute the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./examples/communication_test<span class="w"> </span>&lt;robot-ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="pylibfranka">
+<span id="id4"></span><h3>7. Pylibfranka<a class="headerlink" href="#pylibfranka" title="Permalink to this heading"></a></h3>
+<p>Pylibfranka is a Python binding for libfranka, allowing you to control Franka robots using Python. It is included in the libfranka repository and
+can be built alongside libfranka. For more details, see <code class="docutils literal notranslate"><span class="pre">pylibfranka</span></code> and its <a class="reference external" href="pylibfranka/README.md">README</a>.
+The <a class="reference external" href="https://frankarobotics.github.io/libfranka/pylibfranka/latest">generated API documentation</a> offers an overview of its capabilities.</p>
+</section>
+<section id="development-information">
+<span id="id5"></span><h3>8. Development Information<a class="headerlink" href="#development-information" title="Permalink to this heading"></a></h3>
+<p>If you actively contribute to this repository, you should install and set up pre-commit hooks:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pre-commit
+pre-commit<span class="w"> </span>install
+</pre></div>
+</div>
+<p>This will install pre-commit and set up the git hooks to automatically run checks before each commit.
+The hooks will help maintain code quality by running various checks like code formatting, linting, and other validations.</p>
+<p>To manually run the pre-commit checks on all files:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pre-commit<span class="w"> </span>run<span class="w"> </span>--all-files
+</pre></div>
+</div>
+<p>This will build the C++ extension and install the Python package.</p>
+</section>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">libfranka</span></code> is licensed under the <a class="reference external" href="https://www.apache.org/licenses/LICENSE-2.0.html">Apache 2.0 license</a>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

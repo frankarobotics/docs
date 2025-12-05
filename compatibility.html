@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Software Versions Compatibility &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Control Interface Specification and Robot Limits" href="robot_specifications.html" />
+    <link rel="prev" title="Troubleshooting" href="franka_toolbox_for_matlab/docs/franka_matlab/troubleshooting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Software Versions Compatibility</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/compatibility.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="software-versions-compatibility">
+<h1>Software Versions Compatibility<a class="headerlink" href="#software-versions-compatibility" title="Permalink to this heading"></a></h1>
+<style>
+    .compatibility-container {
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        margin: 20px 0;
+    }
+    .robot-select {
+        padding: 8px 12px;
+        font-size: 16px;
+        margin-bottom: 20px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        width: 200px;
+    }
+    .compatibility-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+    .compatibility-table th,
+    .compatibility-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+    .compatibility-table th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+    }
+    .compatibility-table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+    .matrix {
+        display: none;
+    }
+    .matrix.active {
+        display: block;
+    }
+    .robot-description {
+        margin-bottom: 15px;
+        font-style: italic;
+        color: #666;
+    }
+</style>
+
+<div class="compatibility-container">
+    <select class="robot-select" id="robotSelector" onchange="showCompatibility()">
+    </select>
+    <div class="robot-description" id="robotDescription"></div>
+    <div id="matrixContainer"></div>
+</div>
+
+<script src="_static/compatibility_data.js"></script>
+<script>
+    // Populate the dropdown
+    const selector = document.getElementById('robotSelector');
+
+    // Sort robot names to ensure Franka Research 3 is first
+    const robotNames = Object.keys(compatibilityData).sort((a, b) => {
+        if (a === 'Franka Research 3') return -1;
+        if (b === 'Franka Research 3') return 1;
+        return a.localeCompare(b);
+    });
+
+    robotNames.forEach(robot => {
+        const option = document.createElement('option');
+        option.value = robot;
+        option.textContent = robot;
+        selector.appendChild(option);
+    });
+
+    // Set default selection to Franka Research 3
+    selector.value = 'Franka Research 3';
+    showCompatibility();  // Show the default selection immediately
+
+    function createTable(robotData) {
+        const table = document.createElement('table');
+        table.className = 'compatibility-table';
+
+        // Create header row
+        const headerRow = document.createElement('tr');
+        robotData.headers.forEach(header => {
+            const th = document.createElement('th');
+            th.textContent = header;
+            headerRow.appendChild(th);
+        });
+        table.appendChild(headerRow);
+
+        // Create data rows
+        robotData.data.forEach(row => {
+            const tr = document.createElement('tr');
+            row.forEach(cell => {
+                const td = document.createElement('td');
+                td.textContent = cell;
+                tr.appendChild(td);
+            });
+            table.appendChild(tr);
+        });
+
+        return table;
+    }
+
+    function showCompatibility() {
+        const selected = selector.value;
+        const container = document.getElementById('matrixContainer');
+        const descriptionElement = document.getElementById('robotDescription');
+
+        // Clear previous content
+        container.innerHTML = '';
+        descriptionElement.textContent = '';
+
+        if (selected && compatibilityData[selected]) {
+            // Show robot description
+            if (robotDescriptions[selected]) {
+                descriptionElement.textContent = robotDescriptions[selected];
+            }
+
+            // Create and show compatibility table
+            const table = createTable(compatibilityData[selected]);
+            container.appendChild(table);
+        }
+    }
+
+    // Initialize on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        showCompatibility();
+    });
+</script><p><a class="reference external" href="https://github.com/frankarobotics/libfranka-common/blob/master/include/research_interface/robot/service_types.h#L21">Robot version line 19</a>
+and <a class="reference external" href="https://github.com/frankarobotics/libfranka-common/blob/master/include/research_interface/gripper/types.h#L17">Gripper version line 17</a>
+are part of libfranka-common repository, a submodule of libfranka repository.</p>
+<p>Franka MATLAB® compatible versions are located <a class="reference internal" href="franka_toolbox_for_matlab/docs/franka_matlab/compatibility.html#compatibility-franka-matlab"><span class="std std-ref">here</span></a>.</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>Franka Robotics currently does not provide any support for Windows</p>
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="franka_toolbox_for_matlab/docs/franka_matlab/troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="robot_specifications.html" class="btn btn-neutral float-right" title="Control Interface Specification and Robot Limits" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Franka Control Interface Overview &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="libfranka client library" href="libfranka/docs/index.html" />
+    <link rel="prev" title="Franka Control Interface Documentation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Franka Control Interface Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#language-and-framework-support">Language and Framework Support</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Franka Control Interface Overview</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/overview.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-control-interface-overview">
+<h1>Franka Control Interface Overview<a class="headerlink" href="#franka-control-interface-overview" title="Permalink to this heading"></a></h1>
+<figure class="align-center" id="id1">
+<img alt="_images/fci-architecture.png" src="_images/fci-architecture.png" />
+<figcaption>
+<p><span class="caption-text">Schematic overview of the Franka Control Interface architecture.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Franka Control Interface (FCI) provides a fast and direct low-level bidirectional connection
+to the Arm and Hand. It delivers real-time robot status information and enables direct control
+through an external workstation PC connected via Ethernet.</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>, our open-source C++ interface, you can send real-time control values
+at 1 kHz using five different control modes:</p>
+<ul class="simple">
+<li><p>Gravity and friction compensated joint-level torque commands</p></li>
+<li><p>Joint position or velocity commands</p></li>
+<li><p>Cartesian pose or velocity commands</p></li>
+</ul>
+<p>Simultaneously, you receive 1 kHz measurements of:</p>
+<ul class="simple">
+<li><p>Measured joint data, including position, velocity, and link-side torque sensor signals</p></li>
+<li><p>Estimated externally applied torques and forces</p></li>
+<li><p>Collision and contact detection information</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> library also includes robot model functionality that provides:</p>
+<ul class="simple">
+<li><p>Forward kinematics for all robot joints</p></li>
+<li><p>Jacobian matrices for all robot joints</p></li>
+<li><p>Dynamics calculations: inertia matrix, Coriolis and centrifugal vector, and gravity vector</p></li>
+</ul>
+<section id="language-and-framework-support">
+<h2>Language and Framework Support<a class="headerlink" href="#language-and-framework-support" title="Permalink to this heading"></a></h2>
+<p><strong>Python Integration</strong></p>
+<p><code class="docutils literal notranslate"><span class="pre">pylibfranka</span></code> provides Python bindings for <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>, enabling robot control and monitoring
+in Python applications.</p>
+<p><strong>ROS Integration</strong></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">franka_ros</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_ros2</span></code> packages provide integration with the ROS and ROS 2
+ecosystems. They connect <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> with <a class="reference external" href="https://wiki.ros.org/ros_control">ROS Control</a>
+and <a class="reference external" href="https://control.ros.org/">ROS 2 Control</a>, and include <a class="reference external" href="https://wiki.ros.org/urdf">URDF</a>
+models with detailed 3D meshes, enabling visualization (e.g., RViz, RViz2) and kinematic simulations.
+<a class="reference external" href="https://wiki.ros.org/moveit">MoveIt!</a> and <a class="reference external" href="https://moveit.ros.org/">MoveIt 2</a> integration
+provides motion planning capabilities and gripper control for both ROS and ROS 2 applications.</p>
+<p><strong>MATLAB Simulink Integration</strong></p>
+<p>MATLAB Simulink support enables robot control and data analysis directly within the MATLAB Simulink
+environment, ideal for research and prototyping workflows.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>The FCI transmits data over the network at 1 kHz, requiring a stable, high-quality network
+connection for proper operation. While the FCI is active, you have full, exclusive control
+of the Arm and Hand, which means you cannot use Desk or Apps simultaneously.</p>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Franka Control Interface Documentation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="libfranka/docs/index.html" class="btn btn-neutral float-right" title="libfranka client library" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

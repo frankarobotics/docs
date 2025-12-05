@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fanka Library for Simulink - Reference &mdash; Franka Control Interface (FCI) 0.6.0 documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Franka Library for MATLAB - Reference" href="matlab_library.html" />
+    <link rel="prev" title="Getting started" href="getting_started.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2/docs/index.html">franka_ros2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Franka Toolbox for MATLAB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Fanka Library for Simulink - Reference</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#robot-control">Robot Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#robot-state">Robot State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#duration-period">Duration Period</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gripper-state">Gripper State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#vacuum-gripper-state">Vacuum Gripper State</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mass-matrix">Mass Matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#coriolis">Coriolis</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#gravity">Gravity</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#jacobian">Jacobian</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pose">Pose</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_library.html">Franka Library for MATLAB - Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../fr3-certification-remarks.html">FR3 certification remarks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Franka Toolbox for MATLAB</a> &raquo;</li>
+      <li>Fanka Library for Simulink - Reference</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/franka_toolbox_for_matlab/docs/franka_matlab/simulink_library.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fanka-library-for-simulink-reference">
+<h1>Fanka Library for Simulink - Reference<a class="headerlink" href="#fanka-library-for-simulink-reference" title="Permalink to this heading"></a></h1>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Regarding the input/output signal nomenclature, datatypes, and sizes, the libfranka definitions
+have been fully adopted. You can find the complete list of signals
+<a class="reference external" href="https://frankarobotics.github.io/libfranka/0.16.1/structfranka_1_1RobotState.html">here</a>.
+The column-major format for signals has been adopted as well.</p>
+</div>
+<section id="robot-control">
+<h2>Robot Control<a class="headerlink" href="#robot-control" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id1">
+<img alt="../../../_images/robot_control.png" src="../../../_images/robot_control.png" />
+<figcaption>
+<p><span class="caption-text">Robot Control Simulink Block.</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>This is the main block of the Franka Simulink Library. It is responsible for applying the desired robot parameters and control signals to the robot.</p>
+<p>The robot settings can be applied through the block parameters.</p>
+<figure class="align-center" id="id2">
+<a class="reference internal image-reference" href="../../../_images/block_parameters_robot_control.png"><img alt="../../../_images/block_parameters_robot_control.png" src="../../../_images/block_parameters_robot_control.png" style="width: 530px;" /></a>
+<figcaption>
+<p><span class="caption-text">Robot Control Simulink Block Settings.</span><a class="headerlink" href="#id2" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>If desired, an initial robot configuration can be applied <strong>before</strong> the main execution of the control loop.
+Namely, the robot will move to the desired configuration and only then the main execution of the Simulink model
+will take place. You can define that in the <cite>Initial Configuration</cite> section of the block settings.</p>
+</div>
+</section>
+<section id="robot-state">
+<h2>Robot State<a class="headerlink" href="#robot-state" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id3">
+<img alt="../../../_images/get_robot_state.png" src="../../../_images/get_robot_state.png" />
+<figcaption>
+<p><span class="caption-text">Robot State Simulink Block.</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For reading the desired set of signals stemming from the current robot state,
+you can free-type the names of the signals in the <cite>Parameters</cite> pane of the block parameters.
+For the set of available signals and their namings –&gt; <a class="reference external" href="https://frankarobotics.github.io/libfranka/0.16.1/structfranka_1_1RobotState.html">Robot State Attributes</a></p>
+<figure class="align-center" id="id4">
+<img alt="../../../_images/get_robot_state_settings.png" src="../../../_images/get_robot_state_settings.png" />
+<figcaption>
+<p><span class="caption-text">Get initial robot state Simulink Block Settings.</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="duration-period">
+<h2>Duration Period<a class="headerlink" href="#duration-period" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id5">
+<img alt="../../../_images/duration.png" src="../../../_images/duration.png" />
+<figcaption>
+<p><span class="caption-text">Get duration from last main callback(Sample Time) Simulink Block.</span><a class="headerlink" href="#id5" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>This Simulink block outputs the duration from the last execution step in seconds. Ideally this should be always
+0.001 seconds but due to lost packages during communication errors 0.002 secs or 0.003 secs could be seen.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The step count of the Simulink model <strong>does not change</strong> during these communication mishaps. It continues to increment even though an execution step has been lost in reality. Therefore, special design considerations are necessary, especially for sensitive position motion generators. For example, refer to the <cite>generate_cartesian_pose_motion.slx</cite> demo to see how the main “clock” of the application has been designed.</p>
+</div>
+</section>
+<section id="gripper-state">
+<h2>Gripper State<a class="headerlink" href="#gripper-state" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id6">
+<img alt="../../../_images/gripper_state.png" src="../../../_images/gripper_state.png" />
+<figcaption>
+<p><span class="caption-text">Get current gripper state Simulink Block.</span><a class="headerlink" href="#id6" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The gripper state block will inform the application about the current gripper state.</p>
+</section>
+<section id="vacuum-gripper-state">
+<h2>Vacuum Gripper State<a class="headerlink" href="#vacuum-gripper-state" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id7">
+<a class="reference internal image-reference" href="../../../_images/vacuum_gripper_state.png"><img alt="../../../_images/vacuum_gripper_state.png" src="../../../_images/vacuum_gripper_state.png" style="width: 300px;" /></a>
+<figcaption>
+<p><span class="caption-text">Get current vacuum gripper state Simulink Block.</span><a class="headerlink" href="#id7" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The vacuum gripper state block will inform the application about the current vacuum gripper state.</p>
+</section>
+<section id="mass-matrix">
+<h2>Mass Matrix<a class="headerlink" href="#mass-matrix" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id8">
+<img alt="../../../_images/mass_matrix.png" src="../../../_images/mass_matrix.png" />
+<figcaption>
+<p><span class="caption-text">Get the Mass Matrix of the Robot Model.</span><a class="headerlink" href="#id8" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="coriolis">
+<h2>Coriolis<a class="headerlink" href="#coriolis" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id9">
+<img alt="../../../_images/coriolis.png" src="../../../_images/coriolis.png" />
+<figcaption>
+<p><span class="caption-text">Get the Coriolis Matrix of the Robot Model.</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="gravity">
+<h2>Gravity<a class="headerlink" href="#gravity" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id10">
+<img alt="../../../_images/gravity.png" src="../../../_images/gravity.png" />
+<figcaption>
+<p><span class="caption-text">Get the Gravity Vector of the Robot Model.</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="jacobian">
+<h2>Jacobian<a class="headerlink" href="#jacobian" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id11">
+<img alt="../../../_images/jacobian.png" src="../../../_images/jacobian.png" />
+<figcaption>
+<p><span class="caption-text">Get the Jabobian Matrix of the Robot.</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can select between “zero” or “body” Jacobian as well as the desired
+frame inside the block parameters.</p>
+</section>
+<section id="pose">
+<h2>Pose<a class="headerlink" href="#pose" title="Permalink to this heading"></a></h2>
+<figure class="align-center" id="id12">
+<img alt="../../../_images/pose.png" src="../../../_images/pose.png" />
+<figcaption>
+<p><span class="caption-text">Get the Robot Pose.</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>You can select the desired pose frame inside the block parameters.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="getting_started.html" class="btn btn-neutral float-left" title="Getting started" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="matlab_library.html" class="btn btn-neutral float-right" title="Franka Library for MATLAB - Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
