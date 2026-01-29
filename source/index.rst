@@ -49,6 +49,5 @@ The source code of this documentation is also `available online
    franka_toolbox_for_matlab/docs/franka_matlab/index
    compatibility
    robot_specifications
-   fr3-certification-remarks
    troubleshooting
    faq
