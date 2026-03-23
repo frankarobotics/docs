@@ -1,7 +1,13 @@
+.. _compatibility-libfranka:
+
 Software Versions Compatibility
 ===============================
 
-.. _compatibility-libfranka:
+This section provides an overview of the compatibility between different versions of the robot system version,
+libfranka and the robot/gripper server version which are coupled to the robot system version. E.g. a
+**robot system version** 5.7.2 needs a **robot** version 9 and **gripper** version 3.
+
+Note: Often, people talk about *image version* while talking about the *robot system version*.
 
 .. raw:: html
 
@@ -121,12 +127,34 @@ Software Versions Compatibility
             if (selected && compatibilityData[selected]) {
                 // Show robot description
                 if (robotDescriptions[selected]) {
-                    descriptionElement.textContent = robotDescriptions[selected];
+                    descriptionElement.innerHTML = robotDescriptions[selected];
                 }
 
                 // Create and show compatibility table
+                const mainHeading = document.createElement('h4');
+                mainHeading.textContent = selected;
+                container.appendChild(mainHeading);
                 const table = createTable(compatibilityData[selected]);
                 container.appendChild(table);
+
+                // Show additional tables if configured
+                if (additionalTables[selected]) {
+                    additionalTables[selected].forEach(entry => {
+                        const heading = document.createElement('h4');
+                        heading.textContent = entry.title;
+                        heading.style.marginTop = '30px';
+                        container.appendChild(heading);
+                        if (entry.description) {
+                            const desc = document.createElement('p');
+                            desc.innerHTML = entry.description;
+                            desc.style.fontStyle = 'italic';
+                            desc.style.color = '#666';
+                            container.appendChild(desc);
+                        }
+                        const extraTable = createTable(entry);
+                        container.appendChild(extraTable);
+                    });
+                }
             }
         }
 
@@ -136,13 +164,17 @@ Software Versions Compatibility
         });
     </script>
 
-`Robot version line 19
-<https://github.com/frankarobotics/libfranka-common/blob/master/include/research_interface/robot/service_types.h#L21>`_
-and `Gripper version line 17
-<https://github.com/frankarobotics/libfranka-common/blob/master/include/research_interface/gripper/types.h#L17>`_
-are part of libfranka-common repository, a submodule of libfranka repository.
+Further Compatibility Information
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Franka MATLAB® compatible versions are located :ref:`here<compatibility-franka-matlab>`.
+For `franka_ros` compatibility information, please refer to :ref:`ros-compatibility` and for `franka_matlab`
+compatibility information, please refer to :ref:`compatibility-franka-matlab`.
+
+`Robot version
+<https://github.com/frankarobotics/libfranka-common/blob/master/include/research_interface/robot/service_types.h>`_
+and `Gripper version
+<https://github.com/frankarobotics/libfranka-common/blob/master/include/research_interface/gripper/types.h>`_
+are part of libfranka-common repository, a submodule of libfranka repository.
 
 .. caution::
     Franka Robotics currently does not provide any support for Windows

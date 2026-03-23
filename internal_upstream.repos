@@ -5,19 +5,19 @@ repositories:
     version: develop
   franka_description:
     type: git
-    url: https://github.com/frankarobotics/franka_description.git
+    url: ssh://git@bitbucket.fe.lan:7999/moctrl/franka_description.git
     version: main
   franka_ros2_jazzy:
     type: git
-    url: https://github.com/frankarobotics/franka_ros2.git
+    url: ssh://git@bitbucket.fe.lan:7999/moctrl/franka_ros2.git
     version: jazzy
   franka_ros2_humble:
     type: git
-    url: https://github.com/frankarobotics/franka_ros2.git
+    url: ssh://git@bitbucket.fe.lan:7999/moctrl/franka_ros2.git
     version: humble
   libfranka:
     type: git
-    url: https://github.com/frankarobotics/libfranka.git
+    url: ssh://git@bitbucket.fe.lan:7999/moctrl/libfranka.git
     version: main
   franka_toolbox_for_matlab:
     type: git
