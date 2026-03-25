@@ -1,8 +1,10 @@
 .. _control_interface_specifications:
+.. _control_parameters_specifications:
+.. _limit_table:
 
-=============================================
+================================================
 Control Interface Specification and Robot Limits
-=============================================
+================================================
 
 .. _overview:
 
@@ -265,7 +267,7 @@ Joint-space limits:
 
 .. csv-table::
    :header-rows: 1
-   :file: control-parameters-joint-Franka Emika Robot (FER).csv
+   :file: control-parameters-joint-fer.csv
 
 The arm reaches its maximum extension when joint 4 is at
 :math:`q_{elbow-flip} = -0.467002423653011\:rad`. This parameter determines the elbow

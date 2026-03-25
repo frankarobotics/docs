@@ -16,6 +16,9 @@ indent_size = 4
 [*.rst]
 max_line_length = 150
 
+[robot_specifications.rst]
+max_line_length = 170
+
 [compatibility.rst]
 max_line_length = 165
 

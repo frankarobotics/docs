@@ -1,5 +1,4 @@
 # Minimal makefile for Sphinx documentation
-#
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
@@ -7,6 +6,7 @@ SPHINXBUILD   = python3 -msphinx
 SPHINXPROJ    = research-interface
 SOURCEDIR     = source
 BUILDDIR      = build
+REPOS         = upstream.repos
 
 # Put it first so that "make" without argument is like "make help".
 help:
@@ -22,27 +22,19 @@ generate-js:
 # Import VCS repositories for documentation
 import-repos:
 	@echo "Importing VCS repositories..."
-	@rm -rf $(SOURCEDIR)/doc
 	@mkdir -p $(SOURCEDIR)/doc
-	@vcs import --input rolling.repos $(SOURCEDIR)/doc
-	@echo "Copying prepared franka_ros2 documentation..."
-	@rm -rf $(SOURCEDIR)/doc/franka_ros2
-	@cp -r franka_ros2 $(SOURCEDIR)/doc/
+	@vcs import --shallow --skip-existing --input $(REPOS) $(SOURCEDIR)/doc
 
 # Clean build directory and doc imports
+# Note, we intentionally do not remove the entire doc directory to preserve any manually added content,
+# but we do clean the build directory to ensure a fresh build each time.
 clean:
 	rm -rf $(BUILDDIR)/*
-	rm -rf $(SOURCEDIR)/doc
-	rm -rf $(SOURCEDIR)/franka_ros
-	rm -rf $(SOURCEDIR)/franka_ros2
-	rm -rf $(SOURCEDIR)/libfranka
-	rm -rf $(SOURCEDIR)/franka_toolbox_for_matlab
 
-# Custom html target that first imports repos, generates JS, clones franka_ros, franka_ros2, libfranka and franka_toolbox_for_matlab, then builds
+# Custom html target that first imports repos, generates JS, then builds
 html: generate-js
-	@echo "Importing documentation repositories..."
-	@if [ ! -d "$(SOURCEDIR)/franka_ros" ] || [ ! -d "$(SOURCEDIR)/franka_ros2" ] || [ ! -d "$(SOURCEDIR)/libfranka" ] || [ ! -d "$(SOURCEDIR)/franka_toolbox_for_matlab" ]; then \
-		cd $(SOURCEDIR) && vcs import --input ../upstream.repos .; \
+	@if [ ! -d "$(SOURCEDIR)/doc/franka_ros" ] || [ ! -d "$(SOURCEDIR)/doc/franka_ros2_jazzy" ] || [ ! -d "$(SOURCEDIR)/doc/franka_ros2_humble" ] || [ ! -d "$(SOURCEDIR)/doc/libfranka" ] || [ ! -d "$(SOURCEDIR)/doc/franka_toolbox_for_matlab" ] || [ ! -d "$(SOURCEDIR)/doc/franka_description" ]; then \
+		$(MAKE) import-repos; \
 	fi
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
