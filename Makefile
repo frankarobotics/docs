@@ -32,10 +32,11 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 # Custom html target that first imports repos, generates JS, then builds
-html: generate-js
+html:
 	@if [ ! -d "$(SOURCEDIR)/doc/franka_ros" ] || [ ! -d "$(SOURCEDIR)/doc/franka_ros2_jazzy" ] || [ ! -d "$(SOURCEDIR)/doc/franka_ros2_humble" ] || [ ! -d "$(SOURCEDIR)/doc/libfranka" ] || [ ! -d "$(SOURCEDIR)/doc/franka_toolbox_for_matlab" ] || [ ! -d "$(SOURCEDIR)/doc/franka_description" ]; then \
 		$(MAKE) import-repos; \
 	fi
+	@$(MAKE) generate-js
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
 # Catch-all target: route all unknown targets to Sphinx using the new
