@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_selfcollision &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="franka_semantic_components" href="../../franka_semantic_components/doc/index.html" />
+    <link rel="prev" title="franka_robot_state_broadcaster" href="../../franka_robot_state_broadcaster/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros2/doc/compatibility_matrix.html">Compatibility: franka_ros2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo_bringup/doc/index.html">franka_gazebo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile/doc/index.html">franka_mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile_fr3_duo_moveit_config/doc/index.html">franka_mobile_fr3_duo_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile_sensors/doc/index.html">franka_mobile_sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">franka_selfcollision</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functionality">Functionality</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_spine/index.html">franka_spine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_vision_and_manipulation_kit/doc/index.html">franka_vision_and_manipulation_kit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mobile_fr3_duo_trajectory_controller/doc/index.html">mobile_fr3_duo_trajectory_controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a> &raquo;</li>
+      <li>franka_selfcollision</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_ros2_jazzy/franka_selfcollision/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-selfcollision">
+<h1>franka_selfcollision<a class="headerlink" href="#franka-selfcollision" title="Permalink to this heading"></a></h1>
+<p>This package contains the library and the node for self-collision checking of the FR3 Duo and
+Mobile FR3 Duo robots.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Minimum necessary <cite>franka_description</cite> version is 2.3.2.
+You can clone franka_description package from <a class="reference external" href="https://github.com/frankarobotics/franka_description">https://github.com/frankarobotics/franka_description</a>.</p>
+</div>
+<section id="functionality">
+<h2>Functionality<a class="headerlink" href="#functionality" title="Permalink to this heading"></a></h2>
+<p>This monitoring node is spawned by <code class="docutils literal notranslate"><span class="pre">fr3_duo.launch.py</span></code> or <code class="docutils literal notranslate"><span class="pre">mobile_fr3_duo.launch.py</span></code> in <code class="docutils literal notranslate"><span class="pre">franka_bringup</span></code> if the <code class="docutils literal notranslate"><span class="pre">check_selfcollision</span></code> argument is enabled.</p>
+<p>The node continuously monitors the robot’s joint states to check for self-collisions between the robot links. It handles both <code class="docutils literal notranslate"><span class="pre">fr3_duo</span></code> and <code class="docutils literal notranslate"><span class="pre">mobile_fr3_duo</span></code> configurations.
+It performs two main actions upon detecting a collision (or violation of the security margin):</p>
+<ol class="arabic simple">
+<li><p><strong>Publishes Status:</strong> Sends a boolean to the topic <code class="docutils literal notranslate"><span class="pre">~/&lt;node_name&gt;/collision_detected</span></code>
+(where <code class="docutils literal notranslate"><span class="pre">&lt;node_name&gt;</span></code> is set via the <code class="docutils literal notranslate"><span class="pre">name</span></code> parameter in the launch file, default: <code class="docutils literal notranslate"><span class="pre">self_collision_node</span></code>).</p></li>
+<li><p><strong>Logs Warning:</strong> Prints the specific colliding link pairs to the console if enabled (throttled to 1Hz to prevent spam).</p></li>
+</ol>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Parameters are defined in <code class="docutils literal notranslate"><span class="pre">config/self_collision_node.yaml</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">security_margin</span></code>: Safety buffer around the robot links in meters (default: <code class="docutils literal notranslate"><span class="pre">0.045</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">print_collisions</span></code>: If <code class="docutils literal notranslate"><span class="pre">true</span></code>, logs the names of the colliding links to the console.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">robot_description_semantic</span></code>: SRDF XML used to exclude allowable collision pairs.</p></li>
+</ul>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>Both nodes are automatically started when the robot is launched with <code class="docutils literal notranslate"><span class="pre">check_selfcollision</span></code> set
+to <code class="docutils literal notranslate"><span class="pre">true</span></code>:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span><span class="c1"># FR3 Duo</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>fr3_duo.launch.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>check_selfcollision:<span class="o">=</span><span class="nb">true</span>
+
+<span class="c1"># Mobile FR3 Duo</span>
+ros2<span class="w"> </span>launch<span class="w"> </span>franka_bringup<span class="w"> </span>mobile_fr3_duo.launch.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>check_selfcollision:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../franka_robot_state_broadcaster/doc/index.html" class="btn btn-neutral float-left" title="franka_robot_state_broadcaster" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../franka_semantic_components/doc/index.html" class="btn btn-neutral float-right" title="franka_semantic_components" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

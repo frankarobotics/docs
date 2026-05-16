@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build / Installation &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Setting up the Real-Time Kernel" href="real_time_kernel.html" />
+    <link rel="prev" title="Minimum system and network requirements" href="system_requirements.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">libfranka client library</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compatibility_matrix.html">Compatibility: libfranka</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="overview.html#getting-started">Getting Started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="libfranka_architecture.html">Library Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">Minimum system and network requirements</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Build / Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#debian-package">Debian Package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation-instructions">Installation Instructions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#verify-installation">Verify Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#inside-docker-container">Inside docker container</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#plain-cmake">Plain CMake</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-package-pip">Python Package (pip)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#platform-compatibility">Platform Compatibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">Verify Installation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quick-start-example">Quick Start Example</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#building-python-bindings-from-source">Building Python Bindings from Source</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#installing-prerequisites-on-ubuntu-debian">Installing Prerequisites on Ubuntu/Debian</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#build-and-install">Build and Install</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#inside-a-ros-ros-2-workspace">Inside a ROS / ROS 2 workspace</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-this-library-in-other-projects">Use this Library in Other Projects</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="real_time_kernel.html">Setting up the Real-Time Kernel</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Setting Up the Robot System and Network for FCI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage_examples.html">Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api_references.html">API References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration_notes.html">Migration Notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#changelog">ChangeLog</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2_jazzy/docs/index.html">franka_ros2: <strong>Jazzy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">libfranka client library</a> &raquo;</li>
+      <li>Build / Installation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/doc/libfranka/docs/installation.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-installation">
+<span id="libfranka-installation"></span><h1>Build / Installation<a class="headerlink" href="#build-installation" title="Permalink to this heading"></a></h1>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>libfranka</strong> supports Ubuntu 20.04 (focal), 22.04 (jammy), and 24.04 (noble) LTS versions. Pre-built <strong>amd64</strong> Debian packages are available for all supported versions.</p>
+</div>
+<section id="debian-package">
+<span id="libfranka-installation-debian-package"></span><h2>Debian Package<a class="headerlink" href="#debian-package" title="Permalink to this heading"></a></h2>
+<p><strong>libfranka</strong> releases are provided as pre-built Debian packages for multiple Ubuntu LTS versions.
+You can find the packaged artifacts on the <a class="reference external" href="https://github.com/frankarobotics/libfranka/releases/">libfranka releases</a> page on GitHub.</p>
+<section id="installation-instructions">
+<h3>Installation Instructions<a class="headerlink" href="#installation-instructions" title="Permalink to this heading"></a></h3>
+<p><strong>Step 1: Check your Ubuntu version</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>lsb_release<span class="w"> </span>-a
+</pre></div>
+</div>
+<p><strong>Step 2: Download and install the appropriate package</strong></p>
+<p>For the supported ubuntu versions, use the following pattern:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Replace with your desired version and Ubuntu codename</span>
+<span class="nv">VERSION</span><span class="o">=</span><span class="m">0</span>.19.0
+<span class="nv">CODENAME</span><span class="o">=</span>focal<span class="w">  </span><span class="c1"># or jammy, noble</span>
+
+wget<span class="w"> </span>https://github.com/frankarobotics/libfranka/releases/download/<span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span>/libfranka_<span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span>_<span class="si">${</span><span class="nv">CODENAME</span><span class="si">}</span>_amd64.deb
+sudo<span class="w"> </span>dpkg<span class="w"> </span>-i<span class="w"> </span>libfranka_<span class="si">${</span><span class="nv">VERSION</span><span class="si">}</span>_<span class="si">${</span><span class="nv">CODENAME</span><span class="si">}</span>_amd64.deb
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is the recommended installation method for <strong>libfranka</strong> if you do not need to modify the source code.</p>
+</div>
+</section>
+<section id="verify-installation">
+<h3>Verify Installation<a class="headerlink" href="#verify-installation" title="Permalink to this heading"></a></h3>
+<p>After installation, verify that libfranka is correctly installed:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>dpkg<span class="w"> </span>-l<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>libfranka
+</pre></div>
+</div>
+</section>
+</section>
+<section id="inside-docker-container">
+<span id="libfranka-installation-docker"></span><h2>Inside docker container<a class="headerlink" href="#inside-docker-container" title="Permalink to this heading"></a></h2>
+<p>If you prefer to build <strong>libfranka</strong> inside a Docker container, you can use the
+provided Docker setup.</p>
+</section>
+<section id="plain-cmake">
+<span id="libfranka-installation-plain-cmake"></span><h2>Plain CMake<a class="headerlink" href="#plain-cmake" title="Permalink to this heading"></a></h2>
+<p>Before you begin, check the <a class="reference internal" href="system_requirements.html#system-requirements"><span class="std std-ref">Minimum system and network requirements</span></a>.</p>
+<p>Afterwards, proceed to <a class="reference internal" href="../README.html#building-from-source"><span class="std std-ref">4. Building from Source (Advanced)</span></a>.</p>
+<p>Once the build is complete, you can optionally create and install a Debian package as described in <a class="reference internal" href="#libfranka-installation-debian-package"><span class="std std-ref">Debian Package</span></a>.</p>
+</section>
+<section id="python-package-pip">
+<span id="libfranka-installation-pip"></span><h2>Python Package (pip)<a class="headerlink" href="#python-package-pip" title="Permalink to this heading"></a></h2>
+<p><strong>pylibfranka</strong> is a Python binding for libfranka that enables control of Franka Robotics robots from Python.
+Pre-built wheels are available on PyPI and include all necessary dependencies.</p>
+<section id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h3>
+<p>The easiest way to install pylibfranka is via pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>pylibfranka
+</pre></div>
+</div>
+</section>
+<section id="platform-compatibility">
+<h3>Platform Compatibility<a class="headerlink" href="#platform-compatibility" title="Permalink to this heading"></a></h3>
+<table class="colwidths-given docutils align-default">
+<colgroup>
+<col style="width: 30%" />
+<col style="width: 70%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Ubuntu Version</p></th>
+<th class="head"><p>Supported Python Versions</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>20.04 (Focal)</p></td>
+<td><p>Python 3.9 only</p></td>
+</tr>
+<tr class="row-odd"><td><p>22.04 (Jammy)</p></td>
+<td><p>Python 3.9, 3.10, 3.11, 3.12</p></td>
+</tr>
+<tr class="row-even"><td><p>24.04 (Noble)</p></td>
+<td><p>Python 3.9, 3.10, 3.11, 3.12</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Ubuntu 20.04 users must use Python 3.9 due to glibc compatibility requirements.</p>
+</div>
+</section>
+<section id="id1">
+<h3>Verify Installation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>After installation, verify that pylibfranka is correctly installed:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pylibfranka</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;pylibfranka version: </span><span class="si">{</span><span class="n">pylibfranka</span><span class="o">.</span><span class="n">__version__</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># Verify key classes are available</span>
+<span class="kn">from</span> <span class="nn">pylibfranka</span> <span class="kn">import</span> <span class="n">Robot</span><span class="p">,</span> <span class="n">Gripper</span><span class="p">,</span> <span class="n">Model</span><span class="p">,</span> <span class="n">RobotState</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All core classes imported successfully&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="quick-start-example">
+<h3>Quick Start Example<a class="headerlink" href="#quick-start-example" title="Permalink to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pylibfranka</span>
+
+<span class="c1"># Connect to the robot</span>
+<span class="n">robot</span> <span class="o">=</span> <span class="n">pylibfranka</span><span class="o">.</span><span class="n">Robot</span><span class="p">(</span><span class="s2">&quot;172.16.0.2&quot;</span><span class="p">)</span>
+<span class="n">state</span> <span class="o">=</span> <span class="n">robot</span><span class="o">.</span><span class="n">read_once</span><span class="p">()</span>
+
+<span class="c1"># Print joint positions</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Joint positions: </span><span class="si">{</span><span class="n">state</span><span class="o">.</span><span class="n">q</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For more examples, see the <a class="reference external" href="https://github.com/frankarobotics/libfranka/tree/main/pylibfranka/examples">pylibfranka examples</a> on GitHub.</p>
+</section>
+</section>
+<section id="building-python-bindings-from-source">
+<span id="libfranka-installation-python-bindings"></span><h2>Building Python Bindings from Source<a class="headerlink" href="#building-python-bindings-from-source" title="Permalink to this heading"></a></h2>
+<p>If you need to build from source (e.g., for development or unsupported platforms), follow these instructions.</p>
+<section id="prerequisites">
+<h3>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Python 3.9 or newer</p></li>
+<li><p>CMake 3.16 or newer</p></li>
+<li><p>C++ compiler with C++17 support</p></li>
+<li><p>Eigen3 development headers</p></li>
+<li><p>Poco development headers</p></li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you are using the provided devcontainer, you can skip the prerequisites installation as they are already included in the container.</p>
+</div>
+</section>
+<section id="installing-prerequisites-on-ubuntu-debian">
+<h3>Installing Prerequisites on Ubuntu/Debian<a class="headerlink" href="#installing-prerequisites-on-ubuntu-debian" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>build-essential<span class="w"> </span>cmake<span class="w"> </span>libeigen3-dev<span class="w"> </span>libpoco-dev<span class="w"> </span>python3-dev
+</pre></div>
+</div>
+</section>
+<section id="build-and-install">
+<h3>Build and Install<a class="headerlink" href="#build-and-install" title="Permalink to this heading"></a></h3>
+<p>From the libfranka root folder, install pylibfranka using pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+<p>This will build the C++ extension and install pylibfranka in your current Python environment.</p>
+<p>For development (editable install):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>-e<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+</section>
+<section id="inside-a-ros-ros-2-workspace">
+<h2>Inside a ROS / ROS 2 workspace<a class="headerlink" href="#inside-a-ros-ros-2-workspace" title="Permalink to this heading"></a></h2>
+<p>If you want to use libfranka in a ROS or ROS 2 workspace, please head over to the <a class="reference internal" href="../../franka_ros2_jazzy/docs/index.html#franka-ros2-jazzy"><span class="std std-ref">franka_ros2: Jazzy</span></a>
+and <a class="reference internal" href="../../franka_ros2_humble/docs/index.html#franka-ros2-humble"><span class="std std-ref">franka_ros2: Humble</span></a> chapters for instructions on how to use libfranka in ROS 2,
+and to the <span class="xref std std-ref">franka_ros</span> chapter for ROS 1 instructions.</p>
+</section>
+<section id="use-this-library-in-other-projects">
+<h2>Use this Library in Other Projects<a class="headerlink" href="#use-this-library-in-other-projects" title="Permalink to this heading"></a></h2>
+<p>To get started with <strong>libfranka</strong> in your own CMake projects, you need a simple <cite>CMakeLists.txt</cite> and a corresponding <cite>main.cpp</cite> file.</p>
+<p>At a minimum, your project must:</p>
+<ul class="simple">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">find_package(Franka</span> <span class="pre">REQUIRED)</span></code> to locate the library</p></li>
+<li><p>Link against <code class="docutils literal notranslate"><span class="pre">Franka::Franka</span></code> inside your <code class="docutils literal notranslate"><span class="pre">target_link_libraries(...)</span></code> command</p></li>
+</ul>
+<p>Below is an example <cite>CMakeLists.txt</cite> file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.16</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">MyRobotProject</span><span class="p">)</span>
+
+<span class="c"># Find libfranka</span>
+<span class="nb">find_package</span><span class="p">(</span><span class="s">Franka</span><span class="w"> </span><span class="s">REQUIRED</span><span class="p">)</span>
+
+<span class="c"># Create executable</span>
+<span class="nb">add_executable</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">src/main.cpp</span><span class="p">)</span>
+
+<span class="c"># Link libfranka</span>
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">PROJECT_NAME</span><span class="o">}</span><span class="w"> </span><span class="s">Franka::Franka</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This example uses <code class="docutils literal notranslate"><span class="pre">find_package</span></code> to detect <strong>libfranka</strong> and sets up an executable target that links to the library.</p>
+<p>A matching <cite>example_main.cpp</cite> file could look like this:</p>
+<div class="highlight-cpp notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;iostream&gt;</span>
+
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;franka/exception.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;franka/robot.h&gt;</span>
+
+<span class="kt">int</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">argc</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="o">**</span><span class="w"> </span><span class="n">argv</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">argc</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Usage: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; &lt;robot ip&gt;&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Connect to robot</span>
+<span class="w">    </span><span class="n">franka</span><span class="o">::</span><span class="n">Robot</span><span class="w"> </span><span class="n">robot</span><span class="p">(</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+
+<span class="w">    </span><span class="c1">// Read robot state</span>
+<span class="w">    </span><span class="n">franka</span><span class="o">::</span><span class="n">RobotState</span><span class="w"> </span><span class="n">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">robot</span><span class="p">.</span><span class="n">readOnce</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Print robot information</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Successfully connected to robot!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="c1">// Print end-effector position</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;End-effector position (x, y, z): &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">O_T_EE</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">O_T_EE</span><span class="p">[</span><span class="mi">13</span><span class="p">]</span>
+<span class="w">              </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">state</span><span class="p">.</span><span class="n">O_T_EE</span><span class="p">[</span><span class="mi">14</span><span class="p">]</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">franka</span><span class="o">::</span><span class="n">Exception</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">cerr</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;Error: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To build the project:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>..
+cmake<span class="w"> </span>--build<span class="w"> </span>.
+</pre></div>
+</div>
+<p>Once built, run your example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>./example_main
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="system_requirements.html" class="btn btn-neutral float-left" title="Minimum system and network requirements" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="real_time_kernel.html" class="btn btn-neutral float-right" title="Setting up the Real-Time Kernel" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

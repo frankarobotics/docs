@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_mobile &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="franka_mobile_fr3_duo_moveit_config" href="../../franka_mobile_fr3_duo_moveit_config/doc/index.html" />
+    <link rel="prev" title="franka_hardware" href="../../franka_hardware/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros2/doc/compatibility_matrix.html">Compatibility: franka_ros2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo_bringup/doc/index.html">franka_gazebo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">franka_mobile</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#package-overview">Package Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#controllers">Controllers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile_fr3_duo_moveit_config/doc/index.html">franka_mobile_fr3_duo_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile_sensors/doc/index.html">franka_mobile_sensors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_selfcollision/doc/index.html">franka_selfcollision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_spine/index.html">franka_spine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_vision_and_manipulation_kit/doc/index.html">franka_vision_and_manipulation_kit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mobile_fr3_duo_trajectory_controller/doc/index.html">mobile_fr3_duo_trajectory_controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a> &raquo;</li>
+      <li>franka_mobile</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_ros2_jazzy/franka_mobile/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-mobile">
+<h1>franka_mobile<a class="headerlink" href="#franka-mobile" title="Permalink to this heading"></a></h1>
+<section id="package-overview">
+<h2>Package Overview<a class="headerlink" href="#package-overview" title="Permalink to this heading"></a></h2>
+<p>This package contains the controllers needed for franka tmr swerve drive robot, both in simulation and on real hardware.</p>
+</section>
+<section id="controllers">
+<h2>Controllers<a class="headerlink" href="#controllers" title="Permalink to this heading"></a></h2>
+<p>The package provides:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">franka_mobile/swerve_drive_controller</span></code>: this is the main drive controller for the tmr. Its main features are:</dt><dd><ul>
+<li><p>subscribes to <cite>geometry_msgs::msg::TwistStamped</cite> messages on <code class="docutils literal notranslate"><span class="pre">~/cmd_vel</span></code></p></li>
+<li><p>publishes to <cite>/tf</cite> the odometry transformation between <cite>world</cite> and <cite>base_link</cite>. Frame names are configurable</p></li>
+<li><p>publishes to <cite>~/odom</cite> the <cite>nav_msgs::msg::Odometry</cite> containing the twist coming from the robot’s master controller or simulation.</p></li>
+<li><p>writes to a loaned <cite>franka_semantic_components::CartesianVelocity</cite> command interface to send the desired twist to the robot (either real or simulated).</p></li>
+<li><p>Both state and reference interfaces are configurable with prefixes for chaining purposes.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">franka_mobile/swerve_ik_controller</span></code>: this controller is needed for simulation purposes, e.g. with gazebo. Its main features are:</dt><dd><ul>
+<li><p>Reads/writes from/to <cite>joint/position</cite> and <cite>joint/velocity</cite> state/command interface exposes by <cite>gz_ros2_control</cite> plugins.</p></li>
+<li><p>Performs the forward/inverse kinematics computation needed to replicated the master controller’s behaviour.</p></li>
+<li><p>Exports a <cite>franka_semantic_components::CartesianVelocityInterface</cite> as reference interface.</p></li>
+<li><p>Exports a <cite>franka_semantic_components::CartesianPoseInterface</cite> as state interface.</p></li>
+<li><p>Both state and reference interfaces are configurable with prefixes for chaining purposes.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Both these controllers are derived from <code class="docutils literal notranslate"><span class="pre">controller_interface::ChainableControllerInterface</span></code> and can be composed with other controllers
+that adhere to the same state/reference interfaces exposed.
+Please look the the ros2 control documentation for more informations about chaining controllers.</p>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p>Please look into the <cite>config/swerve_drive_controller_parameters.yaml</cite> for available overrides in your yaml files.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../franka_hardware/doc/index.html" class="btn btn-neutral float-left" title="franka_hardware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../franka_mobile_fr3_duo_moveit_config/doc/index.html" class="btn btn-neutral float-right" title="franka_mobile_fr3_duo_moveit_config" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

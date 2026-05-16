@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copilot Instructions — franka_ros2 &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">franka_ros2: <strong>Jazzy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Copilot Instructions — franka_ros2</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/doc/franka_ros2_jazzy/.github/copilot-instructions.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="copilot-instructions-franka-ros2">
+<h1>Copilot Instructions — franka_ros2<a class="headerlink" href="#copilot-instructions-franka-ros2" title="Permalink to this heading"></a></h1>
+<blockquote>
+<div><p><strong>Living document.</strong> When you discover an important, reusable insight (e.g. a
+non-obvious build quirk, a naming convention not yet captured, a hard-won
+debugging lesson), add it to the appropriate section below. Before adding,
+re-validate existing entries so nothing becomes stale. Only record things that
+will save meaningful time in the future — skip trivia and one-off facts.</p>
+<p><strong>Small, surgical edits only.</strong> Never rewrite this file wholesale. Use targeted
+insertions or replacements to add or update individual entries. This keeps diffs
+reviewable and avoids accidentally dropping existing content.</p>
+</div></blockquote>
+<section id="project-overview">
+<h2>Project Overview<a class="headerlink" href="#project-overview" title="Permalink to this heading"></a></h2>
+<p>ROS 2 Jazzy workspace for Franka Robotics research robots, built on <code class="docutils literal notranslate"><span class="pre">libfranka</span></code>.
+Supports FR3 single-arm, FR3 Duo dual-arm, and Mobile FR3 Duo configurations.
+Uses <code class="docutils literal notranslate"><span class="pre">ros2_control</span></code> for hardware abstraction and MoveIt for motion planning.</p>
+</section>
+<section id="workspace-layout">
+<h2>Workspace Layout<a class="headerlink" href="#workspace-layout" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Source lives under <code class="docutils literal notranslate"><span class="pre">/ros2_ws/src/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_*</span></code> packages are the project’s own code</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">libfranka/</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_description/</span></code> are <strong>separate repos</strong> with their own <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> — see those files for repo-specific conventions</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ros2_control/</span></code>, <code class="docutils literal notranslate"><span class="pre">realtime_tools/</span></code>, <code class="docutils literal notranslate"><span class="pre">gz_ros2_control/</span></code>, <code class="docutils literal notranslate"><span class="pre">serial/</span></code>, <code class="docutils literal notranslate"><span class="pre">zed_description/</span></code>, <code class="docutils literal notranslate"><span class="pre">ros2_robotiq_gripper/</span></code>, <code class="docutils literal notranslate"><span class="pre">olvx_descriptions_module/</span></code> are vendored dependencies — avoid modifying these unless patching</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dependency.repos</span></code> defines external dependency versions (imported via <code class="docutils literal notranslate"><span class="pre">vcs</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">patches/</span></code> contains patches applied on top of vendored deps (e.g., <code class="docutils literal notranslate"><span class="pre">manage_overruns.patch</span></code> for <code class="docutils literal notranslate"><span class="pre">ros2_control/hardware_interface</span></code>)</p></li>
+</ul>
+</section>
+<section id="build-test">
+<h2>Build &amp; Test<a class="headerlink" href="#build-test" title="Permalink to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Source ROS 2 environment</span>
+.<span class="w"> </span>/opt/ros/<span class="nv">$ROS_DISTRO</span>/setup.sh
+
+<span class="c1"># Build everything</span>
+colcon<span class="w"> </span>build<span class="w"> </span>--base-paths<span class="w"> </span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cmake-args<span class="w"> </span>-DCMAKE_EXPORT_COMPILE_COMMANDS<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>-DCHECK_TIDY<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>-DBUILD_TESTING<span class="o">=</span>ON
+
+<span class="c1"># Run unit tests (excludes hardware tests)</span>
+.<span class="w"> </span>install/setup.sh
+colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--base-paths<span class="w"> </span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--packages-select-regex<span class="w"> </span><span class="s1">&#39;^franka_(?!bringup$|gripper$)&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--event-handlers<span class="w"> </span>console_direct+<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ctest-args<span class="w"> </span>--exclude-regex<span class="w"> </span>test_hardware
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Working directory for colcon commands is <code class="docutils literal notranslate"><span class="pre">/ros2_ws</span></code> (one level above <code class="docutils literal notranslate"><span class="pre">src/</span></code>)</p></li>
+<li><p>Always source <code class="docutils literal notranslate"><span class="pre">install/setup.sh</span></code> before running tests</p></li>
+<li><p>Hardware tests require a real robot and run separately via <code class="docutils literal notranslate"><span class="pre">franka_ros2/scripts/run_hardware_tests.sh</span> <span class="pre">&lt;robot_ip&gt;</span></code></p></li>
+</ul>
+</section>
+<section id="c-conventions">
+<h2>C++ Conventions<a class="headerlink" href="#c-conventions" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Standard</strong>: C++20 (some packages still on C++17)</p></li>
+<li><p><strong>Style</strong>: Chromium-based (<code class="docutils literal notranslate"><span class="pre">.clang-format</span></code>), 100-column limit, sorted includes</p></li>
+<li><p><strong>Compiler flags</strong>: <code class="docutils literal notranslate"><span class="pre">-Wall</span> <span class="pre">-Wextra</span> <span class="pre">-Wpedantic</span></code></p></li>
+<li><p><strong>Naming</strong> (enforced by <code class="docutils literal notranslate"><span class="pre">.clang-tidy</span></code>):</p>
+<ul>
+<li><p>Namespaces: <code class="docutils literal notranslate"><span class="pre">lower_case</span></code></p></li>
+<li><p>Classes / Structs / Enums / Typedefs: <code class="docutils literal notranslate"><span class="pre">CamelCase</span></code></p></li>
+<li><p>Functions / Methods: <code class="docutils literal notranslate"><span class="pre">camelBack</span></code></p></li>
+<li><p>Variables / Parameters: <code class="docutils literal notranslate"><span class="pre">lower_case</span></code></p></li>
+<li><p>Private member variables: <code class="docutils literal notranslate"><span class="pre">lower_case_</span></code> (trailing underscore)</p></li>
+<li><p>Constants: <code class="docutils literal notranslate"><span class="pre">kCamelCase</span></code></p></li>
+</ul>
+</li>
+<li><p><strong>Build system</strong>: <code class="docutils literal notranslate"><span class="pre">ament_cmake</span></code> with <code class="docutils literal notranslate"><span class="pre">pluginlib</span></code> for plugin export</p></li>
+<li><p><strong>Testing</strong>: Google Test / Google Mock via <code class="docutils literal notranslate"><span class="pre">ament_add_gmock()</span></code></p></li>
+<li><p><strong>Linting</strong>: clang-format, clang-tidy, ament_cppcheck, ament_cpplint, ament_lint_cmake</p></li>
+</ul>
+</section>
+<section id="python-conventions">
+<h2>Python Conventions<a class="headerlink" href="#python-conventions" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Formatter / Linter</strong>: Ruff (configured in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>)</p></li>
+<li><p><strong>Line length</strong>: 99</p></li>
+<li><p><strong>Quotes</strong>: single quotes</p></li>
+<li><p><strong>Import order</strong>: Google-style (future → stdlib → third-party), managed by <code class="docutils literal notranslate"><span class="pre">ruff</span> <span class="pre">lint</span> <span class="pre">--select</span> <span class="pre">I</span></code></p></li>
+</ul>
+</section>
+<section id="commits">
+<h2>Commits<a class="headerlink" href="#commits" title="Permalink to this heading"></a></h2>
+<p>All commits must include a <code class="docutils literal notranslate"><span class="pre">Signed-off-by:</span></code> line (DCO requirement). Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">-s</span></code>.</p>
+</section>
+<section id="docker-dev-container">
+<h2>Docker / Dev Container<a class="headerlink" href="#docker-dev-container" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Base image: <code class="docutils literal notranslate"><span class="pre">ros:jazzy-ros-base</span></code></p></li>
+<li><p>Dev container config in <code class="docutils literal notranslate"><span class="pre">.devcontainer/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">docker-compose.yml</span></code> runs with <code class="docutils literal notranslate"><span class="pre">--network</span> <span class="pre">host</span></code>, real-time ulimits, and privileged mode for robot communication</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_entrypoint.sh</span></code> imports dependencies via <code class="docutils literal notranslate"><span class="pre">vcs</span></code> and applies patches</p></li>
+</ul>
+</section>
+<section id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this heading"></a></h2>
+<p>Apache 2.0 — see <code class="docutils literal notranslate"><span class="pre">LICENSE</span></code> and <code class="docutils literal notranslate"><span class="pre">NOTICE</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

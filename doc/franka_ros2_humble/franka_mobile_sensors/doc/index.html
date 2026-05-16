@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_mobile_sensors &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="franka_msgs" href="../../franka_msgs/doc/index.html" />
+    <link rel="prev" title="franka_hardware" href="../../franka_hardware/doc/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_jazzy/docs/index.html">franka_ros2: <strong>Jazzy</strong></a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2: <strong>Humble</strong></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros2/doc/compatibility_matrix.html">Compatibility: franka_ros2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo_bringup/doc/index.html">franka_gazebo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">franka_mobile_sensors</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#package-overview">Package Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#launch-arguments">Launch Arguments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#sensor-suite-configuration">Sensor Suite Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#device-specific-parameters">Device-Specific Parameters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#custom-configurations">Custom Configurations</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#example">Example</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2: <strong>Humble</strong></a> &raquo;</li>
+      <li>franka_mobile_sensors</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_ros2_humble/franka_mobile_sensors/doc/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-mobile-sensors">
+<h1>franka_mobile_sensors<a class="headerlink" href="#franka-mobile-sensors" title="Permalink to this heading"></a></h1>
+<section id="package-overview">
+<h2>Package Overview<a class="headerlink" href="#package-overview" title="Permalink to this heading"></a></h2>
+<p>This package contains launch files and run-time configurations for using sensors on Franka Robotics mobile research robots.
+It provides integration for:</p>
+<ul class="simple">
+<li><p><strong>RealSense Cameras</strong> - Intel RealSense depth cameras (D455)</p></li>
+<li><p><strong>SICK Safety Scanners</strong> - SICK nanoScan3 safety lidars</p></li>
+<li><p><strong>Olive Robotics IMU</strong> - Olive Robotics olixSense X1 IMU</p></li>
+</ul>
+<p>The package handles sensor configuration, driver launching, and RViz visualization for the complete sensor suite.</p>
+</section>
+<section id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this heading"></a></h2>
+<p>Launch the complete sensor suite with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_mobile_sensors</span> <span class="n">franka_mobile_sensors</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> \
+  <span class="n">robot_type</span><span class="o">:=&lt;</span><span class="n">robot_type</span><span class="o">&gt;</span> \
+  <span class="n">config_file</span><span class="o">:=&lt;</span><span class="n">config_name</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<section id="launch-arguments">
+<h3>Launch Arguments<a class="headerlink" href="#launch-arguments" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start_cameras</span></code> (default: <code class="docutils literal notranslate"><span class="pre">true</span></code>) - Start RealSense camera drivers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_lidars</span></code> (default: <code class="docutils literal notranslate"><span class="pre">true</span></code>) - Start SICK safety scanner drivers</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_rviz</span></code> (default: <code class="docutils literal notranslate"><span class="pre">true</span></code>) - Start RViz visualization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">robot_type</span></code> (default: <code class="docutils literal notranslate"><span class="pre">tmrv0_2</span></code>) - ID of the robot type for visualization</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_file</span></code> (default: <code class="docutils literal notranslate"><span class="pre">default_sensor_suite</span></code>) - Sensor suite configuration (without .yaml extension)</p></li>
+</ul>
+</section>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<section id="sensor-suite-configuration">
+<h3>Sensor Suite Configuration<a class="headerlink" href="#sensor-suite-configuration" title="Permalink to this heading"></a></h3>
+<p>The main sensor suite is configured in:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config/default_sensor_suite.yaml</span></code> - Defines which sensors are used</p></li>
+</ul>
+<p>This file specifies:</p>
+<ul class="simple">
+<li><p>List of cameras with their device profiles</p></li>
+<li><p>List of lidars with their device profiles</p></li>
+<li><p>Network configurations</p></li>
+<li><p>Sensor placement and mounting parameters</p></li>
+</ul>
+</section>
+<section id="device-specific-parameters">
+<h3>Device-Specific Parameters<a class="headerlink" href="#device-specific-parameters" title="Permalink to this heading"></a></h3>
+<p>Individual device parameters are configured in device profile files:</p>
+<p><strong>Cameras:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config/cameras/franka_mobile_d455.yaml</span></code> - RealSense D455 parameters</p></li>
+</ul>
+<p><strong>Lidars:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">config/lidars/sick_nanoscan3.yaml</span></code> - SICK nanoScan3 parameters</p></li>
+</ul>
+</section>
+<section id="custom-configurations">
+<h3>Custom Configurations<a class="headerlink" href="#custom-configurations" title="Permalink to this heading"></a></h3>
+<p>To create a custom configuration:</p>
+<ol class="arabic simple">
+<li><p>Copy <code class="docutils literal notranslate"><span class="pre">config/default_sensor_suite.yaml</span></code> to <code class="docutils literal notranslate"><span class="pre">config/my_custom_suite.yaml</span></code></p></li>
+<li><p>Modify camera/lidar lists and reference existing or new device profiles</p></li>
+<li><p>Launch with: <code class="docutils literal notranslate"><span class="pre">config_file:=my_custom_suite</span></code></p></li>
+</ol>
+</section>
+</section>
+<section id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h2>
+<p>To launch only cameras without lidars and RViz:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_mobile_sensors</span> <span class="n">franka_mobile_sensors</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> \
+  <span class="n">start_cameras</span><span class="o">:=</span><span class="n">true</span> \
+  <span class="n">start_lidars</span><span class="o">:=</span><span class="n">false</span> \
+  <span class="n">start_rviz</span><span class="o">:=</span><span class="n">false</span>
+</pre></div>
+</div>
+<p>To use a custom sensor configuration:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ros2</span> <span class="n">launch</span> <span class="n">franka_mobile_sensors</span> <span class="n">franka_mobile_sensors</span><span class="o">.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> \
+  <span class="n">config_file</span><span class="o">:=</span><span class="n">my_custom_suite</span> \
+  <span class="n">robot_type</span><span class="o">:=</span><span class="n">tmrv0_2</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../../franka_hardware/doc/index.html" class="btn btn-neutral float-left" title="franka_hardware" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../franka_msgs/doc/index.html" class="btn btn-neutral float-right" title="franka_msgs" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
