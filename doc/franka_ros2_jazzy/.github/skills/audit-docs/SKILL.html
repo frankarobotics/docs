@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Audit Documentation &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Audit Documentation</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/doc/franka_ros2_jazzy/.github/skills/audit-docs/SKILL.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="audit-documentation">
+<h1>Audit Documentation<a class="headerlink" href="#audit-documentation" title="Permalink to this heading"></a></h1>
+<section id="when-to-use">
+<h2>When to Use<a class="headerlink" href="#when-to-use" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>After major refactors (renamed packages, changed launch args, added/removed controllers)</p></li>
+<li><p>When a user suspects docs are outdated or incorrect</p></li>
+<li><p>Periodic hygiene check to keep docs accurate</p></li>
+<li><p>After adding new features that should be documented</p></li>
+</ul>
+</section>
+<section id="documentation-locations">
+<h2>Documentation Locations<a class="headerlink" href="#documentation-locations" title="Permalink to this heading"></a></h2>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Location</p></th>
+<th class="head"><p>Content</p></th>
+<th class="head"><p>Packages</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;pkg&gt;/doc/index.rst</span></code></p></td>
+<td><p>Package user documentation (Sphinx RST)</p></td>
+<td><p>Most <code class="docutils literal notranslate"><span class="pre">franka_*</span></code> packages</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">&lt;pkg&gt;/README.md</span></code></p></td>
+<td><p>Package overview, quick-start</p></td>
+<td><p>Some packages</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">src/README.md</span></code></p></td>
+<td><p>Top-level workspace guide</p></td>
+<td><p>Root</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">src/.github/copilot-instructions.md</span></code></p></td>
+<td><p>AI agent context, conventions</p></td>
+<td><p>Workspace-wide</p></td>
+</tr>
+<tr class="row-even"><td><p>Launch file docstrings</p></td>
+<td><p>Launch argument descriptions</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_bringup</span></code>, <code class="docutils literal notranslate"><span class="pre">franka_gazebo_bringup</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Config YAML comments</p></td>
+<td><p>Parameter explanations</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_bringup/config/</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<section id="packages-with-doc-folders-franka-owned">
+<h3>Packages with <code class="docutils literal notranslate"><span class="pre">doc/</span></code> folders (franka-owned)<a class="headerlink" href="#packages-with-doc-folders-franka-owned" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_bringup/doc/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_hardware/doc/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_gripper/doc/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_mobile/doc/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_mobile_fr3_duo_moveit_config/doc/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_description_extensions/doc/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_description_extensions/franka_mobile_sensors/doc/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_description_extensions/franka_vision_and_manipulation_kit/doc/</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_ros2/doc/</span></code> (compatibility matrix)</p></li>
+</ul>
+<p>The relocated description packages are exposed through the umbrella
+<code class="docutils literal notranslate"><span class="pre">franka_description_extensions/doc/index.rst</span></code>. The repository-level
+<code class="docutils literal notranslate"><span class="pre">docs/index.rst</span></code> lists that umbrella, which keeps the two child package docs
+reachable without duplicating them in the root toctree.</p>
+</section>
+</section>
+<section id="audit-procedure">
+<h2>Audit Procedure<a class="headerlink" href="#audit-procedure" title="Permalink to this heading"></a></h2>
+<section id="identify-scope">
+<h3>1. Identify scope<a class="headerlink" href="#identify-scope" title="Permalink to this heading"></a></h3>
+<p>Ask the user: full audit (all packages) or specific packages?</p>
+</section>
+<section id="cross-reference-checks">
+<h3>2. Cross-reference checks<a class="headerlink" href="#cross-reference-checks" title="Permalink to this heading"></a></h3>
+<p>For each package in scope, perform these checks:</p>
+<section id="launch-arguments-vs-docs">
+<h4>Launch arguments vs docs<a class="headerlink" href="#launch-arguments-vs-docs" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">of</span> <span class="n">truth</span><span class="p">:</span> <span class="o">*.</span><span class="n">launch</span><span class="o">.</span><span class="n">py</span> <span class="p">(</span><span class="n">DeclareLaunchArgument</span> <span class="n">calls</span><span class="p">)</span>
+<span class="n">Docs</span><span class="p">:</span> <span class="n">doc</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span><span class="p">,</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Extract all <code class="docutils literal notranslate"><span class="pre">DeclareLaunchArgument</span></code> names and descriptions from launch files</p></li>
+<li><p>Compare against documented launch arguments in <code class="docutils literal notranslate"><span class="pre">doc/index.rst</span></code></p></li>
+<li><p>Flag any missing, renamed, or removed arguments</p></li>
+</ul>
+</section>
+<section id="controller-names-vs-docs">
+<h4>Controller names vs docs<a class="headerlink" href="#controller-names-vs-docs" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">of</span> <span class="n">truth</span><span class="p">:</span> <span class="o">*</span><span class="n">_plugin</span><span class="o">.</span><span class="n">xml</span><span class="p">,</span> <span class="n">controllers</span><span class="o">.</span><span class="n">yaml</span><span class="p">,</span> <span class="n">CMakeLists</span><span class="o">.</span><span class="n">txt</span> <span class="p">(</span><span class="n">pluginlib_export</span><span class="p">)</span>
+<span class="n">Docs</span><span class="p">:</span> <span class="n">doc</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span><span class="p">,</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span> <span class="n">examples</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Extract registered controller plugin names</p></li>
+<li><p>Check that documented controller names match actual registrations</p></li>
+<li><p>Verify example commands in docs use valid controller names</p></li>
+</ul>
+</section>
+<section id="parameters-vs-docs">
+<h4>Parameters vs docs<a class="headerlink" href="#parameters-vs-docs" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">of</span> <span class="n">truth</span><span class="p">:</span> <span class="n">generate_parameter_library</span> <span class="n">YAML</span><span class="p">,</span> <span class="ow">or</span> <span class="n">rclcpp</span> <span class="n">declare_parameter</span><span class="p">()</span> <span class="n">calls</span>
+<span class="n">Docs</span><span class="p">:</span> <span class="n">doc</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span><span class="p">,</span> <span class="n">config</span> <span class="n">YAML</span> <span class="n">comments</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Extract declared parameters from source</p></li>
+<li><p>Compare against documented parameter tables/lists</p></li>
+</ul>
+</section>
+<section id="package-dependencies-and-interfaces">
+<h4>Package dependencies and interfaces<a class="headerlink" href="#package-dependencies-and-interfaces" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">of</span> <span class="n">truth</span><span class="p">:</span> <span class="n">package</span><span class="o">.</span><span class="n">xml</span><span class="p">,</span> <span class="n">CMakeLists</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">Docs</span><span class="p">:</span> <span class="n">doc</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span> <span class="s2">&quot;Package Overview&quot;</span> <span class="n">sections</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Check that listed interfaces (state/command) match actual exports</p></li>
+<li><p>Verify dependency lists if documented</p></li>
+</ul>
+</section>
+<section id="commands-and-examples">
+<h4>Commands and examples<a class="headerlink" href="#commands-and-examples" title="Permalink to this heading"></a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Source</span> <span class="n">of</span> <span class="n">truth</span><span class="p">:</span> <span class="n">actual</span> <span class="n">CLI</span> <span class="n">behavior</span>
+<span class="n">Docs</span><span class="p">:</span> <span class="n">doc</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span><span class="p">,</span> <span class="n">README</span><span class="o">.</span><span class="n">md</span> <span class="n">code</span> <span class="n">blocks</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Verify documented <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">launch</span></code>, <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">control</span></code> commands use correct syntax</p></li>
+<li><p>Check package/executable names still exist</p></li>
+<li><p>Verify config file paths referenced in docs exist</p></li>
+</ul>
+</section>
+</section>
+<section id="report-findings">
+<h3>3. Report findings<a class="headerlink" href="#report-findings" title="Permalink to this heading"></a></h3>
+<p>Present a summary table:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">|</span> <span class="n">Package</span> <span class="o">|</span> <span class="n">File</span> <span class="o">|</span> <span class="n">Issue</span> <span class="o">|</span> <span class="n">Severity</span> <span class="o">|</span>
+<span class="o">|---------|------|-------|----------|</span>
+<span class="o">|</span> <span class="n">franka_bringup</span> <span class="o">|</span> <span class="n">doc</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span><span class="p">:</span><span class="n">L25</span> <span class="o">|</span> <span class="n">Launch</span> <span class="n">arg</span> <span class="s1">&#39;arm_id&#39;</span> <span class="n">removed</span> <span class="n">but</span> <span class="n">still</span> <span class="n">documented</span> <span class="o">|</span> <span class="n">High</span> <span class="o">|</span>
+<span class="o">|</span> <span class="n">franka_hardware</span> <span class="o">|</span> <span class="n">doc</span><span class="o">/</span><span class="n">index</span><span class="o">.</span><span class="n">rst</span><span class="p">:</span><span class="n">L10</span> <span class="o">|</span> <span class="n">Still</span> <span class="n">references</span> <span class="s1">&#39;panda&#39;</span> <span class="n">naming</span> <span class="o">|</span> <span class="n">Medium</span> <span class="o">|</span>
+</pre></div>
+</div>
+<p>Severity levels:</p>
+<ul class="simple">
+<li><p><strong>High</strong>: Documented command/parameter will fail if followed</p></li>
+<li><p><strong>Medium</strong>: Inaccurate description but won’t cause errors</p></li>
+<li><p><strong>Low</strong>: Style/formatting issues, minor wording</p></li>
+</ul>
+</section>
+<section id="propose-fixes">
+<h3>4. Propose fixes<a class="headerlink" href="#propose-fixes" title="Permalink to this heading"></a></h3>
+<p>For each finding, propose a specific edit. <strong>Ask the user before applying changes.</strong></p>
+<p>Group fixes by package for easier review.</p>
+</section>
+</section>
+<section id="quick-audit-mode">
+<h2>Quick Audit Mode<a class="headerlink" href="#quick-audit-mode" title="Permalink to this heading"></a></h2>
+<p>For a fast check on a single package:</p>
+<ol class="arabic simple">
+<li><p>Read the package’s <code class="docutils literal notranslate"><span class="pre">doc/index.rst</span></code> or <code class="docutils literal notranslate"><span class="pre">README.md</span></code></p></li>
+<li><p>Read its launch files and source for parameter/interface declarations</p></li>
+<li><p>Diff documented vs actual — report discrepancies</p></li>
+</ol>
+</section>
+<section id="deep-audit-mode">
+<h2>Deep Audit Mode<a class="headerlink" href="#deep-audit-mode" title="Permalink to this heading"></a></h2>
+<p>For a full workspace audit:</p>
+<ol class="arabic simple">
+<li><p>Iterate over all <code class="docutils literal notranslate"><span class="pre">franka_*</span></code> packages with <code class="docutils literal notranslate"><span class="pre">doc/</span></code> folders</p></li>
+<li><p>Run all cross-reference checks above</p></li>
+<li><p>Also check <code class="docutils literal notranslate"><span class="pre">src/README.md</span></code> and <code class="docutils literal notranslate"><span class="pre">copilot-instructions.md</span></code> for accuracy</p></li>
+<li><p>Produce a consolidated report</p></li>
+</ol>
+</section>
+<section id="common-drift-patterns">
+<h2>Common Drift Patterns<a class="headerlink" href="#common-drift-patterns" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><strong>Renamed launch arguments</strong> — old name in docs, new name in code</p></li>
+<li><p><strong>Removed controllers</strong> — docs still show examples with deleted controllers</p></li>
+<li><p><strong>Changed default values</strong> — doc says default is X but code now defaults to Y</p></li>
+<li><p><strong>Deprecated interfaces</strong> — doc references <code class="docutils literal notranslate"><span class="pre">panda/</span></code> prefix but code uses <code class="docutils literal notranslate"><span class="pre">fr3/</span></code></p></li>
+<li><p><strong>Missing new features</strong> — new controller/parameter added but never documented</p></li>
+<li><p><strong>Dead links</strong> — RST cross-references to moved/renamed files</p></li>
+<li><p><strong>Missing changelog entry</strong> — code changed but CHANGELOG.rst not updated</p></li>
+</ul>
+</section>
+<section id="changelog-verification">
+<h2>Changelog Verification<a class="headerlink" href="#changelog-verification" title="Permalink to this heading"></a></h2>
+<p>The workspace changelog lives at <code class="docutils literal notranslate"><span class="pre">src/CHANGELOG.rst</span></code> and uses this format:</p>
+<div class="highlight-rst notranslate"><div class="highlight"><pre><span></span><span class="gh">UNRELEASED</span>
+<span class="gh">----------</span>
+Requires libfranka &gt;= X.Y.Z and franka_description &gt;= X.Y.Z requires ROS 2 Jazzy
+
+<span class="m">*</span> &lt;type&gt;: &lt;description&gt;
+
+<span class="gh">v3.3.0 (2026-05-04)</span>
+<span class="gh">-------------------</span>
+Requires libfranka &gt;= X.Y.Z and franka_description &gt;= X.Y.Z requires ROS 2 Jazzy
+
+<span class="m">*</span> &lt;type&gt;: &lt;description&gt;
+</pre></div>
+</div>
+<p><strong>RST underline rule:</strong> The underline (<code class="docutils literal notranslate"><span class="pre">---</span></code>) must be <strong>exactly</strong> as long as the title
+text it underlines (measured in characters). This is the project convention; RST only
+requires “at least as long” but we match exactly for consistency.</p>
+<p>New entries always go under the <code class="docutils literal notranslate"><span class="pre">UNRELEASED</span></code> section at the top. Released versions
+(those with a date) are frozen and must not be modified.</p>
+<p><strong>Verify the <code class="docutils literal notranslate"><span class="pre">Requires</span></code> line:</strong> When adding entries to <code class="docutils literal notranslate"><span class="pre">UNRELEASED</span></code>, check that the
+<code class="docutils literal notranslate"><span class="pre">Requires</span> <span class="pre">libfranka</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_description</span></code> versions are still correct. Cross-reference
+against <code class="docutils literal notranslate"><span class="pre">package.xml</span></code> or <code class="docutils literal notranslate"><span class="pre">dependency.repos</span></code> — if a dependency version was bumped as part
+of the current task, update the <code class="docutils literal notranslate"><span class="pre">Requires</span></code> line accordingly.</p>
+<p>Entry types: <code class="docutils literal notranslate"><span class="pre">feat</span></code>, <code class="docutils literal notranslate"><span class="pre">fix</span></code>, <code class="docutils literal notranslate"><span class="pre">refactor</span></code>, <code class="docutils literal notranslate"><span class="pre">chore</span></code>, <code class="docutils literal notranslate"><span class="pre">docu</span></code>, <code class="docutils literal notranslate"><span class="pre">BREAKING</span> <span class="pre">CHANGE</span></code></p>
+<section id="check-for-current-task">
+<h3>Check for current task<a class="headerlink" href="#check-for-current-task" title="Permalink to this heading"></a></h3>
+<p>A “task” corresponds to the current git branch. One changelog entry per branch is expected.</p>
+<ol class="arabic simple">
+<li><p>Get the current branch: <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rev-parse</span> <span class="pre">--abbrev-ref</span> <span class="pre">HEAD</span></code></p></li>
+<li><p>Infer the task type and scope from the branch name (e.g., <code class="docutils literal notranslate"><span class="pre">feat/add-gripper-support</span></code> → <code class="docutils literal notranslate"><span class="pre">feat:</span> <span class="pre">...</span></code>)</p></li>
+<li><p>Read the top (latest version) section of <code class="docutils literal notranslate"><span class="pre">src/CHANGELOG.rst</span></code></p></li>
+<li><p>Check if there is already an entry that covers this branch’s work in the <code class="docutils literal notranslate"><span class="pre">UNRELEASED</span></code> section</p></li>
+<li><p>If missing, <strong>ask the user</strong> whether to add one</p></li>
+<li><p>If adding, insert a new bullet under the <code class="docutils literal notranslate"><span class="pre">UNRELEASED</span></code> heading</p></li>
+</ol>
+<p>Common branch naming patterns:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">&lt;JIRA-ID&gt;-&lt;description&gt;</span></code> (e.g., <code class="docutils literal notranslate"><span class="pre">PRCUN-6298-collision-topic-to-best-effort</span></code>) — infer the type from the description or ask the user</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">feat/&lt;description&gt;</span></code> → <code class="docutils literal notranslate"><span class="pre">feat:</span> <span class="pre">&lt;description&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fix/&lt;description&gt;</span></code> → <code class="docutils literal notranslate"><span class="pre">fix:</span> <span class="pre">&lt;description&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refactor/&lt;description&gt;</span></code> → <code class="docutils literal notranslate"><span class="pre">refactor:</span> <span class="pre">&lt;description&gt;</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">chore/&lt;description&gt;</span></code> → <code class="docutils literal notranslate"><span class="pre">chore:</span> <span class="pre">&lt;description&gt;</span></code></p></li>
+<li><p>If the branch name doesn’t follow a convention, ask the user for the entry type</p></li>
+</ul>
+</section>
+<section id="rules">
+<h3>Rules<a class="headerlink" href="#rules" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>One changelog entry per branch/task (not per commit or per file edit)</p></li>
+<li><p>Every user-facing change (feat, fix, breaking) <strong>must</strong> have a changelog entry</p></li>
+<li><p>Internal refactors (<code class="docutils literal notranslate"><span class="pre">chore</span></code>, <code class="docutils literal notranslate"><span class="pre">refactor</span></code>) should have entries for non-trivial changes</p></li>
+<li><p>Multi-line entries use 2-space indentation for continuation lines</p></li>
+<li><p>BREAKING CHANGE entries should include migration examples in RST code blocks</p></li>
+<li><p>Branches like <code class="docutils literal notranslate"><span class="pre">main</span></code>, <code class="docutils literal notranslate"><span class="pre">jazzy</span></code>, <code class="docutils literal notranslate"><span class="pre">develop</span></code> are integration branches — skip the check</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

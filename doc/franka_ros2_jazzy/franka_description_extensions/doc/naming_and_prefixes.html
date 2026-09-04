@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Naming and prefixes &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Attaching a third-party gripper" href="custom_grippers.html" />
+    <link rel="prev" title="Mounting-point catalog" href="mounting_points.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros2/doc/compatibility_matrix.html">Compatibility: franka_ros2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo/franka_gazebo_bringup/doc/index.html">franka_gazebo_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile/doc/index.html">franka_mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile_fr3_duo_moveit_config/doc/index.html">franka_mobile_fr3_duo_moveit_config</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Franka description extensions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="composition_layers.html">Composition layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mounting_points.html">Mounting-point catalog</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Naming and prefixes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#single-arm-names">Single-arm names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#stationary-fr3-duo">Stationary FR3 Duo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mobile-fr3-duo">Mobile FR3 Duo</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#prefix-rules-for-attachments">Prefix rules for attachments</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="custom_grippers.html">Attaching a third-party gripper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples.html">Worked examples and entry points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../franka_mobile_sensors/doc/index.html">franka_mobile_sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../franka_vision_and_manipulation_kit/doc/index.html">franka_vision_and_manipulation_kit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_selfcollision/doc/index.html">franka_selfcollision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_spine/index.html">franka_spine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mobile_fr3_duo_trajectory_controller/doc/index.html">mobile_fr3_duo_trajectory_controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a> &raquo;</li>
+          <li><a href="index.html">Franka description extensions</a> &raquo;</li>
+      <li>Naming and prefixes</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_ros2_jazzy/franka_description_extensions/doc/naming_and_prefixes.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="naming-and-prefixes">
+<span id="franka-description-extension-naming"></span><h1>Naming and prefixes<a class="headerlink" href="#naming-and-prefixes" title="Permalink to this heading"></a></h1>
+<p>The URDF name is built from the robot model and the prefix at the composition
+boundary. Keep the separator rule in mind: the public single-arm entry
+points accept a prefix token such as <code class="docutils literal notranslate"><span class="pre">left</span></code> and add the trailing
+underscore internally.</p>
+<section id="single-arm-names">
+<h2>Single-arm names<a class="headerlink" href="#single-arm-names" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">franka_description</span></code> entry point for a model such as
+<code class="docutils literal notranslate"><span class="pre">fr3v2_1</span></code> declares an <code class="docutils literal notranslate"><span class="pre">arm_prefix</span></code> argument. Its wrapper computes:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>expanded_arm_prefix = arm_prefix + &quot;_&quot; if arm_prefix else &quot;&quot;
+link8 = expanded_arm_prefix + robot_type + &quot;_link8&quot;
+</pre></div>
+</div>
+<p>With <code class="docutils literal notranslate"><span class="pre">no_prefix:=false</span></code> (the default), the resulting names include that
+expanded prefix:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">arm_prefix:=</span></code> (empty) gives <code class="docutils literal notranslate"><span class="pre">fr3v2_1_link8</span></code>;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arm_prefix:=left</span></code> gives <code class="docutils literal notranslate"><span class="pre">left_fr3v2_1_link8</span></code>; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">arm_prefix:=right</span></code> gives <code class="docutils literal notranslate"><span class="pre">right_fr3v2_1_link8</span></code>.</p></li>
+</ul>
+<p>Pass <code class="docutils literal notranslate"><span class="pre">left</span></code>, not <code class="docutils literal notranslate"><span class="pre">left_</span></code>, to a public single-arm entry point. The wrapper
+adds the separator. <code class="docutils literal notranslate"><span class="pre">no_prefix:=true</span></code> suppresses the whole generated
+prefix, producing <code class="docutils literal notranslate"><span class="pre">link0</span></code> through <code class="docutils literal notranslate"><span class="pre">link8</span></code> and unprefixed joints.</p>
+<p>The low-level <code class="docutils literal notranslate"><span class="pre">franka_robot</span></code> macro receives the already expanded prefix.
+This distinction matters when an extension calls that macro directly:
+<code class="docutils literal notranslate"><span class="pre">arm_prefix=&quot;left_&quot;</span></code> produces <code class="docutils literal notranslate"><span class="pre">left_fr3v2_1_link8</span></code> for
+<code class="docutils literal notranslate"><span class="pre">robot_type=&quot;fr3v2_1&quot;</span></code>.</p>
+</section>
+<section id="stationary-fr3-duo">
+<h2>Stationary FR3 Duo<a class="headerlink" href="#stationary-fr3-duo" title="Permalink to this heading"></a></h2>
+<p>The stationary branch of
+<code class="docutils literal notranslate"><span class="pre">vision_and_manipulation_kit.urdf.xacro</span></code> passes
+<code class="docutils literal notranslate"><span class="pre">[prefix</span> <span class="pre">+</span> <span class="pre">&quot;left&quot;,</span> <span class="pre">prefix</span> <span class="pre">+</span> <span class="pre">&quot;right&quot;]</span></code> to <code class="docutils literal notranslate"><span class="pre">fr3_duo</span></code>. The duo macro adds
+the separator before passing each arm prefix to <code class="docutils literal notranslate"><span class="pre">franka_robot</span></code>.</p>
+<p>For the default arguments:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>left_arm_type=fr3v2_1
+right_arm_type=fr3v2_1
+prefix=&quot;&quot;
+</pre></div>
+</div>
+<p>the arm end frames are:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>left_fr3v2_1_link8
+right_fr3v2_1_link8
+</pre></div>
+</div>
+<p>To put the complete stationary kit under an outer name, pass a separator in
+the vision-kit <code class="docutils literal notranslate"><span class="pre">prefix</span></code> value, for example <code class="docutils literal notranslate"><span class="pre">prefix:=kit_</span></code>:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>kit_left_fr3v2_1_link8
+kit_right_fr3v2_1_link8
+</pre></div>
+</div>
+<p>The vision-kit entry point uses <code class="docutils literal notranslate"><span class="pre">prefix</span></code> literally; it does not add an
+underscore before <code class="docutils literal notranslate"><span class="pre">left</span></code> or <code class="docutils literal notranslate"><span class="pre">right</span></code>. Therefore <code class="docutils literal notranslate"><span class="pre">kit_</span></code> and <code class="docutils literal notranslate"><span class="pre">kit</span></code> have
+different results.</p>
+</section>
+<section id="mobile-fr3-duo">
+<h2>Mobile FR3 Duo<a class="headerlink" href="#mobile-fr3-duo" title="Permalink to this heading"></a></h2>
+<p>The current <code class="docutils literal notranslate"><span class="pre">mobile_fr3_duo_v0_2</span></code> macro defines its arm prefixes internally
+as <code class="docutils literal notranslate"><span class="pre">left</span></code> and <code class="docutils literal notranslate"><span class="pre">right</span></code>. Consequently, the mobile branch of the vision kit
+uses:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>left_fr3v2_1_link8
+right_fr3v2_1_link8
+</pre></div>
+</div>
+<p>for the default arm types, even when the outer vision-kit <code class="docutils literal notranslate"><span class="pre">prefix</span></code> is
+non-empty. That outer prefix is used for accessory names, such as the ZED
+camera and Robotiq chains; it does not rename the mobile arm frames.</p>
+<p>The same distinction applies to the mobile sensor entry point. Its
+<code class="docutils literal notranslate"><span class="pre">robot_types</span></code> argument is a list whose current default is
+<code class="docutils literal notranslate"><span class="pre">['tmrv0_2','fr3v2','fr3v2']</span></code>. The first item is the mobile base and the
+two arm names are emitted with the upstream <code class="docutils literal notranslate"><span class="pre">left</span></code> and <code class="docutils literal notranslate"><span class="pre">right</span></code> prefixes.</p>
+</section>
+<section id="prefix-rules-for-attachments">
+<h2>Prefix rules for attachments<a class="headerlink" href="#prefix-rules-for-attachments" title="Permalink to this heading"></a></h2>
+<p>Use the expanded output name as the fixed-joint parent:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>&lt;arm_prefix&gt;&lt;robot_type&gt;_link8
+</pre></div>
+</div>
+<p>Here <code class="docutils literal notranslate"><span class="pre">&lt;arm_prefix&gt;</span></code> includes its trailing underscore when it is non-empty.
+For a public single-arm argument <code class="docutils literal notranslate"><span class="pre">arm_prefix:=left</span></code>, the expanded value is
+<code class="docutils literal notranslate"><span class="pre">left_</span></code>. For a stationary duo with <code class="docutils literal notranslate"><span class="pre">prefix:=kit_</span></code>, the left expanded
+value is <code class="docutils literal notranslate"><span class="pre">kit_left_</span></code>. For the mobile duo, use the current fixed values
+<code class="docutils literal notranslate"><span class="pre">left_</span></code> and <code class="docutils literal notranslate"><span class="pre">right_</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">no_prefix</span></code> is a description-wide switch, not an attachment remapping
+feature. In particular, the vision-kit component macro still constructs
+parents such as <code class="docutils literal notranslate"><span class="pre">left_fr3v2_1_link8</span></code>. Leave <code class="docutils literal notranslate"><span class="pre">no_prefix</span></code> at its default
+<code class="docutils literal notranslate"><span class="pre">false</span></code> when using the supplied vision-kit components unless the whole
+composition is adapted consistently.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mounting_points.html" class="btn btn-neutral float-left" title="Mounting-point catalog" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="custom_grippers.html" class="btn btn-neutral float-right" title="Attaching a third-party gripper" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
