@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mounting-point catalog &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Naming and prefixes" href="naming_and_prefixes.html" />
+    <link rel="prev" title="Composition layers" href="composition_layers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros2/doc/compatibility_matrix.html">Compatibility: franka_ros2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo/franka_gazebo_bringup/doc/index.html">franka_gazebo_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile/doc/index.html">franka_mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile_fr3_duo_moveit_config/doc/index.html">franka_mobile_fr3_duo_moveit_config</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Franka description extensions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="composition_layers.html">Composition layers</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mounting-point catalog</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arm-flange-and-link8">Arm flange and <code class="docutils literal notranslate"><span class="pre">link8</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tmrv0-2-sensor-points">TMRv0.2 sensor points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fr3-duo-mount">FR3 Duo mount</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#spine">Spine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#head-camera-point">Head camera point</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="naming_and_prefixes.html">Naming and prefixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_grippers.html">Attaching a third-party gripper</a></li>
+<li class="toctree-l3"><a class="reference internal" href="examples.html">Worked examples and entry points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../franka_mobile_sensors/doc/index.html">franka_mobile_sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../franka_vision_and_manipulation_kit/doc/index.html">franka_vision_and_manipulation_kit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_selfcollision/doc/index.html">franka_selfcollision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_spine/index.html">franka_spine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mobile_fr3_duo_trajectory_controller/doc/index.html">mobile_fr3_duo_trajectory_controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a> &raquo;</li>
+          <li><a href="index.html">Franka description extensions</a> &raquo;</li>
+      <li>Mounting-point catalog</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_ros2_jazzy/franka_description_extensions/doc/mounting_points.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mounting-point-catalog">
+<span id="franka-description-extension-mounting-points"></span><h1>Mounting-point catalog<a class="headerlink" href="#mounting-point-catalog" title="Permalink to this heading"></a></h1>
+<p>Mounting points are ordinary URDF links. Attach an extension with a fixed
+joint whose <code class="docutils literal notranslate"><span class="pre">parent</span></code> is one of these links; do not attach to a mesh name or
+to a controller name.</p>
+<section id="arm-flange-and-link8">
+<h2>Arm flange and <code class="docutils literal notranslate"><span class="pre">link8</span></code><a class="headerlink" href="#arm-flange-and-link8" title="Permalink to this heading"></a></h2>
+<p>Each arm ends at a fixed <code class="docutils literal notranslate"><span class="pre">link8</span></code> frame. With prefixes enabled, its expanded
+name is <code class="docutils literal notranslate"><span class="pre">&lt;arm_prefix&gt;&lt;robot_type&gt;_link8</span></code>. The upstream
+<code class="docutils literal notranslate"><span class="pre">franka_robot</span></code> macro uses this frame as the built-in end-effector parent
+when <code class="docutils literal notranslate"><span class="pre">special_connection</span></code> is empty. For example:</p>
+<ul class="simple">
+<li><p>a single <code class="docutils literal notranslate"><span class="pre">fr3v2_1</span></code> arm without a prefix has
+<code class="docutils literal notranslate"><span class="pre">fr3v2_1_link8</span></code>;</p></li>
+<li><p>a left <code class="docutils literal notranslate"><span class="pre">fr3v2_1</span></code> arm in a duo has
+<code class="docutils literal notranslate"><span class="pre">left_fr3v2_1_link8</span></code>; and</p></li>
+<li><p>a stationary vision kit with <code class="docutils literal notranslate"><span class="pre">prefix:=kit_</span></code> has
+<code class="docutils literal notranslate"><span class="pre">kit_left_fr3v2_1_link8</span></code> and <code class="docutils literal notranslate"><span class="pre">kit_right_fr3v2_1_link8</span></code>.</p></li>
+</ul>
+<p>The exact expansion depends on the selected <code class="docutils literal notranslate"><span class="pre">robot_type</span></code>, <code class="docutils literal notranslate"><span class="pre">arm_prefix</span></code>,
+<code class="docutils literal notranslate"><span class="pre">prefix</span></code>, and <code class="docutils literal notranslate"><span class="pre">no_prefix</span></code> settings. See
+<a class="reference internal" href="naming_and_prefixes.html"><span class="doc">Naming and prefixes</span></a> before hard-coding a parent
+frame.</p>
+<p><code class="docutils literal notranslate"><span class="pre">special_connection</span></code> is an upstream built-in-end-effector option. When it
+is non-empty, <code class="docutils literal notranslate"><span class="pre">franka_robot</span></code> uses it instead of
+<code class="docutils literal notranslate"><span class="pre">&lt;robot_type&gt;_link8</span></code> and then prepends the arm prefix. It does not discover
+or re-parent an external xacro macro. An external gripper should use its
+explicitly expanded <code class="docutils literal notranslate"><span class="pre">link8</span></code> parent.</p>
+<p><code class="docutils literal notranslate"><span class="pre">link8</span></code>, end effector, and TCP have different roles:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">link8</span></code> is the last fixed arm link and the standard flange/physical
+attachment frame. It is not the tool center point.</p></li>
+<li><p>The end effector (EE) is the attached body or mechanism, such as the
+upstream <code class="docutils literal notranslate"><span class="pre">hand</span></code> link or an external gripper base link.</p></li>
+<li><p>The tool center point (TCP) is a separate fixed child frame of the EE. The
+upstream built-in paths place it with <code class="docutils literal notranslate"><span class="pre">tcp_xyz</span></code> and <code class="docutils literal notranslate"><span class="pre">tcp_rpy</span></code>; an
+external macro must emit its own TCP frame and transform.</p></li>
+</ul>
+</section>
+<section id="tmrv0-2-sensor-points">
+<h2>TMRv0.2 sensor points<a class="headerlink" href="#tmrv0-2-sensor-points" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">franka_description/robots/tmrv0_2/tmrv0_2.xacro</span></code> creates these links. All
+of them are children of <code class="docutils literal notranslate"><span class="pre">base_link</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">imu_mounting_point</span></code> at <code class="docutils literal notranslate"><span class="pre">(0.260,</span> <span class="pre">0.0,</span> <span class="pre">0.1478)</span></code> with
+<code class="docutils literal notranslate"><span class="pre">rpy=(pi,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>. The mobile sensor suite attaches its OLV-IMU01 here.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">front_mounting_point</span></code> at <code class="docutils literal notranslate"><span class="pre">(0.380705,</span> <span class="pre">0.0,</span> <span class="pre">0.2345)</span></code> with
+<code class="docutils literal notranslate"><span class="pre">rpy=(pi,</span> <span class="pre">0,</span> <span class="pre">0)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rear_mounting_point</span></code> at <code class="docutils literal notranslate"><span class="pre">(-0.380705,</span> <span class="pre">0.0,</span> <span class="pre">0.2345)</span></code> with
+<code class="docutils literal notranslate"><span class="pre">rpy=(pi,</span> <span class="pre">0,</span> <span class="pre">pi)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">left_mounting_point</span></code> at <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">0.272712,</span> <span class="pre">0.1145)</span></code> with
+<code class="docutils literal notranslate"><span class="pre">rpy=(pi,</span> <span class="pre">0,</span> <span class="pre">pi/2)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">right_mounting_point</span></code> at <code class="docutils literal notranslate"><span class="pre">(0.0,</span> <span class="pre">-0.272712,</span> <span class="pre">0.1145)</span></code> with
+<code class="docutils literal notranslate"><span class="pre">rpy=(pi,</span> <span class="pre">0,</span> <span class="pre">-pi/2)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lidar_front_mounting_point</span></code> at <code class="docutils literal notranslate"><span class="pre">(0.3275,</span> <span class="pre">0.2175,</span> <span class="pre">0.19065)</span></code> with
+<code class="docutils literal notranslate"><span class="pre">rpy=(0,</span> <span class="pre">pi,</span> <span class="pre">3*pi/4)</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">lidar_rear_mounting_point</span></code> at <code class="docutils literal notranslate"><span class="pre">(-0.3275,</span> <span class="pre">-0.2175,</span> <span class="pre">0.19065)</span></code> with
+<code class="docutils literal notranslate"><span class="pre">rpy=(0,</span> <span class="pre">pi,</span> <span class="pre">7*pi/4)</span></code>.</p></li>
+</ul>
+<p>The current <code class="docutils literal notranslate"><span class="pre">sensor_suite</span></code> uses the four directional points for the D455
+cameras and the two <code class="docutils literal notranslate"><span class="pre">lidar_*</span></code> points for the nanoScan3 descriptions. It
+uses the frame names exactly as emitted, without an arm prefix.</p>
+</section>
+<section id="fr3-duo-mount">
+<h2>FR3 Duo mount<a class="headerlink" href="#fr3-duo-mount" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">fr3_duo</span></code> macro creates:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">fr3_duo_mount_mounting_point</span></code> for the physical duo mount;</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fr3_duo_mount_origin</span></code> for the mount’s kinematic origin; and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fr3_duo_mount_&lt;left_prefix&gt;</span></code> and
+<code class="docutils literal notranslate"><span class="pre">fr3_duo_mount_&lt;right_prefix&gt;</span></code> for the two arm attachment points.</p></li>
+</ul>
+<p>The mount macro attaches <code class="docutils literal notranslate"><span class="pre">fr3_duo_mount_mounting_point</span></code> to its <code class="docutils literal notranslate"><span class="pre">parent</span></code>
+with an identity fixed joint. The stationary <code class="docutils literal notranslate"><span class="pre">fr3_duo</span></code> entry point passes
+<code class="docutils literal notranslate"><span class="pre">base</span></code> as that parent. The mobile
+<code class="docutils literal notranslate"><span class="pre">mobile_fr3_duo_v0_2</span></code> entry point passes
+<code class="docutils literal notranslate"><span class="pre">franka_spine_mounting_point</span></code> instead.</p>
+</section>
+<section id="spine">
+<h2>Spine<a class="headerlink" href="#spine" title="Permalink to this heading"></a></h2>
+<p>The mobile macro calls <code class="docutils literal notranslate"><span class="pre">franka_spine</span> <span class="pre">parent=&quot;base_link&quot;</span></code>. The resulting
+chain is:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>base_link
+  └── franka_spine
+        └── franka_spine_mounting_point
+              └── fr3_duo_mount_mounting_point
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">franka_spine_vertical_joint</span></code> is the prismatic joint between
+<code class="docutils literal notranslate"><span class="pre">franka_spine</span></code> and <code class="docutils literal notranslate"><span class="pre">franka_spine_mounting_point</span></code>. The duo arms are
+therefore mounted through <code class="docutils literal notranslate"><span class="pre">franka_spine_mounting_point</span></code> rather than
+directly to <code class="docutils literal notranslate"><span class="pre">base_link</span></code>.</p>
+</section>
+<section id="head-camera-point">
+<h2>Head camera point<a class="headerlink" href="#head-camera-point" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">fr3_duo</span></code> macro creates the head once, attached to
+<code class="docutils literal notranslate"><span class="pre">fr3_duo_mount_mounting_point</span></code>. The head macro then creates
+<code class="docutils literal notranslate"><span class="pre">head_camera_mounting_point</span></code> as a child of <code class="docutils literal notranslate"><span class="pre">head_link</span></code>. The vision kit
+attaches the ZED camera with a fixed joint whose parent is exactly
+<code class="docutils literal notranslate"><span class="pre">head_camera_mounting_point</span></code> and whose child is
+<code class="docutils literal notranslate"><span class="pre">&lt;prefix&gt;head_camera_link</span></code>.</p>
+<p>Do not add another <code class="docutils literal notranslate"><span class="pre">head</span></code> macro when composing the vision kit. The base
+duo description already supplies <code class="docutils literal notranslate"><span class="pre">head_link</span></code> and
+<code class="docutils literal notranslate"><span class="pre">head_camera_mounting_point</span></code>.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="composition_layers.html" class="btn btn-neutral float-left" title="Composition layers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="naming_and_prefixes.html" class="btn btn-neutral float-right" title="Naming and prefixes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
