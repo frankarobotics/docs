@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Attaching a third-party gripper &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Worked examples and entry points" href="examples.html" />
+    <link rel="prev" title="Naming and prefixes" href="naming_and_prefixes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros2/doc/compatibility_matrix.html">Compatibility: franka_ros2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo/franka_gazebo_bringup/doc/index.html">franka_gazebo_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile/doc/index.html">franka_mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile_fr3_duo_moveit_config/doc/index.html">franka_mobile_fr3_duo_moveit_config</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Franka description extensions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="composition_layers.html">Composition layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mounting_points.html">Mounting-point catalog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naming_and_prefixes.html">Naming and prefixes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Attaching a third-party gripper</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#fixed-joint-description-macro">Fixed-joint description macro</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#connecting-the-macro-to-a-franka-arm">Connecting the macro to a Franka arm</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#built-in-end-effectors-are-a-different-path">Built-in end effectors are a different path</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#description-pkg-is-not-a-complete-package-relocation-switch"><code class="docutils literal notranslate"><span class="pre">description_pkg</span></code> is not a complete package relocation switch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#control-and-controller-integration">Control and controller integration</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="examples.html">Worked examples and entry points</a></li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../franka_mobile_sensors/doc/index.html">franka_mobile_sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../franka_vision_and_manipulation_kit/doc/index.html">franka_vision_and_manipulation_kit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_selfcollision/doc/index.html">franka_selfcollision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_spine/index.html">franka_spine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mobile_fr3_duo_trajectory_controller/doc/index.html">mobile_fr3_duo_trajectory_controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a> &raquo;</li>
+          <li><a href="index.html">Franka description extensions</a> &raquo;</li>
+      <li>Attaching a third-party gripper</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_ros2_jazzy/franka_description_extensions/doc/custom_grippers.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="attaching-a-third-party-gripper">
+<span id="franka-description-extension-custom-grippers"></span><h1>Attaching a third-party gripper<a class="headerlink" href="#attaching-a-third-party-gripper" title="Permalink to this heading"></a></h1>
+<p>An external gripper is a description extension, not an <code class="docutils literal notranslate"><span class="pre">ee_id</span></code> registration.
+Keep the arm description and the gripper description in separate xacro
+macros, then connect them with a fixed joint.</p>
+<p>The supported composition pattern is:</p>
+<ol class="arabic simple">
+<li><p>Disable the built-in end effector in the Franka description with
+<code class="docutils literal notranslate"><span class="pre">hand=&quot;false&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">ee_id=&quot;none&quot;</span></code>.</p></li>
+<li><p>Expand the arm prefix using the same rule as the selected Franka entry
+point.</p></li>
+<li><p>Attach the external macro to
+<code class="docutils literal notranslate"><span class="pre">&lt;arm_prefix&gt;&lt;robot_type&gt;_link8</span></code>.</p></li>
+<li><p>Give the gripper its own base link, visual geometry, collision geometry,
+inertial data, and TCP frame.</p></li>
+<li><p>Add ros2_control and controller wiring in the runtime overlay required by
+the gripper. The fixed-joint description macro does not provide that
+wiring.</p></li>
+</ol>
+<section id="fixed-joint-description-macro">
+<h2>Fixed-joint description macro<a class="headerlink" href="#fixed-joint-description-macro" title="Permalink to this heading"></a></h2>
+<p>The following is a complete shape for an external macro. The package name
+<code class="docutils literal notranslate"><span class="pre">example_gripper_description</span></code> is a placeholder for the third-party package
+that owns the mesh and xacro files.</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;example_gripper&quot;</span>
+<span class="w">    </span><span class="na">params=</span><span class="s">&quot;parent prefix:=&#39;&#39;</span>
+<span class="s">            xyz:=&#39;0 0 0&#39; rpy:=&#39;0 0 0&#39;</span>
+<span class="s">            tcp_xyz:=&#39;0 0 0.15&#39; tcp_rpy:=&#39;0 0 0&#39;&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}gripper_base_link&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;visual&gt;</span>
+<span class="w">      </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mesh</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;package://example_gripper_description/meshes/visual/gripper.dae&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/visual&gt;</span>
+<span class="w">    </span><span class="nt">&lt;collision&gt;</span>
+<span class="w">      </span><span class="nt">&lt;geometry&gt;</span>
+<span class="w">        </span><span class="nt">&lt;mesh</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;package://example_gripper_description/meshes/collision/gripper.stl&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;/geometry&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/collision&gt;</span>
+<span class="w">    </span><span class="nt">&lt;inertial&gt;</span>
+<span class="w">      </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;0 0 0&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;0 0 0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;mass</span><span class="w"> </span><span class="na">value=</span><span class="s">&quot;1.0&quot;</span><span class="nt">/&gt;</span>
+<span class="w">      </span><span class="nt">&lt;inertia</span><span class="w"> </span><span class="na">ixx=</span><span class="s">&quot;0.01&quot;</span><span class="w"> </span><span class="na">ixy=</span><span class="s">&quot;0.0&quot;</span><span class="w"> </span><span class="na">ixz=</span><span class="s">&quot;0.0&quot;</span>
+<span class="w">               </span><span class="na">iyy=</span><span class="s">&quot;0.01&quot;</span><span class="w"> </span><span class="na">iyz=</span><span class="s">&quot;0.0&quot;</span><span class="w"> </span><span class="na">izz=</span><span class="s">&quot;0.01&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;/inertial&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/link&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}gripper_mount_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${parent}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}gripper_base_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${xyz}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${rpy}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;link</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}gripper_tcp&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;joint</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;${prefix}gripper_tcp_joint&quot;</span><span class="w"> </span><span class="na">type=</span><span class="s">&quot;fixed&quot;</span><span class="nt">&gt;</span>
+<span class="w">    </span><span class="nt">&lt;parent</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}gripper_base_link&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;child</span><span class="w"> </span><span class="na">link=</span><span class="s">&quot;${prefix}gripper_tcp&quot;</span><span class="nt">/&gt;</span>
+<span class="w">    </span><span class="nt">&lt;origin</span><span class="w"> </span><span class="na">xyz=</span><span class="s">&quot;${tcp_xyz}&quot;</span><span class="w"> </span><span class="na">rpy=</span><span class="s">&quot;${tcp_rpy}&quot;</span><span class="nt">/&gt;</span>
+<span class="w">  </span><span class="nt">&lt;/joint&gt;</span>
+<span class="nt">&lt;/xacro:macro&gt;</span>
+</pre></div>
+</div>
+<p>The mesh paths, mass, inertia, mount transform, and TCP transform must be
+replaced with the gripper manufacturer’s data. Additional gripper links and
+moving joints can be emitted by the same macro.</p>
+</section>
+<section id="connecting-the-macro-to-a-franka-arm">
+<h2>Connecting the macro to a Franka arm<a class="headerlink" href="#connecting-the-macro-to-a-franka-arm" title="Permalink to this heading"></a></h2>
+<p>For a single-arm wrapper that accepts the public, unexpanded <code class="docutils literal notranslate"><span class="pre">arm_prefix</span></code>
+token, derive the expanded prefix once and use it for both the arm and the
+gripper parent:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;xacro:include</span><span class="w"> </span><span class="na">filename=</span><span class="s">&quot;$(find franka_description)/robots/common/franka_robot.xacro&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;xacro:include</span>
+<span class="w">    </span><span class="na">filename=</span><span class="s">&quot;$(find example_gripper_description)/urdf/example_gripper.xacro&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;xacro:macro</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;franka_with_example_gripper&quot;</span>
+<span class="w">    </span><span class="na">params=</span><span class="s">&quot;robot_type arm_prefix:=&#39;&#39;&quot;</span><span class="nt">&gt;</span>
+<span class="w">  </span><span class="nt">&lt;xacro:property</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;expanded_arm_prefix&quot;</span>
+<span class="w">      </span><span class="na">value=</span><span class="s">&quot;${arm_prefix + &#39;_&#39; if arm_prefix else &#39;&#39;}&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;xacro:franka_robot</span>
+<span class="w">      </span><span class="na">robot_type=</span><span class="s">&quot;${robot_type}&quot;</span>
+<span class="w">      </span><span class="na">arm_prefix=</span><span class="s">&quot;${expanded_arm_prefix}&quot;</span>
+<span class="w">      </span><span class="na">connected_to=</span><span class="s">&quot;base&quot;</span>
+<span class="w">      </span><span class="na">hand=</span><span class="s">&quot;false&quot;</span>
+<span class="w">      </span><span class="na">ee_id=</span><span class="s">&quot;none&quot;</span><span class="nt">/&gt;</span>
+
+<span class="w">  </span><span class="nt">&lt;xacro:example_gripper</span>
+<span class="w">      </span><span class="na">parent=</span><span class="s">&quot;${expanded_arm_prefix}${robot_type}_link8&quot;</span>
+<span class="w">      </span><span class="na">prefix=</span><span class="s">&quot;${expanded_arm_prefix}&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/xacro:macro&gt;</span>
+</pre></div>
+</div>
+<p>For <code class="docutils literal notranslate"><span class="pre">robot_type=&quot;fr3v2_1&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">arm_prefix=&quot;left&quot;</span></code>, the fixed joint
+parent is <code class="docutils literal notranslate"><span class="pre">left_fr3v2_1_link8</span></code>. With an empty prefix it is
+<code class="docutils literal notranslate"><span class="pre">fr3v2_1_link8</span></code>. A duo wrapper must perform the same calculation separately
+for its left and right arm prefixes.</p>
+</section>
+<section id="built-in-end-effectors-are-a-different-path">
+<h2>Built-in end effectors are a different path<a class="headerlink" href="#built-in-end-effectors-are-a-different-path" title="Permalink to this heading"></a></h2>
+<p>The upstream <code class="docutils literal notranslate"><span class="pre">franka_robot</span></code> macro has built-in handling for
+<code class="docutils literal notranslate"><span class="pre">ee_id=&quot;franka_hand&quot;</span></code> and for upstream one-link end effectors. Those paths
+load xacros and inertial data from the <code class="docutils literal notranslate"><span class="pre">franka_description</span></code> end-effector
+tree. An arbitrary third-party package name is not a documented registry
+interface: setting <code class="docutils literal notranslate"><span class="pre">ee_id</span></code> to an external name does not make that package
+discoverable.</p>
+<p>Use the external fixed-joint pattern above instead. <code class="docutils literal notranslate"><span class="pre">special_connection</span></code> is
+also an upstream built-in-end-effector parameter. When it is non-empty, the
+upstream macro uses it instead of <code class="docutils literal notranslate"><span class="pre">&lt;robot_type&gt;_link8</span></code> and prepends the
+expanded arm prefix. It does not alter the <code class="docutils literal notranslate"><span class="pre">parent</span></code> supplied to an external
+macro.</p>
+</section>
+<section id="description-pkg-is-not-a-complete-package-relocation-switch">
+<h2><code class="docutils literal notranslate"><span class="pre">description_pkg</span></code> is not a complete package relocation switch<a class="headerlink" href="#description-pkg-is-not-a-complete-package-relocation-switch" title="Permalink to this heading"></a></h2>
+<p>The current base macros accept and forward <code class="docutils literal notranslate"><span class="pre">description_pkg</span></code> through the
+outer and built-in end-effector calls, but the parameter does not relocate the
+whole description. The current <code class="docutils literal notranslate"><span class="pre">franka_robot</span></code> call does not pass it to
+<code class="docutils literal notranslate"><span class="pre">franka_arm</span></code>, so the arm still uses the default <code class="docutils literal notranslate"><span class="pre">franka_description</span></code> for
+its visual resources. The arm also loads its joint limits, kinematics,
+inertials, dynamics, and accelerometer YAML from <code class="docutils literal notranslate"><span class="pre">franka_description</span></code>; its
+collision mesh URI and several include paths are hard-coded to that package.
+Built-in end-effector visual mesh URIs can use <code class="docutils literal notranslate"><span class="pre">description_pkg</span></code>, while
+their include and inertial-data paths remain tied to <code class="docutils literal notranslate"><span class="pre">franka_description</span></code>.</p>
+<p>Leave the base description resources on <code class="docutils literal notranslate"><span class="pre">franka_description</span></code> and keep
+third-party gripper meshes and inertials in the external package’s own macro.
+Do not use <code class="docutils literal notranslate"><span class="pre">description_pkg</span></code> as a substitute for the fixed-joint extension
+pattern.</p>
+</section>
+<section id="control-and-controller-integration">
+<h2>Control and controller integration<a class="headerlink" href="#control-and-controller-integration" title="Permalink to this heading"></a></h2>
+<p>The fixed-joint macro describes geometry and TF only. If the gripper has
+actuated joints, add its <code class="docutils literal notranslate"><span class="pre">&lt;ros2_control&gt;</span></code> hardware/component description,
+controller configuration, driver, and lifecycle startup in the appropriate
+overlay:</p>
+<ul class="simple">
+<li><p>use the real/mock composition owned by <code class="docutils literal notranslate"><span class="pre">franka_bringup</span></code> and
+<code class="docutils literal notranslate"><span class="pre">franka_hardware</span></code> for hardware bringup; or</p></li>
+<li><p>use the Gazebo composition owned by <code class="docutils literal notranslate"><span class="pre">franka_gazebo_bringup</span></code> for
+simulation.</p></li>
+</ul>
+<p>The optional Robotiq control block in
+<code class="docutils literal notranslate"><span class="pre">franka_vision_and_manipulation_kit</span></code> is specific to that package’s
+Robotiq macro. It is not a general third-party gripper registration mechanism.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="naming_and_prefixes.html" class="btn btn-neutral float-left" title="Naming and prefixes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="examples.html" class="btn btn-neutral float-right" title="Worked examples and entry points" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

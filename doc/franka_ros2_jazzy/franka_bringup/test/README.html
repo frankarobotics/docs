@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Test Suite Architecture &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Test Suite Architecture</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_ros2_jazzy/franka_bringup/test/README.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="test-suite-architecture">
+<h1>Test Suite Architecture<a class="headerlink" href="#test-suite-architecture" title="Permalink to this heading"></a></h1>
+<p>This directory contains the integration and structural tests for the
+<code class="docutils literal notranslate"><span class="pre">franka_bringup</span></code> package. Tests are organized by what they verify and
+what hardware they require.</p>
+<section id="test-categories">
+<h2>Test Categories<a class="headerlink" href="#test-categories" title="Permalink to this heading"></a></h2>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Category</p></th>
+<th class="text-center head"><p>Requires Hardware</p></th>
+<th class="head"><p>Framework</p></th>
+<th class="head"><p>Purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Fake-hardware integration</p></td>
+<td class="text-center"><p>❌</p></td>
+<td><p>launch_testing</p></td>
+<td><p>Verify controller lifecycle with <code class="docutils literal notranslate"><span class="pre">mock_components/GenericSystem</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>Interface validation</p></td>
+<td class="text-center"><p>❌</p></td>
+<td><p>pytest</p></td>
+<td><p>Assert URDF xacro expands to correct ros2_control interfaces</p></td>
+</tr>
+<tr class="row-even"><td><p>Launch file parsing</p></td>
+<td class="text-center"><p>❌</p></td>
+<td><p>pytest</p></td>
+<td><p>Verify all launch files import and generate valid descriptions</p></td>
+</tr>
+<tr class="row-odd"><td><p>Teleop plumbing</p></td>
+<td class="text-center"><p>❌</p></td>
+<td><p>launch_testing</p></td>
+<td><p>Verify Joy→cmd_vel pipeline works</p></td>
+</tr>
+<tr class="row-even"><td><p>Controller ordering</p></td>
+<td class="text-center"><p>❌</p></td>
+<td><p>launch_testing</p></td>
+<td><p>Verify startup ordering, no error states</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hardware smoke tests</p></td>
+<td class="text-center"><p>✅</p></td>
+<td><p>launch_testing</p></td>
+<td><p>Run controllers on real robot for fixed duration</p></td>
+</tr>
+<tr class="row-even"><td><p>Gazebo integration</p></td>
+<td class="text-center"><p>❌*</p></td>
+<td><p>launch_testing</p></td>
+<td><p>Controller tests against Gazebo simulation</p></td>
+</tr>
+</tbody>
+</table>
+<p>* Requires Gazebo installed in the environment.</p>
+</section>
+<section id="file-layout">
+<h2>File Layout<a class="headerlink" href="#file-layout" title="Permalink to this heading"></a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>test/
+├── config/                              # YAML configs for test scenarios
+│   ├── test_use_fake_hardware.config.yaml   # FR3 single-arm (use_fake_hardware=false)
+│   ├── test_fake_hardware_fr3.config.yaml   # FR3 single-arm (fake hw)
+│   ├── test_fake_hardware_fr3_duo.config.yaml
+│   ├── test_fake_hardware_mobile_fr3_duo.config.yaml
+│   ├── test_0.config.yaml ... test_1.config.yaml  # Real-hardware configs
+│   └── ...
+├── test_fake_hardware_controllers.py    # FR3 controller lifecycle (fake hw)
+├── test_fake_hardware_fr3_duo.py        # FR3 Duo integration (fake hw)
+├── test_fake_hardware_mobile_fr3_duo.py # Mobile FR3 Duo integration (fake hw)
+├── test_franka_arm_interfaces.py        # Single-arm URDF interface validation
+├── test_fr3_duo_interfaces.py           # Dual-arm URDF interface validation
+├── test_mobile_fr3_duo_interfaces.py    # Mobile URDF interface validation
+├── test_controller_activation_order.py  # Verifies startup ordering, no error states
+├── test_teleop_plumbing.py              # Joy → cmd_vel pipeline validation
+├── test_launch_file_parsing.py          # Launch file structural validation
+├── test_hardware_example_controllers.py # Real-hardware controller tests
+├── test_hardware_generic_controller.py  # Real-hardware generic test framework
+├── test_gazebo_wrapper_expansion.py     # Gazebo URDF expansion test
+└── ros2_control_test_helpers.py         # Shared URDF parsing utilities
+</pre></div>
+</div>
+</section>
+<section id="shared-testing-utilities">
+<h2>Shared Testing Utilities<a class="headerlink" href="#shared-testing-utilities" title="Permalink to this heading"></a></h2>
+<p>Located in <code class="docutils literal notranslate"><span class="pre">franka_bringup/franka_bringup/testing/</span></code>:</p>
+<ul class="simple">
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">fake_hardware_test_base.py</span></code></strong> — <code class="docutils literal notranslate"><span class="pre">FakeHardwareTestBase</span></code> class providing
+ROS lifecycle management, joint_state waiting, and error assertion for all
+fake-hardware tests.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">controller_service_client.py</span></code></strong> — Service client wrapper for
+controller_manager operations (load, configure, switch, unload).</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">controller_test_utils.py</span></code></strong> — Higher-level utilities for hardware tests
+(move_to_start workflow, smoke test runner).</p></li>
+</ul>
+</section>
+<section id="fake-hardware-test-design">
+<h2>Fake-Hardware Test Design<a class="headerlink" href="#fake-hardware-test-design" title="Permalink to this heading"></a></h2>
+<p>All fake-hardware tests inherit from <code class="docutils literal notranslate"><span class="pre">FakeHardwareTestBase</span></code> and share:</p>
+<ol class="arabic simple">
+<li><p><strong>ROS lifecycle</strong> — <code class="docutils literal notranslate"><span class="pre">rclpy.init()</span></code> in <code class="docutils literal notranslate"><span class="pre">setUpClass</span></code>, shutdown in
+<code class="docutils literal notranslate"><span class="pre">tearDownClass</span></code>, per-test node creation in <code class="docutils literal notranslate"><span class="pre">setUp</span></code>/<code class="docutils literal notranslate"><span class="pre">tearDown</span></code>.</p></li>
+<li><p><strong>Stack readiness check</strong> — <code class="docutils literal notranslate"><span class="pre">wait_for_stack_ready()</span></code> waits for
+controller_manager services and joint_state_broadcaster activation.</p></li>
+<li><p><strong>Joint state verification</strong> — <code class="docutils literal notranslate"><span class="pre">wait_for_joint_states(min_joints=N)</span></code>
+subscribes to <code class="docutils literal notranslate"><span class="pre">/joint_states</span></code> and waits for messages with enough joints.</p></li>
+<li><p><strong>Error output assertion</strong> — <code class="docutils literal notranslate"><span class="pre">assert_no_errors_in_output(proc_output)</span></code>
+with optional <code class="docutils literal notranslate"><span class="pre">ignore_patterns</span></code> for expected errors.</p></li>
+</ol>
+<section id="known-limitations">
+<h3>Known Limitations<a class="headerlink" href="#known-limitations" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>swerve_drive_controller</strong> cannot activate with <code class="docutils literal notranslate"><span class="pre">mock_components</span></code> because
+it requires <code class="docutils literal notranslate"><span class="pre">0/cartesian_pose_state</span></code> interfaces from real TMR hardware.
+The Mobile FR3 Duo test filters this expected error.</p></li>
+<li><p><strong>Franka GPIO controllers</strong> (cartesian_pose, cartesian_velocity, etc.)
+cannot activate because <code class="docutils literal notranslate"><span class="pre">GenericSystem</span></code> doesn’t provide GPIO interfaces.
+These are tested at load-only level.</p></li>
+<li><p><strong><code class="docutils literal notranslate"><span class="pre">franka_fr3_moveit_config</span></code></strong> cannot be declared as a <code class="docutils literal notranslate"><span class="pre">test_depend</span></code> in
+<code class="docutils literal notranslate"><span class="pre">franka_bringup/package.xml</span></code> because it would create a circular dependency.
+The launch parsing test for MoveIt files works in full-workspace builds (CI)
+but may fail in isolated <code class="docutils literal notranslate"><span class="pre">--packages-up-to</span> <span class="pre">franka_bringup</span></code> builds.</p></li>
+</ul>
+</section>
+</section>
+<section id="running-tests">
+<h2>Running Tests<a class="headerlink" href="#running-tests" title="Permalink to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># All no-hardware tests (CI default)</span>
+colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>franka_bringup<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ctest-args<span class="w"> </span>--exclude-regex<span class="w"> </span><span class="s1">&#39;test_hardware|test_gazebo_launch|test_gazebo_contact&#39;</span>
+
+<span class="c1"># Only fake-hardware integration tests</span>
+colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>franka_bringup<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ctest-args<span class="w"> </span>--tests-regex<span class="w"> </span><span class="s1">&#39;test_fake_hardware|test_controller_activation&#39;</span>
+
+<span class="c1"># Only interface/structural tests</span>
+colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>franka_bringup<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ctest-args<span class="w"> </span>--tests-regex<span class="w"> </span><span class="s1">&#39;test_franka_arm|test_fr3_duo|test_mobile_fr3_duo|test_launch&#39;</span>
+
+<span class="c1"># Hardware tests (requires robot_ip, see scripts/run_hardware_tests.sh)</span>
+colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>franka_bringup<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ctest-args<span class="w"> </span>--tests-regex<span class="w"> </span><span class="s1">&#39;test_hardware&#39;</span><span class="w"> </span>--<span class="w"> </span>--robot_ip<span class="w"> </span>&lt;ip&gt;
+</pre></div>
+</div>
+</section>
+<section id="adding-new-tests">
+<h2>Adding New Tests<a class="headerlink" href="#adding-new-tests" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>For a new fake-hardware test: inherit from <code class="docutils literal notranslate"><span class="pre">FakeHardwareTestBase</span></code>,
+define test methods, and provide <code class="docutils literal notranslate"><span class="pre">generate_test_description()</span></code>.</p></li>
+<li><p>For a new interface test: use <code class="docutils literal notranslate"><span class="pre">ros2_control_test_helpers.py</span></code> utilities
+to expand xacro and assert on the parsed hardware components.</p></li>
+<li><p>Register in <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> using <code class="docutils literal notranslate"><span class="pre">add_launch_test()</span></code> or
+<code class="docutils literal notranslate"><span class="pre">ament_add_pytest_test()</span></code>.</p></li>
+</ol>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
