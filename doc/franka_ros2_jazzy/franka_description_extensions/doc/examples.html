@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Worked examples and entry points &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Troubleshooting" href="troubleshooting.html" />
+    <link rel="prev" title="Attaching a third-party gripper" href="custom_grippers.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../franka_ros2/doc/compatibility_matrix.html">Compatibility: franka_ros2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_bringup/doc/index.html">franka_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_example_controllers/doc/index.html">franka_example_controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_fr3_moveit_config/doc/index.html">franka_fr3_moveit_config</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gazebo/franka_gazebo_bringup/doc/index.html">franka_gazebo_bringup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_gripper/doc/index.html">franka_gripper</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_hardware/doc/index.html">franka_hardware</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile/doc/index.html">franka_mobile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_mobile_fr3_duo_moveit_config/doc/index.html">franka_mobile_fr3_duo_moveit_config</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Franka description extensions</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="composition_layers.html">Composition layers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mounting_points.html">Mounting-point catalog</a></li>
+<li class="toctree-l3"><a class="reference internal" href="naming_and_prefixes.html">Naming and prefixes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="custom_grippers.html">Attaching a third-party gripper</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Worked examples and entry points</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#standalone-description-entry-points">Standalone description entry points</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mobile-sensor-suite">Mobile sensor suite</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#vision-and-manipulation-kit">Vision and Manipulation Kit</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gazebo-composition">Gazebo composition</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../franka_mobile_sensors/doc/index.html">franka_mobile_sensors</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../franka_vision_and_manipulation_kit/doc/index.html">franka_vision_and_manipulation_kit</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_msgs/doc/index.html">franka_msgs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_robot_state_broadcaster/doc/index.html">franka_robot_state_broadcaster</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_selfcollision/doc/index.html">franka_selfcollision</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_semantic_components/doc/index.html">franka_semantic_components</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../franka_spine/index.html">franka_spine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../mobile_fr3_duo_trajectory_controller/doc/index.html">mobile_fr3_duo_trajectory_controller</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a> &raquo;</li>
+          <li><a href="index.html">Franka description extensions</a> &raquo;</li>
+      <li>Worked examples and entry points</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_ros2_jazzy/franka_description_extensions/doc/examples.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="worked-examples-and-entry-points">
+<span id="franka-description-extension-examples"></span><h1>Worked examples and entry points<a class="headerlink" href="#worked-examples-and-entry-points" title="Permalink to this heading"></a></h1>
+<p>The source package names are unchanged by the
+<code class="docutils literal notranslate"><span class="pre">franka_description_extensions/</span></code> grouping folder. Use
+<code class="docutils literal notranslate"><span class="pre">franka_mobile_sensors</span></code> and
+<code class="docutils literal notranslate"><span class="pre">franka_vision_and_manipulation_kit</span></code> in ROS commands.</p>
+<section id="standalone-description-entry-points">
+<h2>Standalone description entry points<a class="headerlink" href="#standalone-description-entry-points" title="Permalink to this heading"></a></h2>
+<p>The mobile sensor package installs these description files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_mobile_sensors/robots/tmrv0_2_with_sensors.urdf.xacro</span></code>
+exposes <code class="docutils literal notranslate"><span class="pre">robot_type</span></code> (default <code class="docutils literal notranslate"><span class="pre">tmrv0_2</span></code>), <code class="docutils literal notranslate"><span class="pre">reduced_version</span></code>
+(default <code class="docutils literal notranslate"><span class="pre">false</span></code>), and <code class="docutils literal notranslate"><span class="pre">robot_namespace</span></code> (default empty).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_mobile_sensors/robots/mobile_fr3_duo_v0_2_with_sensors.urdf.xacro</span></code>
+exposes the mobile duo description arguments, including
+<code class="docutils literal notranslate"><span class="pre">robot_types</span></code> (default
+<code class="docutils literal notranslate"><span class="pre">['tmrv0_2','fr3v2','fr3v2']</span></code>), <code class="docutils literal notranslate"><span class="pre">hand</span></code>, <code class="docutils literal notranslate"><span class="pre">ee_id</span></code>,
+<code class="docutils literal notranslate"><span class="pre">special_connection</span></code>, <code class="docutils literal notranslate"><span class="pre">no_prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">with_sc</span></code>,
+<code class="docutils literal notranslate"><span class="pre">include_self_collision_geometry</span></code>, <code class="docutils literal notranslate"><span class="pre">description_pkg</span></code>,
+<code class="docutils literal notranslate"><span class="pre">connected_to</span></code>, <code class="docutils literal notranslate"><span class="pre">reduced_version</span></code>, and <code class="docutils literal notranslate"><span class="pre">use_arms</span></code>. The transform and
+collision arguments are <code class="docutils literal notranslate"><span class="pre">xyz_ee</span></code>, <code class="docutils literal notranslate"><span class="pre">rpy_ee</span></code>, <code class="docutils literal notranslate"><span class="pre">tcp_xyz</span></code>, <code class="docutils literal notranslate"><span class="pre">tcp_rpy</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">safety_distance</span></code>.</p></li>
+</ul>
+<p>The vision kit installs:</p>
+<p><code class="docutils literal notranslate"><span class="pre">franka_vision_and_manipulation_kit/robots/vision_and_manipulation_kit.urdf.xacro</span></code></p>
+<p>Its xacro arguments include <code class="docutils literal notranslate"><span class="pre">prefix</span></code>, <code class="docutils literal notranslate"><span class="pre">mobile_platform</span></code>,
+<code class="docutils literal notranslate"><span class="pre">mobile_platform_type</span></code> (default <code class="docutils literal notranslate"><span class="pre">tmrv0_2</span></code>), <code class="docutils literal notranslate"><span class="pre">left_arm_type</span></code> and
+<code class="docutils literal notranslate"><span class="pre">right_arm_type</span></code> (default <code class="docutils literal notranslate"><span class="pre">fr3v2_1</span></code>), <code class="docutils literal notranslate"><span class="pre">no_prefix</span></code>,
+<code class="docutils literal notranslate"><span class="pre">special_connection</span></code>, <code class="docutils literal notranslate"><span class="pre">xyz_ee</span></code>, <code class="docutils literal notranslate"><span class="pre">rpy_ee</span></code>, <code class="docutils literal notranslate"><span class="pre">tcp_xyz</span></code>, <code class="docutils literal notranslate"><span class="pre">tcp_rpy</span></code>,
+<code class="docutils literal notranslate"><span class="pre">safety_distance</span></code>, <code class="docutils literal notranslate"><span class="pre">with_sc</span></code>, <code class="docutils literal notranslate"><span class="pre">include_self_collision_geometry</span></code>,
+<code class="docutils literal notranslate"><span class="pre">ros2_control</span></code>, the three <code class="docutils literal notranslate"><span class="pre">*_ip</span></code> arguments, <code class="docutils literal notranslate"><span class="pre">use_fake_hardware</span></code>,
+<code class="docutils literal notranslate"><span class="pre">fake_sensor_commands</span></code>, and <code class="docutils literal notranslate"><span class="pre">description_pkg</span></code>. These are xacro
+arguments; the ROS launch file exposes only the launch arguments described
+below and maps <code class="docutils literal notranslate"><span class="pre">use_mobile_platform</span></code> to <code class="docutils literal notranslate"><span class="pre">mobile_platform</span></code>.</p>
+</section>
+<section id="mobile-sensor-suite">
+<h2>Mobile sensor suite<a class="headerlink" href="#mobile-sensor-suite" title="Permalink to this heading"></a></h2>
+<p>Start the physical mobile sensor drivers and RViz with the default
+configuration:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_mobile_sensors<span class="w"> </span>franka_mobile_sensors.launch.py
+</pre></div>
+</div>
+<p>The launch file declares:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start_cameras</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_lidars</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_rviz</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_file</span></code> (default <code class="docutils literal notranslate"><span class="pre">default_sensor_suite</span></code>, without <code class="docutils literal notranslate"><span class="pre">.yaml</span></code>); and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">robot_xacro</span></code> (default <code class="docutils literal notranslate"><span class="pre">tmrv0_2_with_sensors.urdf.xacro</span></code>).</p></li>
+</ul>
+<p>For example, start only the camera drivers and omit RViz:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_mobile_sensors<span class="w"> </span>franka_mobile_sensors.launch.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>start_lidars:<span class="o">=</span><span class="nb">false</span><span class="w"> </span>start_rviz:<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<p>The default configuration contains four D455 cameras, two nanoScan3
+LiDARs, and the OLV-IMU01 IMU. Camera and LiDAR nodes load their device
+profiles from the <code class="docutils literal notranslate"><span class="pre">config/cameras</span></code> and <code class="docutils literal notranslate"><span class="pre">config/lidars</span></code> directories.
+<code class="docutils literal notranslate"><span class="pre">config_file</span></code> is resolved by <code class="docutils literal notranslate"><span class="pre">franka_mobile_sensors</span></code> and may omit the
+<code class="docutils literal notranslate"><span class="pre">.yaml</span></code> suffix.</p>
+<p>For the package-specific launch arguments and configuration layout, see
+<a class="reference internal" href="../franka_mobile_sensors/doc/index.html"><span class="doc">Mobile sensor package documentation</span></a>.</p>
+</section>
+<section id="vision-and-manipulation-kit">
+<h2>Vision and Manipulation Kit<a class="headerlink" href="#vision-and-manipulation-kit" title="Permalink to this heading"></a></h2>
+<p>Start the kit’s robot-state publisher and enabled drivers with the default
+configuration:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_vision_and_manipulation_kit<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>franka_vision_and_manipulation_kit.launch.py
+</pre></div>
+</div>
+<p>The launch file declares:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start_robotiq_grippers</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_realsense_cameras</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_zed_camera</span></code> (default <code class="docutils literal notranslate"><span class="pre">false</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">start_rviz</span></code> (default <code class="docutils literal notranslate"><span class="pre">true</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_mobile_platform</span></code> (default <code class="docutils literal notranslate"><span class="pre">false</span></code>);</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> (default
+<code class="docutils literal notranslate"><span class="pre">package://franka_vision_and_manipulation_kit/config/default_config.yaml</span></code>);
+and</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">xacro_file_path</span></code> (default
+<code class="docutils literal notranslate"><span class="pre">package://franka_vision_and_manipulation_kit/robots/vision_and_manipulation_kit.urdf.xacro</span></code>).</p></li>
+</ul>
+<p>Use the mobile description and start the ZED driver without starting RViz:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_vision_and_manipulation_kit<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>franka_vision_and_manipulation_kit.launch.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>use_mobile_platform:<span class="o">=</span><span class="nb">true</span><span class="w"> </span>start_zed_camera:<span class="o">=</span><span class="nb">true</span><span class="w"> </span>start_rviz:<span class="o">=</span><span class="nb">false</span>
+</pre></div>
+</div>
+<p>The default YAML has <code class="docutils literal notranslate"><span class="pre">head</span></code>, <code class="docutils literal notranslate"><span class="pre">left_arm</span></code>, and <code class="docutils literal notranslate"><span class="pre">right_arm</span></code> sections.
+Each arm section contains a Robotiq <code class="docutils literal notranslate"><span class="pre">gripper</span></code> configuration and a
+RealSense <code class="docutils literal notranslate"><span class="pre">camera</span></code> configuration. The <code class="docutils literal notranslate"><span class="pre">config_file_path</span></code> and
+<code class="docutils literal notranslate"><span class="pre">xacro_file_path</span></code> arguments accept a filesystem path or a
+<code class="docutils literal notranslate"><span class="pre">package://</span></code> resource.</p>
+<p>For the complete prerequisite and configuration details, see
+<a class="reference internal" href="../franka_vision_and_manipulation_kit/doc/index.html"><span class="doc">Vision and Manipulation Kit package documentation</span></a>.</p>
+</section>
+<section id="gazebo-composition">
+<h2>Gazebo composition<a class="headerlink" href="#gazebo-composition" title="Permalink to this heading"></a></h2>
+<p>Gazebo uses Layer-3 entry points from <code class="docutils literal notranslate"><span class="pre">franka_gazebo_bringup</span></code>. Do not pass
+<code class="docutils literal notranslate"><span class="pre">with_sensors</span></code> or <code class="docutils literal notranslate"><span class="pre">gazebo_effort</span></code> to either standalone Layer-2 xacro.
+Use the Gazebo launch files instead:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_gazebo_bringup<span class="w"> </span>gazebo_fr3_duo_example.launch.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>with_sensors:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>This composes the two-arm vision kit. For the mobile base plus both sensor
+suites, use:</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_gazebo_bringup<span class="w"> </span>gazebo_mobile_fr3_duo_example.launch.py<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>with_sensors:<span class="o">=</span><span class="nb">true</span>
+</pre></div>
+</div>
+<p>The mobile Gazebo entry point composes the seven mobile-platform sensors with
+the two wrist cameras and one head camera from the vision kit. It also
+selects the Gazebo worlds, hardware plugins, transmissions, and controller
+configuration owned by <code class="docutils literal notranslate"><span class="pre">franka_gazebo_bringup</span></code>. See
+<a class="reference internal" href="../../franka_gazebo/franka_gazebo_bringup/doc/index.html"><span class="doc">Gazebo bringup documentation</span></a> for its launch arguments.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="custom_grippers.html" class="btn btn-neutral float-left" title="Attaching a third-party gripper" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="troubleshooting.html" class="btn btn-neutral float-right" title="Troubleshooting" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
