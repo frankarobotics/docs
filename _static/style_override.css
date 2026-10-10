@@ -1,0 +1,49 @@
+.wy-table-responsive table td {
+    white-space: normal !important;
+}
+
+/* Switch order of project name and logo in sidebar */
+body > div > nav > div > div.wy-side-nav-search > a {
+    display: flex !important;
+    justify-content: center !important;
+    flex-direction: column-reverse !important;
+}
+
+/* Smaller logo, adjust margins after reordering with project name */
+body > div.wy-grid-for-nav > nav > div > div.wy-side-nav-search > a > img {
+    width: 85% !important;
+    margin-bottom: 0.85em !important;
+    margin-top: 0 !important;
+}
+
+/* Remove home icon in sidebar */
+body > div.wy-grid-for-nav > nav > div > div.wy-side-nav-search > a::before {
+    content: "" !important;
+}
+
+/* Change style of search form in sidebar */
+.wy-side-nav-search input[type="text"] {
+    width: 90% !important;
+    border: 0 !important;
+    border-radius: 3px !important;
+}
+
+/* Use text font for headings */
+h1, h2, .rst-content .toctree-wrapper p.caption, h3, h4, h5, h6, legend {
+    font-family: "Lato", "proxima-nova", "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* Use "Brand light blue" for ToC heading */
+body > div.wy-grid-for-nav > nav > div > div.wy-menu.wy-menu-vertical > p > span {
+    color: #00b9eb !important;
+}
+
+/* Use "Brand dark blue" for top of sidebar */
+.wy-side-nav-search {
+    background-color: #1a282d !important;
+}
+
+/* Use lighter colour derived from "Brand dark blue" for sidebar background */
+.wy-nav-side {
+    background-color: #233942 !important;
+}
