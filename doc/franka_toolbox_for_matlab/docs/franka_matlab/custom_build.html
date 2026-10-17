@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Custom Build &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../" id="documentation_options" src="../../../../_static/documentation_options.js"></script>
+        <script src="../../../../_static/jquery.js"></script>
+        <script src="../../../../_static/underscore.js"></script>
+        <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="Software Versions Compatibility" href="../../../../compatibility.html" />
+    <link rel="prev" title="Troubleshooting" href="troubleshooting.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_jazzy/docs/index.html">franka_ros2: <strong>Jazzy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Franka Toolbox for MATLAB</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="compatibility.html">Compatible versions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="system_requirements.html">System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l2"><a class="reference internal" href="simulink_library.html">Fanka Library for Simulink - Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="matlab_library.html">Franka Library for MATLAB - Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Custom Build</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-server-binaries-docker">Building Server Binaries (Docker)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-mex-files">Building MEX Files</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#linux">Linux</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#windows">Windows</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-the-distribution-package">Creating the Distribution Package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ci-cd-reference">CI/CD Reference</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Franka Toolbox for MATLAB</a> &raquo;</li>
+      <li>Custom Build</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../_sources/doc/franka_toolbox_for_matlab/docs/franka_matlab/custom_build.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="custom-build">
+<h1>Custom Build<a class="headerlink" href="#custom-build" title="Permalink to this heading"></a></h1>
+<p>This guide covers building the Franka Toolbox from source. For most users, we recommend downloading the pre-built toolbox from the <a class="reference external" href="https://github.com/frankarobotics/franka_toolbox_for_matlab/releases">GitHub Releases</a> page.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The toolbox consists of two parts:</p>
+<ol class="arabic simple">
+<li><p><strong>Server binaries</strong> — Run on the target Linux PC connected to the robot</p></li>
+<li><p><strong>MEX files</strong> — Run on your MATLAB host (Windows or Linux)</p></li>
+</ol>
+</section>
+<section id="building-server-binaries-docker">
+<h2>Building Server Binaries (Docker)<a class="headerlink" href="#building-server-binaries-docker" title="Permalink to this heading"></a></h2>
+<p>Server binaries are built using Docker, which handles all dependencies automatically.
+If you need a specific <code class="docutils literal notranslate"><span class="pre">libfranka</span></code> version instead of the one used for the pre-built release packages, build with <code class="docutils literal notranslate"><span class="pre">./build.sh</span> <span class="pre">--libfranka</span> <span class="pre">&lt;version&gt;</span></code> from the <code class="docutils literal notranslate"><span class="pre">docker/</span></code> directory.
+You can also build only <code class="docutils literal notranslate"><span class="pre">amd64</span></code> for a local host target or only <code class="docutils literal notranslate"><span class="pre">arm64</span></code> when targeting Jetson, instead of building both architectures.</p>
+<p><strong>Requirements:</strong> Docker installed and running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>docker
+./build.sh<span class="w">              </span><span class="c1"># Build for both x86_64 and ARM64</span>
+<span class="c1"># Or:</span>
+./build.sh<span class="w"> </span>amd64<span class="w">        </span><span class="c1"># x86_64 only</span>
+./build.sh<span class="w"> </span>arm64<span class="w">        </span><span class="c1"># ARM64 only (cross-compiled)</span>
+</pre></div>
+</div>
+<p><strong>Output files:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">common/bin.zip</span></code>, <code class="docutils literal notranslate"><span class="pre">common/bin_arm.zip</span></code> — Common library</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">franka_robot_server/bin.tar.gz</span></code>, <code class="docutils literal notranslate"><span class="pre">franka_robot_server/bin_arm.tar.gz</span></code> — Server executable</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">dependencies/libfranka.zip</span></code>, <code class="docutils literal notranslate"><span class="pre">dependencies/libfranka_arm.zip</span></code> — libfranka with dependencies</p></li>
+</ul>
+<p>For implementation details, see the <code class="docutils literal notranslate"><span class="pre">Dockerfile.amd64</span></code> and <code class="docutils literal notranslate"><span class="pre">Dockerfile.arm64</span></code> files in the <code class="docutils literal notranslate"><span class="pre">docker/</span></code> directory.</p>
+</section>
+<section id="building-mex-files">
+<h2>Building MEX Files<a class="headerlink" href="#building-mex-files" title="Permalink to this heading"></a></h2>
+<p>MEX files must be built on each platform where you want to use the toolbox.</p>
+<section id="linux">
+<h3>Linux<a class="headerlink" href="#linux" title="Permalink to this heading"></a></h3>
+<p><strong>Install dependencies:</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt-get<span class="w"> </span>update
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>cmake<span class="w"> </span>build-essential<span class="w"> </span>libeigen3-dev
+
+<span class="c1"># Build Cap&#39;n Proto (static libraries with PIC)</span>
+<span class="nv">CAPNP_VERSION</span><span class="o">=</span><span class="s2">&quot;1.0.2&quot;</span>
+curl<span class="w"> </span>-O<span class="w"> </span>https://capnproto.org/capnproto-c++-<span class="si">${</span><span class="nv">CAPNP_VERSION</span><span class="si">}</span>.tar.gz
+tar<span class="w"> </span>zxf<span class="w"> </span>capnproto-c++-<span class="si">${</span><span class="nv">CAPNP_VERSION</span><span class="si">}</span>.tar.gz
+<span class="nb">cd</span><span class="w"> </span>capnproto-c++-<span class="si">${</span><span class="nv">CAPNP_VERSION</span><span class="si">}</span>
+mkdir<span class="w"> </span>build<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>build
+cmake<span class="w"> </span>-DBUILD_TESTING<span class="o">=</span>OFF<span class="w"> </span>-DBUILD_SHARED_LIBS<span class="o">=</span>OFF<span class="w"> </span>-DCMAKE_POSITION_INDEPENDENT_CODE<span class="o">=</span>ON<span class="w"> </span>..
+make<span class="w"> </span>-j<span class="k">$(</span>nproc<span class="k">)</span>
+sudo<span class="w"> </span>make<span class="w"> </span>install
+sudo<span class="w"> </span>ldconfig
+</pre></div>
+</div>
+<p><strong>Build MEX files (in MATLAB):</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_simulink_library_mex</span><span class="p">();</span>
+<span class="n">franka_robot_mex</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+<section id="windows">
+<h3>Windows<a class="headerlink" href="#windows" title="Permalink to this heading"></a></h3>
+<p><strong>Requirements:</strong></p>
+<ul class="simple">
+<li><p>Visual Studio 2022</p></li>
+<li><p>CMake 3.15+</p></li>
+</ul>
+<p><strong>Install Cap’n Proto:</strong></p>
+<p>Build Cap’n Proto from source as static libraries. See the CI workflow in <code class="docutils literal notranslate"><span class="pre">.github/workflows/build-and-release.yml</span></code> for the exact steps.</p>
+<p><strong>Build MEX files (in MATLAB):</strong></p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_simulink_library_mex</span><span class="p">();</span>
+<span class="n">franka_robot_mex</span><span class="p">();</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-the-distribution-package">
+<h2>Creating the Distribution Package<a class="headerlink" href="#creating-the-distribution-package" title="Permalink to this heading"></a></h2>
+<p>After building both server binaries and MEX files:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_dist_make</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>By default, <code class="docutils literal notranslate"><span class="pre">franka_toolbox_dist_make()</span></code> now uses the CI-safe packaging behavior and preserves the generated server and MEX archives in your working tree.
+This creates <code class="docutils literal notranslate"><span class="pre">dist/franka.mltbx</span></code> by default. You can also specify the output name:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_dist_make</span><span class="p">(</span><span class="s">&#39;OutputName&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;franka-fr3&#39;</span><span class="p">);</span><span class="w"> </span><span class="c">% For FR3</span>
+<span class="n">franka_toolbox_dist_make</span><span class="p">(</span><span class="s">&#39;OutputName&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;franka-fer&#39;</span><span class="p">);</span><span class="w"> </span><span class="c">% For FER</span>
+</pre></div>
+</div>
+<p>If you explicitly want the old local cleanup behavior, you can run:</p>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="n">franka_toolbox_dist_make</span><span class="p">(</span><span class="s">&#39;Mode&#39;</span><span class="p">,</span><span class="w"> </span><span class="s">&#39;local&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">Mode='local'</span></code> runs <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clean</span> <span class="pre">-ffxd</span></code> before packaging. This removes untracked generated artifacts from the repository checkout, including locally built archives that have not been committed.</p>
+</section>
+<section id="ci-cd-reference">
+<h2>CI/CD Reference<a class="headerlink" href="#ci-cd-reference" title="Permalink to this heading"></a></h2>
+<p>For a complete automated build example, see <code class="docutils literal notranslate"><span class="pre">.github/workflows/build-and-release.yml</span></code> which builds for all platforms and creates release packages.</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="troubleshooting.html" class="btn btn-neutral float-left" title="Troubleshooting" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../../../../compatibility.html" class="btn btn-neutral float-right" title="Software Versions Compatibility" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
