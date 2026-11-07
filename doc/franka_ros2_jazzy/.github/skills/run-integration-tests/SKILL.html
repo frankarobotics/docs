@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Run Integration Tests &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../../../" id="documentation_options" src="../../../../../_static/documentation_options.js"></script>
+        <script src="../../../../../_static/jquery.js"></script>
+        <script src="../../../../../_static/underscore.js"></script>
+        <script src="../../../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../docs/index.html">franka_ros2: <strong>Jazzy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros2_humble/docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Run Integration Tests</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../../../_sources/doc/franka_ros2_jazzy/.github/skills/run-integration-tests/SKILL.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="run-integration-tests">
+<h1>Run Integration Tests<a class="headerlink" href="#run-integration-tests" title="Permalink to this heading"></a></h1>
+<section id="when-to-use">
+<h2>When to Use<a class="headerlink" href="#when-to-use" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>User asks to run tests or integration tests</p></li>
+<li><p>Verifying controller changes work end-to-end</p></li>
+<li><p>Debugging test failures</p></li>
+<li><p>Running simulation-based validation before hardware deployment</p></li>
+</ul>
+</section>
+<section id="test-tiers">
+<h2>Test Tiers<a class="headerlink" href="#test-tiers" title="Permalink to this heading"></a></h2>
+<table class="colwidths-auto docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Tier</p></th>
+<th class="head"><p>Packages</p></th>
+<th class="head"><p>Robot Required</p></th>
+<th class="head"><p>Gazebo Required</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Unit tests</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_*</span></code> (excl. bringup, gripper)</p></td>
+<td><p>No</p></td>
+<td><p>No</p></td>
+</tr>
+<tr class="row-odd"><td><p>Gazebo integration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">gz_ros2_control_tests</span></code></p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-even"><td><p>Franka Gazebo integration</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_gazebo_bringup</span></code></p></td>
+<td><p>No</p></td>
+<td><p>Yes</p></td>
+</tr>
+<tr class="row-odd"><td><p>Hardware tests</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">franka_bringup</span></code>, <code class="docutils literal notranslate"><span class="pre">franka_gripper</span></code></p></td>
+<td><p>Yes</p></td>
+<td><p>No</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="procedure">
+<h2>Procedure<a class="headerlink" href="#procedure" title="Permalink to this heading"></a></h2>
+<section id="pre-flight-checks">
+<h3>1. Pre-flight Checks<a class="headerlink" href="#pre-flight-checks" title="Permalink to this heading"></a></h3>
+<p>Ensure the workspace is built with testing enabled:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>/ros2_ws
+colcon<span class="w"> </span>build<span class="w"> </span>--base-paths<span class="w"> </span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--cmake-args<span class="w"> </span>-DCMAKE_EXPORT_COMPILE_COMMANDS<span class="o">=</span>ON<span class="w"> </span><span class="se">\</span>
+<span class="w">               </span>-DBUILD_TESTING<span class="o">=</span>ON
+</pre></div>
+</div>
+<p>Source the workspace before running any tests:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span>install/setup.sh
+</pre></div>
+</div>
+</section>
+<section id="unit-tests-no-hardware-no-gazebo">
+<h3>2. Unit Tests (No Hardware, No Gazebo)<a class="headerlink" href="#unit-tests-no-hardware-no-gazebo" title="Permalink to this heading"></a></h3>
+<p>Run all franka unit tests excluding hardware-dependent ones:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--base-paths<span class="w"> </span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--packages-select-regex<span class="w"> </span><span class="s1">&#39;^franka_(?!bringup$|gripper$)&#39;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--event-handlers<span class="w"> </span>console_direct+<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ctest-args<span class="w"> </span>--exclude-regex<span class="w"> </span>test_hardware
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<p>To test a single package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--base-paths<span class="w"> </span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--packages-select<span class="w"> </span>&lt;package_name&gt;<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--event-handlers<span class="w"> </span>console_direct+
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+</section>
+<section id="gazebo-integration-tests-no-hardware">
+<h3>3. Gazebo Integration Tests (No Hardware)<a class="headerlink" href="#gazebo-integration-tests-no-hardware" title="Permalink to this heading"></a></h3>
+<p>These launch controllers in Gazebo headless and verify topics/states.</p>
+<p><strong>gz_ros2_control tests</strong> (position, velocity, effort, FT sensor):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>gz_ros2_control_tests<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--event-handlers<span class="w"> </span>console_direct+
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<p><strong>Franka Gazebo bringup tests</strong> (full controller launch in simulation):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--packages-select<span class="w"> </span>franka_gazebo_bringup<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--event-handlers<span class="w"> </span>console_direct+
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+</section>
+<section id="hardware-tests-requires-real-robot">
+<h3>4. Hardware Tests (Requires Real Robot)<a class="headerlink" href="#hardware-tests-requires-real-robot" title="Permalink to this heading"></a></h3>
+<p>Hardware tests need the robot IP. They unlock joints, activate FCI, and run controllers on real hardware.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>src/franka_ros2/scripts/run_hardware_tests.sh<span class="w"> </span>&lt;robot_ip&gt;
+</pre></div>
+</div>
+<p>Or manually via colcon:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span><span class="nb">test</span><span class="w"> </span>--base-paths<span class="w"> </span>src<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--packages-select<span class="w"> </span>franka_bringup<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--event-handlers<span class="w"> </span>console_direct+<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span>--ctest-args<span class="w"> </span>--tests-regex<span class="w"> </span>test_hardware
+colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+</section>
+<section id="inspect-results">
+<h3>5. Inspect Results<a class="headerlink" href="#inspect-results" title="Permalink to this heading"></a></h3>
+<p>Always check results after any test run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>colcon<span class="w"> </span>test-result<span class="w"> </span>--verbose
+</pre></div>
+</div>
+<p>XML results are in: <code class="docutils literal notranslate"><span class="pre">build/**/test_results/**/*.xml</span></code></p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<section id="gazebo-processes-not-cleaned-up">
+<h3>Gazebo processes not cleaned up<a class="headerlink" href="#gazebo-processes-not-cleaned-up" title="Permalink to this heading"></a></h3>
+<p>If Gazebo tests fail because of leftover processes:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pkill<span class="w"> </span>-9<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;^gz sim&#39;</span>
+pkill<span class="w"> </span>-9<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;ruby.*gz&#39;</span>
+pkill<span class="w"> </span>-9<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;controller_manager&#39;</span>
+pkill<span class="w"> </span>-9<span class="w"> </span>-f<span class="w"> </span><span class="s1">&#39;robot_state_publisher&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="communication-constraint-violations-hardware-tests">
+<h3>Communication constraint violations (hardware tests)<a class="headerlink" href="#communication-constraint-violations-hardware-tests" title="Permalink to this heading"></a></h3>
+<p>The hardware test script has built-in retry logic for transient communication constraint violations. If tests fail with this error, they will automatically retry once.</p>
+</section>
+<section id="test-timeout">
+<h3>Test timeout<a class="headerlink" href="#test-timeout" title="Permalink to this heading"></a></h3>
+<p>Gazebo tests default to 50-600s timeout depending on the test. If running on slow hardware, consider building with optimizations or running fewer tests at once.</p>
+</section>
+<section id="tests-not-found">
+<h3>Tests not found<a class="headerlink" href="#tests-not-found" title="Permalink to this heading"></a></h3>
+<p>Ensure you built with <code class="docutils literal notranslate"><span class="pre">-DBUILD_TESTING=ON</span></code>. Without this flag, test targets are not generated.</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

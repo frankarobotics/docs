@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>franka_spine &mdash; Franka Control Interface (FCI)  documentation</title>
+      <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../../../_static/style_override.css" type="text/css" />
+    <link rel="shortcut icon" href="../../../_static/favicon.png"/>
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+        <script src="../../../_static/jquery.js"></script>
+        <script src="../../../_static/underscore.js"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../../index.html" class="icon icon-home"> Franka Control Interface (FCI)
+            <img src="../../../_static/logo.svg" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../overview.html">Franka Control Interface Overview</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libfranka/docs/index.html">libfranka client library</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_description/README.html">franka_description</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros2_jazzy/docs/index.html">franka_ros2: <strong>Jazzy</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/index.html">franka_ros2: <strong>Humble</strong></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_ros/docs/index.html">franka_ros</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../franka_toolbox_for_matlab/docs/franka_matlab/index.html">Franka Toolbox for MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../compatibility.html">Software Versions Compatibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../robot_specifications.html">Control Interface Specification and Robot Limits</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../troubleshooting.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../faq.html">FAQ</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Franka Control Interface (FCI)</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>franka_spine</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/doc/franka_ros2_humble/franka_spine/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="franka-spine">
+<h1>franka_spine<a class="headerlink" href="#franka-spine" title="Permalink to this heading"></a></h1>
+<p>ROS 2 action/service server for the Franka Spine REST API.</p>
+<section id="launch">
+<h2>Launch<a class="headerlink" href="#launch" title="Permalink to this heading"></a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_spine_server<span class="w"> </span>spine.launch.py<span class="w"> </span>spine_ip:<span class="o">=</span><span class="m">172</span>.16.16.10
+</pre></div>
+</div>
+<p>With a namespace:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>launch<span class="w"> </span>franka_spine_server<span class="w"> </span>spine.launch.py<span class="w"> </span>spine_ip:<span class="o">=</span><span class="m">172</span>.16.16.10<span class="w"> </span>namespace:<span class="o">=</span>my_robot
+</pre></div>
+</div>
+</section>
+<section id="services">
+<h2>Services<a class="headerlink" href="#services" title="Permalink to this heading"></a></h2>
+<section id="get-spine-state">
+<h3>Get spine state<a class="headerlink" href="#get-spine-state" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/franka_spine_node/get_state<span class="w"> </span>franka_spine_msgs/srv/GetSpineState
+</pre></div>
+</div>
+</section>
+<section id="get-position">
+<h3>Get position<a class="headerlink" href="#get-position" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/franka_spine_node/get_position<span class="w"> </span>franka_spine_msgs/srv/GetPosition
+</pre></div>
+</div>
+</section>
+<section id="switch-on">
+<h3>Switch on<a class="headerlink" href="#switch-on" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/franka_spine_node/switch_on<span class="w"> </span>franka_spine_msgs/srv/SwitchOn
+</pre></div>
+</div>
+</section>
+<section id="switch-off">
+<h3>Switch off<a class="headerlink" href="#switch-off" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/franka_spine_node/switch_off<span class="w"> </span>franka_spine_msgs/srv/SwitchOff
+</pre></div>
+</div>
+</section>
+<section id="fault-reset">
+<h3>Fault reset<a class="headerlink" href="#fault-reset" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/franka_spine_node/fault_reset<span class="w"> </span>franka_spine_msgs/srv/FaultReset
+</pre></div>
+</div>
+</section>
+<section id="halt-motion">
+<h3>Halt motion<a class="headerlink" href="#halt-motion" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/franka_spine_node/halt<span class="w"> </span>franka_spine_msgs/srv/Halt
+</pre></div>
+</div>
+</section>
+<section id="get-parameters">
+<h3>Get parameters<a class="headerlink" href="#get-parameters" title="Permalink to this heading"></a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>service<span class="w"> </span>call<span class="w"> </span>/franka_spine_node/get_parameters_spine<span class="w"> </span>franka_spine_msgs/srv/GetParameters
+</pre></div>
+</div>
+</section>
+</section>
+<section id="action">
+<h2>Action<a class="headerlink" href="#action" title="Permalink to this heading"></a></h2>
+<section id="move-to-absolute-position">
+<h3>Move to absolute position<a class="headerlink" href="#move-to-absolute-position" title="Permalink to this heading"></a></h3>
+<p>Send a goal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>action<span class="w"> </span>send_goal<span class="w"> </span>/franka_spine_node/move_absolute<span class="w"> </span>franka_spine_msgs/action/MoveAbsolute<span class="w"> </span><span class="se">\</span>
+<span class="w">  </span><span class="s2">&quot;{position: 0.4, velocity: 0.1, acceleration: 0.2, deceleration: 0.2}&quot;</span><span class="w"> </span>--feedback
+</pre></div>
+</div>
+</section>
+</section>
+<section id="python-client-example">
+<h2>Python Client Example<a class="headerlink" href="#python-client-example" title="Permalink to this heading"></a></h2>
+<p>See the <code class="docutils literal notranslate"><span class="pre">franka_spine_examples</span></code> package for a runnable Python client:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ros2<span class="w"> </span>run<span class="w"> </span>franka_spine_examples<span class="w"> </span>spine_client_example.py
+</pre></div>
+</div>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Franka Robotics GmbH.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
